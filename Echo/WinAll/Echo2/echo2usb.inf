@@ -1,0 +1,229 @@
+;
+; Copyright (c) 2009-2012 Echo Digital Audio
+;
+; Echo2 setup information file
+;
+; This file supports:
+;     Windows XP
+;     Windows Vista      Windows Vista x64
+;     Windows 7          Windows 7 x64
+;
+
+;******************************************************************************
+; Version Section
+;------------------------------------------------------------------------------
+[Version]
+Signature="$Windows NT$"
+DriverVer=04/13/2012,1.56.0.0
+Provider=%S_Provider%
+CatalogFile=echo2usb.cat
+
+; private setup class
+Class=echo2usb_SetupClass
+ClassGUID={0A13E0B7-DF1F-4044-8F9E-C6F4E983C6C0}
+
+
+;******************************************************************************
+; Install private class
+;------------------------------------------------------------------------------
+[ClassInstall32] 
+AddReg=_AddReg_ClassInstall
+ 
+[_AddReg_ClassInstall]
+HKR,,,,"%S_DeviceClassDisplayName%"
+HKR,,Icon,,"-5"
+
+
+;******************************************************************************
+; Manufacturer
+;------------------------------------------------------------------------------
+[Manufacturer]
+%S_Mfg%=_Models, ntamd64
+
+
+;******************************************************************************
+; Models sections
+;------------------------------------------------------------------------------
+[_Models]
+"Echo2"=_Install, USB\VID_040f&PID_0010
+
+
+[_Models.ntamd64]
+"Echo2"=_Install, USB\VID_040f&PID_0010
+
+
+;******************************************************************************
+; Install Sections x86
+;------------------------------------------------------------------------------
+[_Install.ntx86]
+CopyFiles=_CopyFiles_sys_x86
+
+[_Install.ntx86.HW]
+AddReg=_AddReg_HW
+
+[_Install.ntx86.Services]
+AddService = %S_ServiceName%, 0x00000002, _AddService_x86, _EventLog_x86
+
+[_AddService_x86]
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\echo2usb.sys
+DelReg=_DelReg_Parameters
+AddReg=_AddReg_Parameters, _AddReg_MediaCategories, _AddReg_Profiles
+
+[_EventLog_x86]
+AddReg=_EventLogAddReg_x86
+
+[_EventLogAddReg_x86]
+HKR,,EventMessageFile,%REG_EXPAND_SZ%,"%%SystemRoot%%\System32\IoLogMsg.dll;%%SystemRoot%%\System32\drivers\echo2usb.sys"
+HKR,,TypesSupported,  %REG_DWORD%, 7
+
+
+
+;******************************************************************************
+; Install Sections x64
+;------------------------------------------------------------------------------
+[_Install.ntamd64]
+CopyFiles=_CopyFiles_sys_x64
+
+[_Install.ntamd64.HW]
+AddReg=_AddReg_HW
+
+[_Install.ntamd64.Services]
+AddService = %S_ServiceName%, 0x00000002, _AddService_x64, _EventLog_x64
+
+[_AddService_x64]
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\echo2usb_x64.sys
+DelReg=_DelReg_Parameters
+AddReg=_AddReg_Parameters, _AddReg_MediaCategories, _AddReg_Profiles
+
+[_EventLog_x64]
+AddReg=_EventLogAddReg_x64
+
+[_EventLogAddReg_x64]
+HKR,,EventMessageFile,%REG_EXPAND_SZ%,"%%SystemRoot%%\System32\IoLogMsg.dll;%%SystemRoot%%\System32\drivers\echo2usb_x64.sys"
+HKR,,TypesSupported,  %REG_DWORD%, 7
+
+
+
+;******************************************************************************
+; Copy file sections
+;------------------------------------------------------------------------------
+[_CopyFiles_sys_x86]
+echo2usb.sys,,,0x00000004
+
+[_CopyFiles_sys_x64]
+echo2usb_x64.sys,,,0x00000004
+
+;******************************************************************************
+; Destination Directories
+;------------------------------------------------------------------------------
+[DestinationDirs]
+DefaultDestDir  = 12  ; %windir%\system32\drivers 
+_CopyFiles_sys_x86 = 12
+_CopyFiles_sys_x64 = 12
+
+;******************************************************************************
+; Disk Layout
+;------------------------------------------------------------------------------
+[SourceDisksNames.x86]
+1=%S_DiskName%,,0
+[SourceDisksNames.amd64]
+1=%S_DiskName%,,0
+
+[SourceDisksFiles.x86]
+echo2usb.sys=1
+[SourceDisksFiles.amd64]
+echo2usb_x64.sys=1
+
+
+;******************************************************************************
+; Registry sections
+;------------------------------------------------------------------------------
+[_AddReg_HW]
+; audio-mode driver interface name, replace by your custom GUID
+HKR, , InterfaceGUID, %REG_SZ%, "{C253FDAB-318C-4da4-A284-EB26DBFABF4F}"
+; enable the following line to support OUT-only configurations with explicit feedback
+; that uses a feedback endpoint polling interval > 4
+;HKR, , EnableFbEpDescIntervalPatch, %REG_DWORD%, 1
+
+
+
+[_DelReg_Parameters]
+; delete old configuration and settings
+HKR, "Parameters"
+
+
+[_AddReg_Parameters]
+; global setting: ASIO multi-client support, 1 for allowed (default), 0 for disabled
+;HKR, "Parameters\Settings", "EnableAsioSharing", %REG_DWORD%, 0
+
+
+[_AddReg_MediaCategories]
+
+
+[_AddReg_Profiles]
+
+
+
+;******************************************************************************
+; Text Strings
+;------------------------------------------------------------------------------
+[Strings]
+;
+; Non-Localizable Strings, DO NOT MODIFY!
+;
+REG_SZ         = 0x00000000
+REG_DEL        = 0x00000004
+REG_MULTI_SZ   = 0x00010000
+REG_EXPAND_SZ  = 0x00020000
+REG_BINARY     = 0x00000001
+REG_DWORD      = 0x00010001
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+;
+; These are sound device categories predefined by Windows.
+; This is a subset only, containing most commonly used categories.
+; See ks.inf, ksmedia.h and WDK docs for the full set of available category GUIDs.
+;
+; KSNODETYPE_SPEAKER, speaker icon
+GUID.Speaker="{DFF21CE1-F70F-11D0-B917-00A0C9223196}"
+; KSNODETYPE_DESKTOP_SPEAKER, speaker icon
+GUID.DesktopSpeaker="{DFF21CE4-F70F-11D0-B917-00A0C9223196}"
+; KSNODETYPE_HEADPHONES, headphone icon
+GUID.Headphones="{DFF21CE2-F70F-11D0-B917-00A0C9223196}"
+; KSNODETYPE_LINE_CONNECTOR, cinch cable icon
+GUID.Line="{DFF21FE3-F70F-11D0-B917-00A0C9223196}"
+; KSNODETYPE_SPDIF_INTERFACE, black box icon
+GUID.SPDIFInterface="{DFF21FE5-F70F-11D0-B917-00A0C9223196}"
+; KSNODETYPE_DIGITAL_AUDIO_INTERFACE, black box icon
+GUID.DigitalAudioInterface="{DFF21FE2-F70F-11D0-B917-00A0C9223196}"
+; KSNODETYPE_HEADSET, headset icon
+GUID.Headset="{DFF21DE2-F70F-11D0-B917-00A0C9223196}"
+; KSNODETYPE_MICROPHONE, microphone icon
+GUID.Microphone="{DFF21BE1-F70F-11D0-B917-00A0C9223196}"
+
+
+;
+; Localizable Strings, modify as required
+;
+; provider
+S_Provider="Echo Digital Audio"
+S_Mfg="Echo Digital Audio"
+
+; device class display name
+S_DeviceClassDisplayName="Echo2 USB Audio"
+
+; disk name
+S_DiskName="Echo2 driver disk"
+
+; service name, should be set to x86 binary executable name without .sys extension
+S_ServiceName="echo2usb"
+
+
+
+;;;;;;;;;;;;;;;;;;;;;; EOF ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

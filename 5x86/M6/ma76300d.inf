@@ -1,0 +1,170 @@
+;
+; File:    MA76300d.INF   (If the name is changed, make the proper changes in the uninstaller)
+; Authors:  Jeff Claar, Nemesis
+; Copyright 2003 Midiman/M-Audio
+;
+; Midiman/M-Audio Omni Studio USB Driver .INF File
+;
+
+
+[Version]
+signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%Maudio%
+DriverVer=09/26/2003,5.10.00.3516
+;CatalogFile=OmniStudio USB.cat
+
+[SourceDisksNames]
+1=%MAudioDisk%,,,
+
+[SourceDisksFiles]
+ma98_00d.sys=1
+ma76300d.sys=1
+omnistud.cpl=1
+OmniTask.exe=1
+OmniASIO.dll=1
+
+[DestinationDirs]
+DefaultDestDir=10,system32\drivers
+DriverCopyFiles=10,system32\drivers
+Driver9XCopyFiles=10,system32\drivers
+;NTControlPanelCopyFiles=16422,M-Audio OmniStudio USB
+;Panel9XCopyFiles=28700,M-Audio OmniStudio USB
+
+[Manufacturer]
+%Maudio%=M_AUDIO
+
+[M_AUDIO]
+; OmniStudio USB VID and PID
+%maavsusb.DeviceDesc%=maavsusb,USB\VID_0763&PID_200D&MI_03
+
+[maavsusb]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+; to make ME installation silent
+;CopyFiles=Driver9XCopyFiles,Panel9XCopyFiles
+;CopyFiles=Driver9XCopyFiles
+;AddReg=maavsusb.AddReg,maavsusb.ASIO.AddReg
+AddReg=maavsusb.AddReg
+;UpdateInis=ControlPanelIni
+
+[maavsusb.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+;CopyFiles=DriverCopyFiles,NTControlPanelCopyFiles
+CopyFiles=DriverCopyFiles
+AddReg=maavsusb.AddReg,maavsusb.NT.ControlPanel.AddReg
+
+[maavsusb.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_Filter%,maavsusb.InterfaceWave
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_Filter%,maavsusb.InterfaceWave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_Filter%,maavsusb.InterfaceWave
+
+[maavsusb.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_Filter%,maavsusb.InterfaceWave
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_Filter%,maavsusb.InterfaceWave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_Filter%,maavsusb.InterfaceWave
+
+[maavsusb.NT.ControlPanel.AddReg]
+; Add item to control panel indicating where the cpl lives.
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Control Panel\Cpls","OmniStudioCPL",0x00020000,%OmniStudioCPLDir%
+HKLM,%CATEGORYKEYNAME%,%16422%\M-Audio OmniStudio USB\omnistud.cpl,0x00010001,4
+
+; Add the self-registration for the ASIO driver.
+;HKLM,%RUNONCEKEYNAME%,OmniStudioASIO,0,"rundll32 ""%16422%\M-Audio\OmniStudio USB\omniasio.dll"",INFRegisterServer"
+
+[maavsusb.AddReg]
+HKR,,DevLoader,,*NTKERN
+HKR,,NTMPDriver,,MA76300d.sys
+
+;the system audio drivers require the following information
+;to establish support by the Windows multimedia system for a port-class audio adapter.
+HKR,,SetupPreferredAudioDevices,3,01,00,00,00
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,MA76300d.sys
+HKR,,NTMPDriver,,"MA76300d.sys,sbemul.sys"
+HKR,,CLSID,,{17CCA71B-ECD7-11D0-B908-00A0C9223196}
+HKR,Drivers,SubClasses,,"wave,midi,mixer,aux"
+
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\aux\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%maavsusb.GenericDesc%
+HKR,Drivers\midi\wdmaud.drv,Description,,%maavsusb.GenericDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%maavsusb.GenericDesc%
+HKR,Drivers\aux\wdmaud.drv,Description,,%maavsusb.GenericDesc%
+
+; Media category
+HKLM,%MEDIACATEGORY%\%ManufacturerGuid%,Name,,%Maudio%
+HKLM,%MEDIACATEGORY%\%ProductGuid%,Name,,%maavsusb.DeviceDesc%
+HKLM,%MEDIACATEGORY%\%ComponentGuid%,Name,,%maavsusb.DeviceDesc%
+
+;[maavsusb.ASIO.AddReg]
+;HKLM,%RUNONCEKEYNAME%,"OmniStudioASIO",,"rundll32 %28700%\M-Audio OmniStudio USB\omniasio,INFRegisterServer"
+
+[maavsusb.InterfaceWave]
+AddReg=maavsusb.InterfaceWave.AddReg
+
+[maavsusb.InterfaceWave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%maavsusb.Wave.szPname%
+HKR,,CurveType,1,01,00,00,00
+
+[DriverCopyFiles]
+MA76300d.sys
+
+[Driver9XCopyFiles]
+MA76300d.sys, MA98_00d.sys
+
+[NTControlPanelCopyFiles]
+OmniStud.cpl
+OmniTask.exe
+OmniASIO.dll
+
+[Panel9XCopyFiles]
+OmniStud.cpl
+OmniTask.exe
+OmniASIO.dll
+
+;[ControlPanelIni]
+;%10%\control.ini,"MMCPL",,"OmniStudio.cpl=%28700%\M-Audio OmniStudio USB\OmniStud.cpl",0
+
+[maavsusb.NT.Services]
+AddService=ma76300d, 0x00000002, maavsusb.ServiceInstall
+
+[maavsusb.ServiceInstall]
+DisplayName=%maavsusb.DeviceDesc%
+ServiceType=%SERVICE_KERNEL_DRIVER%
+StartType=%SERVICE_DEMAND_START%
+ErrorControl=%SERVICE_ERROR_NORMAL%
+ServiceBinary=%10%\system32\drivers\MA76300d.sys
+
+[Strings]
+; non-localizeable
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSSTRING_Filter="{9B365890-165F-11D0-A195-0020AFD156E4}"
+ManufacturerGuid="{D5A48096-6D98-11D1-A21A-00A0C9223196}"
+ProductGuid="{EF80B0D4-D7F1-42fe-BD28-148B4594AFF5}"
+ComponentGuid="{ADE6923C-23DD-43cc-B54C-EACCAD8E5671}"
+MEDIACATEGORY="System\CurrentControlSet\Control\MediaCategories"
+MEDIACATEGORYNAME="Name"
+OmniStudioCPLDir="%ProgramFiles%\M-Audio OmniStudio USB\OmniStud.cpl"
+CATEGORYKEYNAME="Software\Microsoft\Windows\CurrentVersion\Control Panel\Extended Properties\{305CA226-D286-468e-B848-2B2E8E697B74} 2"
+RUNONCEKEYNAME="Software\Microsoft\Windows\CurrentVersion\RunOnce"
+
+SERVICE_KERNEL_DRIVER=1
+SERVICE_DEMAND_START=3
+SERVICE_ERROR_NORMAL=1
+
+;localizeable
+Maudio="M-Audio"
+MAudioDisk="M-Audio OmniStudio USB Driver Disk"
+maavsusb.DeviceDesc="M-Audio OmniStudio USB"
+maavsusb.Wave.szPname="M-Audio OmniStudio USB"
+maavsusb.GenericDesc="M-Audio OmniStudio USB"

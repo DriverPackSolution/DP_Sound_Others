@@ -1,0 +1,270 @@
+;----------------------------------------------------------------------
+;M-Audio Revolution series Setup File
+;Written by Stephan Kappertz
+;Copyright (c) 1999-2003 Midiman, Inc.
+;Manufacturer: M-Audio
+;File: Revo.inf
+;----------------------------------------------------------------------
+[Version]
+Signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+provider=%MMfg%
+CatalogFile=revo.cat
+DriverVer = 10/02/2003,5.10.00.5052
+
+
+[SourceDisksNames.x86]
+1=%DriverDiskName%,,,
+
+[SourceDisksFiles.x86]
+revo.sys=1
+revoasio.dll=1
+revopnl.dll=1
+revosens.sys=1
+audio3d.dll=1
+crlds3d.dll=1
+Revo.cpl=1
+RevoTask.exe=1
+Revo_inf.exe=1
+RevoRest.exe=1
+RevoCoIn.dll=1
+
+[Manufacturer]
+%MMfg%=M-Audio
+
+[M-Audio]
+%REVO.DeviceDesc% = REVO,PCI\VEN_1412&DEV_1724&SUBSYS_36301412
+
+[DestinationDirs]
+REVO.CopyList=10,system32\drivers
+REVO.CopyList.PANEL=11
+REVO.CopyList.ASIO=11
+REVO.CopyList.EASI=11
+REVO.CopyList.CoInst=11
+
+SENS.CopyList.DLL32=11
+SENS.CopyList.DLL=10,system
+SENS.CopyList.SYS=10,system32\drivers
+DefaultDestDir=10,system32\drivers
+
+[REVO]
+AlsoInstall=KS.Registration(ks.inf), WDMAUDIO.Registration(wdmaudio.inf)
+DelFiles=SENS.DelList
+;CopyFiles=REVO.CopyList,REVO.CopyList.PANEL,REVO.CopyList.ASIO,SENS.CopyList.DLL32,SENS.CopyList.DLL,SENS.CopyList.SYS
+DelReg=REVO.DelReg
+AddReg=REVO.AddReg,REVO_NAMES.AddReg, REVO.AddReg.ASIO,REVO.AddReg.Branding,REVO.AddReg.NAMES,SENS.AddReg.Audio3D,SENS.AddReg.Configuration
+
+[REVO.CopyList]
+revo.sys
+
+[REVO.CopyList.PANEL]
+revopnl.dll,,
+RevoTask.exe,,
+Revo.cpl,,
+RevoRest.exe,,
+revo_inf.exe,,
+
+[REVO.CopyList.ASIO]
+revoasio.dll,,
+
+[SENS.DelList]
+a3d.dll
+Audio3D.dll
+
+[SENS.CopyList.DLL32]
+a3d.dll,audio3d.dll,,4
+audio3d.dll
+
+[SENS.CopyList.DLL]
+crlds3d.dll,,
+
+[SENS.CopyList.SYS]
+revosens.sys
+
+[REVO.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave0%,REVO.Interface.Wave0
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave0%,REVO.Interface.Wave0
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave0%,REVO.Interface.Wave0
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,REVO.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,REVO.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,REVO.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,REVO.Interface.Topology
+
+[REVO.HW]
+AddReg=SENS.AddReg.Filter
+
+[REVO.Interface.Wave0]
+AddReg=REVO.I.Wave.AddReg
+
+[REVO.Interface.Wave1]
+AddReg=REVO.I.Wave.AddReg
+
+[REVO.I.Wave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%REVO.Wave.szPname%
+
+[REVO.Interface.Topology]
+AddReg=REVO.I.Topo.AddReg
+
+[REVO.I.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%REVO.Topology.szPname%
+
+[REVO.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,revo.sys
+HKR,,NTMPDriver,,"revo.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%REVO.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv, Description,,%REVO.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%REVO.DeviceDesc%
+
+[REVO.AddReg.ASIO]
+HKLM,SOFTWARE\ASIO\%AsioNameStr%,"CLSID",0,%AsioID%
+HKCR,CLSID\%AsioID%,,0,%AsioNameStr%
+HKCR,CLSID\%AsioID%\InprocServer32,,0,%11%\revoasio.dll
+HKCR,CLSID\%AsioID%\InprocServer32,"ThreadingModel",0,"Apartment"
+
+[REVO.AddReg.NAMES]
+HKLM,%MediaCategories%\%REVOGUID.MainVolume%,Name,,%REVONode.MainVolume%
+HKLM,%MediaCategories%\%REVOGUID.MainVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%REVOGUID.MicVolume%,Name,,%REVONode.MicVolume%
+HKLM,%MediaCategories%\%REVOGUID.MicVolume%,Display,1,00,00,00,00
+
+[REVO.DelReg]
+HKCR,CLSID\%AsioID%
+
+[REVO.AddReg.Branding]
+HKR,Branding,icon,,"revo.sys,114"
+HKR,Branding,bitmap,,"revo.sys,115"
+HKR,Branding,url,,"http://www.m-audio.com/"
+
+[SENS.AddReg.Audio3D]
+HKCR,Audio3D,,0,Audio3DObject
+HKCR,Audio3D\CLSID,,0,%Audio3D.CLSID%
+HKCR,CLSID\%Audio3D.CLSID%,,0,Audio3DObject
+HKCR,CLSID\%Audio3D.CLSID%\InProcServer32,,0,Audio3D.dll
+HKCR,CLSID\%Audio3D.CLSID%\InProcServer32,ThreadingModel,0,Apartment
+
+[SENS.AddReg.Filter]
+HKR,,UpperFilters,0x00010000,revosens.sys
+
+[SENS.AddReg.NTX86.Filter]
+HKR,,UpperFilters,0x00010000,"revosens"
+
+[SENS.AddReg.Configuration]
+HKR,Sensaura\Configuration,RenderFactory,0,%KSNAME_Wave1%
+HKR,Sensaura\Configuration,TopologyFactory,0,"Disable"
+HKR,Sensaura\Configuration,MaxStreams,0x00010001,65
+HKR,Sensaura\Configuration,StereoExpansionEnable,0x00010001,1
+HKR,Sensaura\Configuration,LFEGenerationEnable,0x00010001,1
+HKR,Sensaura\Configuration,ForwardSpeakerConfiguration,0x00010001,1
+HKR,Sensaura\Configuration,IgnoreDSSpeakerConfiguration,0x00010001,0
+HKR,Sensaura\Configuration,BassBoostEnable,0x00010001,0
+HKR,Sensaura\Configuration,TrebleBoostEnable,0x00010001,0
+
+[REVO.Services]
+AddService = REVO, 0x00000002, REVO_Service_Inst
+AddService = REVOSENS, 0x00000000, REVOSENS_Service_Inst
+
+[REVO_Service_Inst]
+DisplayName   = %REVO.SvcDesc%
+ServiceType   = 1                  ; SERVICE_KERNEL_DRIVER
+StartType     = 3                  ; SERVICE_DEMAND_START
+ErrorControl  = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary = %10%\system32\drivers\revo.sys
+
+[REVOSENS_Service_Inst]
+ServiceType   = 1                  ; SERVICE_KERNEL_DRIVER
+StartType     = 3                  ; SERVICE_DEMAND_START
+ErrorControl  = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary = %10%\system32\drivers\revosens.sys
+
+[REVO_NAMES.AddReg]
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Run,RevoTaskbarApp,,"%11%\RevoTask.exe"
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce,RevoTaskbarApp,,"%11%\RevoTask.exe noload"
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce,RevoInstall,,"%11%\Revo_inf.exe"
+
+[REVO_NAMES.AddReg.NT]
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Run,RevoTaskbarApp,,"%11%\RevoTask.exe"
+
+;;Nodes
+
+;;================= Windows2000====================
+
+[REVO.NTX86]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+DelFiles=SENS.DelList
+CopyFiles=REVO.CopyList,REVO.CopyList.PANEL,REVO.CopyList.ASIO,SENS.CopyList.DLL32,SENS.CopyList.DLL,SENS.CopyList.SYS
+DelReg=REVO.DelReg
+AddReg=REVO.AddReg, REVO_NAMES.AddReg.NT, REVO.AddReg.ASIO,REVO.AddReg.Branding,REVO.AddReg.NAMES,SENS.AddReg.Audio3D,SENS.AddReg.Configuration
+
+[REVO.NTX86.CoInstallers]
+CopyFiles=REVO.CopyList.CoInst
+AddReg=REVO.Coinstallers_AddReg
+
+[REVO.CopyList.CoInst]
+RevoCoIn.dll
+
+[REVO.CoInstallers_AddReg]
+HKR,,CoInstallers32,0x00010000,"RevoCoIn.dll,RevoCoInstProc"
+
+
+[REVO.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave0%,REVO.Interface.Wave0
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave0%,REVO.Interface.Wave0
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave0%,REVO.Interface.Wave0
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,REVO.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,REVO.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,REVO.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,REVO.Interface.Topology
+
+[REVO.NTX86.HW]
+AddReg=SENS.AddReg.NTX86.Filter
+
+[REVO.NTX86.Services]
+AddService = REVO, 0x00000002, REVO_Service_Inst
+AddService = REVOSENS, 0x00000000, REVOSENS_Service_Inst
+
+[Strings]
+MMfg="M-Audio"
+
+;; Nodes (non-localizeable)
+REVOGUID.MicVolume     ="{E03AC990-29B4-4db4-9681-557753BC88D9}"
+REVOGUID.MainVolume    ="{E03AC991-29B4-4db4-9681-557753BC88D9}"
+
+
+;; Nodes (localizeable)
+REVONode.MainVolume     ="Master Volume"
+REVONode.MicVolume     	="Mic/Line Volume"
+
+
+REVO.DeviceDesc			="M-Audio Revolution"
+REVO.Wave.szPname		="M-Audio Revolution"
+REVO.Topology.szPname	="Revolution Mixer"
+
+MediaCategories			="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+Audio3D.CLSID			="{D8F1EEE0-F634-11CF-8700-00A0245D918B}" 
+Proxy.CLSID				="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO		="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER		="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE		="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSNAME_Wave0			="Wave0"
+KSNAME_Wave1			="Wave1"
+
+KSNAME_Topology			="Topology"
+
+REVO.SvcDesc			="Service for Revo Driver (WDM)"
+
+AsioID="{615C2C66-F8EB-11d3-B0B2-0000E8ED4AD9}"
+AsioNameStr="M-Audio Revo ASIO"
+DriverDiskName="M-Audio Revolution Driver Disk"              

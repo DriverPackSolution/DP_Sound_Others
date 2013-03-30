@@ -1,0 +1,553 @@
+;;Copyright (c) 1998-2002 ALi Corporation. All rights reserved.
+;;Module Name: ALi51WDM.inf (Ac97ALi.inf)
+
+[Version]
+Signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%ProviderName%
+;;LayoutFile is for Windows in-box driver INF
+;LayoutFile=layout.inf, layout1.inf, layout2.inf
+CatalogFile=ALi51WDM.cat
+DriverVer=04/03/2003,5.12.01.5260
+;;== FILEVERSION, 5.10.00.XXXX
+
+[Manufacturer]
+%MfgName%=ALi
+
+[ALi]
+%AC97ALi.DeviceDesc%=AC97ALi_ECS,PCI\VEN_10B9&DEV_5451&SUBSYS_0F201019   ;ECS
+%AC97ALi.DeviceDesc%=AC97ALi_Transmeta,PCI\VEN_10B9&DEV_5451&SUBSYS_B0011279   ;Transmeta
+%AC97ALi.DeviceDesc%=AC97ALi_Clevo,PCI\VEN_10B9&DEV_5451&SUBSYS_72601265 ;Clevo CASIO Transmeta
+%AC97ALi.DeviceDesc%=AC97ALi_Clevo,PCI\VEN_10B9&DEV_5451&SUBSYS_72601558 ;Clevo 
+
+[ControlFlags]
+ExcludeFromSelect=*
+
+[SourceDisksNames]
+1=%AC97ALi_DiskDesc%,,,
+
+[SourceDisksFiles]
+ali51wdm.sys=1
+ALi51Cpl.cpl=1
+ALi51Snd.exe=1
+;GM.dls=1
+;gm10mb.sam=1
+;gm40mb.sam=1
+;gm80mb.sam=1
+
+[DestinationDirs]
+AC97ALi.CopyList=10,system32\drivers
+AC97CPL.CopyList=11	;;%SystemRoot%\system
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[AC97ALi]
+;;Needs & Include is for Windows in-box driver INF
+;Include=ks.inf, wdmaudio.inf
+;Needs=KS.Registration, WDMAUDIO.Registration
+;;AlsoInstall is for IHV INF in OEM distributed disk
+AlsoInstall=KS.Registration(ks.inf), WDMAUDIO.Registration(wdmaudio.inf)
+CopyFiles=AC97ALi.CopyList,AC97CPL.CopyList
+AddReg=AC97ALi.AddReg, ALiOEM.AddReg, AcPm.AddReg,AcPm1.AddReg
+KnownRegEntries=AC97.KnownRegEntries
+
+[AC97ALi_Clevo]
+;;Needs & Include is for Windows in-box driver INF
+;Include=ks.inf, wdmaudio.inf
+;Needs=KS.Registration, WDMAUDIO.Registration
+;;AlsoInstall is for IHV INF in OEM distributed disk
+AlsoInstall=KS.Registration(ks.inf), WDMAUDIO.Registration(wdmaudio.inf)
+CopyFiles=AC97ALi.CopyList,AC97CPL.CopyList
+AddReg=AC97ALi.AddReg, ALiClevo.AddReg, AcPm.AddReg,AcPm1.AddReg
+KnownRegEntries=AC97.KnownRegEntries
+
+[AC97ALi_Transmeta]
+;;Needs & Include is for Windows in-box driver INF
+;Include=ks.inf, wdmaudio.inf
+;Needs=KS.Registration, WDMAUDIO.Registration
+;;AlsoInstall is for IHV INF in OEM distributed disk
+AlsoInstall=KS.Registration(ks.inf), WDMAUDIO.Registration(wdmaudio.inf)
+CopyFiles=AC97ALi.CopyList,AC97CPL.CopyList
+AddReg=AC97ALi.AddReg, ALiTransmeta.AddReg, AcPm.AddReg,AcPm1.AddReg
+KnownRegEntries=AC97.KnownRegEntries
+
+[AC97ALi_ECS]
+;;Needs & Include is for Windows in-box driver INF
+;Include=ks.inf, wdmaudio.inf
+;Needs=KS.Registration, WDMAUDIO.Registration
+;;AlsoInstall is for IHV INF in OEM distributed disk
+AlsoInstall=KS.Registration(ks.inf), WDMAUDIO.Registration(wdmaudio.inf)
+CopyFiles=AC97ALi.CopyList,AC97CPL.CopyList
+AddReg=AC97ALi.AddReg, ALiECS.AddReg, AcPm.AddReg,AcPm1.AddReg
+KnownRegEntries=AC97.KnownRegEntries
+
+;;prevent installation on Windows 98 (Gold)
+[AC97.KnownRegEntries]
+IsWin98Gold=keep
+[IsWin98Gold]
+1=HKLM,Software\Microsoft\Windows\CurrentVersion,VersionNumber,0,4.10.1998
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[AC97ALi.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,AC97ALi.I.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,AC97ALi.I.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,AC97ALi.I.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,AC97ALi.I.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,AC97ALi.I.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,AC97ALi.I.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,AC97ALi.I.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,AC97ALi.I.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wavetable%,AC97ALi.I.Wavetable
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wavetable%,AC97ALi.I.Wavetable
+
+[AC97ALi_Clevo.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,AC97ALi.I.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,AC97ALi.I.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,AC97ALi.I.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,AC97ALi.I.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,AC97ALi.I.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,AC97ALi.I.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,AC97ALi.I.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,AC97ALi.I.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wavetable%,AC97ALi.I.Wavetable
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wavetable%,AC97ALi.I.Wavetable
+
+[AC97ALi_Transmeta.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,AC97ALi.I.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,AC97ALi.I.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,AC97ALi.I.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,AC97ALi.I.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,AC97ALi.I.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,AC97ALi.I.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,AC97ALi.I.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,AC97ALi.I.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wavetable%,AC97ALi.I.Wavetable
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wavetable%,AC97ALi.I.Wavetable
+
+[AC97ALi_ECS.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,AC97ALi.I.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,AC97ALi.I.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,AC97ALi.I.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,AC97ALi.I.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,AC97ALi.I.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,AC97ALi.I.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,AC97ALi.I.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,AC97ALi.I.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wavetable%,AC97ALi.I.Wavetable
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wavetable%,AC97ALi.I.Wavetable
+
+[AC97ALi.I.Wave]
+AddReg=AC97ALi.I.Wave.AddReg
+
+[AC97ALi.I.Wave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%AC97ALi.Wave.szPname%
+
+[AC97ALi.I.Topology]
+AddReg=AC97ALi.I.Topo.AddReg
+
+;;Warning: "Topology" is too long
+[AC97ALi.I.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%AC97ALi.Topology.szPname%
+
+[AC97ALi.I.UART]
+AddReg=AC97ALi.I.UART.AddReg
+
+[AC97ALi.I.UART.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%AC97ALi.UART.szPname%
+
+[AC97ALi.I.Wavetable]
+AddReg=AC97ALi.I.WTBL.AddReg
+
+[AC97ALi.I.WTBL.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%AC97ALi.Wavetable.szPname%
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[AC97ALi.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,ali51wdm.sys
+HKR,,NTMPDriver,,"ali51wdm.sys,sbemul.sys"
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+;HKR,Drivers\aux\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\wave\wdmaud.drv, Description,,%AC97ALi.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv, Description,,%AC97ALi.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%AC97ALi.DeviceDesc%
+;HKR,Drivers\aux\wdmaud.drv,Description,,%AC97ALi.DeviceDesc%
+
+;;Pin/Node GUIDs & Names
+;HKLM,%MediaCategories%\%GUID.%,Name,,%Name.%
+;HKLM,%MediaCategories%\%GUID.%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.PCMOut%,Name,,%Name.PCMOut%
+HKLM,%MediaCategories%\%GUID.PCMOut%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.3DControl%,Name,,%Name.3DControl%
+HKLM,%MediaCategories%\%GUID.3DControl%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.3DDeepth%,Name,,%Name.3DDeepth%
+HKLM,%MediaCategories%\%GUID.3DDeepth%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.I2S%,Name,,%Name.I2S%
+HKLM,%MediaCategories%\%GUID.I2S%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.SPDIF%,Name,,%Name.SPDIF%
+HKLM,%MediaCategories%\%GUID.SPDIF%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.SURROUND%,Name,,%Name.SURROUND%
+HKLM,%MediaCategories%\%GUID.SURROUND%,Display,1,00,00,00,00
+
+[ALiOEM.AddReg]
+;;Default register value
+HKR,%SETS%,Master,1,0,0	;MasterVolume
+HKR,%SETS%,Headphone,1,0,0	;HeadphoneVolume
+HKR,%SETS%,MasterMono,1,0,0	;MonooutVolume
+HKR,%SETS%,MasterTone,1,F,F	;ToneControls
+HKR,%SETS%,PCBeep,1,0,0	;BeepVolume
+HKR,%SETS%,PCPhone,1,8,80	;PhoneVolume
+HKR,%SETS%,Mic,1,8,80	;MicVolume
+HKR,%SETS%,LineIn,1,8,8	;LineInVolume
+HKR,%SETS%,CDIn,1,8,8	;CDVolume
+HKR,%SETS%,Video,1,8,8	;VideoVolume
+HKR,%SETS%,AUX,1,8,8	;AUXVolume
+HKR,%SETS%,PCMOut,1,8,8	;WaveOutVolume
+HKR,%SETS%,RecordSelect,1,00,00	;4 LineIn
+HKR,%SETS%,RecordGain,1,00,00
+HKR,%SETS%,RecordGainMic,1,00,00
+;HKR,%SETS%,GeneralPurpose,1,0,0	;pre 3D, 3D off, loudness off, mono=mix, mic1
+HKR,%SETS%,3DControl,1,00,00
+;HKR,%SETS%,PowerDown,1,0,0			;no power down
+;HKR,%SETS%,ExtAudioCtrl,1,01,40		;VRA, DACs on, MicIn off
+;HKR,%SETS%,CenterLFEVolume,1,0,0		;0dB
+HKR,%SETS%,Surround,1,0,0	;SurroundVolume
+
+HKR,%SETS%,MicAGC,1,ff,ff
+HKR,%SETS%,INRecord,1,ff,ff,ff,ff
+HKR,%SETS%,INMic,1,00,00,00,80
+HKR,%SETS%,INCD,1,00,00,00,80
+HKR,%SETS%,INVideo,1,00,00,00,80
+HKR,%SETS%,INAUX,1,00,00,00,80
+HKR,%SETS%,INLine,1,00,00,00,80
+HKR,%SETS%,INSMix,1,00,00,00,80
+HKR,%SETS%,INMMix,1,00,00,00,80
+HKR,%SETS%,INPhone,1,00,00,00,80
+HKR,%SETS%,INI2S,1,ff,ff,ff,ff
+HKR,%SETS%,Max3DDepth,1,00,80
+;HKR,%SETS%,MicBoostDisable,1,01
+;HKR,%SETS%,DisableMic2,1,01
+
+;;Configuration
+;HKR,%PARS%,GamePort,1,01
+;HKR,%PARS%,GPIOVol,1,01
+;HKR,%PARS%,ModelType,1,00,00,00,00
+;HKR,%PARS%,MPU401,1,01
+;HKR,%PARS%,SoftModem,1,01
+;HKR,%PARS%,SPK,1,02
+
+[ALiClevo.AddReg]
+;;Default register value
+HKR,%SETS%,Master,1,0,0	;MasterVolume
+HKR,%SETS%,Headphone,1,0,0	;HeadphoneVolume
+HKR,%SETS%,MasterMono,1,0,0	;MonooutVolume
+HKR,%SETS%,MasterTone,1,F,F	;ToneControls
+HKR,%SETS%,PCBeep,1,0,0	;BeepVolume
+HKR,%SETS%,PCPhone,1,8,80	;PhoneVolume
+HKR,%SETS%,Mic,1,8,80	;MicVolume
+HKR,%SETS%,LineIn,1,8,8	;LineInVolume
+HKR,%SETS%,CDIn,1,8,8	;CDVolume
+HKR,%SETS%,Video,1,8,8	;VideoVolume
+HKR,%SETS%,AUX,1,8,8	;AUXVolume
+HKR,%SETS%,PCMOut,1,8,8	;WaveOutVolume
+HKR,%SETS%,RecordSelect,1,00,00	;4 LineIn
+HKR,%SETS%,RecordGain,1,00,00
+HKR,%SETS%,RecordGainMic,1,00,00
+;HKR,%SETS%,GeneralPurpose,1,0,0	;pre 3D, 3D off, loudness off, mono=mix, mic1
+HKR,%SETS%,3DControl,1,00,00
+;HKR,%SETS%,PowerDown,1,0,0			;no power down
+;HKR,%SETS%,ExtAudioCtrl,1,01,40		;VRA, DACs on, MicIn off
+;HKR,%SETS%,CenterLFEVolume,1,0,0		;0dB
+HKR,%SETS%,Surround,1,0,0	;SurroundVolume
+
+HKR,%SETS%,MicAGC,1,ff,ff
+HKR,%SETS%,INRecord,1,ff,ff,ff,ff
+HKR,%SETS%,INMic,1,00,00,00,80
+HKR,%SETS%,INCD,1,00,00,00,80
+HKR,%SETS%,INVideo,1,00,00,00,80
+HKR,%SETS%,INAUX,1,00,00,00,80
+HKR,%SETS%,INLine,1,00,00,00,80
+HKR,%SETS%,INSMix,1,00,00,00,80
+HKR,%SETS%,INMMix,1,00,00,00,80
+HKR,%SETS%,INPhone,1,00,00,00,80
+HKR,%SETS%,INI2S,1,ff,ff,ff,ff
+HKR,%SETS%,Max3DDepth,1,00,80
+HKR,%SETS%,MaxPCMOut,1,00,80
+HKR,%SETS%,MaxMic,1,04,00
+HKR,%SETS%,MaxRecSMix,1,04,00
+;HKR,%SETS%,MicBoostDisable,1,01
+;HKR,%SETS%,DisableMic2,1,01
+
+;;Configuration
+;HKR,%PARS%,GamePort,1,01
+;HKR,%PARS%,GPIOVol,1,01
+;HKR,%PARS%,ModelType,1,00,00,00,00
+;HKR,%PARS%,MPU401,1,01
+;HKR,%PARS%,SoftModem,1,01
+;HKR,%PARS%,SPK,1,02
+
+[ALiTransmeta.AddReg]
+;;Default register value
+HKR,%SETS%,Master,1,0,0	;MasterVolume
+HKR,%SETS%,Headphone,1,0,0	;HeadphoneVolume
+HKR,%SETS%,MasterMono,1,0,0	;MonooutVolume
+HKR,%SETS%,MasterTone,1,F,F	;ToneControls
+HKR,%SETS%,PCBeep,1,0,0	;BeepVolume
+HKR,%SETS%,PCPhone,1,8,80	;PhoneVolume
+HKR,%SETS%,Mic,1,8,80	;MicVolume
+HKR,%SETS%,LineIn,1,8,8	;LineInVolume
+HKR,%SETS%,CDIn,1,8,8	;CDVolume
+HKR,%SETS%,Video,1,8,8	;VideoVolume
+HKR,%SETS%,AUX,1,8,8	;AUXVolume
+HKR,%SETS%,PCMOut,1,8,8	;WaveOutVolume
+HKR,%SETS%,RecordSelect,1,00,00	;4 LineIn
+HKR,%SETS%,RecordGain,1,00,00
+HKR,%SETS%,RecordGainMic,1,00,00
+;HKR,%SETS%,GeneralPurpose,1,0,0	;pre 3D, 3D off, loudness off, mono=mix, mic1
+HKR,%SETS%,3DControl,1,00,00
+;HKR,%SETS%,PowerDown,1,0,0			;no power down
+;HKR,%SETS%,ExtAudioCtrl,1,01,40		;VRA, DACs on, MicIn off
+;HKR,%SETS%,CenterLFEVolume,1,0,0		;0dB
+;HKR,%SETS%,Surround,1,0,0	;SurroundVolume
+
+HKR,%SETS%,MicAGC,1,ff,ff
+HKR,%SETS%,INRecord,1,ff,ff,ff,ff
+HKR,%SETS%,INMic,1,00,00,00,80
+HKR,%SETS%,INCD,1,00,00,00,80
+HKR,%SETS%,INVideo,1,00,00,00,80
+HKR,%SETS%,INAUX,1,00,00,00,80
+HKR,%SETS%,INLine,1,00,00,00,80
+HKR,%SETS%,INSMix,1,00,00,00,80
+HKR,%SETS%,INMMix,1,00,00,00,80
+HKR,%SETS%,INPhone,1,00,00,00,80
+HKR,%SETS%,INI2S,1,ff,ff,ff,ff
+HKR,%SETS%,Max3DDepth,1,00,80
+HKR,%SETS%,MaxPCMOut,1,00,00
+HKR,%SETS%,MaxMic,1,04,00
+HKR,%SETS%,MaxRecSMix,1,04,00
+;HKR,%SETS%,MicBoostDisable,1,01
+;HKR,%SETS%,DisableMic2,1,01
+
+;;Configuration
+;HKR,%PARS%,GamePort,1,01
+;HKR,%PARS%,GPIOVol,1,01
+;HKR,%PARS%,ModelType,1,00,00,00,00
+;HKR,%PARS%,MPU401,1,01
+;HKR,%PARS%,SoftModem,1,01
+;HKR,%PARS%,SPK,1,02
+
+[ALiECS.AddReg]
+;;Default register value
+HKR,%SETS%,Master,1,0,0	;MasterVolume
+HKR,%SETS%,Headphone,1,0,0	;HeadphoneVolume
+HKR,%SETS%,MasterMono,1,0,0	;MonooutVolume
+HKR,%SETS%,MasterTone,1,F,F	;ToneControls
+HKR,%SETS%,PCBeep,1,0,0	;BeepVolume
+HKR,%SETS%,PCPhone,1,8,80	;PhoneVolume
+HKR,%SETS%,Mic,1,8,80	;MicVolume
+HKR,%SETS%,LineIn,1,8,8	;LineInVolume
+HKR,%SETS%,CDIn,1,8,8	;CDVolume
+HKR,%SETS%,Video,1,8,8	;VideoVolume
+HKR,%SETS%,AUX,1,8,8	;AUXVolume
+HKR,%SETS%,PCMOut,1,c,c	;WaveOutVolume
+HKR,%SETS%,RecordSelect,1,00,00	;4 LineIn
+HKR,%SETS%,RecordGain,1,00,00
+HKR,%SETS%,RecordGainMic,1,00,00
+;HKR,%SETS%,GeneralPurpose,1,0,0	;pre 3D, 3D off, loudness off, mono=mix, mic1
+HKR,%SETS%,3DControl,1,00,00
+;HKR,%SETS%,PowerDown,1,0,0			;no power down
+;HKR,%SETS%,ExtAudioCtrl,1,01,40		;VRA, DACs on, MicIn off
+;HKR,%SETS%,CenterLFEVolume,1,0,0		;0dB
+;HKR,%SETS%,Surround,1,0,0	;SurroundVolume
+
+HKR,%SETS%,MicAGC,1,ff,ff
+HKR,%SETS%,INRecord,1,ff,ff,ff,ff
+HKR,%SETS%,INMic,1,00,00,00,80
+HKR,%SETS%,INCD,1,00,00,00,80
+HKR,%SETS%,INVideo,1,00,00,00,80
+HKR,%SETS%,INAUX,1,00,00,00,80
+HKR,%SETS%,INLine,1,00,00,00,80
+HKR,%SETS%,INSMix,1,00,00,00,80
+HKR,%SETS%,INMMix,1,00,00,00,80
+HKR,%SETS%,INPhone,1,00,00,00,80
+HKR,%SETS%,INI2S,1,ff,ff,ff,ff
+HKR,%SETS%,Max3DDepth,1,00,80
+HKR,%SETS%,MaxPCMOut,1,00,00
+HKR,%SETS%,MaxMic,1,04,00
+HKR,%SETS%,MaxRecSMix,1,04,00
+;HKR,%SETS%,MicBoostDisable,1,01
+;HKR,%SETS%,DisableMic2,1,01
+
+;;Configuration
+;HKR,%PARS%,GamePort,1,01
+;HKR,%PARS%,GPIOVol,1,01
+;HKR,%PARS%,ModelType,1,00,00,00,00
+;HKR,%PARS%,MPU401,1,01
+;HKR,%PARS%,SoftModem,1,01
+;HKR,%PARS%,SPK,1,02
+
+[AcPm.AddReg]
+;HKR,%SERV%,PmEnable,1,01
+;HKR,%SERV%,PmTimer,1,02
+;HKR,%SERV%,PmDynamic,1,01
+[AcPm1.AddReg]
+HKLM,"SOFTWARE\Microsoft\Windows\CurrentVersion\Run",ALi51Snd,,"ALi51Snd.exe"
+;HKLM,"SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce",ALi51Snd,,"ALi51Snd.exe"
+
+[AC97ALi.CopyList]
+ali51wdm.sys
+;gm.dls
+;gm10mb.sam
+;gm40mb.sam
+;gm80mb.sam
+
+[AC97CPL.CopyList]
+ALi51Cpl.cpl
+ALi51Snd.exe
+
+;;================ Windows 2000 ================
+[AC97ALi.NTX86]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=AC97ALi.CopyList,AC97CPL.CopyList
+AddReg=AC97ALi.AddReg, ALiOEM.AddReg, AcPm.AddReg
+
+[AC97ALi_Clevo.NTX86]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=AC97ALi.CopyList,AC97CPL.CopyList
+AddReg=AC97ALi.AddReg, ALiOEM.AddReg, AcPm.AddReg
+
+[AC97ALi_Transmeta.NTX86]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=AC97ALi.CopyList,AC97CPL.CopyList
+AddReg=AC97ALi.AddReg, ALiTransmeta.AddReg, AcPm.AddReg
+
+[AC97ALi_ECS.NTX86]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=AC97ALi.CopyList,AC97CPL.CopyList
+AddReg=AC97ALi.AddReg, ALiECS.AddReg, AcPm.AddReg
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[AC97ALi.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,AC97ALi.I.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,AC97ALi.I.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,AC97ALi.I.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,AC97ALi.I.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,AC97ALi.I.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,AC97ALi.I.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,AC97ALi.I.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,AC97ALi.I.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wavetable%,AC97ALi.I.Wavetable
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wavetable%,AC97ALi.I.Wavetable
+
+[AC97ALi_Clevo.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,AC97ALi.I.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,AC97ALi.I.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,AC97ALi.I.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,AC97ALi.I.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,AC97ALi.I.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,AC97ALi.I.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,AC97ALi.I.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,AC97ALi.I.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wavetable%,AC97ALi.I.Wavetable
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wavetable%,AC97ALi.I.Wavetable
+
+[AC97ALi_Transmeta.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,AC97ALi.I.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,AC97ALi.I.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,AC97ALi.I.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,AC97ALi.I.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,AC97ALi.I.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,AC97ALi.I.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,AC97ALi.I.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,AC97ALi.I.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wavetable%,AC97ALi.I.Wavetable
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wavetable%,AC97ALi.I.Wavetable
+
+[AC97ALi_ECS.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,AC97ALi.I.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,AC97ALi.I.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,AC97ALi.I.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,AC97ALi.I.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,AC97ALi.I.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,AC97ALi.I.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,AC97ALi.I.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,AC97ALi.I.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wavetable%,AC97ALi.I.Wavetable
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wavetable%,AC97ALi.I.Wavetable
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[AC97ALi.NTX86.Services]
+AddService = aliadwdm, 0x00000002, AC97ALi_Service_Inst
+
+[AC97ALi_Clevo.NTX86.Services]
+AddService = aliadwdm, 0x00000002, AC97ALi_Service_Inst
+
+[AC97ALi_Transmeta.NTX86.Services]
+AddService = aliadwdm, 0x00000002, AC97ALi_Service_Inst
+
+[AC97ALi_ECS.NTX86.Services]
+AddService = aliadwdm, 0x00000002, AC97ALi_Service_Inst
+
+[AC97ALi_Service_Inst]
+DisplayName    = %AC97ALi.DeviceDesc%	; %AC97ALi.SvcDesc%
+ServiceType    = 1	; SERVICE_KERNEL_DRIVER
+StartType      = 3	; SERVICE_DEMAND_START
+ErrorControl   = 1	; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\ali51wdm.sys
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[Strings]
+ProviderName="ALi Corporation."
+MfgName="ALi Corporation."
+AC97ALi.DeviceDesc="ALi Audio Accelerator WDM Driver"
+AC97ALi_DiskDesc="ALi Audio Accelerator WDM Driver Disk"
+
+AC97ALi.Wave.szPname="ALi Audio Wave"
+AC97ALi.Topology.szPname="ALi Audio Mixer"
+AC97ALi.UART.szPname="MPU-401"
+AC97ALi.Wavetable.szPname="ALi Wavetable"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+KSNAME_UART="UART"
+;KSNAME_FMSynth="FMSynth"
+KSNAME_Wavetable="Wavetable"
+
+PARS="Parameters"
+SETS="Settings"
+;SOFT="SOFTWARE\ALiSnd\Parameters"
+SERV="SYSTEM\CurrentControlSet\Services\ALiADWDM\Parameters"
+
+;;Pin/Node GUIDs & Names
+;GUID.		="{BC09A5E0-35B4-11d2-BE7A-0000210155AD}"
+;Name.		=""
+GUID.PCMOut		="{BC09A5E6-35B4-11d2-BE7A-0000210155AD}"
+Name.PCMOut		="PCM Out"
+GUID.3DControl		="{BC09A5EA-35B4-11d2-BE7A-0000210155AD}"
+Name.3DControl		="3D Control"
+GUID.3DDeepth		="{BC09A5EB-35B4-11d2-BE7A-0000210155AD}"
+Name.3DDeepth		="3D Depth"
+GUID.I2S		="{BC09A5EC-35B4-11d2-BE7A-0000210155AD}"
+Name.I2S		="I2S"
+GUID.SPDIF		="{BC09A5ED-35B4-11d2-BE7A-0000210155AD}"
+Name.SPDIF		="S/PDIF"
+GUID.SURROUND		="{BC09A5EF-35B4-11d2-BE7A-0000210155AD}"
+Name.SURROUND		="Surround"

@@ -1,0 +1,1840 @@
+;----------------------------------------------------------------------
+;M Audio Delta series Setup File
+;Written by Stephan Kappertz
+;Copyright (c) 1999-2005 Midiman/M-Audio 
+;Manufacturer: M-Audio
+;----------------------------------------------------------------------
+[Version]
+Signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+provider=%MMfg%
+CatalogFile=delta.cat
+DriverVer =10/06/2005,5.10.00.5052
+
+
+[SourceDisksNames]
+1="M-Audio DELTA Driver Disk",,,
+
+[SourceDisksFiles]
+delta.sys=1
+deltasio.dll=1
+pcifmdio.dll=1
+deltapnl.exe=1
+deltapnl.dll=1
+delttray.exe=1
+DeltaCPL.cpl=1
+
+delta64.sys=1
+DeltaCPL64.cpl=1
+
+[Manufacturer]
+%MMfg%=M-Audio, NTX86, NTAMD64
+
+;;================= Windows 2000 ==============
+
+[M-Audio]
+%DELTA1010.DeviceDesc%	= DELTA1010,	PCI\VEN_1412&DEV_1712&SUBSYS_D6301412
+%DELTADIO.DeviceDesc%	= DELTADIO, 	PCI\VEN_1412&DEV_1712&SUBSYS_D6311412
+%DELTA66.DeviceDesc%	= DELTA66,  	PCI\VEN_1412&DEV_1712&SUBSYS_D6321412
+%DELTA44.DeviceDesc%	= DELTA44,  	PCI\VEN_1412&DEV_1712&SUBSYS_D6331412
+%DELTAAP.DeviceDesc%	= DELTAAP,  	PCI\VEN_1412&DEV_1712&SUBSYS_D6341412
+%DELTATDIF.DeviceDesc%	= DELTATDIF,	PCI\VEN_1412&DEV_1712&SUBSYS_D6351412
+%DELTARBUS.DeviceDesc%	= DELTARBUS,	PCI\VEN_1412&DEV_1712&SUBSYS_D6371412
+%DELTA410.DeviceDesc%	= DELTA410 ,	PCI\VEN_1412&DEV_1712&SUBSYS_D6381412
+%DELTA1010LT.DeviceDesc%= DELTA1010LT,	PCI\VEN_1412&DEV_1712&SUBSYS_D63B1412
+%DELTAAP192.DeviceDesc%	= DELTAAP192,  	PCI\VEN_1412&DEV_1724&SUBSYS_36321412
+
+;;================= XP 32 bit =================
+
+[M-Audio.NTX86]
+%DELTA1010.DeviceDesc%	= DELTA1010,	PCI\VEN_1412&DEV_1712&SUBSYS_D6301412
+%DELTADIO.DeviceDesc%	= DELTADIO, 	PCI\VEN_1412&DEV_1712&SUBSYS_D6311412
+%DELTA66.DeviceDesc%	= DELTA66,  	PCI\VEN_1412&DEV_1712&SUBSYS_D6321412
+%DELTA44.DeviceDesc%	= DELTA44,  	PCI\VEN_1412&DEV_1712&SUBSYS_D6331412
+%DELTAAP.DeviceDesc%	= DELTAAP,  	PCI\VEN_1412&DEV_1712&SUBSYS_D6341412
+%DELTATDIF.DeviceDesc%	= DELTATDIF,	PCI\VEN_1412&DEV_1712&SUBSYS_D6351412
+%DELTARBUS.DeviceDesc%	= DELTARBUS,	PCI\VEN_1412&DEV_1712&SUBSYS_D6371412
+%DELTA410.DeviceDesc%	= DELTA410 ,	PCI\VEN_1412&DEV_1712&SUBSYS_D6381412
+%DELTA1010LT.DeviceDesc%= DELTA1010LT,	PCI\VEN_1412&DEV_1712&SUBSYS_D63B1412
+%DELTAAP192.DeviceDesc%	= DELTAAP192,  	PCI\VEN_1412&DEV_1724&SUBSYS_36321412
+
+;;================= 64 bit ====================
+
+[M-Audio.NTAMD64]
+%DELTA1010.DeviceDesc%	= DELTA1010,	PCI\VEN_1412&DEV_1712&SUBSYS_D6301412
+%DELTADIO.DeviceDesc%	= DELTADIO, 	PCI\VEN_1412&DEV_1712&SUBSYS_D6311412
+%DELTA66.DeviceDesc%	= DELTA66,  	PCI\VEN_1412&DEV_1712&SUBSYS_D6321412
+%DELTA44.DeviceDesc%	= DELTA44,  	PCI\VEN_1412&DEV_1712&SUBSYS_D6331412
+%DELTAAP.DeviceDesc%	= DELTAAP,  	PCI\VEN_1412&DEV_1712&SUBSYS_D6341412
+%DELTATDIF.DeviceDesc%	= DELTATDIF,	PCI\VEN_1412&DEV_1712&SUBSYS_D6351412
+%DELTARBUS.DeviceDesc%	= DELTARBUS,	PCI\VEN_1412&DEV_1712&SUBSYS_D6371412
+%DELTA410.DeviceDesc%	= DELTA410 ,	PCI\VEN_1412&DEV_1712&SUBSYS_D6381412
+%DELTA1010LT.DeviceDesc%= DELTA1010LT,	PCI\VEN_1412&DEV_1712&SUBSYS_D63B1412
+%DELTAAP192.DeviceDesc%	= DELTAAP192,  	PCI\VEN_1412&DEV_1724&SUBSYS_36321412
+
+[DestinationDirs]
+DELTA.CopyList=12
+DELTA.CopyList.PANEL=11
+DELTA.CopyList.ASIO=11
+
+DELTA64.CopyList=12
+DELTA64.CopyList.PANEL=11
+DELTA64.CopyList.PANEL.WOW64=10,SysWOW64
+DELTA64.CopyList.ASIO=10,SysWOW64
+
+[DELTA1010]
+AlsoInstall=KS.Registration(ks.inf), WDMAUDIO.Registration(wdmaudio.inf)
+CopyFiles=DELTA.CopyList,Delta.CopyList.PANEL,Delta.CopyList.ASIO
+DelReg=DELTA.DelReg
+AddReg=DELTA1010.AddReg,DELTA.AddReg.Names, DELTA.AddReg.ASIO, DELTA.AddReg.Branding
+
+[DELTA1010LT]
+AlsoInstall=KS.Registration(ks.inf), WDMAUDIO.Registration(wdmaudio.inf)
+CopyFiles=DELTA.CopyList,Delta.CopyList.PANEL,Delta.CopyList.ASIO
+DelReg=DELTA.DelReg
+AddReg=DELTA1010LT.AddReg,DELTA.AddReg.Names, DELTA.AddReg.ASIO, DELTA.AddReg.Branding
+
+[DELTA410]
+AlsoInstall=KS.Registration(ks.inf), WDMAUDIO.Registration(wdmaudio.inf)
+CopyFiles=DELTA.CopyList,Delta.CopyList.PANEL,Delta.CopyList.ASIO
+DelReg=DELTA.DelReg
+AddReg=DELTA410.AddReg,DELTA.AddReg.Names, DELTA.AddReg.ASIO, DELTA.AddReg.Branding
+
+[DELTA66]
+AlsoInstall=KS.Registration(ks.inf), WDMAUDIO.Registration(wdmaudio.inf)
+CopyFiles=DELTA.CopyList,Delta.CopyList.PANEL,Delta.CopyList.ASIO
+DelReg=DELTA.DelReg
+AddReg=DELTA66.AddReg,DELTA.AddReg.Names, DELTA.AddReg.ASIO, DELTA.AddReg.Branding
+
+[DELTA44]
+AlsoInstall=KS.Registration(ks.inf), WDMAUDIO.Registration(wdmaudio.inf)
+CopyFiles=DELTA.CopyList,Delta.CopyList.PANEL,Delta.CopyList.ASIO
+DelReg=DELTA.DelReg
+AddReg=DELTA44.AddReg,DELTA.AddReg.Names, DELTA.AddReg.ASIO, DELTA.AddReg.Branding
+
+[DELTADIO]
+AlsoInstall=KS.Registration(ks.inf), WDMAUDIO.Registration(wdmaudio.inf)
+CopyFiles=DELTA.CopyList,Delta.CopyList.PANEL,Delta.CopyList.ASIO
+DelReg=DELTA.DelReg
+AddReg=DELTADIO.AddReg,DELTA.AddReg.Names, DELTA.AddReg.ASIO, DELTA.AddReg.Branding
+
+[DELTAAP]
+AlsoInstall=KS.Registration(ks.inf), WDMAUDIO.Registration(wdmaudio.inf)
+CopyFiles=DELTA.CopyList,Delta.CopyList.PANEL,Delta.CopyList.ASIO
+DelReg=DELTA.DelReg
+AddReg=DELTAAP.AddReg,DELTA.AddReg.Names, DELTA.AddReg.ASIO, DELTA.AddReg.Branding
+
+[DELTAAP192]
+AlsoInstall=KS.Registration(ks.inf), WDMAUDIO.Registration(wdmaudio.inf)
+CopyFiles=DELTA.CopyList,Delta.CopyList.PANEL,Delta.CopyList.ASIO
+DelReg=DELTA.DelReg
+AddReg=DELTAAP192.AddReg,DELTA.AddReg.Names, DELTA.AddReg.ASIO, DELTA.AddReg.Branding
+
+[DELTATDIF]
+AlsoInstall=KS.Registration(ks.inf), WDMAUDIO.Registration(wdmaudio.inf)
+CopyFiles=DELTA.CopyList,Delta.CopyList.PANEL,Delta.CopyList.ASIO
+DelReg=DELTA.DelReg
+AddReg=DELTATDIF.AddReg,DELTA.AddReg.Names, DELTA.AddReg.ASIO, DELTA.AddReg.Branding
+
+[DELTARBUS]
+AlsoInstall=KS.Registration(ks.inf), WDMAUDIO.Registration(wdmaudio.inf)
+CopyFiles=DELTA.CopyList,Delta.CopyList.PANEL,Delta.CopyList.ASIO
+DelReg=DELTA.DelReg
+AddReg=DELTARBUS.AddReg,DELTA.AddReg.Names, DELTA.AddReg.ASIO, DELTA.AddReg.Branding
+
+[DELTA.CopyList]
+delta.sys
+
+[Delta.CopyList.PANEL]
+deltapnl.exe,,
+deltapnl.dll,,
+delttray.exe,,
+DeltaCPL.cpl,,
+
+[DELTA.CopyList.ASIO]
+deltasio.dll,,
+pcifmdio.dll,,
+
+[DELTA64.CopyList]
+delta.sys,delta64.sys,
+
+[DELTA64.CopyList.ASIO]
+deltasio.dll,,
+
+[Delta64.CopyList.PANEL]
+DeltaCPL.cpl,DeltaCPL64.cpl,
+
+[Delta64.CopyList.PANEL.WOW64]
+deltapnl.exe,,
+deltapnl.dll,,
+delttray.exe,,
+
+[DELTA1010.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,DELTA1010.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,DELTA1010.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,DELTA1010.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,DELTA1010.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,DELTA1010.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,DELTA1010.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave3%,DELTA1010.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave3%,DELTA1010.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave3%,DELTA1010.Interface.Wave3
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave4%,DELTA1010.Interface.Wave4
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave4%,DELTA1010.Interface.Wave4
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave4%,DELTA1010.Interface.Wave4
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave5%,DELTA1010.Interface.Wave5
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave5%,DELTA1010.Interface.Wave5
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave5%,DELTA1010.Interface.Wave5
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave6%,DELTA1010.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave6%,DELTA1010.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave6%,DELTA1010.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave7%,DELTA1010.Interface.Wave7
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave7%,DELTA1010.Interface.Wave7
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,DELTA1010.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,DELTA1010.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,DELTA1010.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,DELTA1010.Interface.Topology
+
+[DELTA1010.Interface.Wave1]
+AddReg=DELTA1010.I.Wave1.AddReg
+
+[DELTA1010.Interface.Wave2]
+AddReg=DELTA1010.I.Wave2.AddReg
+
+[DELTA1010.Interface.Wave3]
+AddReg=DELTA1010.I.Wave3.AddReg
+
+[DELTA1010.Interface.Wave4]
+AddReg=DELTA1010.I.Wave4.AddReg
+
+[DELTA1010.Interface.Wave5]
+AddReg=DELTA1010.I.Wave5.AddReg
+
+[DELTA1010.Interface.Wave6]
+AddReg=DELTA1010.I.Wave6.AddReg
+
+[DELTA1010.Interface.Wave7]
+AddReg=DELTA1010.I.Wave7.AddReg
+
+[DELTA1010.Interface.Wave8]
+AddReg=DELTA1010.I.Wave8.AddReg
+
+[DELTA1010.Interface.UART]
+AddReg=DELTA1010.Interface.UART.AddReg
+
+[DELTA1010.Interface.UART.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA1010.UART.szPname%
+
+[DELTA1010.I.Wave1.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA1010.Wave1.szPname%
+
+[DELTA1010.I.Wave2.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA1010.Wave2.szPname%
+
+[DELTA1010.I.Wave3.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA1010.Wave3.szPname%
+
+[DELTA1010.I.Wave4.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA1010.Wave4.szPname%
+
+[DELTA1010.I.Wave5.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA1010.Wave5.szPname%
+
+[DELTA1010.I.Wave6.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA1010.Wave6.szPname%
+
+[DELTA1010.I.Wave7.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA1010.Wave7.szPname%
+
+[DELTA1010.I.Wave8.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA1010.Wave8.szPname%
+
+[DELTA1010.Interface.Topology]
+AddReg=DELTA1010.I.Topo.AddReg
+
+[DELTA1010.I.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA1010.Topology.szPname%
+
+[DELTA1010.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,delta.sys
+HKR,,NTMPDriver,,"delta.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%DELTA1010.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv, Description,,%DELTA1010.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%DELTA1010.DeviceDesc%
+
+[DELTA1010LT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,DELTA1010LT.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,DELTA1010LT.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,DELTA1010LT.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,DELTA1010LT.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,DELTA1010LT.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,DELTA1010LT.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave3%,DELTA1010LT.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave3%,DELTA1010LT.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave3%,DELTA1010LT.Interface.Wave3
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave4%,DELTA1010LT.Interface.Wave4
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave4%,DELTA1010LT.Interface.Wave4
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave4%,DELTA1010LT.Interface.Wave4
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave5%,DELTA1010LT.Interface.Wave5
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave5%,DELTA1010LT.Interface.Wave5
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave5%,DELTA1010LT.Interface.Wave5
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave6%,DELTA1010LT.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave6%,DELTA1010LT.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave6%,DELTA1010LT.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave7%,DELTA1010LT.Interface.Wave7
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave7%,DELTA1010LT.Interface.Wave7
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,DELTA1010LT.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,DELTA1010LT.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,DELTA1010LT.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,DELTA1010LT.Interface.Topology
+
+[DELTA1010LT.Interface.Wave1]
+AddReg=DELTA1010LT.I.Wave1.AddReg
+
+[DELTA1010LT.Interface.Wave2]
+AddReg=DELTA1010LT.I.Wave2.AddReg
+
+[DELTA1010LT.Interface.Wave3]
+AddReg=DELTA1010LT.I.Wave3.AddReg
+
+[DELTA1010LT.Interface.Wave4]
+AddReg=DELTA1010LT.I.Wave4.AddReg
+
+[DELTA1010LT.Interface.Wave5]
+AddReg=DELTA1010LT.I.Wave5.AddReg
+
+[DELTA1010LT.Interface.Wave6]
+AddReg=DELTA1010LT.I.Wave6.AddReg
+
+[DELTA1010LT.Interface.Wave7]
+AddReg=DELTA1010LT.I.Wave7.AddReg
+
+[DELTA1010LT.Interface.Wave8]
+AddReg=DELTA1010LT.I.Wave8.AddReg
+
+[DELTA1010LT.Interface.UART]
+AddReg=DELTA1010LT.Interface.UART.AddReg
+
+[DELTA1010LT.Interface.UART.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA1010LT.UART.szPname%
+
+[DELTA1010LT.I.Wave1.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA1010LT.Wave1.szPname%
+
+[DELTA1010LT.I.Wave2.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA1010LT.Wave2.szPname%
+
+[DELTA1010LT.I.Wave3.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA1010LT.Wave3.szPname%
+
+[DELTA1010LT.I.Wave4.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA1010LT.Wave4.szPname%
+
+[DELTA1010LT.I.Wave5.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA1010LT.Wave5.szPname%
+
+[DELTA1010LT.I.Wave6.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA1010LT.Wave6.szPname%
+
+[DELTA1010LT.I.Wave7.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA1010LT.Wave7.szPname%
+
+[DELTA1010LT.I.Wave8.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA1010LT.Wave8.szPname%
+
+[DELTA1010LT.Interface.Topology]
+AddReg=DELTA1010LT.I.Topo.AddReg
+
+[DELTA1010LT.I.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA1010LT.Topology.szPname%
+
+[DELTA1010LT.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,delta.sys
+HKR,,NTMPDriver,,"delta.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%DELTA1010LT.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv, Description,,%DELTA1010LT.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%DELTA1010LT.DeviceDesc%
+
+[DELTA410.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,DELTA410.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,DELTA410.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,DELTA410.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,DELTA410.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,DELTA410.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,DELTA410.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave3%,DELTA410.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave3%,DELTA410.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave3%,DELTA410.Interface.Wave3
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave4%,DELTA410.Interface.Wave4
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave4%,DELTA410.Interface.Wave4
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave4%,DELTA410.Interface.Wave4
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave5%,DELTA410.Interface.Wave5
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave5%,DELTA410.Interface.Wave5
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave5%,DELTA410.Interface.Wave5
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave6%,DELTA410.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave6%,DELTA410.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave6%,DELTA410.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave7%,DELTA410.Interface.Wave7
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave7%,DELTA410.Interface.Wave7
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,DELTA410.Interface.Topology
+
+[DELTA410.Interface.Wave1]
+AddReg=DELTA410.I.Wave1.AddReg
+
+[DELTA410.Interface.Wave2]
+AddReg=DELTA410.I.Wave2.AddReg
+
+[DELTA410.Interface.Wave3]
+AddReg=DELTA410.I.Wave3.AddReg
+
+[DELTA410.Interface.Wave4]
+AddReg=DELTA410.I.Wave4.AddReg
+
+[DELTA410.Interface.Wave5]
+AddReg=DELTA410.I.Wave5.AddReg
+
+[DELTA410.Interface.Wave6]
+AddReg=DELTA410.I.Wave6.AddReg
+
+[DELTA410.Interface.Wave7]
+AddReg=DELTA410.I.Wave7.AddReg
+
+[DELTA410.Interface.Wave8]
+AddReg=DELTA410.I.Wave8.AddReg
+
+[DELTA410.I.Wave1.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA410.Wave1.szPname%
+
+[DELTA410.I.Wave2.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA410.Wave2.szPname%
+
+[DELTA410.I.Wave3.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA410.Wave3.szPname%
+
+[DELTA410.I.Wave4.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA410.Wave4.szPname%
+
+[DELTA410.I.Wave5.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA410.Wave5.szPname%
+
+[DELTA410.I.Wave6.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA410.Wave6.szPname%
+
+[DELTA410.I.Wave7.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA410.Wave7.szPname%
+
+[DELTA410.I.Wave8.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA410.Wave8.szPname%
+
+[DELTA410.Interface.Topology]
+AddReg=DELTA410.I.Topo.AddReg
+
+[DELTA410.I.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA410.Topology.szPname%
+
+[DELTA410.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,delta.sys
+HKR,,NTMPDriver,,"delta.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%DELTA410.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv, Description,,%DELTA410.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%DELTA410.DeviceDesc%
+
+[DELTA66.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,DELTA66.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,DELTA66.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,DELTA66.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,DELTA66.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,DELTA66.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,DELTA66.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave3%,DELTA66.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave3%,DELTA66.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave3%,DELTA66.Interface.Wave3
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave6%,DELTA66.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave6%,DELTA66.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave6%,DELTA66.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave7%,DELTA66.Interface.Wave7
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave7%,DELTA66.Interface.Wave7
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,DELTA66.Interface.Topology
+
+[DELTA66.Interface.Wave1]
+AddReg=DELTA66.I.Wave1.AddReg
+
+[DELTA66.Interface.Wave2]
+AddReg=DELTA66.I.Wave2.AddReg
+
+[DELTA66.Interface.Wave3]
+AddReg=DELTA66.I.Wave3.AddReg
+
+[DELTA66.Interface.Wave6]
+AddReg=DELTA66.I.Wave6.AddReg
+
+[DELTA66.Interface.Wave7]
+AddReg=DELTA66.I.Wave7.AddReg
+
+[DELTA66.I.Wave1.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA66.Wave1.szPname%
+
+[DELTA66.I.Wave2.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA66.Wave2.szPname%
+
+[DELTA66.I.Wave3.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA66.Wave3.szPname%
+
+[DELTA66.I.Wave6.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA66.Wave6.szPname%
+
+[DELTA66.I.Wave7.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA66.Wave7.szPname%
+
+[DELTA66.Interface.Topology]
+AddReg=DELTA66.I.Topo.AddReg
+
+[DELTA66.I.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA66.Topology.szPname%
+
+[DELTA66.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,delta.sys
+HKR,,NTMPDriver,,"delta.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%DELTA66.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv, Description,,%DELTA66.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%DELTA66.DeviceDesc%
+
+[DELTA44.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,DELTA44.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,DELTA44.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,DELTA44.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,DELTA44.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,DELTA44.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,DELTA44.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave3%,DELTA44.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave3%,DELTA44.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave3%,DELTA44.Interface.Wave3
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave7%,DELTA44.Interface.Wave7
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave7%,DELTA44.Interface.Wave7
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,DELTA44.Interface.Topology
+
+[DELTA44.Interface.Wave1]
+AddReg=DELTA44.I.Wave1.AddReg
+
+[DELTA44.Interface.Wave2]
+AddReg=DELTA44.I.Wave2.AddReg
+
+[DELTA44.Interface.Wave3]
+AddReg=DELTA44.I.Wave3.AddReg
+
+[DELTA44.Interface.Wave7]
+AddReg=DELTA44.I.Wave7.AddReg
+
+[DELTA44.I.Wave1.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA44.Wave1.szPname%
+
+[DELTA44.I.Wave2.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA44.Wave2.szPname%
+
+[DELTA44.I.Wave3.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA44.Wave3.szPname%
+
+[DELTA44.I.Wave7.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA44.Wave7.szPname%
+
+[DELTA44.Interface.Topology]
+AddReg=DELTA44.I.Topo.AddReg
+
+[DELTA44.I.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTA44.Topology.szPname%
+
+[DELTA44.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,delta.sys
+HKR,,NTMPDriver,,"delta.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%DELTA44.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv, Description,,%DELTA44.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%DELTA44.DeviceDesc%
+
+[DELTADIO.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,DELTADIO.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,DELTADIO.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,DELTADIO.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,DELTADIO.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,DELTADIO.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,DELTADIO.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave6%,DELTADIO.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave6%,DELTADIO.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave6%,DELTADIO.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave7%,DELTADIO.Interface.Wave7
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave7%,DELTADIO.Interface.Wave7
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,DELTADIO.Interface.Topology
+
+[DELTADIO.Interface.Wave1]
+AddReg=DELTADIO.I.Wave1.AddReg
+
+[DELTADIO.Interface.Wave2]
+AddReg=DELTADIO.I.Wave2.AddReg
+
+[DELTADIO.Interface.Wave6]
+AddReg=DELTADIO.I.Wave6.AddReg
+
+[DELTADIO.Interface.Wave7]
+AddReg=DELTADIO.I.Wave7.AddReg
+
+[DELTADIO.I.Wave1.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTADIO.Wave1.szPname%
+
+[DELTADIO.I.Wave2.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTADIO.Wave2.szPname%
+
+[DELTADIO.I.Wave6.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTADIO.Wave6.szPname%
+
+[DELTADIO.I.Wave7.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTADIO.Wave7.szPname%
+
+[DELTADIO.Interface.Topology]
+AddReg=DELTADIO.I.Topo.AddReg
+
+[DELTADIO.I.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTADIO.Topology.szPname%
+
+[DELTADIO.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,delta.sys
+HKR,,NTMPDriver,,"delta.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%DELTADIO.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv, Description,,%DELTADIO.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%DELTADIO.DeviceDesc%
+
+[DELTAAP.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,DELTAAP.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,DELTAAP.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,DELTAAP.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,DELTAAP.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,DELTAAP.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,DELTAAP.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave6%,DELTAAP.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave6%,DELTAAP.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave6%,DELTAAP.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave7%,DELTAAP.Interface.Wave7
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave7%,DELTAAP.Interface.Wave7
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,DELTAAP.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,DELTAAP.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,DELTAAP.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,DELTAAP.Interface.Topology
+
+[DELTAAP.Interface.Wave1]
+AddReg=DELTAAP.I.Wave1.AddReg
+
+[DELTAAP.Interface.Wave2]
+AddReg=DELTAAP.I.Wave2.AddReg
+
+[DELTAAP.Interface.Wave6]
+AddReg=DELTAAP.I.Wave6.AddReg
+
+[DELTAAP.Interface.Wave7]
+AddReg=DELTAAP.I.Wave7.AddReg
+
+[DELTAAP.Interface.UART]
+AddReg=DELTAAP.Interface.UART.AddReg
+
+[DELTAAP.Interface.UART.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTAAP.UART.szPname%
+
+[DELTAAP.I.Wave1.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTAAP.Wave1.szPname%
+
+[DELTAAP.I.Wave2.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTAAP.Wave2.szPname%
+
+[DELTAAP.I.Wave6.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTAAP.Wave6.szPname%
+
+[DELTAAP.I.Wave7.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTAAP.Wave7.szPname%
+
+[DELTAAP.Interface.Topology]
+AddReg=DELTAAP.I.Topo.AddReg
+
+[DELTAAP.I.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTAAP.Topology.szPname%
+
+[DELTAAP.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,delta.sys
+HKR,,NTMPDriver,,"delta.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%DELTAAP.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv, Description,,%DELTAAP.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%DELTAAP.DeviceDesc%
+
+[DELTAAP192.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,DELTAAP192.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,DELTAAP192.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,DELTAAP192.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave6%,DELTAAP192.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave6%,DELTAAP192.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave6%,DELTAAP192.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,DELTAAP192.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,DELTAAP192.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,DELTAAP192.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,DELTAAP192.Interface.Topology
+
+[DELTAAP192.Interface.Wave1]
+AddReg=DELTAAP192.I.Wave1.AddReg
+
+[DELTAAP192.Interface.Wave6]
+AddReg=DELTAAP192.I.Wave6.AddReg
+
+[DELTAAP192.Interface.UART]
+AddReg=DELTAAP192.Interface.UART.AddReg
+
+[DELTAAP192.Interface.UART.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTAAP192.UART.szPname%
+
+[DELTAAP192.I.Wave1.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTAAP192.Wave1.szPname%
+
+[DELTAAP192.I.Wave6.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTAAP192.Wave6.szPname%
+
+[DELTAAP192.Interface.Topology]
+AddReg=DELTAAP192.I.Topo.AddReg
+
+[DELTAAP192.I.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTAAP192.Topology.szPname%
+
+[DELTAAP192.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,delta.sys
+HKR,,NTMPDriver,,"delta.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%DELTAAP.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv, Description,,%DELTAAP.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%DELTAAP.DeviceDesc%
+
+[DELTATDIF.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,DELTATDIF.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,DELTATDIF.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,DELTATDIF.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,DELTATDIF.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,DELTATDIF.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,DELTATDIF.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave3%,DELTATDIF.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave3%,DELTATDIF.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave3%,DELTATDIF.Interface.Wave3
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave4%,DELTATDIF.Interface.Wave4
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave4%,DELTATDIF.Interface.Wave4
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave4%,DELTATDIF.Interface.Wave4
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave5%,DELTATDIF.Interface.Wave5
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave5%,DELTATDIF.Interface.Wave5
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave5%,DELTATDIF.Interface.Wave5
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave6%,DELTATDIF.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave6%,DELTATDIF.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave6%,DELTATDIF.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave7%,DELTATDIF.Interface.Wave7
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave7%,DELTATDIF.Interface.Wave7
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,DELTATDIF.Interface.Topology
+
+[DELTATDIF.Interface.Wave1]
+AddReg=DELTATDIF.I.Wave1.AddReg
+
+[DELTATDIF.Interface.Wave2]
+AddReg=DELTATDIF.I.Wave2.AddReg
+
+[DELTATDIF.Interface.Wave3]
+AddReg=DELTATDIF.I.Wave3.AddReg
+
+[DELTATDIF.Interface.Wave4]
+AddReg=DELTATDIF.I.Wave4.AddReg
+
+[DELTATDIF.Interface.Wave5]
+AddReg=DELTATDIF.I.Wave5.AddReg
+
+[DELTATDIF.Interface.Wave6]
+AddReg=DELTATDIF.I.Wave6.AddReg
+
+[DELTATDIF.Interface.Wave7]
+AddReg=DELTATDIF.I.Wave7.AddReg
+
+[DELTATDIF.Interface.UART]
+AddReg=DELTATDIF.Interface.UART.AddReg
+
+[DELTATDIF.Interface.UART.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTATDIF.UART.szPname%
+
+[DELTATDIF.I.Wave1.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTATDIF.Wave1.szPname%
+
+[DELTATDIF.I.Wave2.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTATDIF.Wave2.szPname%
+
+[DELTATDIF.I.Wave3.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTATDIF.Wave3.szPname%
+
+[DELTATDIF.I.Wave4.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTATDIF.Wave4.szPname%
+
+[DELTATDIF.I.Wave5.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTATDIF.Wave5.szPname%
+
+[DELTATDIF.I.Wave6.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTATDIF.Wave6.szPname%
+
+[DELTATDIF.I.Wave7.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTATDIF.Wave7.szPname%
+
+[DELTATDIF.Interface.Topology]
+AddReg=DELTATDIF.I.Topo.AddReg
+
+[DELTATDIF.I.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTATDIF.Topology.szPname%
+
+[DELTATDIF.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,delta.sys
+HKR,,NTMPDriver,,"delta.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%DELTATDIF.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv, Description,,%DELTATDIF.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%DELTATDIF.DeviceDesc%
+
+[DELTARBUS.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,DELTARBUS.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,DELTARBUS.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,DELTARBUS.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,DELTARBUS.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,DELTARBUS.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,DELTARBUS.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave3%,DELTARBUS.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave3%,DELTARBUS.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave3%,DELTARBUS.Interface.Wave3
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave4%,DELTARBUS.Interface.Wave4
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave4%,DELTARBUS.Interface.Wave4
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave4%,DELTARBUS.Interface.Wave4
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave5%,DELTARBUS.Interface.Wave5
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave5%,DELTARBUS.Interface.Wave5
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave5%,DELTARBUS.Interface.Wave5
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave6%,DELTARBUS.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave6%,DELTARBUS.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave6%,DELTARBUS.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave7%,DELTARBUS.Interface.Wave7
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave7%,DELTARBUS.Interface.Wave7
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,DELTARBUS.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,DELTARBUS.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,DELTARBUS.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,DELTARBUS.Interface.Topology
+
+[DELTARBUS.Interface.Wave1]
+AddReg=DELTARBUS.I.Wave1.AddReg
+
+[DELTARBUS.Interface.Wave2]
+AddReg=DELTARBUS.I.Wave2.AddReg
+
+[DELTARBUS.Interface.Wave3]
+AddReg=DELTARBUS.I.Wave3.AddReg
+
+[DELTARBUS.Interface.Wave4]
+AddReg=DELTARBUS.I.Wave4.AddReg
+
+[DELTARBUS.Interface.Wave5]
+AddReg=DELTARBUS.I.Wave5.AddReg
+
+[DELTARBUS.Interface.Wave6]
+AddReg=DELTARBUS.I.Wave6.AddReg
+
+[DELTARBUS.Interface.Wave7]
+AddReg=DELTARBUS.I.Wave7.AddReg
+
+[DELTARBUS.Interface.UART]
+AddReg=DELTARBUS.Interface.UART.AddReg
+
+[DELTARBUS.Interface.UART.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTARBUS.UART.szPname%
+
+[DELTARBUS.I.Wave1.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTARBUS.Wave1.szPname%
+
+[DELTARBUS.I.Wave2.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTARBUS.Wave2.szPname%
+
+[DELTARBUS.I.Wave3.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTARBUS.Wave3.szPname%
+
+[DELTARBUS.I.Wave4.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTARBUS.Wave4.szPname%
+
+[DELTARBUS.I.Wave5.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTARBUS.Wave5.szPname%
+
+[DELTARBUS.I.Wave6.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTARBUS.Wave6.szPname%
+
+[DELTARBUS.I.Wave7.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTARBUS.Wave7.szPname%
+
+[DELTARBUS.Interface.Topology]
+AddReg=DELTARBUS.I.Topo.AddReg
+
+[DELTARBUS.I.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%DELTARBUS.Topology.szPname%
+
+[DELTARBUS.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,delta.sys
+HKR,,NTMPDriver,,"delta.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%DELTARBUS.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv, Description,,%DELTARBUS.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%DELTARBUS.DeviceDesc%
+
+[DELTA.AddReg.ASIO]
+HKLM,SOFTWARE\ASIO\%AsioNameStr%,"CLSID",0,%AsioID%
+HKCR,CLSID\%AsioID%,,0,%AsioNameStr%
+HKCR,CLSID\%AsioID%\InprocServer32,,0,%11%\deltasio.dll
+HKCR,CLSID\%AsioID%\InprocServer32,"ThreadingModel",0,"Apartment"
+
+[DELTA64.AddReg.ASIO]
+HKLM,SOFTWARE\Wow6432Node\ASIO\%AsioNameStr%,"CLSID",0,%AsioID%
+HKCR,Wow6432Node\CLSID\%AsioID%,,0,%AsioNameStr%
+HKCR,Wow6432Node\CLSID\%AsioID%\InprocServer32,,0,%10%\SysWOW64\deltasio.dll
+HKCR,Wow6432Node\CLSID\%AsioID%\InprocServer32,"ThreadingModel",0,"Apartment"
+
+[DELTA.DelReg]
+HKCR,CLSID\%AsioID%
+HKCR,CLSID\%EasiID%
+HKLM,SOFTWARE\ASIO\%AsioNameStr%
+HKLM,SOFTWARE\ASIO\%AsioNameStrOld%
+HKLM,SOFTWARE\ASIO\%EasiNameStr%
+HKLM,SOFTWARE\EASI\%EasiNameStrOld%
+HKCR,Wow6432Node\CLSID\%AsioID%
+HKLM,SOFTWARE\Wow6432Node\ASIO\%AsioNameStr%
+HKLM,SOFTWARE\Wow6432Node\ASIO\%AsioNameStrOld%
+
+[DELTA.AddReg.Branding]
+HKR,Branding,icon,,"delta.sys,114"
+HKR,Branding,bitmap,,"delta.sys,115"
+HKR,Branding,url,,"http://www.m-audio.com/"
+
+[DELTA1010.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+[DELTA1010LT.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+[DELTA410.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+[DELTAREVO.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+[DELTA66.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+[DELTA44.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+[DELTADIO.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+[DELTAAP.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+[DELTAAP192.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+[DELTATDIF.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+[DELTARBUS.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+[DELTA_Service_Inst]
+DisplayName   = %DELTA.SvcDesc%
+ServiceType   = 1                  ; SERVICE_KERNEL_DRIVER
+StartType     = 3                  ; SERVICE_DEMAND_START
+ErrorControl  = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary = %12%\delta.sys
+
+[DELTA.AddReg.Names]
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Run,DeltTray,,"DeltTray.exe"
+
+[DELTA64.AddReg.Names]
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Run,DeltTray,,"%10%\SysWOW64\DeltTray.exe"
+
+
+;;================= Windows2000====================
+[DELTA1010.NTX86]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=DELTA.CopyList,Delta.CopyList.PANEL,Delta.CopyList.ASIO
+DelReg=DELTA.DelReg
+AddReg=DELTA1010.AddReg, DELTA.AddReg.Names, DELTA.AddReg.ASIO, DELTA.AddReg.Branding
+
+[DELTA1010LT.NTX86]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=DELTA.CopyList,Delta.CopyList.PANEL,Delta.CopyList.ASIO
+DelReg=DELTA.DelReg
+AddReg=DELTA1010LT.AddReg, DELTA.AddReg.Names, DELTA.AddReg.ASIO, DELTA.AddReg.Branding
+
+[DELTA410.NTX86]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=DELTA.CopyList,Delta.CopyList.PANEL,Delta.CopyList.ASIO
+DelReg=DELTA.DelReg
+AddReg=DELTA410.AddReg, DELTA.AddReg.Names, DELTA.AddReg.ASIO, DELTA.AddReg.Branding
+
+[DELTA66.NTX86]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=DELTA.CopyList,Delta.CopyList.PANEL,Delta.CopyList.ASIO
+DelReg=DELTA.DelReg
+AddReg=DELTA66.AddReg, DELTA.AddReg.Names, DELTA.AddReg.ASIO, DELTA.AddReg.Branding
+
+[DELTA44.NTX86]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=DELTA.CopyList,Delta.CopyList.PANEL,Delta.CopyList.ASIO
+DelReg=DELTA.DelReg
+AddReg=DELTA44.AddReg, DELTA.AddReg.Names, DELTA.AddReg.ASIO, DELTA.AddReg.Branding
+
+[DELTADIO.NTX86]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=DELTA.CopyList,Delta.CopyList.PANEL,Delta.CopyList.ASIO
+DelReg=DELTA.DelReg
+AddReg=DELTADIO.AddReg, DELTA.AddReg.Names, DELTA.AddReg.ASIO, DELTA.AddReg.Branding
+
+[DELTAAP.NTX86]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=DELTA.CopyList,Delta.CopyList.PANEL,Delta.CopyList.ASIO
+DelReg=DELTA.DelReg
+AddReg=DELTAAP.AddReg, DELTA.AddReg.Names, DELTA.AddReg.ASIO, DELTA.AddReg.Branding
+
+[DELTAAP192.NTX86]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=DELTA.CopyList,Delta.CopyList.PANEL,Delta.CopyList.ASIO
+DelReg=DELTA.DelReg
+AddReg=DELTAAP192.AddReg, DELTA.AddReg.Names, DELTA.AddReg.ASIO, DELTA.AddReg.Branding
+
+[DELTATDIF.NTX86]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=DELTA.CopyList,Delta.CopyList.PANEL,Delta.CopyList.ASIO
+DelReg=DELTA.DelReg
+AddReg=DELTATDIF.AddReg, DELTA.AddReg.Names, DELTA.AddReg.ASIO, DELTA.AddReg.Branding
+
+[DELTARBUS.NTX86]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=DELTA.CopyList,Delta.CopyList.PANEL,Delta.CopyList.ASIO
+DelReg=DELTA.DelReg
+AddReg=DELTARBUS.AddReg, DELTA.AddReg.Names, DELTA.AddReg.ASIO, DELTA.AddReg.Branding
+
+[DELTA1010.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,DELTA1010.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,DELTA1010.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,DELTA1010.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,DELTA1010.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,DELTA1010.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,DELTA1010.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave3%,DELTA1010.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave3%,DELTA1010.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave3%,DELTA1010.Interface.Wave3
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave4%,DELTA1010.Interface.Wave4
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave4%,DELTA1010.Interface.Wave4
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave4%,DELTA1010.Interface.Wave4
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave5%,DELTA1010.Interface.Wave5
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave5%,DELTA1010.Interface.Wave5
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave5%,DELTA1010.Interface.Wave5
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave6%,DELTA1010.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave6%,DELTA1010.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave6%,DELTA1010.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave7%,DELTA1010.Interface.Wave7
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave7%,DELTA1010.Interface.Wave7
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,DELTA1010.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,DELTA1010.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,DELTA1010.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,DELTA1010.Interface.Topology
+
+[DELTA1010LT.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,DELTA1010LT.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,DELTA1010LT.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,DELTA1010LT.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,DELTA1010LT.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,DELTA1010LT.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,DELTA1010LT.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave3%,DELTA1010LT.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave3%,DELTA1010LT.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave3%,DELTA1010LT.Interface.Wave3
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave4%,DELTA1010LT.Interface.Wave4
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave4%,DELTA1010LT.Interface.Wave4
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave4%,DELTA1010LT.Interface.Wave4
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave5%,DELTA1010LT.Interface.Wave5
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave5%,DELTA1010LT.Interface.Wave5
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave5%,DELTA1010LT.Interface.Wave5
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave6%,DELTA1010LT.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave6%,DELTA1010LT.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave6%,DELTA1010LT.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave7%,DELTA1010LT.Interface.Wave7
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave7%,DELTA1010LT.Interface.Wave7
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,DELTA1010LT.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,DELTA1010LT.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,DELTA1010LT.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,DELTA1010LT.Interface.Topology
+
+[DELTA410.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,DELTA410.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,DELTA410.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,DELTA410.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,DELTA410.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,DELTA410.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,DELTA410.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave3%,DELTA410.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave3%,DELTA410.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave3%,DELTA410.Interface.Wave3
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave4%,DELTA410.Interface.Wave4
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave4%,DELTA410.Interface.Wave4
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave4%,DELTA410.Interface.Wave4
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave5%,DELTA410.Interface.Wave5
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave5%,DELTA410.Interface.Wave5
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave5%,DELTA410.Interface.Wave5
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave6%,DELTA410.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave6%,DELTA410.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave6%,DELTA410.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave7%,DELTA410.Interface.Wave7
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave7%,DELTA410.Interface.Wave7
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,DELTA410.Interface.Topology
+
+[DELTATDIF.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,DELTATDIF.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,DELTATDIF.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,DELTATDIF.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,DELTATDIF.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,DELTATDIF.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,DELTATDIF.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave3%,DELTATDIF.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave3%,DELTATDIF.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave3%,DELTATDIF.Interface.Wave3
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave4%,DELTATDIF.Interface.Wave4
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave4%,DELTATDIF.Interface.Wave4
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave4%,DELTATDIF.Interface.Wave4
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave5%,DELTATDIF.Interface.Wave5
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave5%,DELTATDIF.Interface.Wave5
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave5%,DELTATDIF.Interface.Wave5
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave6%,DELTATDIF.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave6%,DELTATDIF.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave6%,DELTATDIF.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave7%,DELTATDIF.Interface.Wave7
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave7%,DELTATDIF.Interface.Wave7
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,DELTATDIF.Interface.Topology
+
+[DELTA66.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,DELTA66.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,DELTA66.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,DELTA66.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,DELTA66.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,DELTA66.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,DELTA66.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave3%,DELTA66.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave3%,DELTA66.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave3%,DELTA66.Interface.Wave3
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave6%,DELTA66.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave6%,DELTA66.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave6%,DELTA66.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave7%,DELTA66.Interface.Wave7
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave7%,DELTA66.Interface.Wave7
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,DELTA66.Interface.Topology
+
+[DELTA44.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,DELTA44.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,DELTA44.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,DELTA44.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,DELTA44.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,DELTA44.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,DELTA44.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave3%,DELTA44.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave3%,DELTA44.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave3%,DELTA44.Interface.Wave3
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave7%,DELTA44.Interface.Wave7
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave7%,DELTA44.Interface.Wave7
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,DELTA44.Interface.Topology
+
+[DELTADIO.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,DELTADIO.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,DELTADIO.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,DELTADIO.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,DELTADIO.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,DELTADIO.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,DELTADIO.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave6%,DELTADIO.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave6%,DELTADIO.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave6%,DELTADIO.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave7%,DELTADIO.Interface.Wave7
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave7%,DELTADIO.Interface.Wave7
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,DELTADIO.Interface.Topology
+
+[DELTAAP.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,DELTAAP.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,DELTAAP.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,DELTAAP.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,DELTAAP.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,DELTAAP.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,DELTAAP.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave6%,DELTAAP.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave6%,DELTAAP.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave6%,DELTAAP.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave7%,DELTAAP.Interface.Wave7
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave7%,DELTAAP.Interface.Wave7
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,DELTAAP.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,DELTAAP.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,DELTAAP.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,DELTAAP.Interface.Topology
+
+[DELTAAP192.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,DELTAAP192.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,DELTAAP192.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,DELTAAP192.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave6%,DELTAAP192.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave6%,DELTAAP192.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave6%,DELTAAP192.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,DELTAAP192.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,DELTAAP192.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,DELTAAP192.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,DELTAAP192.Interface.Topology
+
+[DELTARBUS.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,DELTARBUS.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,DELTARBUS.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,DELTARBUS.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,DELTARBUS.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,DELTARBUS.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,DELTARBUS.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave3%,DELTARBUS.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave3%,DELTARBUS.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave3%,DELTARBUS.Interface.Wave3
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave4%,DELTARBUS.Interface.Wave4
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave4%,DELTARBUS.Interface.Wave4
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave4%,DELTARBUS.Interface.Wave4
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave5%,DELTARBUS.Interface.Wave5
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave5%,DELTARBUS.Interface.Wave5
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave5%,DELTARBUS.Interface.Wave5
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave6%,DELTARBUS.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave6%,DELTARBUS.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave6%,DELTARBUS.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave7%,DELTARBUS.Interface.Wave7
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave7%,DELTARBUS.Interface.Wave7
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,DELTARBUS.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,DELTARBUS.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,DELTARBUS.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,DELTARBUS.Interface.Topology
+
+[DELTA1010.NTX86.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+[DELTA1010LT.NTX86.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+[DELTA410.NTX86.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+[DELTAREVO.NTX86.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+[DELTA66.NTX86.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+[DELTA44.NTX86.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+[DELTADIO.NTX86.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+[DELTAAP.NTX86.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+[DELTAAP192.NTX86.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+[DELTATDIF.NTX86.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+[DELTARBUS.NTX86.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+
+;;================= Windows XP/2003 AMD 64bit ====================
+[DELTA1010.NTAMD64]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=DELTA64.CopyList,Delta64.CopyList.PANEL,Delta64.CopyList.PANEL.WOW64,Delta64.CopyList.ASIO
+DelReg=DELTA.DelReg
+AddReg=DELTA1010.AddReg, DELTA64.AddReg.Names, DELTA64.AddReg.ASIO, DELTA.AddReg.Branding
+
+[DELTA1010LT.NTAMD64]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=DELTA64.CopyList,Delta64.CopyList.PANEL,Delta64.CopyList.PANEL.WOW64,Delta64.CopyList.ASIO
+DelReg=DELTA.DelReg
+AddReg=DELTA1010LT.AddReg, DELTA64.AddReg.Names, DELTA64.AddReg.ASIO, DELTA.AddReg.Branding
+
+[DELTA410.NTAMD64]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=DELTA64.CopyList,Delta64.CopyList.PANEL,Delta64.CopyList.PANEL.WOW64,Delta64.CopyList.ASIO
+DelReg=DELTA.DelReg
+AddReg=DELTA410.AddReg, DELTA64.AddReg.Names, DELTA64.AddReg.ASIO, DELTA.AddReg.Branding
+
+[DELTA66.NTAMD64]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=DELTA64.CopyList,Delta64.CopyList.PANEL,Delta64.CopyList.PANEL.WOW64,Delta64.CopyList.ASIO
+DelReg=DELTA.DelReg
+AddReg=DELTA66.AddReg, DELTA64.AddReg.Names, DELTA64.AddReg.ASIO, DELTA.AddReg.Branding
+
+[DELTA44.NTAMD64]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=DELTA64.CopyList,Delta64.CopyList.PANEL,Delta64.CopyList.PANEL.WOW64,Delta64.CopyList.ASIO
+DelReg=DELTA.DelReg
+AddReg=DELTA44.AddReg, DELTA64.AddReg.Names, DELTA64.AddReg.ASIO, DELTA.AddReg.Branding
+
+[DELTADIO.NTAMD64]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=DELTA64.CopyList,Delta64.CopyList.PANEL,Delta64.CopyList.PANEL.WOW64,Delta64.CopyList.ASIO
+DelReg=DELTA.DelReg
+AddReg=DELTADIO.AddReg, DELTA64.AddReg.Names, DELTA64.AddReg.ASIO, DELTA.AddReg.Branding
+
+[DELTAAP.NTAMD64]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=DELTA64.CopyList,Delta64.CopyList.PANEL,Delta64.CopyList.PANEL.WOW64,Delta64.CopyList.ASIO
+DelReg=DELTA.DelReg
+AddReg=DELTAAP.AddReg, DELTA64.AddReg.Names, DELTA64.AddReg.ASIO, DELTA.AddReg.Branding
+
+[DELTAAP192.NTAMD64]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=DELTA64.CopyList,Delta64.CopyList.PANEL,Delta64.CopyList.PANEL.WOW64,Delta64.CopyList.ASIO
+DelReg=DELTA.DelReg
+AddReg=DELTAAP192.AddReg, DELTA64.AddReg.Names, DELTA64.AddReg.ASIO, DELTA.AddReg.Branding
+
+[DELTATDIF.NTAMD64]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=DELTA64.CopyList,Delta64.CopyList.PANEL,Delta64.CopyList.PANEL.WOW64,Delta64.CopyList.ASIO
+DelReg=DELTA.DelReg
+AddReg=DELTATDIF.AddReg, DELTA64.AddReg.Names, DELTA64.AddReg.ASIO, DELTA.AddReg.Branding
+
+[DELTARBUS.NTAMD64]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=DELTA64.CopyList,Delta64.CopyList.PANEL,Delta64.CopyList.PANEL.WOW64,Delta64.CopyList.ASIO
+DelReg=DELTA.DelReg
+AddReg=DELTARBUS.AddReg, DELTA64.AddReg.Names, DELTA64.AddReg.ASIO, DELTA.AddReg.Branding
+
+[DELTA1010.NTAMD64.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,DELTA1010.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,DELTA1010.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,DELTA1010.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,DELTA1010.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,DELTA1010.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,DELTA1010.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave3%,DELTA1010.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave3%,DELTA1010.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave3%,DELTA1010.Interface.Wave3
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave4%,DELTA1010.Interface.Wave4
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave4%,DELTA1010.Interface.Wave4
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave4%,DELTA1010.Interface.Wave4
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave5%,DELTA1010.Interface.Wave5
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave5%,DELTA1010.Interface.Wave5
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave5%,DELTA1010.Interface.Wave5
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave6%,DELTA1010.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave6%,DELTA1010.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave6%,DELTA1010.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave7%,DELTA1010.Interface.Wave7
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave7%,DELTA1010.Interface.Wave7
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,DELTA1010.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,DELTA1010.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,DELTA1010.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,DELTA1010.Interface.Topology
+
+[DELTA1010LT.NTAMD64.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,DELTA1010LT.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,DELTA1010LT.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,DELTA1010LT.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,DELTA1010LT.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,DELTA1010LT.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,DELTA1010LT.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave3%,DELTA1010LT.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave3%,DELTA1010LT.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave3%,DELTA1010LT.Interface.Wave3
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave4%,DELTA1010LT.Interface.Wave4
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave4%,DELTA1010LT.Interface.Wave4
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave4%,DELTA1010LT.Interface.Wave4
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave5%,DELTA1010LT.Interface.Wave5
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave5%,DELTA1010LT.Interface.Wave5
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave5%,DELTA1010LT.Interface.Wave5
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave6%,DELTA1010LT.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave6%,DELTA1010LT.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave6%,DELTA1010LT.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave7%,DELTA1010LT.Interface.Wave7
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave7%,DELTA1010LT.Interface.Wave7
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,DELTA1010LT.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,DELTA1010LT.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,DELTA1010LT.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,DELTA1010LT.Interface.Topology
+
+[DELTA410.NTAMD64.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,DELTA410.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,DELTA410.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,DELTA410.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,DELTA410.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,DELTA410.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,DELTA410.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave3%,DELTA410.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave3%,DELTA410.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave3%,DELTA410.Interface.Wave3
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave4%,DELTA410.Interface.Wave4
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave4%,DELTA410.Interface.Wave4
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave4%,DELTA410.Interface.Wave4
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave5%,DELTA410.Interface.Wave5
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave5%,DELTA410.Interface.Wave5
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave5%,DELTA410.Interface.Wave5
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave6%,DELTA410.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave6%,DELTA410.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave6%,DELTA410.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave7%,DELTA410.Interface.Wave7
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave7%,DELTA410.Interface.Wave7
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,DELTA410.Interface.Topology
+
+[DELTATDIF.NTAMD64.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,DELTATDIF.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,DELTATDIF.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,DELTATDIF.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,DELTATDIF.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,DELTATDIF.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,DELTATDIF.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave3%,DELTATDIF.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave3%,DELTATDIF.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave3%,DELTATDIF.Interface.Wave3
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave4%,DELTATDIF.Interface.Wave4
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave4%,DELTATDIF.Interface.Wave4
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave4%,DELTATDIF.Interface.Wave4
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave5%,DELTATDIF.Interface.Wave5
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave5%,DELTATDIF.Interface.Wave5
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave5%,DELTATDIF.Interface.Wave5
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave6%,DELTATDIF.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave6%,DELTATDIF.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave6%,DELTATDIF.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave7%,DELTATDIF.Interface.Wave7
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave7%,DELTATDIF.Interface.Wave7
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,DELTATDIF.Interface.Topology
+
+[DELTA66.NTAMD64.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,DELTA66.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,DELTA66.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,DELTA66.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,DELTA66.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,DELTA66.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,DELTA66.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave3%,DELTA66.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave3%,DELTA66.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave3%,DELTA66.Interface.Wave3
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave6%,DELTA66.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave6%,DELTA66.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave6%,DELTA66.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave7%,DELTA66.Interface.Wave7
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave7%,DELTA66.Interface.Wave7
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,DELTA66.Interface.Topology
+
+[DELTA44.NTAMD64.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,DELTA44.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,DELTA44.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,DELTA44.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,DELTA44.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,DELTA44.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,DELTA44.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave3%,DELTA44.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave3%,DELTA44.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave3%,DELTA44.Interface.Wave3
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave7%,DELTA44.Interface.Wave7
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave7%,DELTA44.Interface.Wave7
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,DELTA44.Interface.Topology
+
+[DELTADIO.NTAMD64.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,DELTADIO.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,DELTADIO.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,DELTADIO.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,DELTADIO.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,DELTADIO.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,DELTADIO.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave6%,DELTADIO.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave6%,DELTADIO.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave6%,DELTADIO.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave7%,DELTADIO.Interface.Wave7
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave7%,DELTADIO.Interface.Wave7
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,DELTADIO.Interface.Topology
+
+[DELTAAP.NTAMD64.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,DELTAAP.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,DELTAAP.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,DELTAAP.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,DELTAAP.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,DELTAAP.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,DELTAAP.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave6%,DELTAAP.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave6%,DELTAAP.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave6%,DELTAAP.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave7%,DELTAAP.Interface.Wave7
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave7%,DELTAAP.Interface.Wave7
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,DELTAAP.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,DELTAAP.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,DELTAAP.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,DELTAAP.Interface.Topology
+
+[DELTAAP192.NTAMD64.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,DELTAAP192.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,DELTAAP192.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,DELTAAP192.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave6%,DELTAAP192.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave6%,DELTAAP192.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave6%,DELTAAP192.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,DELTAAP192.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,DELTAAP192.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,DELTAAP192.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,DELTAAP192.Interface.Topology
+
+[DELTARBUS.NTAMD64.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,DELTARBUS.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,DELTARBUS.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,DELTARBUS.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,DELTARBUS.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,DELTARBUS.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,DELTARBUS.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave3%,DELTARBUS.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave3%,DELTARBUS.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave3%,DELTARBUS.Interface.Wave3
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave4%,DELTARBUS.Interface.Wave4
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave4%,DELTARBUS.Interface.Wave4
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave4%,DELTARBUS.Interface.Wave4
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave5%,DELTARBUS.Interface.Wave5
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave5%,DELTARBUS.Interface.Wave5
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave5%,DELTARBUS.Interface.Wave5
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave6%,DELTARBUS.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave6%,DELTARBUS.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave6%,DELTARBUS.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave7%,DELTARBUS.Interface.Wave7
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave7%,DELTARBUS.Interface.Wave7
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,DELTARBUS.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,DELTARBUS.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,DELTARBUS.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,DELTARBUS.Interface.Topology
+
+[DELTA1010.NTAMD64.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+[DELTA1010LT.NTAMD64.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+[DELTA410.NTAMD64.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+[DELTAREVO.NTAMD64.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+[DELTA66.NTAMD64.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+[DELTA44.NTAMD64.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+[DELTADIO.NTAMD64.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+[DELTAAP.NTAMD64.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+[DELTAAP192.NTAMD64.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+[DELTATDIF.NTAMD64.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+[DELTARBUS.NTAMD64.Services]
+AddService = DELTA, 0x00000002, DELTA_Service_Inst
+
+
+[Strings]
+MSFT="Microsoft"
+MMfg="M-Audio"
+
+DELTA1010.DeviceDesc		="M-Audio Delta 1010"
+DELTA1010LT.DeviceDesc		="M-Audio Delta 1010LT"
+DELTA410.DeviceDesc		="M-Audio Delta 410"
+DELTAREVO.DeviceDesc		="M-Audio Revolution"
+DELTA66.DeviceDesc		="M-Audio Delta 66"
+DELTA44.DeviceDesc		="M-Audio Delta 44"
+DELTADIO.DeviceDesc		="M-Audio Delta DiO"
+DELTAAP.DeviceDesc		="M-Audio Delta Audiophile"
+DELTAAP192.DeviceDesc		="M-Audio Delta AP192"
+DELTATDIF.DeviceDesc		="M-Audio Delta TDIF"
+DELTARBUS.DeviceDesc		="M-Audio Delta RBUS"
+
+DELTA1010.Wave1.szPname		="M-Audio Delta 1010 Multi"
+DELTA1010.Wave2.szPname		="M-Audio Delta 1010 1/2"
+DELTA1010.Wave3.szPname		="M-Audio Delta 1010 3/4"
+DELTA1010.Wave4.szPname		="M-Audio Delta 1010 5/6"
+DELTA1010.Wave5.szPname		="M-Audio Delta 1010 7/8"
+DELTA1010.Wave6.szPname		="M-Audio Delta 1010 S/PDIF"
+DELTA1010.Wave7.szPname		="M-Audio Delta 1010 Mon. Mixer"
+DELTA1010.Wave8.szPname		="M-Audio Delta 1010 Game"
+
+DELTA1010LT.Wave1.szPname	="M-Audio Delta 1010LT Multi"
+DELTA1010LT.Wave2.szPname	="M-Audio Delta 1010LT 1/2"
+DELTA1010LT.Wave3.szPname	="M-Audio Delta 1010LT 3/4"
+DELTA1010LT.Wave4.szPname	="M-Audio Delta 1010LT 5/6"
+DELTA1010LT.Wave5.szPname	="M-Audio Delta 1010LT 7/8"
+DELTA1010LT.Wave6.szPname	="M-Audio Delta 1010LT S/PDIF"
+DELTA1010LT.Wave7.szPname	="M-Audio Delta 1010LT Mon. Mixer"
+DELTA1010LT.Wave8.szPname	="M-Audio Delta 1010LT Game"
+
+DELTA410.Wave1.szPname		="M-Audio Delta 410 Multi"
+DELTA410.Wave2.szPname		="M-Audio Delta 410 1/2"
+DELTA410.Wave3.szPname		="M-Audio Delta 410 3/4"
+DELTA410.Wave4.szPname		="M-Audio Delta 410 5/6"
+DELTA410.Wave5.szPname		="M-Audio Delta 410 7/8"
+DELTA410.Wave6.szPname		="M-Audio Delta 410 S/PDIF"
+DELTA410.Wave7.szPname		="M-Audio Delta 410 Mon. Mixer"
+DELTA410.Wave8.szPname		="M-Audio Delta 410 Game"
+
+DELTA66.Wave1.szPname		="M-Audio Delta 66 Multi"
+DELTA66.Wave2.szPname		="M-Audio Delta 66 1/2"
+DELTA66.Wave3.szPname		="M-Audio Delta 66 3/4"
+DELTA66.Wave6.szPname		="M-Audio Delta 66 S/PDIF"
+DELTA66.Wave7.szPname		="M-Audio Delta 66 Mon. Mixer"
+
+DELTA44.Wave1.szPname		="M-Audio Delta 44 Multi"
+DELTA44.Wave2.szPname		="M-Audio Delta 44 1/2"
+DELTA44.Wave3.szPname		="M-Audio Delta 44 3/4"
+DELTA44.Wave7.szPname		="M-Audio Delta 44 Mon. Mixer"
+
+DELTADIO.Wave1.szPname		="M-Audio Delta DiO Multi"
+DELTADIO.Wave2.szPname		="M-Audio Delta DiO 1/2"
+DELTADIO.Wave6.szPname		="M-Audio Delta DiO S/PDIF"
+DELTADIO.Wave7.szPname		="M-Audio Delta DiO Mon. Mixer"
+
+DELTAAP.Wave1.szPname		="M-Audio Delta AP Multi"
+DELTAAP.Wave2.szPname		="M-Audio Delta AP 1/2"
+DELTAAP.Wave6.szPname		="M-Audio Delta AP S/PDIF"
+DELTAAP.Wave7.szPname		="M-Audio Delta AP Mon. Mixer"
+
+DELTAAP192.Wave1.szPname	="M-Audio Delta AP192 1/2"
+DELTAAP192.Wave6.szPname	="M-Audio Delta AP192 S/PDIF"
+
+DELTATDIF.Wave1.szPname		="M-Audio Delta TDIF Multi"
+DELTATDIF.Wave2.szPname		="M-Audio Delta TDIF 1/2"
+DELTATDIF.Wave3.szPname		="M-Audio Delta TDIF 3/4"
+DELTATDIF.Wave4.szPname		="M-Audio Delta TDIF 5/6"
+DELTATDIF.Wave5.szPname		="M-Audio Delta TDIF 7/8"
+DELTATDIF.Wave6.szPname		="M-Audio Delta TDIF SP/ANA"
+DELTATDIF.Wave7.szPname		="M-Audio Delta TDIF Mon. Mixer"
+
+DELTARBUS.Wave1.szPname		="M-Audio Delta RBUS Multi"
+DELTARBUS.Wave2.szPname		="M-Audio Delta RBUS 1/2"
+DELTARBUS.Wave3.szPname		="M-Audio Delta RBUS 3/4"
+DELTARBUS.Wave4.szPname		="M-Audio Delta RBUS 5/6"
+DELTARBUS.Wave5.szPname		="M-Audio Delta RBUS 7/8"
+DELTARBUS.Wave6.szPname		="M-Audio Delta RBUS SP/ANA"
+DELTARBUS.Wave7.szPname		="M-Audio Delta RBUS Mon. Mixer"
+
+DELTA1010.Uart.szPname		="Delta 1010 MIDI"
+DELTA1010LT.Uart.szPname	="Delta 1010LT MIDI"
+DELTARBUS.Uart.szPname		="Delta RBUS MIDI"
+DELTAAP.Uart.szPname		="Delta AP MIDI"
+DELTAAP192.Uart.szPname		="Delta AP192 MIDI"
+
+DELTA1010.Topology.szPname	="Delta 1010 Mixer"
+DELTA1010LT.Topology.szPname	="Delta 1010LT Mixer"
+DELTA410.Topology.szPname	="Delta 410 Mixer"
+DELTAREVO.Topology.szPname	="Revolution Mixer"
+DELTA66.Topology.szPname	="Delta 66 Mixer"
+DELTA44.Topology.szPname	="Delta 44 Mixer"
+DELTADIO.Topology.szPname	="Delta DiO Mixer"
+DELTAAP.Topology.szPname	="Delta AP Mixer"
+DELTAAP192.Topology.szPname	="Delta AP192 Mixer"
+DELTATDIF.Topology.szPname	="Delta TDIF Mixer"
+DELTARBUS.Topology.szPname	="Delta RBUS Mixer"
+
+MediaCategories			="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+Proxy.CLSID			="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO		="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER		="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE		="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSNAME_Wave1			="Wave1"
+KSNAME_Wave2			="Wave2"
+KSNAME_Wave3			="Wave3"
+KSNAME_Wave4			="Wave4"
+KSNAME_Wave5			="Wave5"
+KSNAME_Wave6			="Wave6"
+KSNAME_Wave7			="Wave7"
+KSNAME_Wave8			="Wave8"
+KSNAME_UART			="UART"
+KSNAME_Topology			="Topology"
+
+DELTA.SvcDesc			="Service for Delta Driver (WDM)"
+
+
+AsioID="{615C2C61-F8EB-11d3-B0B2-0000E8ED4AD9}"
+AsioNameStr="M-Audio Delta ASIO"
+AsioNameStrOld ="M Audio Delta ASIO"
+EasiID="{969C75C2-15F9-11d4-B0B4-0000E8ED4AD9}"
+EasiNameStr="M-Audio Delta EASI"
+EasiNameStrOld="M Audio Delta EASI"
+

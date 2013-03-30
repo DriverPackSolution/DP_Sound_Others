@@ -1,0 +1,241 @@
+;Copyright (c) 1990-2002 ESI Corporation All rights Reserved
+;
+; Juli@ 
+;==============================================================
+
+;==============================================================
+[Version]
+Signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+provider="ESI "
+
+;==============================================================
+[WIN98.KnownRegEntries]
+IsWin98Gold=keep
+
+[IsWin98Gold]
+1=HKLM,Software\Microsoft\Windows\CurrentVersion,VersionNumber,0,4.10.1998
+
+;[ControlFlags]
+;ExcludeFromSelect = *
+
+;==============================================================
+[SourceDisksNames]
+1=%DiskDescription%,,,
+
+[SourceDisksFiles]
+Jula.sys=1
+JulaWdm.sys=1
+JulaPan.exe=1
+JulaAsio.dll=1
+
+[DestinationDirs]
+WDM.CopyList=10,system32\drivers
+WDM.App.CopyList=11
+
+[WDM.CopyList]
+Jula.sys
+JulaWdm.sys
+
+[WDM.App.CopyList]
+JulaPan.exe
+JulaAsio.dll
+
+[DriverDel]
+DelFiles=WDM.CopyList,WDM.App.CopyList
+[DriverUp]
+CopyFiles=WDM.CopyList,WDM.App.CopyList
+
+;==============================================================
+[Manufacturer]
+"E-S-I"=ESI
+
+[ESI]
+%JULA_A0.DeviceDesc%=JULA_AA, PCI\VEN_1412&DEV_1724&SUBSYS_45533031
+%JULA_01.DeviceDesc%=JULA_01, ESI\JULIA_01
+
+;==============================================================
+; JULA_AA 
+;==============================================================
+[JULA_AA]
+CopyFiles=WDM.CopyList,WDM.App.CopyList
+AddReg=JULA_AA.AddReg,JULA_AA.ASIO.AddReg
+
+[JULA_AA.NTX86]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=WDM.CopyList,WDM.App.CopyList
+AddReg=JULA_AA.ASIO.AddReg
+
+[JULA_AA.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,Jula.sys
+
+[JULA_AA.ASIO.AddReg]
+HKLM,SOFTWARE\ASIO\%ASIO_JulaNAME%,CLSID,,%ASIO_JulaIID%
+HKCR,CLSID\%ASIO_JulaIID%,,,%ASIO_JulaNAME%
+HKCR,CLSID\%ASIO_JulaIID%\InProcServer32,,,"%11%\JulaAsio.dll"
+HKCR,CLSID\%ASIO_JulaIID%\InProcServer32,ThreadingModel,,"Apartment"
+HKLM,Software\Microsoft\Windows\CurrentVersion\Run,JulaPan,,"JulaPan.Exe"
+[StartPanel]
+HKLM,Software\Microsoft\Windows\CurrentVersion\RunOnce,JulaPan,,"JulaPan.Exe"
+
+[JULA_AA.NTX86.Services]
+include=wdmaudio.inf
+needs=wdmaudio.registration.services
+AddService = JULA_AA, 0x00000002, JULA_AA_Service_Inst
+
+[JULA_AA_Service_Inst]
+DisplayName   = %JULA_AA.SvcDesc%
+ServiceType   = 1                  
+StartType     = 3                  
+ErrorControl  = 1                  
+ServiceBinary = %10%\system32\drivers\Jula.sys
+
+;=======================================================================================;
+[WDM.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,redbook"
+HKR,,Driver,,JulaWdm.sys
+HKR,,NTMPDriver,,"JulaWdm.sys"
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\wave\wdmaud.drv,Description,,%MME.DriverDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%MME.DriverDesc%
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Description,,%MME.DriverDesc%
+
+;=======================================================================================;
+; JULA_01
+;=======================================================================================;
+[JULA_01]
+AlsoInstall=KS.Registration(ks.inf), WDMAUDIO.Registration(wdmaudio.inf)
+AddReg=WDM.AddReg
+
+[JULA_01.NTX86]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+AddReg=WDM.AddReg
+
+[JULA_01.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topo1%,WDM.Interface.Topo1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,WDM.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,WDM.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,WDM.Interface.Wave1
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topo2%,WDM.Interface.Topo2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,WDM.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,WDM.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,WDM.Interface.Wave2
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topo3%,WDM.Interface.Topo3
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave3%,WDM.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave3%,WDM.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave3%,WDM.Interface.Wave3
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi1%,WDM.Interface.Midi1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi1%,WDM.Interface.Midi1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi1%,WDM.Interface.Midi1
+
+[JULA_01.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topo1%,WDM.Interface.Topo1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,WDM.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,WDM.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,WDM.Interface.Wave1
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topo2%,WDM.Interface.Topo2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,WDM.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,WDM.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,WDM.Interface.Wave2
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topo3%,WDM.Interface.Topo3
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave3%,WDM.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave3%,WDM.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave3%,WDM.Interface.Wave3
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi1%,WDM.Interface.Midi1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi1%,WDM.Interface.Midi1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi1%,WDM.Interface.Midi1
+
+[WDM.Interface.Topo1]
+AddReg=WDM.Interface.Topo1.AddReg
+[WDM.Interface.Topo1.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM.Topo1.szPname%
+
+[WDM.Interface.Wave1]
+AddReg=WDM.Interface.Wave1.AddReg
+[WDM.Interface.Wave1.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM.Wave1.szPname%
+
+[WDM.Interface.Topo2]
+AddReg=WDM.Interface.Topo2.AddReg
+[WDM.Interface.Topo2.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM.Topo2.szPname%
+
+[WDM.Interface.Wave2]
+AddReg=WDM.Interface.Wave2.AddReg
+[WDM.Interface.Wave2.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM.Wave2.szPname%
+
+[WDM.Interface.Topo3]
+AddReg=WDM.Interface.Topo3.AddReg
+[WDM.Interface.Topo3.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM.Topo3.szPname%
+
+[WDM.Interface.Wave3]
+AddReg=WDM.Interface.Wave3.AddReg
+[WDM.Interface.Wave3.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM.Wave3.szPname%
+
+[WDM.Interface.Midi1]
+AddReg=WDM.Interface.Midi1.AddReg
+[WDM.Interface.Midi1.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM.Midi1.szPname%
+
+[JULA_01.NTX86.Services]
+include=wdmaudio.inf
+needs=wdmaudio.registration.services
+AddService = JULA_01, 0x00000002, JULA_01_Service_Inst
+[JULA_01_Service_Inst]
+DisplayName   = %JULA_01.SvcDesc%
+ServiceType   = 1                  ; SERVICE_KERNEL_DRIVER
+StartType     = 3                  ; SERVICE_DEMAND_START
+ErrorControl  = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary = %10%\system32\drivers\JulaWdm.sys
+
+;====================== Strings ===============================
+[Strings]
+DiskDescription         ="Juli@ Driver for WIn98 SE,ME,2000,XP"
+JULA_A0.DeviceDesc      ="Juli@ Controller"
+JULA_01.DeviceDesc      ="Juli@ Audio"
+MME.DriverDesc          ="Juli@ MME Driver"
+KSNAME_Topo1            ="ESI_Mixe1"
+KSNAME_Topo2            ="ESI_Mixe2"
+KSNAME_Topo3            ="ESI_Mixe3"
+KSNAME_Wave1            ="ESI_Wave1"
+KSNAME_Wave2            ="ESI_Wave2"
+KSNAME_Wave3            ="ESI_Wave3"
+KSNAME_Midi1            ="ESI_Midi1"
+WDM.Topo1.szPname       ="Juli@ Ch12 Mixer"
+WDM.Topo2.szPname       ="Juli@ Ch34 Mixer"
+WDM.Topo3.szPname       ="Juli@ Ch1234 Mixer"
+WDM.Wave1.szPname       ="Juli@ Ch12"
+WDM.Wave2.szPname       ="Juli@ Ch34"
+WDM.Wave3.szPname       ="Juli@ Ch1234"
+WDM.Midi1.szPname       ="Juli@ MIDI"
+Proxy.CLSID             ="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO        ="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER       ="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE      ="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+JULA_AA.SvcDesc         ="Service for Juli@ Audio Driver (EWDM)"
+JULA_01.SvcDesc         ="Service for Juli@ 1"
+ASIO_JulaIID            ="{CA4C2A94-71BE-4c3c-90F5-29717D168027}"
+ASIO_JulaNAME           ="ASIO 2.0 - ESI Juli@"

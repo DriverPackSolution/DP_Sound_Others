@@ -1,0 +1,81 @@
+;
+; File:     MADFU805.INF   (If the name is changed, make the proper changes in the uninstaller)
+; Authors:  Zinovy Darkhovsky & David Simpao, Nemesis
+; Copyright 2002 Midiman/M-Audio
+;
+; Midiman/M-Audio DFU Driver .INF File
+;
+ 
+ 
+[Version] 
+Signature = "$CHICAGO$"
+Class=USB
+ClassGUID={36fc9e60-c465-11cf-8056-444553540000} 
+Provider=%ProviderName% 
+DriverVer= 01/21/2003,1.2.0.9
+
+[DestinationDirs] 
+DefaultDestDir=10,system32\drivers
+ConfigCopyFiles=10,System    ; %WinDir%\System
+SonicaFiles=10,temp  ; %WinDir%\System; to run Postinstaller automatically
+
+[SourceDisksNames]
+1 = %DfuDiskName%,,,
+
+; Win98SE has problem with long file names for the firmware
+; if the firmware file names change, then the Uninstaller has to be changed too to properly delete .bin files
+
+[SourceDisksFiles]
+MADFU805.sys=1
+MADFU805.exe=1   ; used to fix the hanging the Win98 when the device plugged in at the computer boot
+MA005101.BIN=1    ; Sonica V1.1
+
+[DriverCopyFiles]
+MADFU805.sys,,,1
+MA005101.BIN,,,1
+
+[ConfigCopyFiles]
+MADFU805.exe,,,1
+
+[Manufacturer] 
+%MFGNAME%=MAudio
+
+[MAudio]
+%MADFUUSBDesc%=MADFUUSB_Inst,USB\VID_0763&PID_2805
+;%MADFUUSBDesc%=MADFUUSB_Inst, USB\CLASS_FE&SUBCLASS_01&PROT_00
+
+[MADFUUSB_Inst] 
+; to make ME installation silent
+;CopyFiles=DriverCopyFiles,ConfigCopyFiles
+AddReg = MADFUUSB.AddReg 
+
+
+[MADFUUSB_Inst.nt] 
+CopyFiles=DriverCopyFiles,ConfigCopyFiles     ; To run Postinstaller automatically
+AddReg = MADFUUSB.AddReg 
+
+
+[MADFUUSB_Inst.nt.Services] 
+AddService = MADFU805,0x00000002,MADFUUSB.AddService
+
+[MADFUUSB.AddService] 
+ServiceType = 1
+StartType = 3
+ErrorControl = 1
+ServiceBinary = %10%\SYSTEM32\DRIVERS\MADFU805.sys 
+LoadOrderGroup = Base
+
+[MADFUUSB.AddReg] 
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,MADFU805.sys
+;HKLM,%RUNONCEKEYNAME%,PostInstall,,"rundll32 MADFU805,PostInstall"
+HKLM,"System\Currentcontrolset\Services\MADFUUSB\Parameters","MaximumTransferSize",0x10001,4096
+HKLM,"System\Currentcontrolset\Services\MADFUUSB\Parameters","DebugLevel",0x10001,2
+HKLM,"System\Currentcontrolset\Services\MADFUUSB\Parameters","FIRMWARE_VID_0763_PID_2805_REV_0100",,"MA005101.BIN"
+
+[Strings] 
+MFGNAME= "M-Audio" 
+DfuDiskName= "M-Audio Sonica DFU Driver Disk"
+MADFUUSBDesc= "M-Audio Sonica DFU" 
+PROVIDERNAME = "Nemesis"
+RUNONCEKEYNAME="Software\Microsoft\Windows\CurrentVersion\RunOnce"

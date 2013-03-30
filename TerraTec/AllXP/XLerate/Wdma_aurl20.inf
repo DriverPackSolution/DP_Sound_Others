@@ -1,0 +1,690 @@
+; Wdma_aurl.inf -- Windows 2000 Setup File for XLerate WDM driver 
+; Copyright (c) 2000 TerraTec Electronic GmbH
+  
+[Version]
+Signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+provider=%AurealMfgName%
+LayoutFile=layout.inf, layout1.inf, layout2.inf
+catalogfile=Wdma_aurl20.cat
+DriverVer=02/28/2000,5.10.1500.0
+
+[Manufacturer]
+%AurealMfgName%=Aureal
+
+[ControlFlags]
+ExcludeFromSelect = MF\PCI_VEN_12EB&DEV_0001_AUDIO
+
+[Aureal]
+%*WDM_AU8820.DeviceDesc%=WDM_AU8820, MF\PCI_VEN_12EB&DEV_0001_AUDIO
+
+[WDM_AU8820]
+; Statement WDMAUDIO.Registration(wdmaudio.inf) would cause W2K to reboot after install-removal-rescan the
+; device
+;Needs = KS.Registration(ks.inf), WDMAUDIO.Registration(wdmaudio.inf)
+Include=ks.inf, wdmaudio.inf
+Needs = KS.Registration
+AddReg = WDM_AU8820.AddReg, WDM_AU88XX.AddReg, Coinstaller_AU8820.AddReg
+CopyFiles = WDM_AU8820.CopyList, Apps_AU8820.CopyList, Coinstaller_AU8820.CopyList, Vortex20App.Copylist, VortexSytem.CopyList, VortexWindows.CopyList
+; , A3DDemos.CopyList disabled by MB 09-08-00
+
+[WDM_AU8820.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,redbook"
+HKR,,Driver,,adm8820.sys
+HKR,,NTMPDriver,,"adm8820.sys,sbemul.sys"
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\wave\wdmaud.drv, Description,,%*WDM_AU8820.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv, Description,,%*WDM_AU8820.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%*WDM_AU8820.DeviceDesc%
+
+;; This setction contaions all registry keys used to disable the Vortex driver related features
+;; or customize the functions provided by Vortex drivers/apps.
+
+; Vortex apps/demos installation
+HKLM, %8820AppCustomStr%, "EnableA3dDemosInstall",0x00010001,0	; set DWORD value to "1" to enable A3D demos installation
+HKLM, %8820AppCustomStr%, "DisableVortexAppsInstall",0x00010001, 0	; set DWORD value to "1" to disable Vortex apps installation
+;HKLM,%8820CustomInf%,"EnableA3dMovie",0x00010001,1,0,0,0						; Set DWORD value to "1" to enable A3DMovie  "0" to disable A3DMovie
+
+; Vortex Control Panel Tray Icon
+HKLM,%8820CustomInf%,"DisableTrayIcon",0x00010001,0,0,0,0						; set DWORD value to "1" to remove the Vortex tray icon program
+
+; Vortex Control Panel
+HKLM,%8820CustomInf%,"ControlPanelTitle",0x00020000,"XLerate ControlPanel"		; Vortex control panel title
+HKLM,%8820CustomInf%,"ControlPanelPageConfig",0x00020000,"0123"				; Vortex control panel page config ; changed by MB 09-09-00
+HKLM,%8820CustomInf%,"ControlPanelActivePage",0x00020000,"0"					; Vortex control panel active page
+HKLM,%8820CustomInf%,"ControlPanelIconDesc",0x00020000,"TerraTec XLerate"	; Vortex control panel description
+HKLM,%8820CustomInf%,"ControlPanelIconInfo",0x00020000,"XLerate ControlPanel"	; Vortex control panel info
+HKLM,%8820CustomInf%,"ControlPanelIcons",0x00000001,01,01,01,01,01,01,00		; icons in 1st tab (1 - display, 0 - hide)
+
+HKLM,%8820ControlStr%,"SoftSynthModeIndex",0x00010001,0							; Inital index setting
+HKLM,%8820ControlStr%,"SoftSynthMode",0x00010001,3,0,0,0						; Vortex contrl panel WT mode (0 - 2)
+HKLM,%8820ControlStr%,"AspenWavetableEffect",0x00010001,1,0,0,0					; Vortex control panel WT effects on/off (1/0)
+HKLM,%8820ControlStr%,"ReverbAmount",0x00010001,0,0,0,0							; Vortex control panel WT reverb amount (0 - 127)
+HKLM,%8820ControlStr%,"ChorusAmount",0x00010001,0,0,0,0							; Vortex control panel WT chorus amount (0 - 127)
+HKLM,%8820ControlStr%,"ShowTrayControl",0x00010001,1,0,0,0						; ??
+
+; Vortex Uninstaller
+HKLM,%8820CustomInf%,"UninstallerName",0x00020000,"TerraTec XLerate"		; Vortex uninstaller name in Add/Remove Programs control panel
+HKLM,%8820CustomInf%,"ManufacturerName",0x00020000,"TerraTec Electronic GmbH"		        ; OEM manufacturer name
+HKLM,%8820CustomInf%,"ProductName",0x00020000,"XLerate"							; OEM product name
+
+; Software Tone Control stages
+HKLM,%8820InstallStr%,"SWTCStages",0x00010001,7,0,0,0						
+HKLM,%8820InstallStr%,"SWTCStagesUsed",0x00010001,7,0,0,0						
+HKLM,%8820InstallStr%,"SpeakerCompEQEnable",0x00010001,0,0,0,0	
+HKLM,%8820InstallStr%,"TCEnable",0x00010001,0,0,0,0						
+HKLM,%8820InstallStr%,"SpeakerCompEQGainAll",0x00010001,57,41,0,0						
+HKLM,%8820InstallStr%,"SWSpeakerEQcoeffs",0x00000001,\
+		6f, 08, 52, 10, 00, 00, 00, 00, 91, f7, ad, ef, ce, 1c, 60, a3, 23, ef, 5b, 1f, 00, 00, 00, 10,\
+        e5, a9, 54, 00, 00, 00, 00, 00, 1b, 56, ab, ff, 7f, 85, 8b, 80, 2e, 46, 77, 3f, 00, 00, 00, 10,\
+        f6, 28, 5c, 7f, 37, 0e, af, 41, b0, e3, 17, 07, 9b, 62, b9, 24, d2, 6d, 2c, 0b, 00, 00, 00, 10,\
+        57, 66, 63, 00, 5e, f3, dd, ff, ce, 47, 08, 00, fa, 85, 8d, 85, 52, 54, b5, 3a, 00, 00, 00, 10,\
+        53, 12, ad, ff, bf, a5, 49, 00, 5e, fa, 08, 00, 74, f4, 58, 80, f8, 51, a7, 3f, 00, 00, 00, 10
+
+; SW TC Bass & Treble coefficients
+HKLM,%8820InstallStr%,"SWTCCoeffs",0x00000001,\
+		10,	CF,	EF,	03,	10,	CF,	EF,	03,	00,	00,	00,	00,	1E,	9E,	DF,	C7,	00,	00,	00,	00,	00,	00,	00,	00,\
+		F1,	30,	10,	3C,	0E,	CF,	EF,	C3,	00,	00,	00,	00,	1E,	9E,	DF,	C7,	00,	00,	00,	00,	00,	00,	00,	00
+
+; S/PDIF settings
+HKLM,%8820SpdifList%,"1",0x00010001,88,0,eb,12									; RagX - DWORD=((SSID_WORD << 16) | SVID_WORD)
+;HKLM,%8820CustomInf%,"EnableSpdifIn",0x00010001,0,0,0,0							; set DWORD value to "1" to enable S/PDIF In
+HKLM,%8820CustomInf%,"EnableSpdifOut",0x00010001,1,0,0,0						; set DWORD value to "1" to enable S/PDIF Out
+HKLM,%8820CustomInf%,"DetectSpdifOut",0x00010001,1,0,0,0						; set DWORD value to "1" to enable S/PDIF Out
+HKLM,%8820CustomInf%,"SpdifFrequency",0x00010001,80,BB,0,0						; DWORD value: 32000, 44100, 48000 - win95 needs DWORD val in binary format
+HKLM,%8820CustomInf%,"SpdifHide441",0x00010001,1,0,0,0							; DWORD Value: 1 - hide, 0 - show
+
+; check for sigmatel LA2 codec, if LA2 detected - core corrects for signal inversion
+HKLM,%8820CustomInf%,"CorrectLA2",0x00010001,1,0,0,0							; set DWORD value to "1" to detect LA2
+
+; set this key to 1 if you want to enable sharing of line and rear output jacks (sets GPIO0 in quad)
+;HKLM,%8820CustomInf%,"SetGPIO0InQuad",0x00010001,0,0,0,0
+
+; Mixer tone control and 3D control config
+HKLM,%8820CustomInf%,"ToneControlType",0x00010001,0,0,0,0						; DWORD Value: 0 - no tone control, 1 - HW TC
+HKLM,%8820CustomInf%,"DisableAC97Codec3DEffect",0x00010001,1,0,0,0				; DWORD Value: 1 - disable, 0 - enable
+
+; mixer sources config
+HKLM,%8820CustomInf%,"MixConfigPlay",0x00000001,1,1,1,1,1,1,1,1,1,0				; Binary Value: 1 - enable, 0 - disable
+HKLM,%8820CustomInf%,"MixConfigRec",0x00000001,1,1,1,1,1,1,1,1					; Binary Value: 1 - enable, 0 - disable
+HKLM,%8820CustomInf%,"MixConfigAC97Ctrl",0x00000001,1,0,1,1,1,1					; Binary Value: 1 - enable, 0 - disable
+
+; mixer controls config
+HKLM,%8820CustomInf%,"MixConfigLineOutMixer",0x00010001,0,0,0,0					; DWORD Value: 1 - enable, 0 - disable
+HKLM,%8820CustomInf%,"MixConfigPlayLoudness",0x00010001,0,0,0,0					; DWORD Value: 1 - enable, 0 - disable
+HKLM,%8820CustomInf%,"MixConfigPlayPopPost3D",0x00010001,0,0,0,0				; DWORD Value: 1 - enable, 0 - disable
+HKLM,%8820CustomInf%,"MixConfigPLaySimStereo",0x00010001,0,0,0,0				; DWORD Value: 1 - enable, 0 - disable
+HKLM,%8820CustomInf%,"MixConfigPlayMicMixSelect",0x00010001,0,0,0,0				; DWORD Value: 1 - enable, 0 - disable
+HKLM,%8820CustomInf%,"MixConfigPlayMic12Select",0x00010001,0,0,0,0				; DWORD Value: 1 - enable, 0 - disable
+HKLM,%8820CustomInf%,"MixConfigPlayMic20dBBoost",0x00010001,1,0,0,0				; DWORD Value: 1 - enable, 0 - disable
+
+; initial mixer Master Vol/Mute
+HKLM,%8820CustomInf%,"MixInitMasterVol",0x00010001,0C,0,0,0						; DWORD Value: 0x00 - 0x10
+HKLM,%8820CustomInf%,"MixInitMasterMute",0x00010001,0,0,0,0						; DWORD Value: 1 - mute, 0 - unmute
+
+;; initial mixer vol level
+;;
+;; ORDER: WT, Wave Out, S/PDIF In, Telephone, Mic, LineIn, CD, Video, Aux, PC-Beep
+HKLM,%8820CustomInf%,"MixInitPlayVol",0x00000001,08,08,0C,0E,0E,0D,0C,0B,0C,0C	; Binary Value: 0x00 - 0x10
+;; ORDER: Telephone, Mic, LineIn, CD, Video, Aux, StreoMixer, MonoMixer
+HKLM,%8820CustomInf%,"MixInitRecVol",0x00000001,08,08,00,08,08,08,08,08			; Binary Value: 0x00 - 0x10
+;; ORDER: Mono Out, Headphone Out, S/PDIF Out, 3D Center, 3D Depth
+HKLM,%8820CustomInf%,"MixInitAC97CtrlVol",0x00000001,0E,0E,10,0C,0C,08			; Binary Value: 0x00 - 0x10
+
+; initial mixer mute
+HKLM,%8820CustomInf%,"MixInitPlayMute",0x00000001,0,0,0,1,1,1,0,1,1,1			; Binary Value: 1 - mute, 0 - unmute
+HKLM,%8820CustomInf%,"MixInitRecSelect",0x00000001,0,1,0,0,0,0,0,0				; Binary Value: 1 - selected
+HKLM,%8820CustomInf%,"MixInitAC97CtrlMute",0x00000001,1,1,0,0,0,0				; Binary Value: 1 - mute, 0 - unmute
+
+; initial tone control - first BYTE for enable (1) / disable (0)
+; and last two BYTE's for Bass and Treble amounts
+HKLM,%8820CustomInf%,"MixInitLineOutToneCtrl",0x00000001,01,08,08				; Binary Value
+
+; initial status of on/off controls for playback
+HKLM,%8820CustomInf%,"MixInitLineOut3D",0x00010001,0,0,0,0						; DWORD Value: 1 - on, 0 - off
+HKLM,%8820CustomInf%,"MixInitPlayLoudness",0x00010001,0,0,0,0					; DWORD Value: 1 - on, 0 - off
+HKLM,%8820CustomInf%,"MixInitPlayPopPost3D",0x00010001,0,0,0,0					; DWORD Value: 1 - on, 0 - off
+HKLM,%8820CustomInf%,"MixInitPLaySimStereo",0x00010001,0,0,0,0					; DWORD Value: 1 - on, 0 - off
+HKLM,%8820CustomInf%,"MixInitPlayMicMixSelect",0x00010001,1,0,0,0				; DWORD Value: 1 - on, 0 - off
+HKLM,%8820CustomInf%,"MixInitPlayMic12Select",0x00010001,0,0,0,0				; DWORD Value: 1 - on, 0 - off
+HKLM,%8820CustomInf%,"MixInitPlayMic20dBBoost",0x00010001,1,0,0,0				; DWORD Value: 1 - on, 0 - off
+
+; CODEC Mixer Values for playback
+; NOTE: the valid value is 0x00000000 ~ 0x000C0000 (0 ~ 12 dB)
+HKLM,%8820CustomInf%,"PlayVolGainPhone",0x00010001,00,00,03,00			;    3 (dB) = 0x00030000 (DWORD)
+HKLM,%8820CustomInf%,"PlayVolGainMic",0x00010001,00,00,0C,00			;   12 (dB) = 0x000C0000 (DWORD)			
+HKLM,%8820CustomInf%,"PlayVolGainLineIn",0x00010001,00,00,0C,00			;	12 (dB) = 0x000C0000 (DWORD)	
+HKLM,%8820CustomInf%,"PlayVolGainCD",0x00010001,00,80,0A,00				; 10.5 (dB) = 0x000A8000 (DWORD)					
+HKLM,%8820CustomInf%,"PlayVolGainVideo",0x00010001,00,00,03,00			;    3 (dB) = 0x00030000 (DWORD)			
+HKLM,%8820CustomInf%,"PlayVolGainAux",0x00010001,00,00,0C,00			;   12 (dB) = 0x000C0000 (DWORD)						
+
+; CODEC record gain
+; NOTE: the valid value is 0 ~ 15 (0 ~ 22.5 dB)
+HKLM,%8820CustomInf%,"RecVolGainPhone",0x00010001,8,0,0,0				; 12 dB = 8 * 1.5 dB					
+HKLM,%8820CustomInf%,"RecVolGainMic",0x00010001,8,0,0,0					; 12 dB	= 8 * 1.5 dB
+HKLM,%8820CustomInf%,"RecVolGainLineIn",0x00010001,8,0,0,0				; 12 dB	= 8 * 1.5 dB
+HKLM,%8820CustomInf%,"RecVolGainCD",0x00010001,8,0,0,0					; 12 dB	= 8 * 1.5 dB
+HKLM,%8820CustomInf%,"RecVolGainVideo",0x00010001,8,0,0,0				; 12 dB	= 8 * 1.5 dB
+HKLM,%8820CustomInf%,"RecVolGainAux",0x00010001,8,0,0,0					; 12 dB	= 8 * 1.5 dB
+HKLM,%8820CustomInf%,"RecVolGainStereoMix",0x00010001,8,0,0,0			; 12 dB	= 8 * 1.5 dB
+HKLM,%8820CustomInf%,"RecVolGainMonoMix",0x00010001,8,0,0,0				; 12 dB = 8 * 1.5 dB
+
+; Digital Mixer Values for record
+; NOTE: the valid value is 0x00000000 ~ 0x00118000 (0 ~ 17.5 dB)
+HKLM,%8820CustomInf%,"RecMaxVolPhone",0x00010001,00,00,06,00			;	 6 (dB) = 0x00060000 (DWORD)
+HKLM,%8820CustomInf%,"RecMaxVolMic",0x00010001,00,80,11,00				; 17.5 (dB) = 0x00118000 (DWORD)
+HKLM,%8820CustomInf%,"RecMaxVolLineIn",0x00010001,00,80,11,00			; 17.5 (dB) = 0x00118000 (DWORD)		
+HKLM,%8820CustomInf%,"RecMaxVolCD",0x00010001,00,80,11,00				; 17.5 (dB) = 0x00118000 (DWORD)
+HKLM,%8820CustomInf%,"RecMaxVolVideo",0x00010001,00,00,06,00			;	 6 (dB) = 0x00060000 (DWORD)
+HKLM,%8820CustomInf%,"RecMaxVolAux",0x00010001,00,80,11,00				; 17.5 (dB) = 0x00118000 (DWORD)
+HKLM,%8820CustomInf%,"RecMaxVolStereoMix",0x00010001,00,00,00,00		;    0 (dB) = 0x00000000 (DWORD)
+HKLM,%8820CustomInf%,"RecMaxVolMonoMix",0x00010001,00,00,00,00			;    0 (dB) = 0x00000000 (DWORD)
+
+; Maximum playback volume for EQed analog inputs	 
+; NOTE: the valid dB value is 0x00000000 ~ 0x00118000 (0 ~ 17.5 dB)
+HKLM,%8820CustomInf%,"MaxEQedPhonePlayVol",0x00010001,00,80,02,00		;  2.5 (dB)	= 0x00028000 (DWORD)				
+HKLM,%8820CustomInf%,"MaxEQedMicPlayVol",0x00010001,00,80,0B,00			; 11.5 (dB) = 0x000B8000 (DWORD)				
+HKLM,%8820CustomInf%,"MaxEQedLineInPlayVol",0x00010001,00,80,02,00		;  2.5 (dB)	= 0x00028000 (DWORD)				
+HKLM,%8820CustomInf%,"MaxEQedCDPlayVol",0x00010001,00,80,01,00			;  1.5 (dB) = 0x00018000 (DWORD)				
+HKLM,%8820CustomInf%,"MaxEQedVideoPlayVol",0x00010001,00,80,02,00		;  2.5 (dB)	= 0x00028000 (DWORD)				
+HKLM,%8820CustomInf%,"MaxEQedAuxPlayVol",0x00010001,00,80,0A,00			; 10.5 (dB) = 0x000A8000 (DWORD)				
+
+HKLM,%8820CustomInf%,"MixEnableTADSpecialFeature",0x00010001,0,0,0,0			; DWORD Value: 0 - disable, 1 - enable
+
+; Initial mixer line states for Microsoft Volume Control Panel
+HKLM,%8820CustomInf%,"MixCplLineStatesPlay",0x00000001,1,1,1,0,0,0,1,1,1,1,0	; Binary Value: 1 - display
+HKLM,%8820CustomInf%,"MixCplLineStatesRec",0x00000001,0,1,1,1,0,1,1,0			; Binary Value: 1 - display
+HKLM,%8820CustomInf%,"MixCplLineStatesAC97Ctrl",0x00000001,1,1,1,1,1			; Binary Value: 1 - display 
+HKLM,%8820CustomInf%,"MixCplEnableAdvancedButton",0x00010001,1,0,0,0			; DWORD Value: 1 - enable, 0 - disable
+
+; Turn on/off the Sigmatel STAC9704 attenuation program 
+HKLM,%8820CustomInf%,"ST9704ATTEN",0x00010001,0,0,0,0							; DWORD Value: 1 - on, 0 - off
+
+; Analog EQ feature
+HKLM,%8820CustomInf%,"SupportAnalogEQ",0x00010001,1,0,0,0						; DWORD Value: 1 - on, 0 - off
+HKLM,%8820ControlStr%,"AnalogEQEnableState",0x00010001,1,0,0,0					; DWORD Value: 1 - enable, 0 - disable
+HKLM,%8820ControlStr%,"AnalogEQSrcLine",0x00010001,3,0,0,0						; DWORD Value: Phone = 0, Mic, LineIn, CD, Video, Aux
+
+; AC97 codec PCM Out volume
+; DWORD Value: 0x0 = +12dB, 0x1 = +10.5dB, ... 0x8 = 0dB, ..., 0x1f = -34.5dB
+HKLM,%8820CustomInf%,"AC97PCMOutVol",0x00010001,08,0,0,0	
+
+; codec PCM2 Out, Mixer Front Out and Mixer Rear Out volumes (only applied to symmetric quad codecs)
+; DWORD Value: 0x0 = +12dB, 0x1 = +10.5dB, ... 0x8 = 0dB, ..., 0x1f = -34.5dB
+HKLM,%8820CustomInf%,"AC97PCM2OutVol",0x00010001,08,0,0,0	
+HKLM,%8820CustomInf%,"AC97MixerFrontOutVol",0x00010001,08,0,0,0	
+HKLM,%8820CustomInf%,"AC97MixerRearOutVol",0x00010001,08,0,0,0	
+
+; Set default state of "Speaker Compensation" check box in Vortex cpl
+HKLM,%8820ControlStr%,"SpeakerCompEQEnable",0x00010001,0,0,0,0				; DWORD Value: 1 - enable, 0 - disable
+HKLM,%8820CustomInf%,"SupportSpeakerEQ",0x00010001,0,0,0,0					; DWORD Value: 1 - on, 0 - off
+HKLM,%8820CustomInf%,"SpeakerEqGainCurve",0x00010001,0,0,0,0				; DWORD Value: 1 - on, 0 - off
+
+; HW & SW Voice Number in WT
+HKLM,%8820CustomInf%,"WtMaxNumHwVoice",0x00010001,20,0,0,0						; DWORD Value: WtNumHwVoice = 64
+HKLM,%8820CustomInf%,"WtMaxNumSwVoice",0x00010001,20,0,0,0						; DWORD Value: WtNumSwVoice = 256
+
+HKLM,%8820CustomInf%,"WtNumVoicesStrings",0x00010001,3,0,0,0					; Number of strings for control panel
+
+HKLM,%8820CustomInf%,"WtNumVoicesString0",0x00020000,%8820WtNumVoicesString0%	; Strings for Wt control panel
+HKLM,%8820CustomInf%,"WtNumVoicesString1",0x00020000,%8820WtNumVoicesString1%	; Strings for Wt control panel
+HKLM,%8820CustomInf%,"WtNumVoicesString2",0x00020000,%8820WtNumVoicesString2%	; Strings for Wt control panel
+HKLM,%8820CustomInf%,"WtNumVoicesString3",0x00020000,%8820WtNumVoicesString3%	; Strings for Wt control panel
+
+HKLM,%8820CustomInf%,"WtNumVoicesParams1",0x00000001,0,0,20,0,20,64,3			; Preset ID, num Hard Voices msb, Num Hard Voices Lsb,num Soft Voices msb, Num Soft Voices Lsb, CPU utilization, mode
+HKLM,%8820CustomInf%,"WtNumVoicesParams2",0x00000001,1,0,20,0,20,64,2			; Preset ID, num Hard Voices msb, Num Hard Voices Lsb,num Soft Voices msb, Num Soft Voices Lsb, CPU utilization, mode
+HKLM,%8820CustomInf%,"WtNumVoicesParams0",0x00000001,2,0,20,0,0,64,0			; Preset ID, num Hard Voices msb, Num Hard Voices Lsb,num Soft Voices msb, Num Soft Voices Lsb, CPU utilization, mode
+HKLM,%8820CustomInf%,"WtNumVoicesParams3",0x00000001,3,0,0,1,00,64,2			; Preset ID, num Hard Voices msb, Num Hard Voices Lsb,num Soft Voices msb, Num Soft Voices Lsb, CPU utilization, mode
+
+
+[WDM_AU88XX.AddReg]
+;; Friendly names
+HKLM,%MediaCategories%\%AURLGUID.WaveOut%,Name,,%AURLPin.WaveOut%
+HKLM,%MediaCategories%\%AURLGUID.WaveOut%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.PcBeep%,Name,,%AURLPin.PcBeep%
+HKLM,%MediaCategories%\%AURLGUID.PcBeep%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.Phone%,Name,,%AURLPin.Phone%
+HKLM,%MediaCategories%\%AURLGUID.Phone%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.Mic%,Name,,%AURLPin.Mic%
+HKLM,%MediaCategories%\%AURLGUID.Mic%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.LineIn%,Name,,%AURLPin.LineIn%
+HKLM,%MediaCategories%\%AURLGUID.LineIn%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.CDPlayer%,Name,,%AURLPin.CDPlayer%
+HKLM,%MediaCategories%\%AURLGUID.CDPlayer%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.Video%,Name,,%AURLPin.Video%
+HKLM,%MediaCategories%\%AURLGUID.Video%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.Aux%,Name,,%AURLPin.Aux%
+HKLM,%MediaCategories%\%AURLGUID.Aux%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.Wavetable%,Name,,%AURLPin.Wavetable%
+HKLM,%MediaCategories%\%AURLGUID.Wavetable%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.Spdif%,Name,,%AURLPin.Spdif%
+HKLM,%MediaCategories%\%AURLGUID.Spdif%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.StereoMix%,Name,,%AURLPin.StereoMix%
+HKLM,%MediaCategories%\%AURLGUID.StereoMix%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.MonoMix%,Name,,%AURLPin.MonoMix%
+HKLM,%MediaCategories%\%AURLGUID.MonoMix%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.LineOut%,Name,,%AURLPin.LineOut%
+HKLM,%MediaCategories%\%AURLGUID.LineOut%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.WaveIn%,Name,,%AURLPin.WaveIn%
+HKLM,%MediaCategories%\%AURLGUID.WaveIn%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.AC97%,Name,,%AURLPin.AC97%
+HKLM,%MediaCategories%\%AURLGUID.AC97%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.MonoOut%,Name,,%AURLPin.MonoOut%
+HKLM,%MediaCategories%\%AURLGUID.MonoOut%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.HPOut%,Name,,%AURLPin.HPOut%
+HKLM,%MediaCategories%\%AURLGUID.HPOut%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.SpdifOut%,Name,,%AURLPin.SpdifOut%
+HKLM,%MediaCategories%\%AURLGUID.SpdifOut%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.Center3D%,Name,,%AURLPin.Center3D%
+HKLM,%MediaCategories%\%AURLGUID.Center3D%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.Depth3D%,Name,,%AURLPin.Depth3D%
+HKLM,%MediaCategories%\%AURLGUID.Depth3D%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.FrontRear%,Name,,%AURLPin.FrontRear%
+HKLM,%MediaCategories%\%AURLGUID.FrontRear%,Display,1,00,00,00,00
+
+HKLM,%MediaCategories%\%AURLGUID.WaveOut_Volume%,Name,,%AURLPin.WaveOut_Volume%
+HKLM,%MediaCategories%\%AURLGUID.WaveOut_Volume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.WaveOut_Mute%,Name,,%AURLPin.WaveOut_Mute%
+HKLM,%MediaCategories%\%AURLGUID.WaveOut_Mute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.PcBeep_Volume%,Name,,%AURLPin.PcBeep_Volume%
+HKLM,%MediaCategories%\%AURLGUID.PcBeep_Volume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.PcBeep_Mute%,Name,,%AURLPin.PcBeep_Mute%
+HKLM,%MediaCategories%\%AURLGUID.PcBeep_Mute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.Phone_Volume%,Name,,%AURLPin.Phone_Volume%
+HKLM,%MediaCategories%\%AURLGUID.Phone_Volume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.Phone_Mute%,Name,,%AURLPin.Phone_Mute%
+HKLM,%MediaCategories%\%AURLGUID.Phone_Mute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.Mic_Volume%,Name,,%AURLPin.Mic_Volume%
+HKLM,%MediaCategories%\%AURLGUID.Mic_Volume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.Mic_Select%,Name,,%AURLPin.Mic_Select%
+HKLM,%MediaCategories%\%AURLGUID.Mic_Select%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.Mic_20dBGain%,Name,,%AURLPin.Mic_20dBGain%
+HKLM,%MediaCategories%\%AURLGUID.Mic_20dBGain%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.Mic_Mute%,Name,,%AURLPin.Mic_Mute%
+HKLM,%MediaCategories%\%AURLGUID.Mic_Mute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.LineIn_Volume%,Name,,%AURLPin.LineIn_Volume%
+HKLM,%MediaCategories%\%AURLGUID.LineIn_Volume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.LineIn_Mute%,Name,,%AURLPin.LineIn_Mute%
+HKLM,%MediaCategories%\%AURLGUID.LineIn_Mute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.CDPlayer_Volume%,Name,,%AURLPin.CDPlayer_Volume%
+HKLM,%MediaCategories%\%AURLGUID.CDPlayer_Volume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.CDPlayer_Mute%,Name,,%AURLPin.CDPlayer_Mute%
+HKLM,%MediaCategories%\%AURLGUID.CDPlayer_Mute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.Video_Volume%,Name,,%AURLPin.Video_Volume%
+HKLM,%MediaCategories%\%AURLGUID.Video_Volume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.Video_Mute%,Name,,%AURLPin.Video_Mute%
+HKLM,%MediaCategories%\%AURLGUID.Video_Mute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.Aux_Volume%,Name,,%AURLPin.Aux_Volume%
+HKLM,%MediaCategories%\%AURLGUID.Aux_Volume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.Aux_Mute%,Name,,%AURLPin.Aux_Mute%
+HKLM,%MediaCategories%\%AURLGUID.Aux_Mute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.Wavetable_Volume%,Name,,%AURLPin.Wavetable_Volume%
+HKLM,%MediaCategories%\%AURLGUID.Wavetable_Volume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.Wavetable_Mute%,Name,,%AURLPin.Wavetable_Mute%
+HKLM,%MediaCategories%\%AURLGUID.Wavetable_Mute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.Spdif_Volume%,Name,,%AURLPin.Spdif_Volume%
+HKLM,%MediaCategories%\%AURLGUID.Spdif_Volume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.Spdif_Mute%,Name,,%AURLPin.Spdif_Mute%
+HKLM,%MediaCategories%\%AURLGUID.Spdif_Mute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.LineOut_Bass%,Name,,%AURLPin.LineOut_Bass%
+HKLM,%MediaCategories%\%AURLGUID.LineOut_Bass%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.LineOut_Treble%,Name,,%AURLPin.LineOut_Treble%
+HKLM,%MediaCategories%\%AURLGUID.LineOut_Treble%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.LineOut_Loudness%,Name,,%AURLPin.LineOut_Loudness%
+HKLM,%MediaCategories%\%AURLGUID.LineOut_Loudness%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.LineOut_3DAudio_OnOff%,Name,,%AURLPin.LineOut_3DAudio_OnOff%
+HKLM,%MediaCategories%\%AURLGUID.LineOut_3DAudio_OnOff%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.LineOut_MasterVolume%,Name,,%AURLPin.LineOut_MasterVolume%
+HKLM,%MediaCategories%\%AURLGUID.LineOut_MasterVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.LineOut_MasterMute%,Name,,%AURLPin.LineOut_MasterMute%
+HKLM,%MediaCategories%\%AURLGUID.LineOut_MasterMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.Phone_W_Volume%,Name,,%AURLPin.Phone_W_Volume%
+HKLM,%MediaCategories%\%AURLGUID.Phone_W_Volume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.Mic_W_Volume%,Name,,%AURLPin.Mic_W_Volume%
+HKLM,%MediaCategories%\%AURLGUID.Mic_W_Volume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.LineIn_W_Volume%,Name,,%AURLPin.LineIn_W_Volume%
+HKLM,%MediaCategories%\%AURLGUID.LineIn_W_Volume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.CDPlayer_W_Volume%,Name,,%AURLPin.CDPlayer_W_Volume%
+HKLM,%MediaCategories%\%AURLGUID.CDPlayer_W_Volume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.Video_W_Volume%,Name,,%AURLPin.Video_W_Volume%
+HKLM,%MediaCategories%\%AURLGUID.Video_W_Volume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.Aux_W_Volume%,Name,,%AURLPin.Aux_W_Volume%
+HKLM,%MediaCategories%\%AURLGUID.Aux_W_Volume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.StereoMix_W_Volume%,Name,,%AURLPin.StereoMix_W_Volume%
+HKLM,%MediaCategories%\%AURLGUID.StereoMix_W_Volume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.MonoMix_W_Volume%,Name,,%AURLPin.MonoMix_W_Volume%
+HKLM,%MediaCategories%\%AURLGUID.MonoMix_W_Volume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.MonoOut_Volume%,Name,,%AURLPin.MonoOut_Volume%
+HKLM,%MediaCategories%\%AURLGUID.MonoOut_Volume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.MonoOut_Mute%,Name,,%AURLPin.MonoOut_Mute%
+HKLM,%MediaCategories%\%AURLGUID.HPOut_Mute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.HPOut_Volume%,Name,,%AURLPin.HPOut_Volume%
+HKLM,%MediaCategories%\%AURLGUID.HPOut_Volume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.HPOut_Mute%,Name,,%AURLPin.HPOut_Mute%
+HKLM,%MediaCategories%\%AURLGUID.HPOut_Mute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.SpdifOut_Volume%,Name,,%AURLPin.SpdifOut_Volume%
+HKLM,%MediaCategories%\%AURLGUID.SpdifOut_Volume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.SpdifOut_Mute%,Name,,%AURLPin.SpdifOut_Mute%
+HKLM,%MediaCategories%\%AURLGUID.SpdifOut_Mute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.Audio_3DDepth_Volume%,Name,,%AURLPin.Audio_3DDepth_Volume%
+HKLM,%MediaCategories%\%AURLGUID.Audio_3DDepth_Volume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.Audio_3DCenter_Volume%,Name,,%AURLPin.Audio_3DCenter_Volume%
+HKLM,%MediaCategories%\%AURLGUID.Audio_3DCenter_Volume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%AURLGUID.FrontBack_Balance%,Name,,%AURLPin.FrontBack_Balance%
+HKLM,%MediaCategories%\%AURLGUID.FrontBack_Balance%,Display,1,00,00,00,00
+
+[WIN2K_8820.AddReg]
+HKLM,%8820_HWKEY%,"Win2K",0x00010001,0,0,0,0
+
+[WDM_AU8820.CopyList]
+adm8820.sys
+aurealgm.arl
+
+[Apps_AU8820.CopyList] 
+asp4Setp.exe
+
+[A3DDemos.Copylist]
+A3DDemos.exe
+
+[VortexWindows.CopyList]
+A3DSplsh.exe
+
+[VortexSytem.CopyList]
+a3dapi.dll
+a3d.dll
+
+[Vortex20App.Copylist]
+Vor20App.exe
+
+[SourceDisksNames]
+1="XLerate Software & Driver CD",""
+
+[SourceDisksFiles]
+adm8820.sys=1
+aurealgm.arl=1
+asp4Setp.exe=1
+;A3DDemos.exe=1,"..\..\A3DDemos" 	; disabled by MB 09-08-00
+Vor20App.exe=1
+a3dsplsh.exe=1
+a3dapi.dll=1
+a3d.dll=1
+
+[DestinationDirs]
+WDM_AU8820.CopyList  = 10,system32\drivers ; %SystemRoot%\system32\drivers
+Apps_AU8820.CopyList = 10	
+;A3DDemos.Copylist = 30,vortapps	; disabled by MB 09-08-00
+Vortex20App.Copylist = 30,vortapps
+VortexSytem.CopyList=11
+VortexWindows.CopyList=10
+DefaultDestDir = 10
+
+[WDM_AU8820.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,AurlAud.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,AurlAud.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,AurlAud.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,AurlAud.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WT%,WDM.Interface.WT
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WT%,WDM.Interface.WT
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_DMUSWT%,AurlAud.Interface.DMusWT
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_DMUSWT%,AurlAud.Interface.DMusWT
+AddInterface=%KSCATEGORY_SYNTHESIZER%,%KSNAME_DMUSWT%,AurlAud.Interface.DMusWT
+
+[AurlAud.Interface.Wave]
+AddReg=AurlAud.Interface.Wave.AddReg
+[AurlAud.Interface.Wave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%AurlAud.Wave.szPname%
+
+[AurlAud.Interface.Topology]
+AddReg=AurlAud.Interface.Topo.AddReg
+[AurlAud.Interface.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%AurlAud.Topology.szPname%
+
+[WDM.Interface.UART]
+AddReg=WDM.Interface.UART.AddReg
+[WDM.Interface.UART.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM.UART.szPname%
+
+[WDM.Interface.WT]
+AddReg=WDM.Interface.WT.AddReg
+[WDM.Interface.WT.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM.WT.szPname%
+
+[AurlAud.Interface.DMusWT]
+AddReg=AurlAud.Interface.DMusWT.AddReg
+[AurlAud.Interface.DMusWT.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%AurlAud.DMusWT.szPname%
+
+
+;;**************** NT Install ****************
+
+[WDM_AU8820.NT]
+DriverVer = 2/28/2000, 5.10.1500
+Include=   ks.inf, wdmaudio.inf
+;Needs=     KS.Registration, WDMAUDIO.Registration
+Needs=     KS.Registration
+CopyFiles= WDM_AU8820.CopyList, Apps_AU8820.CopyList, Coinstaller_AU8820.CopyList, Vortex20App.Copylist, VortexSytem.CopyList, VortexWindows.CopyList
+AddReg=	   WDM_AU8820.AddReg, WDM_AU88XX.AddReg, Coinstaller_AU8820.AddReg,WIN2K_8820.AddReg
+;  A3DDemos.CopyList, disabled by MB 09-08-00
+
+[Coinstaller_AU8820.CopyList]
+;Au20CoInstaller.dll
+
+[Coinstaller_AU8820.AddReg]
+;HKR,,CoInstallers32,0x00010000,"Au20CoInstaller.dll, AuCoDeviceInstall"
+HKLM,%KEY_RUN_ONCE%,"Vortex20AppsSetUp",0x00000000,"asp4Setp.exe 14"
+
+[WDM_AU8820.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,AurlAud.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,AurlAud.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,AurlAud.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,AurlAud.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WT%,WDM.Interface.WT
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WT%,WDM.Interface.WT
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_DMUSWT%,AurlAud.Interface.DMusWT
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_DMUSWT%,AurlAud.Interface.DMusWT
+AddInterface=%KSCATEGORY_SYNTHESIZER%,%KSNAME_DMUSWT%,AurlAud.Interface.DMusWT
+
+[WDM_AU8820.NT.Services]
+AddService = wdm_au8820, 0x00000002, wdm_au8820_Service_Inst
+
+[wdm_au8820_Service_Inst]
+DisplayName    = %wdm_au8820.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\adm8820.sys
+
+[Strings]
+AurealMfgName="TerraTec Electronic GmbH"
+*WDM_AU8820.DeviceDesc="XLerate PCI Audio (WDM)"
+AurlAud.Wave.szPname="XLerate"
+AurlAud.Topology.szPname="XLerate"
+
+;; Aureal friendly names (non-localizeable)
+AURLGUID.WaveOut     ="{62D35A10-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.PcBeep      ="{62D35A11-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.Phone       ="{62D35A12-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.Mic         ="{62D35A13-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.LineIn      ="{62D35A14-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.CDPlayer    ="{62D35A15-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.Video       ="{62D35A16-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.Aux         ="{62D35A17-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.Wavetable   ="{62D35A18-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.StereoMix   ="{62D35A19-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.MonoMix     ="{62D35A1A-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.LineOut     ="{62D35A1B-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.WaveIn      ="{62D35A1C-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.AC97        ="{62D35A1D-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.MonoOut     ="{62D35A1E-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.Spdif       ="{62D35A1F-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.Center3D    ="{62D35A20-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.Depth3D     ="{62D35A21-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.FrontRear   ="{62D35A22-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.HPOut       ="{62D35A23-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.SpdifOut    ="{62D35A24-E42B-11D1-B073-00608CCBD2F1}"
+
+AURLGUID.WaveOut_Volume        ="{62D35A40-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.WaveOut_Mute          ="{62D35A41-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.PcBeep_Volume         ="{62D35A42-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.PcBeep_Mute           ="{62D35A43-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.Phone_Volume          ="{62D35A44-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.Phone_Mute            ="{62D35A45-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.Mic_Volume            ="{62D35A46-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.Mic_Mute              ="{62D35A47-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.Mic_20dBGain          ="{62D35A48-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.LineIn_Volume         ="{62D35A49-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.LineIn_Mute           ="{62D35A4A-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.CDPlayer_Volume       ="{62D35A4B-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.CDPlayer_Mute         ="{62D35A4C-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.Video_Volume          ="{62D35A4D-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.Video_Mute            ="{62D35A4E-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.Aux_Volume            ="{62D35A4F-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.Aux_Mute              ="{62D35A50-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.Wavetable_Volume      ="{62D35A51-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.Wavetable_Mute        ="{62D35A52-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.LineOut_Bass          ="{62D35A53-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.LineOut_Treble        ="{62D35A54-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.LineOut_MasterVolume  ="{62D35A55-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.LineOut_MasterMute    ="{62D35A56-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.Phone_W_Volume        ="{62D35A57-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.Mic_W_Volume          ="{62D35A58-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.LineIn_W_Volume       ="{62D35A59-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.CDPlayer_W_Volume     ="{62D35A5A-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.Video_W_Volume        ="{62D35A5B-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.Aux_W_Volume          ="{62D35A5C-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.Stereomix_W_Volume    ="{62D35A5D-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.Monomix_W_Volume      ="{62D35A5E-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.MonoOut_Volume        ="{62D35A5F-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.MonoOut_Mute          ="{62D35A60-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.Spdif_Volume          ="{62D35A61-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.Spdif_Mute            ="{62D35A62-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.Audio_3DCenter_Volume ="{62D35A63-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.Audio_3DDepth_Volume  ="{62D35A64-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.FrontBack_Balance     ="{62D35A65-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.HPOut_Volume          ="{62D35A66-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.HPOut_Mute            ="{62D35A67-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.Mic_Select            ="{62D35A68-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.LineOut_Loudness      ="{62D35A69-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.LineOut_3DAudio_OnOff ="{62D35A6A-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.SpdifOut_Volume       ="{62D35A6B-E42B-11D1-B073-00608CCBD2F1}"
+AURLGUID.SpdifOut_Mute         ="{62D35A6C-E42B-11D1-B073-00608CCBD2F1}"
+
+;; Aureal friendly names (localizeable)
+AURLPin.WaveOut     ="Wave"
+AURLPin.PcBeep      ="PC Speaker"
+AURLPin.Phone       ="Phone"
+AURLPin.Mic         ="Mic In"
+AURLPin.LineIn      ="Line In"
+AURLPin.CDPlayer    ="CD Audio"
+AURLPin.Video       ="Video"
+AURLPin.Aux         ="Aux In"
+AURLPin.Wavetable   ="Synth"
+AURLPin.Spdif       ="SPDIF Input"
+AURLPin.StereoMix   ="Stereo Mixer Input"
+AURLPin.MonoMix     ="Mono Mixer Input"
+AURLPin.LineOut     ="Volume Control"
+AURLPin.WaveIn      ="Wave In"
+AURLPin.AC97        ="AC97 Controls"
+AURLPin.MonoOut     ="Mono Out"
+AURLPin.HPOut       ="Headphones Out"
+AURLPin.SpdifOut    ="SP-DIF Out"
+AURLPin.Center3D    ="3D Center"
+AURLPin.Depth3D     ="3D Depth"
+AURLPin.FrontRear   ="Front/Rear Control"
+
+AURLPin.WaveOut_Volume        ="Wave Out Volume"
+AURLPin.WaveOut_Mute          ="Wave Out Mute"
+AURLPin.PcBeep_Volume         ="PC Speaker Volume"
+AURLPin.PcBeep_Mute           ="PC Speaker Mute"
+AURLPin.Phone_Volume          ="Phone Volume"
+AURLPin.Phone_Mute            ="Phone Mute"
+AURLPin.Mic_Volume            ="Microphone Volume"
+AURLPin.Mic_Select            ="Microphone 1/2 Select"
+AURLPin.Mic_Mute              ="Microphone Mute"
+AURLPin.Mic_20dBGain          ="Microphone Gain (+20dB)"
+AURLPin.LineIn_Volume         ="Line-In Volume"
+AURLPin.LineIn_Mute           ="Line-In Mute"
+AURLPin.CDPlayer_Volume       ="CD-ROM Volume"
+AURLPin.CDPlayer_Mute         ="CD-ROM Mute"
+AURLPin.Video_Volume          ="Video Volume"
+AURLPin.Video_Mute            ="Video Mute"
+AURLPin.Aux_Volume            ="Auxiliary Volume"
+AURLPin.Aux_Mute              ="Auxiliary Mute"
+AURLPin.Wavetable_Volume      ="Wavetable Synthesizer Volume"
+AURLPin.Wavetable_Mute        ="Wavetable Synthesizer Mute"
+AURLPin.Spdif_Volume          ="SPDIF Input Volume"
+AURLPin.Spdif_Mute            ="SPDIF Input Mute"
+AURLPin.LineOut_Bass          ="Bass Control"
+AURLPin.LineOut_Treble        ="Treble Control"
+AURLPin.LineOut_Loudness      ="Loudness Control"
+AURLPin.LineOut_3DAudio_OnOff ="3D Stereo Enhancement"
+AURLPin.LineOut_MasterVolume  ="Master Volume"
+AURLPin.LineOut_MasterMute    ="Master Mute"
+AURLPin.Phone_W_Volume        ="Phone Input Control"
+AURLPin.Mic_W_Volume          ="Mic Input Control"
+AURLPin.LineIn_W_Volume       ="Line Input Control"
+AURLPin.CDPlayer_W_Volume     ="CD-ROM Input Control"
+AURLPin.Video_W_Volume        ="Video Input Control"
+AURLPin.Aux_W_Volume          ="Auxiliary Input Control"
+AURLPin.Stereomix_W_Volume    ="Stereo Mixer Input Control"
+AURLPin.Monomix_W_Volume      ="Mono Mixer Input Control"
+AURLPin.MonoOut_Volume        ="Mono Out Volume"
+AURLPin.MonoOut_Mute          ="Mono Out Mute"
+AURLPin.HPOut_Volume          ="Headphones Volume"
+AURLPin.HPOut_Mute            ="Headphones Mute"
+AURLPin.SpdifOut_Volume       ="SPDIF Out Volume"
+AURLPin.SpdifOut_Mute         ="SPDIF Out Mute"
+AURLPin.Audio_3DCenter_Volume ="3D Center"
+AURLPin.Audio_3DDepth_Volume  ="3D Depth"
+AURLPin.FrontBack_Balance     ="Front/Rear Fader"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_SYNTHESIZER="{DFF220F3-F70F-11D0-B917-00A0C9223196}"
+
+KSNAME_Wave="Wave"
+KSNAME_UART="Uart"
+KSNAME_Topology="Topology"
+KSNAME_WT="Wavetable"
+KSNAME_DMUSWT="DMusWavetable"
+KSNAME_DMUSUART="DMusUart"
+
+WDM.UART.szPname="XLerate MPU-401"
+WDM.WT.szPname="XLerate Wavetable"
+AurlAud.DMusWT.szPname="XLerate DirectMusic Wavetable"
+AurlAud.DMusUART.szPname="XLerate DirectMusic Uart"
+
+wdm_au8820.SvcDesc = "XLerate Audio Driver (WDM)"
+
+8820CustomInf="System\CurrentControlSet\Services\wdm_au8820\Customization"
+8820SpdifList="System\CurrentControlSet\Services\wdm_au8820\Customization\SpdifEnableList"
+8820ControlStr="System\CurrentControlSet\Services\wdm_au8820\ControlPanel"
+8820InstallStr="System\CurrentControlSet\Services\wdm_au8820\InstallSettings"
+8820AppCustomStr="Software\Aureal\Vortex\Customization"
+
+8820WtNumVoicesString0="64 Voice Pro"
+8820WtNumVoicesString1="64 Voice Gamer"
+8820WtNumVoicesString2="32 Voice Pro"
+
+8820_HWKEY="System\CurrentControlSet\Services\wdm_au8820"
+
+EqBandLabels="31 63 125 250 500 1K 2K 4K 8K 16K"
+KEY_RUN_ONCE="Software\Microsoft\Windows\CurrentVersion\RunOnce"

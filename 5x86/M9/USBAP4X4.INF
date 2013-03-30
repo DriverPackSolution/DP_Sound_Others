@@ -1,0 +1,142 @@
+;-------------------------------------------------------------------------
+; USBAP4X4.INF
+; M-Audio Audiophile USB Midi Interface Hardware Installation File
+; Written by: Doug Fetter Software Wizardry
+; Copyright (c) 1999-2003 Midiman,  All Rights Reserved.
+;-------------------------------------------------------------------------
+
+[Version]
+Signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%MfgName%
+LayoutFile=layout.inf
+
+[ClassInstall]
+; Win9x ClassInstall section
+AddReg=Class.AddReg
+
+[Class.AddReg]
+HKR,,,0,%MediaClassName%
+HKR,,Icon,0,-1
+HKR,,Installer,0,mmci.dll
+
+[ClassInstall32]
+; NT ClassInstall section
+AddReg=Class32.AddReg
+
+[Class32.AddReg]
+HKR,,,,%MediaClassName%
+HKR,,Installer32,,"MmSys.Cpl,MediaClassInstaller"
+HKR,,EnumPropPages32,,"MmSys.Cpl,MediaPropPageProvider"
+HKR,,TroubleShooter-0,,"tshoot.chm,hdw_multi.htm"
+HKR,,Icon,,"3004"
+
+[Manufacturer]
+%MfgName%=ManufacturerName_M_Audio
+
+[ManufacturerName_M_Audio]
+%USB\VID_0763&PID_2003.DeviceDesc%=USBMidiK_Device, USB\VID_0763&PID_2003&MI_06
+%USBMIDI\AP4X4.DeviceDesc%=USBMidi_Device,USBMIDI\AP4X4
+
+
+[Audiophile.CopyList.DRV]
+usbap4x4.drv
+usbap4x4.dll
+usbap4x4.vxd
+
+[Audiophile.CopyList.NTDrv]
+usbnp4x4.dll
+
+[Audiophile.CopyList.WDM]
+usbap4x4.sys
+
+[Audiophile.CopyList.NTWDM]
+usbnp4x4.sys
+
+[DestinationDirs]
+Audiophile.CopyList.DRV  = 11                  ; %SystemRoot%\system
+Audiophile.CopyList.WDM  = 10,system32\drivers ; %SystemRoot%\system32\drivers
+Audiophile.CopyList.NTWDM= 10,system32\drivers ; %SystemRoot%\system32\drivers
+
+[SourceDisksNames]
+1="M-Audio Audiophile USB Driver Disk",,0000-0000
+
+[SourceDisksFiles]
+usbap4x4.drv=1
+usbap4x4.dll=1
+usbap4x4.vxd=1
+usbap4x4.sys=1
+usbnp4x4.dll=1
+usbnp4x4.sys=1
+
+
+;---------------------------------------------------------------;
+; Windows 98+ Install Sections
+;
+[USBMidiK_Device]
+;CopyFiles=Audiophile.CopyList.WDM
+AddReg=AudiophileK.AddReg
+
+[USBMidi_Device]
+;CopyFiles=Audiophile.CopyList.DRV
+AddReg=Audiophile.AddReg
+
+
+;---------------------------------------------------------------;
+; Windows 98+ Registry Section
+;
+[AudiophileK.AddReg]
+HKR,,DevLoader,,"*ntkern"
+HKR,,NTMPDriver,,usbap4x4.sys
+
+[Audiophile.AddReg]
+HKR,,DevLoader,,"mmdevldr.vxd"
+HKR,,Driver,,usbap4x4.vxd
+HKR,Drivers,MIGRATED,0,0
+HKR,Drivers\midi,,0,
+HKR,Drivers\midi\usbap4x4.drv,Description,0,%USBMIDI\AP4X4.DeviceDesc%
+HKR,Drivers\midi\usbap4x4.drv,Driver,0,usbap4x4.drv
+HKR,Drivers\midi\usbap4x4.drv,External,1,01,00,00,00
+HKR,Drivers,SubClasses,,"midi"
+
+
+;---------------------------------------------------------------;
+; Windows 2000 Install Sections
+;
+[USBMidiK_Device.NT]
+CopyFiles=Audiophile.CopyList.NTDrv,Audiophile.CopyList.NTWDM
+AddReg=Audiophile.NTAddReg
+
+[USBMidiK_Device.NT.Services]
+AddService = USBNP4X4, 0x00000002, USBMidiK_Device_Services
+
+[USBMidiK_Device_Services]
+DisplayName    = %Audiophile.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\usbnp4x4.sys
+
+
+;---------------------------------------------------------------;
+; Windows 2000 Registry Section
+;
+[Audiophile.NTAddReg]
+HKR,Drivers\midi,,0,
+HKR,Drivers\midi\usbnp4x4.dll,Description,0,%Audiophile.SvcDesc%
+HKR,Drivers\midi\usbnp4x4.dll,Driver,0,usbnp4x4.dll
+HKR,Drivers\midi\usbnp4x4.dll,External,1,01,00,00,00
+HKR,Drivers,SubClasses,,"midi"
+
+
+;---------------------------------------------------------------;
+
+[Strings]
+MfgName="M-Audio"
+USB\VID_0763&PID_2003.DeviceDesc="M-Audio Audiophile USB Midi"
+USBMIDI\AP4X4.DeviceDesc="M-Audio Audiophile USB Midi (VxD)"
+Audiophile.SvcDesc = "M-Audio Audiophile USB Midi"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+MediaClassName="Sound, video and game controllers"

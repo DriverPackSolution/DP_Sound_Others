@@ -1,0 +1,581 @@
+;===============================================================
+; TerraTec DMX 6fire 24/96
+; Driver Install Script for WDM 
+;---------------------------------------------------------------
+; Copyright: (c) 2001, TerraTec Electronic GmbH
+;
+; History:
+;   06-Dec-2006 (CL)  - Windows Vista Migration
+;   13-Oct-2006 (CL)  - Win64 Migration
+;	09-Jul-2003 (CL)  - Added Sensaura-Filter install
+;	26-Apr-2002 (CL)  - Renamed Driver -> dmx6fire.sys
+;   05-Feb-2002 (CL)  - Renamed MWPC - Midi devices
+;   21-Oct-2001 (FMB) - Initial version
+;===============================================================
+
+
+[Version]
+Signature=$CHICAGO$
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%Provider%
+CatalogFile=DMX6Fire.cat
+
+DriverVer =08/31/2007,5.53.3.144
+
+
+[DestinationDirs]
+EWS.SystemCopyList=10,system32\drivers
+EWS_AMD64.SystemCopyList=12
+sensaura.CopyList=10,system
+ASIO.CopyList=11
+ASIO_AMD64.CopyList=11
+ASIO_AMD_WOW64.CopyList=10,SysWOW64
+Audio3D.CopyList=11
+; C.L. very strange behaviour when we set DefaultDestDir=10 (Sensaura doesn't work)
+DefaultDestDir=12
+
+[Manufacturer]
+%Manufacturer%=TerraTec, NTX86, NTAMD64
+
+;================= Windows 98 - 2000 =================
+[TerraTec]
+%DeviceName_TTP7%=TTP7.Device,PCI\VEN_1412&DEV_1712&SUBSYS_1138153B
+
+;================= 32 bit XP =================
+[TerraTec.NTX86]
+%DeviceName_TTP7%=TTP7.Device,PCI\VEN_1412&DEV_1712&SUBSYS_1138153B
+
+;================= AMD 64 bit ====================
+[TerraTec.NTAMD64]
+%DeviceName_TTP7%=TTP7.Device,PCI\VEN_1412&DEV_1712&SUBSYS_1138153B
+
+
+
+
+;=============================================================================
+;	Windows 9x & ME Install
+;=============================================================================
+
+[TTP7.Device]
+AlsoInstall=ks.registration(ks.inf),wdmaudio.registration(wdmaudio.inf)
+CopyFiles=EWS.SystemCopyList, ASIO.CopyList,Audio3D.CopyList,sensaura.CopyList
+DelFiles=EWS_NTSYS.DelFiles,EWS_NTDLL.DelFiles,EWS_VXD.DelFiles,EWS_ASIO.DelFiles
+AddReg=TTP7.AddReg, TTP7.ASIO.AddReg,Audio3D.AddReg, guids.AddReg, SensauraConfiguration.AddReg
+DelReg=TTP7.ASIO.DelReg
+
+[TTP7.Device.HW]
+AddReg=Sensaura.AddReg
+
+
+
+;-------------------------------------------------------------------------------
+
+
+[TTP7.Device.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_12%,TTP7.Interface.WaveAnalog
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_12%,TTP7.Interface.WaveAnalog
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_12%,TTP7.Interface.WaveAnalog
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_SPDIF%,TTP7.Interface.SPDIF
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_SPDIF%,TTP7.Interface.SPDIF
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_SPDIF%,TTP7.Interface.SPDIF
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi1%,TTP7.Interface.Midi1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi1%,TTP7.Interface.Midi1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi1%,TTP7.Interface.Midi1
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_MWPC1%,TTP7.Interface.MWPC1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_MWPC1%,TTP7.Interface.MWPC1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_MWPC1%,TTP7.Interface.MWPC1
+
+; MIDI-2 only available on WaveTable or MWPC extension
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi2%,TTP7.Interface.Midi2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi2%,TTP7.Interface.Midi2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi2%,TTP7.Interface.Midi2
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_MWPC2%,TTP7.Interface.MWPC2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_MWPC2%,TTP7.Interface.MWPC2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_MWPC2%,TTP7.Interface.MWPC2
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_TopoMT%,TTP7.Interface.TopoMT
+
+
+
+
+
+;=============================================================================
+;	Windows 2000 Install
+;=============================================================================
+
+[TTP7.Device.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=EWS.SystemCopyList, ASIO.CopyList,Audio3D.CopyList,sensaura.CopyList
+DelFiles=EWS_NTSYS.DelFiles,EWS_NTDLL.DelFiles,EWS_VXD.DelFiles,EWS_ASIO.DelFiles
+AddReg=TTP7.AddReg, TTP7.ASIO.AddReg,Audio3D.AddReg, guids.AddReg, SensauraConfiguration.AddReg
+DelReg=TTP7.ASIO.DelReg
+
+[TTP7.Device.NT.HW]
+AddReg=Sensaura.AddReg.NT
+
+[TTP7.Device.NT.Services]
+AddService = dmxfire, 0x00000002, dmx_Service_Inst
+AddService = dmxsens, 0x00000000, Sensaura_Service_Inst
+
+;-------------------------------------------------------------------------------
+
+[TTP7.Device.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_12%,TTP7.Interface.WaveAnalog
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_12%,TTP7.Interface.WaveAnalog
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_12%,TTP7.Interface.WaveAnalog
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_SPDIF%,TTP7.Interface.SPDIF
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_SPDIF%,TTP7.Interface.SPDIF
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_SPDIF%,TTP7.Interface.SPDIF
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi1%,TTP7.Interface.Midi1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi1%,TTP7.Interface.Midi1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi1%,TTP7.Interface.Midi1
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_MWPC1%,TTP7.Interface.MWPC1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_MWPC1%,TTP7.Interface.MWPC1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_MWPC1%,TTP7.Interface.MWPC1
+
+; MIDI-2 only available on WaveTable or MWPC extension
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi2%,TTP7.Interface.Midi2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi2%,TTP7.Interface.Midi2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi2%,TTP7.Interface.Midi2
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_MWPC2%,TTP7.Interface.MWPC2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_MWPC2%,TTP7.Interface.MWPC2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_MWPC2%,TTP7.Interface.MWPC2
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_TopoMT%,TTP7.Interface.TopoMT
+
+;=============================================================================
+;	Windows XP Install
+;=============================================================================
+
+[TTP7.Device.NTX86]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=EWS.SystemCopyList, ASIO.CopyList,Audio3D.CopyList,sensaura.CopyList
+AddReg=TTP7.AddReg, TTP7.ASIO.AddReg,Audio3D.AddReg, guids.AddReg, SensauraConfiguration.AddReg
+DelReg=TTP7.ASIO.DelReg
+
+[TTP7.Device.NTX86.HW]
+AddReg=Sensaura.AddReg.NT
+
+[TTP7.Device.NTX86.Services]
+AddService = dmxfire, 0x00000002, dmx_Service_Inst
+AddService = dmxsens, 0x00000000, Sensaura_Service_Inst
+
+
+;-------------------------------------------------------------------------------
+
+[TTP7.Device.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_12%,TTP7.Interface.WaveAnalog
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_12%,TTP7.Interface.WaveAnalog
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_12%,TTP7.Interface.WaveAnalog
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_SPDIF%,TTP7.Interface.SPDIF
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_SPDIF%,TTP7.Interface.SPDIF
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_SPDIF%,TTP7.Interface.SPDIF
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi1%,TTP7.Interface.Midi1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi1%,TTP7.Interface.Midi1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi1%,TTP7.Interface.Midi1
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_MWPC1%,TTP7.Interface.MWPC1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_MWPC1%,TTP7.Interface.MWPC1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_MWPC1%,TTP7.Interface.MWPC1
+
+; MIDI-2 only available on WaveTable or MWPC extension
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi2%,TTP7.Interface.Midi2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi2%,TTP7.Interface.Midi2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi2%,TTP7.Interface.Midi2
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_MWPC2%,TTP7.Interface.MWPC2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_MWPC2%,TTP7.Interface.MWPC2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_MWPC2%,TTP7.Interface.MWPC2
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_TopoMT%,TTP7.Interface.TopoMT
+
+;=============================================================================
+;	AMD64Bit (XP + 2003) Install
+;=============================================================================
+
+[TTP7.Device.NTAMD64]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=EWS_AMD64.SystemCopyList, ASIO_AMD64.CopyList, ASIO_AMD_WOW64.CopyList
+AddReg=TTP7.AddReg, TTP7_AMD64.ASIO.AddReg
+DelReg=TTP7.ASIO.DelReg
+
+
+[TTP7.Device.NTAMD64.Services]
+AddService = dmxfire, 0x00000002, dmx_Service_Inst
+
+
+;-------------------------------------------------------------------------------
+
+[TTP7.Device.NTAMD64.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_12%,TTP7.Interface.WaveAnalog
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_12%,TTP7.Interface.WaveAnalog
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_12%,TTP7.Interface.WaveAnalog
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_SPDIF%,TTP7.Interface.SPDIF
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_SPDIF%,TTP7.Interface.SPDIF
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_SPDIF%,TTP7.Interface.SPDIF
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi1%,TTP7.Interface.Midi1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi1%,TTP7.Interface.Midi1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi1%,TTP7.Interface.Midi1
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_MWPC1%,TTP7.Interface.MWPC1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_MWPC1%,TTP7.Interface.MWPC1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_MWPC1%,TTP7.Interface.MWPC1
+
+; MIDI-2 only available on WaveTable or MWPC extension
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi2%,TTP7.Interface.Midi2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi2%,TTP7.Interface.Midi2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi2%,TTP7.Interface.Midi2
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_MWPC2%,TTP7.Interface.MWPC2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_MWPC2%,TTP7.Interface.MWPC2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_MWPC2%,TTP7.Interface.MWPC2
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_TopoMT%,TTP7.Interface.TopoMT
+
+
+
+
+
+;=============================================================================
+;	TTP7 Interfaces 
+;=============================================================================
+
+
+[TTP7.Interface.WaveAnalog]
+AddReg=TTP7.Interface.WaveAN.AddReg
+
+[TTP7.Interface.SPDIF]
+AddReg=TTP7.Interface.SPDIF.AddReg
+
+[TTP7.Interface.Midi1]
+AddReg=TTP7.Interface.Midi1.AddReg
+
+[TTP7.Interface.Midi2]
+AddReg=TTP7.Interface.Midi2.AddReg
+
+[TTP7.Interface.MWPC1]
+AddReg=TTP7.Interface.MWPC1.AddReg
+
+[TTP7.Interface.MWPC2]
+AddReg=TTP7.Interface.MWPC2.AddReg
+
+[TTP7.Interface.TopoMT]
+AddReg=TTP7.Interface.ToMT.AddReg
+
+
+;---------------------------------------------------------
+; Friendly Names for TTP7 devices
+; Nasty, AddReg Section Name must not exceed xx Characters 
+;---------------------------------------------------------
+[TTP7.Interface.WaveAN.AddReg]
+HKR,,FriendlyName,,"DMX 6fire Wave"
+HKR,,CLSID,,%Proxy.CLSID%
+
+[TTP7.Interface.SPDIF.AddReg]
+HKR,,FriendlyName,,"DMX 6fire Wave S/PDIF"
+HKR,,CLSID,,%Proxy.CLSID%
+
+[TTP7.Interface.Midi1.AddReg]
+HKR,,FriendlyName,,"DMX 6fire MIDI"
+HKR,,CLSID,,%Proxy.CLSID%
+
+[TTP7.Interface.Midi2.AddReg]
+HKR,,FriendlyName,,"DMX 6Fire WaveTable"
+HKR,,CLSID,,%Proxy.CLSID%
+
+[TTP7.Interface.MWPC1.AddReg]
+HKR,,FriendlyName,,"MWPC Midi-1"
+HKR,,CLSID,,%Proxy.CLSID%
+
+[TTP7.Interface.MWPC2.AddReg]
+HKR,,FriendlyName,,"MWPC Midi-2"
+HKR,,CLSID,,%Proxy.CLSID%
+
+[TTP7.Interface.ToMT.AddReg]
+HKR,,FriendlyName,,"DMX 6fire Virt. Mix"
+HKR,,CLSID,,%Proxy.CLSID%
+
+
+;=============================================================================
+; Service Install
+;=============================================================================
+
+
+[dmx_Service_Inst]
+DisplayName    = %dmxfire.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_SYSTEM_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\dmx6fire.sys
+
+[Sensaura_Service_Inst]
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_SYSTEM_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\dmxsens.sys
+
+
+;=============================================================================
+; AddReg
+;=============================================================================
+
+[TTP7.AddReg]
+HKR,,AssociatedFilters,,"wdmaud"
+HKR,,Driver,,dmx6fire.sys
+HKR,,NTMPDriver,,"dmx6fire.sys"
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\wave\wdmaud.drv,Description,,"DMX 6fire Wave"
+
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Description,,"DMX 6fire Mixer"
+
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Description,,"DMX 6fire MIDI"
+
+;-------------------------------------------------------------------------------
+;	Sensaura Filter
+;-------------------------------------------------------------------------------
+
+[Sensaura.AddReg]
+HKR,,UpperFilters,0x00010000,dmxsens.sys
+
+[Sensaura.AddReg.NT]
+HKR,,UpperFilters,0x00010000,"dmxsens"
+
+[SensauraConfiguration.AddReg]
+HKR,Sensaura\Configuration,RenderFactory,0,%KSNAME_WaveMT_12%
+HKR,Sensaura\Configuration,TopologyFactory,0,%KSNAME_TopoMT%
+HKR,Sensaura\Configuration,ForwardSpeakerConfiguration,0x00010001,1
+HKR,Sensaura\Configuration,IgnoreDSSpeakerConfiguration,0x00010001,0
+
+
+
+;-------------------------------------------------------------------------------
+;	ASIO Install
+;-------------------------------------------------------------------------------
+[TTP7.ASIO.AddReg]
+HKLM,SOFTWARE\ASIO\%ASIO_TTP7NAME%,"CLSID",,%ASIO_TTP7IID%
+HKLM,SOFTWARE\ASIO\%ASIO_TTP7NAME%,"Description",,%ASIO_TTP7NAME%
+HKCR,CLSID\%ASIO_TTP7IID%,,,%ASIO_TTP7NAME%
+HKCR,CLSID\%ASIO_TTP7IID%\InProcServer32,,,"%11%\Asio88mt.dll"
+HKCR,CLSID\%ASIO_TTP7IID%\InProcServer32,ThreadingModel,,"Apartment"
+
+[TTP7_AMD64.ASIO.AddReg]
+; for 64Bit Applications on x64 Systems
+HKLM,SOFTWARE\ASIO\%ASIO_TTP7NAME%,"CLSID",,%ASIO_TTP7IID%
+HKLM,SOFTWARE\ASIO\%ASIO_TTP7NAME%,"Description",,%ASIO_TTP7NAME%
+HKCR,CLSID\%ASIO_TTP7IID%,,,%ASIO_TTP7NAME%
+HKCR,CLSID\%ASIO_TTP7IID%\InProcServer32,,,"%11%\Asio88mt.dll"
+HKCR,CLSID\%ASIO_TTP7IID%\InProcServer32,ThreadingModel,,"Apartment"
+; for 32Bit Applications on x64 Systems
+HKLM,SOFTWARE\Wow6432Node\ASIO\%ASIO_TTP7NAME%,"CLSID",0,%ASIO_TTP7IID%
+HKLM,SOFTWARE\Wow6432Node\ASIO\%ASIO_TTP7NAME%,"Description",,%ASIO_TTP7NAME%
+HKCR,Wow6432Node\CLSID\%ASIO_TTP7IID%,,0,%ASIO_TTP7NAME%
+HKCR,Wow6432Node\CLSID\%ASIO_TTP7IID%\InprocServer32,,0,%10%\SysWOW64\Asio88mt.dll
+HKCR,Wow6432Node\CLSID\%ASIO_TTP7IID%\InprocServer32,"ThreadingModel",0,"Apartment
+
+[TTP7.ASIO.DelReg]
+HKCR,CLSID\%ASIO_TTP7IID%
+HKLM,SOFTWARE\ASIO\%ASIO_TTP7NAME%
+HKCR,Wow6432Node\CLSID\%ASIO_TTP7IID%
+HKLM,SOFTWARE\Wow6432Node\ASIO\%ASIO_TTP7NAME%
+
+
+;-------------------------------------------------------------------------------
+;	Sensaura Install
+;-------------------------------------------------------------------------------
+
+[Audio3D.AddReg]
+HKCR,Audio3D,,0,Audio3DObject
+HKCR,Audio3D\CLSID,,0,%Audio3D_CLSID%
+HKCR,CLSID\%Audio3D_CLSID%,,0,Audio3DObject
+HKCR,CLSID\%Audio3D_CLSID%\InProcServer32,,0,Audio3D.dll
+HKCR,CLSID\%Audio3D_CLSID%\InProcServer32,ThreadingModel,0,Apartment
+
+
+;=============================================================================
+; Copy/DelFiles
+;=============================================================================
+
+[EWS.SystemCopyList]
+dmx6fire.sys,,
+dmxsens.sys
+
+[EWS_AMD64.SystemCopyList]
+dmx6fire.sys,dmx6fire64.sys,
+
+[ASIO.CopyList]
+Asio88mt.dll
+
+[ASIO_AMD64.CopyList]
+Asio88mt.dll, Asio88mt64.dll,
+
+[ASIO_AMD_WOW64.CopyList]
+Asio88mt.dll
+
+[sensaura.CopyList]
+crlds3d.dll
+
+[Audio3D.CopyList]
+a3d.dll,Audio3D.dll,,4
+Audio3D.dll
+
+
+[SourceDisksNames]
+1=%DiskName%,,
+
+[SourceDisksFiles]
+dmx6fire.sys=1
+dmxsens.sys=1
+Asio88Mt.dll=1
+Audio3D.dll=1
+CrlDs3D.dll=1
+
+[guids.AddReg]
+HKLM,%MediaCategories%\%TTGuid.Front%,Name,,%TTNode.Front%
+HKLM,%MediaCategories%\%TTGuid.Front%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%TTGuid.Master%,Name,,%TTNode.Master%
+HKLM,%MediaCategories%\%TTGuid.Master%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%TTGuid.FrontVolume%,Name,,%TTNode.FrontVolume%
+HKLM,%MediaCategories%\%TTGuid.FrontVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%TTGuid.FrontMute%,Name,,%TTNode.FrontMute%
+HKLM,%MediaCategories%\%TTGuid.FrontMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%TTGuid.Rear%,Name,,%TTNode.Rear%
+HKLM,%MediaCategories%\%TTGuid.Rear%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%TTGuid.RearVolume%,Name,,%TTNode.RearVolume%
+HKLM,%MediaCategories%\%TTGuid.RearVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%TTGuid.RearMute%,Name,,%TTNode.RearMute%
+HKLM,%MediaCategories%\%TTGuid.RearMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%TTGuid.Center%,Name,,%TTNode.Center%
+HKLM,%MediaCategories%\%TTGuid.Center%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%TTGuid.CenterVolume%,Name,,%TTNode.CenterVolume%
+HKLM,%MediaCategories%\%TTGuid.CenterVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%TTGuid.CenterMute%,Name,,%TTNode.CenterMute%
+HKLM,%MediaCategories%\%TTGuid.CenterMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%TTGuid.LFE%,Name,,%TTNode.LFE%
+HKLM,%MediaCategories%\%TTGuid.LFE%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%TTGuid.LFEVolume%,Name,,%TTNode.LFEVolume%
+HKLM,%MediaCategories%\%TTGuid.LFEVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%TTGuid.LFEMute%,Name,,%TTNode.LFEMute%
+HKLM,%MediaCategories%\%TTGuid.LFEMute%,Display,1,00,00,00,00
+
+
+;=============================================================================
+;	STRINGS
+;=============================================================================
+[Strings]
+ClassName="Sound, video and game controllers"
+Manufacturer="TerraTec "
+Provider="TerraTec "
+DiskName="TerraTec Driver CD"
+
+DeviceNameEws88mt         = "AudioSystem EWS88 MT"
+DeviceName_TTP7           = "DMX 6fire 24/96"
+DeviceNameIce             = "Envy 24"
+														 
+wdmaud.SvcDesc = "WDM Audio Driver"
+swmidi.SvcDesc = "EWS88 WDM Midi"
+dmxfire.SvcDesc= "DMX6fire WDM Audio"
+
+Proxy.CLSID        ="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO   ="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER  ="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE ="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+;FMB TEST: ChkInf says the following strings must be fix="WAVE"
+;KSNAME_Wave="WAVE"
+;This forces the Systemout to be enumerated at first
+KSNAME_Wave="AveSYS"
+KSNAME_WaveMT_12="WaveMT_12"
+KSNAME_WaveMT_34="WaveMT_34"
+KSNAME_WaveMT_56="WaveMT_56"
+KSNAME_WaveMT_78="WaveMT_78"
+KSNAME_SPDIF    ="_0SPDIF"
+KSNAME_DMIX     ="_1DMIX"
+KSNAME_WaveMT_INTLVD="WaveMT_INTLVD"
+KSNAME_Midi1    ="Midi1"
+KSNAME_Midi2    ="Midi2"
+KSNAME_MWPC1	="MWPC1"
+KSNAME_MWPC2	="MWPC2"
+KSNAME_Topology ="Topology"
+KSNAME_TopoMT   ="TopoMT"
+
+
+;----------------------------------------------------------
+; Guids for Custom Names
+;----------------------------------------------------------
+TTGuid.Master          ="{3C566B60-D997-11d3-943D-0040339FD9C2}"
+TTGuid.Front           ="{FEFB4813-D820-11d3-943D-0040339FD9C2}"
+TTGuid.FrontVolume     ="{38BFD810-A288-11d3-9426-0040339FD9C2}"
+TTGuid.FrontMute       ="{4534F060-A288-11d3-9426-0040339FD9C2}"
+TTGuid.Rear            ="{5CC77870-D821-11d3-943D-0040339FD9C2}"
+TTGuid.RearVolume      ="{4D7644B0-A288-11d3-9426-0040339FD9C2}"
+TTGuid.RearMute        ="{4D7644B1-A288-11d3-9426-0040339FD9C2}"
+TTGuid.SPDIF           ="{307E100f-9035-11d2-99D6-00600893863B}"
+TTGuid.SPDIFVolume     ="{32DA4E70-D997-11d3-943D-0040339FD9C2}"
+TTGuid.SPDIFMute       ="{32DA4E71-D997-11d3-943D-0040339FD9C2}"
+TTGuid.Center          ="{5E7C8DE3-8858-47c2-A01B-7F6B677AFB02}"
+TTGuid.CenterVolume    ="{3A513344-F8E9-449c-A648-B5F2C949870B}"
+TTGuid.CenterMute      ="{5CE856F8-ECA1-43af-815F-FA8F2FA99EBD}"
+TTGuid.LFE             ="{74A01E0D-61F7-4378-8BB7-C26D6CF14327}"
+TTGuid.LFEVolume       ="{9BB84574-E6C7-42a0-ABF6-F48819EAA190}"
+TTGuid.LFEMute         ="{FCDEFACB-5B85-40f7-9B23-9FA84D595326}"
+
+;----------------------------------------------------------
+; Custom Names in Windows Mixer
+;----------------------------------------------------------
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+TTNode.Master          ="Master"
+TTNode.Front           ="Front"
+TTNode.FrontVolume     ="Front Volume"
+TTNode.FrontMute       ="Front Mute"
+TTNode.Rear            ="Surround"
+TTNode.RearVolume      ="Surround Volume"
+TTNode.RearMute        ="Surround Mute"
+TTNode.Center          ="Center"
+TTNode.CenterVolume    ="Center Volume"
+TTNode.CenterMute      ="Center Mute"
+TTNode.LFE             ="LFE"
+TTNode.LFEVolume       ="LFE Volume"
+TTNode.LFEMute         ="LFE Mute"
+
+
+
+;----------------------------------------------------------
+; ASIO
+;----------------------------------------------------------
+
+;ASIO_EWS88IID       ="{D48916ED-526A-4546-B1E4-3DC8D3DA3E0F}"
+;ASIO_EWS88IID_VXD   ="{6D184901-04CA-11d4-8398-0800096F616B}"
+
+
+ASIO_TTP7IID     ="{67E7BAEE-91AB-40e0-AFC7-82CBFC09ECE4}"
+ASIO_TTP7NAME    ="ASIO for DMX 6fire 24/96"
+
+;----------------------------------------------------------
+; Sensaura
+;----------------------------------------------------------
+Sensaura="Sensaura Ltd"
+Audio3D_CLSID="{D8F1EEE0-F634-11CF-8700-00A0245D918B}"
+DevName="Sensaura Audio3D(tm) API"
+

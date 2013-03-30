@@ -1,0 +1,679 @@
+;*****************************************************************************
+; Copyright (c) 2002-2003 Applied Drivers Corporation, All Rights Reserved.
+; Copyright (c) 1998-2000 Cirrus Logic, Inc.
+;
+; cs429x.inf - Device description file for AC9x WDM driver files
+;
+;*****************************************************************************
+[Version]
+CatalogFile = CWAWDM.cat
+Signature = "$CHICAGO$"
+Class=MEDIA
+ClassGUID = {4d36e96c-e325-11ce-bfc1-08002be10318}
+provider = %CSMfgName%
+;Do Not Remove this line.  Win98SE install broken without it
+LayoutFile=layout.inf, layout1.inf, layout2.inf
+DriverVer= 07/14/2003,6.13.10.6109
+
+; win9x installs use ClassInstall
+[ClassInstall]
+AddReg=Class.AddReg
+
+[Class.AddReg]
+HKR,,,,%MediaClassName%
+HKR,,Icon,,"-1"
+HKR,,Installer,,mmci.dll
+
+
+[SourceDisksNames]
+222=%DriverDisk%,,,
+
+
+[SourceDisksFiles]
+cwawdm.sys = 222
+cwautil.sys = 222
+
+[Manufacturer]
+%CSMfgName% = Crystal
+
+
+[Crystal]
+; The non-qualified systems below must be removed before WHQL submission
+;%cs429x_AA.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_2415 ; ICH Whitney
+;%cs429x_AB.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_2425 ; ICH Camino
+;%cs429x_BA.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_2445 ; ICH2
+;%cs429x_BB.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_2485 ; ICH3
+;%cs429x_BC.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_24C5 ; ICH4
+;%cs429x_BD.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_7195 ; Banister
+
+;%cs429x_AA.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_2415&SUBSYS_80251043 ; HP_Hudson, COZUMEL
+;%cs429x_AA.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_2415&SUBSYS_980015D5 ; HP_Tatung
+
+;%cs429x_BA.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_2445&SUBSYS_42011013 ; ICH2 CS4201 ref card
+;%cs429x_BA.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_2445&SUBSYS_42021013 ; ICH2 CS4202 ref card
+;%cs429x_BA.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_2445&SUBSYS_42051013 ; ICH2 CS4205 ref card
+;%cs429x_BA.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_2445&SUBSYS_42991013 ; ICH2 CS4299 ref card
+;%cs429x_BA.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_2445&SUBSYS_FF001179 ; Compal_BTR20 (aka 888M1, atw05 and btr30)
+;%cs429x_BA.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_2445&SUBSYS_334015D5 ; HP_Tatung_B
+;%cs429x_BA.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_2445&SUBSYS_335015D5 ; HP_Tatung_C
+;%cs429x_BA.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_2445&SUBSYS_981515D5 ; HP_Tatung_Onyx
+;%cs429x_BA.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_2445&SUBSYS_984515D5 ; HP_Sapphire
+;
+;%cs429x_BB.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_2485&SUBSYS_42011013 ; ICH3 CS4201 ref card
+;%cs429x_BB.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_2485&SUBSYS_42021013 ; ICH3 CS4202 ref card
+;%cs429x_BB.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_2485&SUBSYS_42051013 ; ICH3 CS4205 ref card
+;%cs429x_BB.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_2485&SUBSYS_42991013 ; ICH3 CS4299 ref card
+;%cs429x_BB.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_2485&SUBSYS_02221014 ; IBM_Toronto4, Sydney 3/4/5, Venice 1
+;%cs429x_BB.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_2485&SUBSYS_14FF0407 ; Twinhead_T8 ADC77
+;%cs429x_BB.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_2485&SUBSYS_10241025 ; Wistron_Falcon3M
+;%cs429x_BB.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_2485&SUBSYS_3500107B ; Samsung_Storm
+;%cs429x_BB.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_2485&SUBSYS_FF001179 ; Compal_888M2_3
+;%cs429x_BB.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_2485&SUBSYS_C002144D ; Samsung_Gemini
+;%cs429x_BB.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_2485&SUBSYS_C006144D ; Samsung_Taurus
+;%cs429x_BB.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_2485&SUBSYS_001214C0 ; Compal_ACL00
+;%cs429x_BB.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_2485&SUBSYS_200117C0 ; Wistron_J1
+;%cs429x_BB.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_2485&SUBSYS_200817C0 ; Wistron_Wildcat
+;
+%cs429x_BC.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_24C5&SUBSYS_42011013 ; ICH4 CS4201 ref card
+%cs429x_BC.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_24C5&SUBSYS_42021013 ; ICH4 CS4202 ref card
+%cs429x_BC.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_24C5&SUBSYS_42051013 ; ICH4 CS4205 ref card
+%cs429x_BC.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_24C5&SUBSYS_42991013 ; ICH4 CS4299 ref card
+
+%cs429x_BC.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_24C5&SUBSYS_C005144D ; Samsung_Aquila
+%cs429x_BC.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_24C5&SUBSYS_C008144D ; Samsung_Draco
+
+
+%cs429x_BC.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_24C5&SUBSYS_C00B144D ; Samsung_Taurus2
+%cs429x_BC.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_24C5&SUBSYS_C00E144D ; Samsung_Galaxy
+%cs429x_BC.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_24C5&SUBSYS_B023144D ; Samsung_Danio
+%cs429x_BC.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_24C5&SUBSYS_C00F144D ; Samsung_Aquila_W
+%cs429x_BC.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_24C5&SUBSYS_2002165E ; Hyunju_Tiger ADC75
+%cs429x_BC.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_24C5&SUBSYS_200517C0 ; Wistron_F4M_Pelican_B2M_W3D
+%cs429x_BC.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_24C5&SUBSYS_00391025 ; Wistron_Yuhina
+%cs429x_BC.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_24C5&SUBSYS_00381025 ; Wistron_Canary
+%cs429x_BC.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_24C5&SUBSYS_10331734 ; Wistron_FB2I
+%cs429x_BC.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_24C5&SUBSYS_59591013 ; Quanta_TM9
+
+;%cs429x_BD.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_7195&SUBSYS_101B1025 ; Wistron_TM100
+;%cs429x_BD.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_7195&SUBSYS_11401071 ; Mitac_W120
+;%cs429x_BD.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_7195&SUBSYS_11411071 ; Mitac_ML800
+;%cs429x_BD.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_7195&SUBSYS_12001071 ; Mitac_CA25 &CA25T
+;%cs429x_BD.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_7195&SUBSYS_12011071 ; Mitac_PT800
+;%cs429x_BD.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_7195&SUBSYS_12021071 ; Mitac_MSL3800
+;%cs429x_BD.DeviceDesc% = cs429x, PCI\VEN_8086&DEV_7195&SUBSYS_200617C0 ; Wistron_A1
+
+[DestinationDirs]
+cs429x.CopyList=10,system32\drivers
+cs429xw9x.CopyList=10,system32\drivers
+
+[cs429x]
+AlsoInstall = ks.registration(ks.inf), wdmaudio.registration(wdmaudio.inf)
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=cs429x.CopyList, cs429xw9x.CopyList
+AddReg=w9x.AddReg,cs429x.AddReg,guids.AddReg,Intel.AddReg
+
+[cs429x.CopyList]
+cwawdm.sys
+
+[cs429xw9x.CopyList]
+; Drivers copied only for Windows 9x/Me
+cwautil.sys
+ 
+;
+; Intel chipset only options
+;
+[Intel.AddReg]
+; Max number of channels possible (is limited by device abilities)
+; Change default to 2 ADC Defect 123 RJJ
+HKR,Settings,MultiChannelSupport,1,02
+
+; 4 => DSP Speaker Stereo, 6 => 6-channel
+HKR,Settings,"Speaker Configuration",1,04,00,00,00
+
+HKR,Mixer,HPJackSense,1,00
+;HKR,Mixer,HPJackSensingGPIO,1,00,00,00,00
+;HKR,Mixer,HPJackInsertedActivePolarity,1,01,00,00,00
+HKR,PowerSettings,AcLinkOffAsap,1,00
+
+[w9x.AddReg]
+; Utility driver is required for Windows 9x and is not needed on NT.
+HKR,,NTMPDriver,,"cwautil.sys,cwawdm.sys,sbemul.sys"
+
+[wnt.AddReg]
+HKR,,NTMPDriver,,"cwawdm.sys,sbemul.sys"
+
+[cs429x.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,cwawdm.sys
+; JHN 28-Jul-2002 Moved to Windows 9x or Windows NT specific sections
+; HKR,,NTMPDriver,,"cwawdm.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer,aux"
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\aux\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%cs429x.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv,Description,,%cs429x.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%cs429x.DeviceDesc%
+HKR,Drivers\aux\wdmaud.drv,Description,,%cs429x.DeviceDesc%
+
+; -200L
+HKR,Ac9x,CodecDelay1,1,38,FF,FF,FF
+; -1000L = 100 microseconds
+HKR,Ac9x,CodecDelay2,1,18,FC,FF,FF
+
+; Sets of master volume and mute also set headphone volume and mute.
+; Note, if set below to 1, must also disable headphone mixer element.
+HKR,Ac9x,HPhoneVolEqMastVol,1,00
+
+;
+; Hardware Defaults - These are default settings to be used in the hardware.
+; The register value XXYY translates to ...,1,yy,xx.  These are the default
+; values of the driver.
+;
+;----------------Mixer modified----------------------------
+;  All mixers should at be in the middle position
+;  Microphone boost - off
+;----------------------------------------------------------
+HKR,Ac9x,MasterVolume,1,04,04
+HKR,Ac9x,HPhoneVolume,1,04,04
+HKR,Ac9x,MonoOutVolume,1,04,04
+;---------------Enable speaker----------------------------
+HKR,Ac9x,BeepVolume,1,08,04
+HKR,Ac9x,PhoneVolume,1,04,04
+; Change MicVolume to 44,80 to enable boost by default (24,80 if not)
+HKR,Ac9x,MicVolume,1,44,80
+HKR,Ac9x,LineInVolume,1,04,04
+HKR,Ac9x,CdVolume,1,04,04
+HKR,Ac9x,VideoVolume,1,04,04
+HKR,Ac9x,AuxVolume,1,04,04
+HKR,Ac9x,PcmOutVolume,1,08,08
+HKR,Ac9x,RecordSelect,1,00,00
+HKR,Ac9x,RecordGain,1,00,00
+HKR,Ac9x,GeneralPurpose,1,00,20         ;; un mute 3d
+HKR,Ac9x,3dControl,1,08,08
+
+; MC sliders
+HKR,Ac9x,FrontVolume,1,04,04
+HKR,Ac9x,SurroundVolume,1,04,04
+HKR,Ac9x,CenterVolume,1,04,04
+HKR,Ac9x,LFEVolume,1,04,04
+
+
+;
+; Volume Ranges - The formula for determining the value of the
+; range is: (maxHWvalue * 98304) = x, Take x, make it negative and
+; convert it to hex. You should get some number like 0xWWXXYYZZ.
+; WWXXYYZZ translates to ...,1,ZZ,YY,XX,WW
+;
+; Example: The max hardware value for master volume is 0x3f.
+; 0x3f = 63, (63 * 98304) = 6193152, hex(-6193152) = ffa18000
+;Master volume
+;#      dB      AC97 register   Hex value       INF setting
+;0      0.0     00      00000000        00:00:00:00
+;1      -1.5    01      FFFE8000        00:80:FE:FF
+;2      -3.0    02      FFFD0000        00:00:FD:FF
+;3      -4.5    03      FFFB8000        00:80:FB:FF
+;4      -6.0    04      FFFA0000        00:00:FA:FF
+;5      -7.5    05      FFF88000        00:80:F8:FF
+;6      -9.0    06      FFF70000        00:00:F7:FF
+;7      -10.5   07      FFF58000        00:80:F5:FF
+;8      -12.0   08      FFF40000        00:00:F4:FF
+;9      -13.5   09      FFF28000        00:80:F2:FF
+;10     -15.0   0A      FFF10000        00:00:F1:FF
+;11     -16.5   0B      FFEF8000        00:80:EF:FF
+;12     -18.0   0C      FFEE0000        00:00:EE:FF
+;13     -19.5   0D      FFEC8000        00:80:EC:FF
+;14     -21.0   0E      FFEB0000        00:00:EB:FF
+;15     -22.5   0F      FFE98000        00:80:E9:FF
+;16     -24.0   10      FFE80000        00:00:E8:FF
+;17     -25.5   11      FFE68000        00:80:E6:FF
+;18     -27.0   12      FFE50000        00:00:E5:FF
+;19     -28.5   13      FFE38000        00:80:E3:FF
+;20     -30.0   14      FFE20000        00:00:E2:FF
+;21     -31.5   15      FFE08000        00:80:E0:FF
+;22     -33.0   16      FFDF0000        00:00:DF:FF
+;23     -34.5   17      FFDD8000        00:80:DD:FF
+;24     -36.0   18      FFDC0000        00:00:DC:FF
+;25     -37.5   19      FFDA8000        00:80:DA:FF
+;26     -39.0   1A      FFD90000        00:00:D9:FF
+;27     -40.5   1B      FFD78000        00:80:D7:FF
+;28     -42.0   1C      FFD60000        00:00:D6:FF
+;29     -43.5   1D      FFD48000        00:80:D4:FF
+;30     -45.0   1E      FFD30000        00:00:D3:FF
+;31     -46.5   1F      FFD18000        00:80:D1:FF
+;32     -48.0   20      FFD00000        00:00:D0:FF
+;33     -49.5   21      FFCE8000        00:80:CE:FF
+;34     -51.0   22      FFCD0000        00:00:CD:FF
+;35     -52.5   23      FFCB8000        00:80:CB:FF
+;36     -54.0   24      FFCA0000        00:00:CA:FF
+;37     -55.5   25      FFC88000        00:80:C8:FF
+;38     -57.0   26      FFC70000        00:00:C7:FF
+;39     -58.5   27      FFC58000        00:80:C5:FF
+;40     -60.0   28      FFC40000        00:00:C4:FF
+;41     -61.5   29      FFC28000        00:80:C2:FF
+;42     -63.0   2A      FFC10000        00:00:C1:FF
+;43     -64.5   2B      FFBF8000        00:80:BF:FF
+;44     -66.0   2C      FFBE0000        00:00:BE:FF
+;45     -67.5   2D      FFBC8000        00:80:BC:FF
+;46     -69.0   2E      FFBB0000        00:00:BB:FF
+;47     -70.5   2F      FFB98000        00:80:B9:FF
+;48     -72.0   30      FFB80000        00:00:B8:FF
+;49     -73.5   31      FFB68000        00:80:B6:FF
+;50     -75.0   32      FFB50000        00:00:B5:FF
+;51     -76.5   33      FFB38000        00:80:B3:FF
+;52     -78.0   34      FFB20000        00:00:B2:FF
+;53     -79.5   35      FFB08000        00:80:B0:FF
+;54     -81.0   36      FFAF0000        00:00:AF:FF
+;55     -82.5   37      FFAD8000        00:80:AD:FF
+;56     -84.0   38      FFAC0000        00:00:AC:FF
+;57     -85.5   39      FFAA8000        00:80:AA:FF
+;58     -87.0   3A      FFA90000        00:00:A9:FF
+;59     -88.5   3B      FFA78000        00:80:A7:FF
+;60     -90.0   3C      FFA60000        00:00:A6:FF
+;61     -91.5   3D      FFA48000        00:80:A4:FF
+;62     -93.0   3E      FFA30000        00:00:A3:FF
+;63     -94.5   3F      FFA18000        00:80:A1:FF
+
+HKR,Mixer,MasterMin,1,00,80,a1,ff
+HKR,Mixer,MasterMax,1,00,00,00,00
+HKR,Mixer,MasterStep,1,00,80,01,00
+
+HKR,Mixer,HPhoneMin,1,00,80,a1,ff
+HKR,Mixer,HPhoneMax,1,00,00,00,00
+HKR,Mixer,HPhoneStep,1,00,80,01,00
+
+
+HKR,Mixer,CdMin,1,00,80,dd,ff
+HKR,Mixer,CdMax,1,00,00,0c,00
+HKR,Mixer,CdStep,1,00,80,01,00
+
+HKR,Mixer,MicMin,1,00,80,dd,ff
+HKR,Mixer,MicMax,1,00,00,0c,00
+HKR,Mixer,MicStep,1,00,80,01,00
+
+HKR,Mixer,LineMin,1,00,80,dd,ff
+HKR,Mixer,LineMax,1,00,00,0c,00
+HKR,Mixer,LineStep,1,00,80,01,00
+
+HKR,Mixer,AuxMin,1,00,80,dd,ff
+HKR,Mixer,AuxMax,1,00,00,0c,00
+HKR,Mixer,AuxStep,1,00,80,01,00
+
+HKR,Mixer,VideoMin,1,00,80,dd,ff
+HKR,Mixer,VideoMax,1,00,00,0c,00
+HKR,Mixer,VideoStep,1,00,80,01,00
+
+HKR,Mixer,3dMin,1,00,00,00,00
+HKR,Mixer,3dMax,1,0f,00,00,00
+HKR,Mixer,3dStep,1,01,00,00,00
+
+HKR,Mixer,PhoneMin,1,00,80,dd,ff
+HKR,Mixer,PhoneMax,1,00,00,0c,00
+HKR,Mixer,PhoneStep,1,00,80,01,00
+
+HKR,Mixer,BeepMin,1,00,80,dd,ff
+HKR,Mixer,BeepMax,1,00,00,00,00
+HKR,Mixer,BeepStep,1,00,00,03,00
+
+
+;
+; Volume controls attached to muxes all use a uniform volume setup.
+;
+HKR,Mixer,RecordMin,1,00,00,00,00
+HKR,Mixer,RecordMax,1,00,80,16,00
+HKR,Mixer,RecordStep,1,00,80,01,00
+
+HKR,Mixer,MonoOutMin,1,00,80,a1,ff
+HKR,Mixer,MonoOutMax,1,00,00,00,00
+HKR,Mixer,MonoOutStep,1,00,80,01,00
+
+
+;
+; This will disable the line on the mixer.  Disabling both Master
+; and Headphones will invalidate the topology.
+;
+HKR,Mixer,DisableMaster,1,00
+HKR,Mixer,DisableRecord,1,00
+HKR,Mixer,DisableHPhone,1,00
+HKR,Mixer,DisableMonoOut,1,01
+
+HKR,Mixer,DisableStereoMix,1,00
+HKR,Mixer,DisableMonoMix,1,00
+HKR,Mixer,DisableMonoPcm,1,00
+
+HKR,Mixer,DisableCd,1,00
+HKR,Mixer,DisableMicOut,1,00
+HKR,Mixer,DisableLine,1,00
+HKR,Mixer,DisableAux,1,00
+HKR,Mixer,DisableVideo,1,00
+HKR,Mixer,Disable3d,1,00
+HKR,Mixer,DisablePhone,1,00
+HKR,Mixer,DisableBeep,1,00
+HKR,Mixer,DisableAdvMic,1,00
+
+HKR,Mixer,DisableAC3SPDIF,1,00
+HKR,Mixer,DisablePCMSPDIF,1,00
+
+; This controls whether the S/PDIF control is enabled by default:
+HKR,Mixer,SPDIFDefault,1,01
+
+; This controls whether the S/PDIF control shows up as an advanced control in the mixer panel
+HKR,Mixer,SPDIFMixerControl,1,01
+
+; This controls whether AC3 SPDIF is auto-enabled.
+HKR,Mixer,SPDIFAc3AutoEnable,1,01
+
+HKR,Mixer,DisableMixerJapaneseFix,1,00,00,00,00
+HKR,Mixer,Enable10dBMicBoost,1,00,00,00,00
+HKR,Mixer,PowerDownHPhoneAmp,1,00,00,00,00
+; The following key can be used to reduce gain on the mix recordings (stereo/mono)
+HKR,Mixer,RecMixAdjust,1,00
+
+
+;HKR,Mixer,HPJackSensePolling,1,00
+;HKR,Mixer,HPJSPollingTime,1,05
+
+
+;
+; General optional Settings
+;
+HKR,Settings,EnableSPDIFOutPin,1,02
+HKR,Settings,SoftWatch,1,42
+HKR,Settings,HardWatch,1,00,01
+HKR,Settings,ProcessKnownMachines,1,01,00,00,00
+HKR,Settings,DACType,1,00
+HKR,Settings,PcmMonitor,1,01
+HKR,Settings,DSAccel,1,0F
+
+;
+; Power Management
+;
+HKR,PowerSettings,AClinkOff,1,01
+HKR,PowerSettings,UseAggressivePowerManagement,1,01
+HKR,PowerSettings,MaxPowerState,1,00
+HKR,PowerSettings,RemapDStates,1,01
+HKR,PowerSettings,DisableColdReset,1,00
+HKR,PowerSettings,NoAnalogPowerdown,1,00
+
+[cs429x.Interfaces]
+AddInterface = %KSCATEGORY_AUDIO%,%KSNAME_Wave%,audio.Interface.Wave
+AddInterface = %KSCATEGORY_RENDER%,%KSNAME_Wave%,audio.Interface.Wave
+AddInterface = %KSCATEGORY_CAPTURE%,%KSNAME_Wave%,audio.Interface.Wave
+AddInterface = %KSCATEGORY_AUDIO%,%KSNAME_Topology%,audio.Interface.Mixer
+
+[audio.Interface.Mixer]
+AddReg = audio.Interface.Mixer.AddReg
+
+[audio.Interface.Mixer.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%audio.Mixer.szPname%
+
+[audio.Interface.Wave]
+AddReg = audio.Interface.Wave.AddReg
+
+[audio.Interface.Wave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%audio.Wave.szPname%
+ 
+;
+; This will default the MS virtual controls to 0dB attenuation.
+;
+HKR,,VirtualSourceDefault,1,00,00,00,00
+
+
+[guids.AddReg]
+;
+; MS Pins
+;
+HKLM,%MediaCategories%\%MSGuid.MonoOut%,Name,2,%MSPin.MonoOut%
+HKLM,%MediaCategories%\%MSGuid.MonoOut%,Display,3,00,00,00,00
+HKLM,%MediaCategories%\%MSGuid.StereoMix%,Name,2,%MSPin.StereoMix%
+HKLM,%MediaCategories%\%MSGuid.StereoMix%,Display,3,00,00,00,00
+HKLM,%MediaCategories%\%MSGuid.MonoMix%,Name,2,%MSPin.MonoMix%
+HKLM,%MediaCategories%\%MSGuid.MonoMix%,Display,3,00,00,00,00
+HKLM,%MediaCategories%\%MSGuid.Video%,Name,2,%MSPin.Video%
+HKLM,%MediaCategories%\%MSGuid.Video%,Display,3,00,00,00,00
+
+;
+; MS Nodes
+;
+HKLM,%MediaCategories%\%MSGuid.MonoOutVolume%,Name,2,%MSNode.MonoOutVolume%
+HKLM,%MediaCategories%\%MSGuid.MonoOutVolume%,Display,3,00,00,00,00
+HKLM,%MediaCategories%\%MSGuid.MonoOutMute%,Name,2,%MSNode.MonoOutMute%
+HKLM,%MediaCategories%\%MSGuid.MonoOutMute%,Display,3,00,00,00,00
+HKLM,%MediaCategories%\%MSGuid.StereoMixVolume%,Name,2,%MSNode.StereoMixVolume%
+HKLM,%MediaCategories%\%MSGuid.StereoMixVolume%,Display,3,00,00,00,00
+HKLM,%MediaCategories%\%MSGuid.MonoMixVolume%,Name,2,%MSNode.MonoMixVolume%
+HKLM,%MediaCategories%\%MSGuid.MonoMixVolume%,Display,3,00,00,00,00
+HKLM,%MediaCategories%\%MSGuid.MicBoost%,Name,2,%MSNode.MicBoost%
+HKLM,%MediaCategories%\%MSGuid.MicBoost%,Display,3,00,00,00,00
+HKLM,%MediaCategories%\%MSGuid.AltMic%,Name,2,%MSNode.AltMic%
+HKLM,%MediaCategories%\%MSGuid.AltMic%,Display,3,00,00,00,00
+HKLM,%MediaCategories%\%MSGuid.VideoVolume%,Name,2,%MSNode.VideoVolume%
+HKLM,%MediaCategories%\%MSGuid.VideoVolume%,Display,3,00,00,00,00
+HKLM,%MediaCategories%\%MSGuid.VideoMute%,Name,2,%MSNode.VideoMute%
+HKLM,%MediaCategories%\%MSGuid.VideoMute%,Display,3,00,00,00,00
+
+;
+; Crystal Pins
+;
+HKLM,%MediaCategories%\%CSCGuid.3dPin%,Name,,%CSCPin.3DPin%
+HKLM,%MediaCategories%\%CSCGuid.3dPin%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.FrontPin%,Name,,%CSCPin.FrontPin%
+HKLM,%MediaCategories%\%CSCGuid.FrontPin%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.SurroundPin%,Name,,%CSCPin.SurroundPin%
+HKLM,%MediaCategories%\%CSCGuid.SurroundPin%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.CenterPin%,Name,,%CSCPin.CenterPin%
+HKLM,%MediaCategories%\%CSCGuid.CenterPin%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.LfePin%,Name,,%CSCPin.LfePin%
+HKLM,%MediaCategories%\%CSCGuid.LfePin%,Display,1,00,00,00,00
+
+;
+; Crystal Nodes
+;
+HKLM,%MediaCategories%\%CSCGuid.PhoneVolume%,Name,,%CSCNode.PhoneVolume%
+HKLM,%MediaCategories%\%CSCGuid.PhoneVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.PhoneMute%,Name,,%CSCNode.PhoneMute%
+HKLM,%MediaCategories%\%CSCGuid.PhoneMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.BeepVolume%,Name,,%CSCNode.BeepVolume%
+HKLM,%MediaCategories%\%CSCGuid.BeepVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.BeepMute%,Name,,%CSCNode.BeepMute%
+HKLM,%MediaCategories%\%CSCGuid.BeepMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.HPhoneVolume%,Name,,%CSCNode.HPhoneVolume%
+HKLM,%MediaCategories%\%CSCGuid.HPhoneVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.HPhoneMute%,Name,,%CSCNode.HPhoneMute%
+HKLM,%MediaCategories%\%CSCGuid.HPhoneMute%,Display,1,00,00,00,00
+
+HKLM,%MediaCategories%\%CSCGuid.3DVolume%,Name,,%CSCNode.3DVolume%
+HKLM,%MediaCategories%\%CSCGuid.3DVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.3DMute%,Name,,%CSCNode.3DMute%
+HKLM,%MediaCategories%\%CSCGuid.3DMute%,Display,1,00,00,00,00
+
+HKLM,%MediaCategories%\%CSCGuid.FrontVolume%,Name,,%CSCNode.FrontVolume%
+HKLM,%MediaCategories%\%CSCGuid.FrontVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.FrontMute%,Name,,%CSCNode.FrontMute%
+HKLM,%MediaCategories%\%CSCGuid.FrontMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.SurroundVolume%,Name,,%CSCNode.SurroundVolume%
+HKLM,%MediaCategories%\%CSCGuid.SurroundVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.SurroundMute%,Name,,%CSCNode.SurroundMute%
+HKLM,%MediaCategories%\%CSCGuid.SurroundMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.CenterVolume%,Name,,%CSCNode.CenterVolume%
+HKLM,%MediaCategories%\%CSCGuid.CenterVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.CenterMute%,Name,,%CSCNode.CenterMute%
+HKLM,%MediaCategories%\%CSCGuid.CenterMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.LfeVolume%,Name,,%CSCNode.LfeVolume%
+HKLM,%MediaCategories%\%CSCGuid.LfeVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.LfeMute%,Name,,%CSCNode.LfeMute%
+HKLM,%MediaCategories%\%CSCGuid.LfeMute%,Display,1,00,00,00,00
+
+HKLM,%MediaCategories%\%CSCGuid.SPDIF%,Name,,%CSCNode.SPDIF%
+HKLM,%MediaCategories%\%CSCGuid.SPDIF%,Display,1,00,00,00,00
+
+
+
+
+
+;
+; **************** NT Install ****************
+;
+; NT prefers ClassInstall32
+;[ClassInstall32]
+;AddReg=Class.AddReg
+
+[cs429x.NT]
+Include   = ks.inf,wdmaudio.inf
+Needs     = ks.registration,wdmaudio.registration
+CopyFiles = cs429x.CopyList
+AddReg    = wnt.AddReg,cs429x.AddReg,guids.AddReg,Intel.AddReg
+
+[cs429x.NT.Interfaces]
+AddInterface = %KSCATEGORY_AUDIO%,%KSNAME_Wave%,audio.Interface.Wave
+AddInterface = %KSCATEGORY_RENDER%,%KSNAME_Wave%,audio.Interface.Wave
+AddInterface = %KSCATEGORY_CAPTURE%,%KSNAME_Wave%,audio.Interface.Wave
+AddInterface = %KSCATEGORY_AUDIO%,%KSNAME_Topology%,audio.Interface.Mixer
+
+
+[cs429x.NT.Services]
+AddService = cs429x,0x00000002,cs429x_Service
+
+[cs429x_Service]
+DisplayName   = %cs429x.SvcDesc%
+ServiceType   = 1                  ; SERVICE_KERNEL_DRIVER
+StartType     = 3                  ; SERVICE_DEMAND_START
+ErrorControl  = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary = %10%\system32\drivers\cwawdm.sys
+
+
+[Strings]
+;
+; Guids
+;
+;WQHLstring="WHQL"
+;Disk1Name="Crystal SoundFusion(tm) WDM Driver Disk 1"
+
+
+KSCATEGORY_AUDIO        ="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER       ="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE      ="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+Proxy.CLSID             ="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+
+MSGuid.MonoOut          ="{F9B41DC3-96E2-11d2-AC4C-00C04F8EFB68}"
+MSGuid.StereoMix        ="{00DFF077-96E3-11d2-AC4C-00C04F8EFB68}"
+MSGuid.MonoMix          ="{00DFF078-96E3-11d2-AC4C-00C04F8EFB68}"
+MSGuid.Video            ="{915DAEC4-A434-11d2-AC52-00C04F8EFB68}"
+
+MSGuid.MonoOutVolume    ="{1AD247EB-96E3-11d2-AC4C-00C04F8EFB68}"
+MSGuid.MonoOutMute      ="{1AD247EC-96E3-11d2-AC4C-00C04F8EFB68}"
+MSGuid.StereoMixVolume  ="{1AD247ED-96E3-11d2-AC4C-00C04F8EFB68}"
+MSGuid.MonoMixVolume    ="{22B0EAFE-96E3-11d2-AC4C-00C04F8EFB68}"
+MSGuid.MicBoost         ="{2BC31D6A-96E3-11d2-AC4C-00C04F8EFB68}"
+MSGuid.AltMic           ="{2BC31D6B-96E3-11d2-AC4C-00C04F8EFB68}"
+MSGuid.VideoVolume      ="{9B46E708-992A-11d2-AC4D-00C04F8EFB68}"
+MSGuid.VideoMute        ="{9B46E709-992A-11d2-AC4D-00C04F8EFB68}"
+
+
+CSCGuid.3dPin           ="{3D8D7AB2-E0BD-11d2-B475-00600893863B}"
+
+CSCGuid.FrontPin        ="{DE47BB77-7946-11d4-82D8-00D0B71B0E05}"
+CSCGuid.SurroundPin     ="{DE47BB80-7946-11d4-82D8-00D0B71B0E05}"
+CSCGuid.CenterPin       ="{DE47BB81-7946-11d4-82D8-00D0B71B0E05}"
+CSCGuid.LfePin          ="{DE47BB82-7946-11d4-82D8-00D0B71B0E05}"
+
+CSCGuid.PhoneVolume     ="{307E1008-9035-11d2-99D6-00600893863B}"
+CSCGuid.PhoneMute       ="{307E1009-9035-11d2-99D6-00600893863B}"
+CSCGuid.BeepVolume      ="{307E100a-9035-11d2-99D6-00600893863B}"
+CSCGuid.BeepMute        ="{307E100b-9035-11d2-99D6-00600893863B}"
+CSCGuid.HPhoneVolume    ="{307E100c-9035-11d2-99D6-00600893863B}"
+CSCGuid.HPhoneMute      ="{307E100d-9035-11d2-99D6-00600893863B}"
+CSCGuid.3dVolume        ="{307E100e-9035-11d2-99D6-00600893863B}"
+CSCGuid.3dMute          ="{307E100f-9035-11d2-99D6-00600893863B}"
+
+CSCGuid.FrontVolume     ="{DE47BB78-7946-11d4-82D8-00D0B71B0E05}"
+CSCGuid.FrontMute       ="{DE47BB79-7946-11d4-82D8-00D0B71B0E05}"
+CSCGuid.SurroundVolume  ="{DE47BB83-7946-11d4-82D8-00D0B71B0E05}"
+CSCGuid.SurroundMute    ="{DE47BB84-7946-11d4-82D8-00D0B71B0E05}"
+CSCGuid.CenterVolume    ="{DE47BB85-7946-11d4-82D8-00D0B71B0E05}"
+CSCGuid.CenterMute      ="{DE47BB86-7946-11d4-82D8-00D0B71B0E05}"
+CSCGuid.LfeVolume       ="{DE47BB87-7946-11d4-82D8-00D0B71B0E05}"
+CSCGuid.LfeMute         ="{DE47BB88-7946-11d4-82D8-00D0B71B0E05}"
+
+CSCGuid.SPDIF           ="{DE47BB89-7946-11d4-82D8-00D0B71B0E05}"
+
+;
+; Misc. Strings
+;
+KEY_RUN                 ="SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
+MediaCategories         ="SYSTEM\CurrentControlSet\Control\MediaCategories"
+KSNAME_Topology         ="Topology"
+KSNAME_Wave             ="Wave"
+KSNAME_UART             ="Uart"
+CSMfgName               ="Applied Drivers Corporation"
+cs429x.SvcDesc          ="Cirrus Logic WDM Audio Codec Driver"
+
+;
+; Friendly Names
+;
+audio.Wave.szPname      ="Crystal WDM Audio"
+audio.Mixer.szPname     ="Crystal WDM Audio Mixer"
+
+MSNode.MonoOutVolume    ="Mono Out Volume"
+MSNode.MonoOutMute      ="Mono Out Mute"
+MSNode.StereoMixVolume  ="Stereo Mix Volume"
+MSNode.MonoMixVolume    ="Mono Mix Volume"
+MSNode.VideoVolume      ="Video Volume"
+MSNode.VideoMute        ="Video Mute"
+
+CSCNode.PhoneVolume     ="Phone Volume"
+CSCNode.PhoneMute       ="Phone Mute"
+CSCNode.BeepVolume      ="Beep Volume"
+CSCNode.BeepMute        ="Beep Mute"
+CSCNode.HPhoneVolume    ="Headphones Volume"
+CSCNode.HPhoneMute      ="Headphones Mute"
+CSCNode.3dVolume        ="3D Volume"
+CSCNode.3dMute          ="3D Mute"
+
+CSCNode.FrontVolume     ="Front Volume"
+CSCNode.FrontMute       ="Front Mute"
+CSCNode.SurroundVolume  ="Surround Volume"
+CSCNode.SurroundMute    ="Surround Mute"
+CSCNode.CenterVolume    ="Center Volume"
+CSCNode.CenterMute      ="Center Mute"
+CSCNode.LfeVolume       ="LFE Volume"
+CSCNode.LfeMute         ="LFE Mute"
+
+CSCNode.SPDIF           ="SPDIF"
+
+;
+; Localized Friendly Pin Names (DO NOT ADD!)
+;
+MSPin.MonoOut           ="Mono Out"
+MSPin.StereoMix         ="Stereo Mix"
+MSPin.MonoMix           ="Mono Mix"
+MSPin.Video             ="Video"
+
+MSNode.MicBoost         ="Microphone Boost (+20dB)"
+MSNode.AltMic           ="Alternate Microphone"
+
+CSCPin.3DPin            ="Crystal 3D"
+
+CSCPin.FrontPin         ="Front"
+CSCPin.SurroundPin      ="Surround"
+CSCPin.CenterPin        ="Center"
+CSCPin.LfePin           ="LFE"
+
+
+;
+; Localizeable Strings
+;
+DriverDisk              ="Crystal AC9x WDM Driver Disk"
+cs429x.DeviceDesc       ="Crystal AC'97 WDM Audio Codec"
+;cs429x_AA.DeviceDesc="Crystal WDM AC'97 Driver ICH"
+;cs429x_AB.DeviceDesc="Crystal WDM AC'97 Driver for ICH"
+;cs429x_BA.DeviceDesc="Crystal WDM AC'97 Driver for ICH2"
+;cs429x_BB.DeviceDesc="Crystal WDM AC'97 Driver for ICH3"
+cs429x_BC.DeviceDesc="Crystal WDM AC'97 Driver for ICH4"
+;cs429x_BD.DeviceDesc="Crystal WDM AC'97 Driver for 440MX"

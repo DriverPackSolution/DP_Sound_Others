@@ -1,0 +1,123 @@
+;----------------------------------------------------------------------
+; TerraTec RC Parser
+;----------------------------------------------------------------------
+; Automatically generated resource strings
+; Source language	 English
+; Target language	 french
+; Created 	 09/10/03 17:10:26
+;----------------------------------------------------------------------
+; Notes for translators:
+; - '\n' and '\t' are control codes and must not be changed.
+; - '%s', '%d', '%i', '%x', '%c' etc. are also control codes
+;   and must not be changed.
+; - '&' is also a control code but should be omitted in all translated strings.
+;
+; - Please use one of the following filenames for your language support:
+;   English.lng, German.lng, French.lng,
+;   Spanish.lng, Italian.lng, Dutch.lng
+;   Portuguese.lng, Danish.lng, Swedish.lng,
+;   Norwegian.lng, Finnish.lng, Polish.lng
+;----------------------------------------------------------------------
+
+[Strings]
+; Application Defined Strings
+
+;## TO DO ## ;IDOK
+1=d'accord
+
+;## TO DO ## ;IDCANCEL
+2=Annuler
+
+;----------------------------------------------------------------------
+; STRINGTABLE 8
+;----------------------------------------------------------------------
+
+;## TO DO ## ;IDS_MUTE
+132=Mûet
+
+;## TO DO ## ;IDS_MIC
+133=Microphon
+
+;## TO DO ## ;IDS_SPDIF
+134=S/P-DIF
+
+;## TO DO ## ;IDS_LINE
+135=Ligne
+
+;## TO DO ## ;IDS_SPKR_STEREO
+136=Haut-parleurs stéréo
+
+;## TO DO ## ;IDS_SPKR_QUAD
+137=Quadriphonie
+
+;## TO DO ## ;IDS_SPKR_SIX
+138=Haut-parleurs  5.1
+
+;## TO DO ## ;IDS_ABOUTTEXT
+139=%s Control Panel\n\n(c) 2003 TerraTec Electronic GmbH\nVersion %s\nVersion pilote: %s\n\n\n\nProgramme, Design:\nRoland Peffer
+
+;## TO DO ## ;IDS_PAGE_RECORD
+140=&Enregistrement
+
+;## TO DO ## ;IDS_PAGE_PLAYBACK
+141=&Volumes
+
+;## TO DO ## ;IDS_PAGE_SPEAKERS
+142=&Orateur
+
+;## TO DO ## ;IDS_PAGE_MISC
+143=&Divers
+
+;----------------------------------------------------------------------
+; STRINGTABLE 9
+;----------------------------------------------------------------------
+
+;## TO DO ## ;IDS_MASTER
+144=Master
+
+;## TO DO ## ;IDS_WAVE
+145=Onde
+
+;## TO DO ## ;IDS_SWSYNTH
+146=Synth.
+
+;## TO DO ## ;IDS_AGC
+147=AGC
+
+;## TO DO ## ;IDS_SPKRCONFIG
+148=Configuration
+
+;## TO DO ## ;IDS_SETTINGS
+149=Préferences
+
+;## TO DO ## ;IDS_LOAD
+150=Charger
+
+;## TO DO ## ;IDR_MAINFRAME
+151=Aureon 5.1 USB
+
+;## TO DO ## ;IDS_SAVE
+152=Enregistrer
+
+;## TO DO ## ;IDS_AUTOSTART
+153=Contrôle miniature
+
+;## TO DO ## ;IDS_COLORS
+154=Couleurs
+
+;## TO DO ## ;IDS_RESET
+155=Remet
+
+;## TO DO ## ;IDS_SWITCHSENSAURA
+156=Sensaura / DVD
+
+;----------------------------------------------------------------------
+; STRINGTABLE 2048
+;----------------------------------------------------------------------
+
+;## TO DO ## ;ID_EXIT
+32772=Fermer
+
+;## TO DO ## ;ID_SHOW
+32773=Visibe
+

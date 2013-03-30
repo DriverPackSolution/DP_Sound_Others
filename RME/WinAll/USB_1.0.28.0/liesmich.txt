@@ -1,0 +1,321 @@
+RME Intelligent Audio Solutions
+
+Fireface UC / Babyface / UFX / UCX
+
+Treiber für Windows XP/64 / Vista/7/8 32/64
+
+Hinweise zur Treiberversion 1.028
+
+
+---------------------
+
+Achtung Fireface UC! Der TotalMix Autostart des alten Treibers V 0.938 wird vom aktuellen Treiber nicht aus der Windows Registry entfernt. Dies muss daher einmalig vor (oder nach) dem Treiberupdate manuell geschehen. Dazu ist der Eintrag
+ 
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run\FirefaceUsbTray2 = firefaceusbmix.exe
+
+zu entfernen. Am einfachsten und sichersten funktioniert dies über die im Treiberarchiv enthaltene Datei
+
+remove old mixer autostart.reg
+
+Per Doppelklick auf diese Datei entfernt Windows den Autostart-Eintrag.
+
+---------------------
+
+Achtung Babyface! Wurde zuvor Treiber 0.956 von der Treiber-CD installiert gilt das gleiche wie oben beim UC. Treiber 0.956 enthält auch eine Deinstallation (siehe Handbuch). Wird der Treiber vor dem Update deinstalliert ist damit auch der alte Autorun-Eintrag entfernt.
+
+---------------------
+
+
+Neuigkeiten, Änderungen und Fixes
+
+
+V 1.028 (11.12.2012)
+
+- Neues TotalMix FX 0.989
+
+- TM FX: Optimiertes Verhalten des Babyface Echo/Reverb bei Wechsel der Samplefrequenz. Crash bei Übergabe unzulässiger Werte für Submixauswahl beseitigt.
+
+- Verbesserte Kompatibilität zu Windows 8
+
+- Verbessertes Verhalten bei Stop, Wechsel der Samplefrequenz und des Settingsdialogs
+
+
+-------------------------------
+
+V 1.025 (27.08.2012)
+
+- Neues TotalMix FX 0.984
+
+
+-------------------------------
+
+V 1.024 (12.07.2012)
+
+- Neues TotalMix FX 0.983
+
+
+-------------------------------
+
+V 1.022 (03.05.2012)
+
+- Kompatibilitätsproblem mit Windows 8 beseitigt
+
+- Problem mit langsamem Herunterfahren/Hardwareentfernung gelöst
+
+-------------------------------
+
+V 1.019 (17.01.2012)
+
+- Support für das Fireface UCX
+
+- Neues TotalMix FX 0.963
+
+
+-------------------------------
+
+V 1.013 (09.11.2011)
+
+- Neues TotalMix FX 0.96
+
+- Settingsdialog: Synchronisation der Latenzeinstellung im Mehrgerätebetrieb
+
+Babyface:
+- Verbesserte Funktion Speaker B, siehe Options/Key Commands in TotalMix FX. Hinweis: Arbeitet nicht mit SPDIF/ADAT!
+
+
+-------------------------------
+
+V 1.01 (10.10.2011)
+
+- Neues TotalMix FX 0.95
+
+- Settingsdialog: Neue Option 'Lock Registry' auf der About-Seite
+
+- Fireface UFX: AC-3 wurde auf dem AES/SPDIF-Ausgang nicht korrekt signalisiert
+
+
+-------------------------------
+
+V 0.984 (21.06.2011)
+
+- Neues TotalMix FX 0.942
+
+
+-------------------------------
+
+V 0.983 (17.06.2011)
+
+Allgemein:
+- ASIO: Support für kAsioCanInputMonitor hinzugefügt
+
+- Neues TotalMix FX 0.941
+
+
+-------------------------------
+
+V 0.981 (20.05.2011)
+
+Allgemein:
+- Settingsdialog: TMS wurde nach Neustart abgeschaltet
+
+- Settingsdialog: In bestimmten Situationen erschien ein Reiter für ein nicht existierendes Gerät
+
+- Neues TotalMix FX 0.94 RC1
+
+
+Babyface:
+- Bugfix hohe Interruptbelastung beim Treiberentfernen unter W7 SP1
+
+
+-------------------------------
+
+V 0.979 (15.04.2011)
+
+- WDM: Wiedergabe bei Buffersize 512 oder höher litt an Knacksern/Aussetzern
+
+
+-------------------------------
+
+V 0.977 (01.04.2011)
+
+- Alle Dateien auf Sprachneutral umgestellt
+
+
+-------------------------------
+
+V 0.976 (18.03.2011)
+
+- Neues TotalMix FX 0.93
+
+- TM FX Hilfe und der Settingsdialog werden unter Win 64 richtig installiert
+
+- Settingsdialog speichert seine Position
+
+- Settingsdialog: Pitch Menü/Listbox verbessert
+
+- Settingsdialog: Frequenzauswahlbox verbessert
+
+- Settingsdialog UC: teilweise falsche Status-Anzeigen beseitigt
+
+- WDM UFX: ADAT 1 1/2 heisst nicht mehr SPDIF
+
+- Diverse kleinere Verbesserungen im WDM-Treiber
+
+- Multiclient Playback Mixing auf gleichen Kanälen
+
+
+--------------------
+
+V 0.966 (20.12.2010)
+
+- Neue TotalMix FX Hilfe
+
+- Doppelten 24 Bit Eintrag in WDM Eigenschaften entfernt
+
+
+--------------------
+
+V 0.964 (03.12.2010)
+
+- Neues TotalMix FX 0.924
+
+
+--------------------
+
+V 0.963 (19.11.2010)
+
+- Nutzung mehrerer WDM-Devices konnte zu Bluescreen führen
+
+
+--------------------
+
+V 0.961 (03.11.2010, aktuelle Firmware: 338)
+
+- Ändern der Puffergrösse setzte zuvor benutzte Samplefrequenz im Settingsdialog
+
+- Mögliches Aufhängen beim Umstellen der Samplerate beseitigt
+
+- TotalMix 0.915
+
+
+--------------------
+
+
+V 0.960 (21.10.2010, aktuelle Firmware: 336)
+
+- Laden des Treibers setzt die korrekte Samplefrequenz
+
+- Nach Standby wird die korrekte Samplefrequenz gesetzt
+
+- Settingsdialog: +D hinzugefügt
+
+- TotalMix 0.913
+
+
+--------------------
+
+
+V 0.959 (04.10.2010, aktuelle Firmware: 336)
+
+- Offizieller Support für Fireface UFX, TotalMix 0.91.
+
+
+--------------------
+
+
+Babyface:
+
+V 0.956 (20.09.2010, aktuelle Firmware: 176)
+
+Version für Babyface Treiber-CD, TotalMix 0.87
+
+--------------------
+
+
+V 0.954 (25.08.2010, aktuelle Firmware: 175)
+
+- SPDIF In TMS Option
+
+- WDM KS 16 Bit für Sonar
+
+- Deinstallation per Windows/Programme
+
+- TotalMix FX 08341, neu: MIDI remote
+
+--------------------
+
+V 0.951 (11.08.2010, aktuelle Firmware: 173)
+
+- Erster öffentlicher Release
+
+
+--------------------
+
+
+Fireface UC:
+
+V 0.954 (25.08.2010, aktuelle Firmware: 111)
+
+- SPDIF In TMS Option
+
+- WDM KS 16 Bit für Sonar
+
+- Deinstallation per Windows/Programme
+
+- Fader der Gain-Seite entfernt, da Steuerung per TotalMix FX
+
+- TotalMix FX 08341, neu: MIDI Remote
+
+
+-------------------
+
+V 0.938 (30.03.2010, aktuelle Firmware: 91)
+
+- Standby bei laufender Wiedergabe möglich
+
+- Verbesserte WDM Kompatibilität, Lautsprecher Surround Routinen überarbeitet
+
+-------------------
+
+V 0.936 (27.01.2010, aktuelle Firmware: 91)
+
+- ASIO Direct Monitoring funktionierte nicht
+
+-------------------
+
+V 0.935 (18.06.2009, aktuelle Firmware: 82)
+
+Erster Release
+
+-------------------
+
+
+Dieser Treiber erfordert eventuell ein Update der Firmware des UC/Babyface. Dies geschieht über das USB Flash Update Tool, erhältlich auf unserer Website:
+
+http://www.rme-audio.de/download/fut_bf_win.zip
+
+
+Erste Treiber-Installation:
+Verweisen Sie während der Installation in das Verzeichnis, in dem sich die Treiberdateien befinden. Nähere Hinweise enthält das Handbuch.
+
+
+*********************************
+
+
+Erläuterung zu den Treiberdateien:
+
+fireface_usb.sys: Windows Hardware Treiber, WDM Audio ud MIDI
+fireface_usb_64.sys: Windows 64 Bit Hardware Treiber, WDM Audio und MIDI
+firefaceusb.exe: Settingsdialog
+firefaceusbmix.exe: TotalMix
+fireface_usb_asio.dll: ASIO Treiber
+fireface_usb_asio_64.dll: 64 Bit ASIO Treiber
+fireface_usb.cat: Katalog File für signierte Installation
+fireface_usb.inf: Hardware Installationsanweisung für Windows
+TotalMixFX.exe: TotalMix FX for Fireface UFX
+TotalMixFX.chm: Help file for TotalMix FX
+
+
+Copyright RME 12/2012
+Alle Rechte vorbehalten. Windows XP/Vista/7/8 ist ein Warenzeichen der Microsoft Corporation. ASIO ist ein Warenzeichen der Steinberg Media Technologies GmbH. ADAT ist ein Warenzeichen der Alesis Corp.
+

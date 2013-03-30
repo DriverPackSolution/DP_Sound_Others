@@ -1,0 +1,61 @@
+/*=============================================================================
+   FILE:         History.txt
+-------------------------------------------------------------------------------
+   DESCRIPTION:  TT1724HT Driver History (WDM)
+   DATE:         22-Nov-2004
+-------------------------------------------------------------------------------
+   COPYRIGHT:    (c) 2004, TerraTec Electronic GmbH. All Rights Reserved.
+=============================================================================*/
+
+
+5. 19.3.27
+------------------------------
+	Bugfix: Mixer for Aureon Sky crashes in Sensaura Mode
+	Bugfix: ASIO Performance bad on newer Systems
+	
+5. 19.3.27
+------------------------------
+	Bugfix: SampleRate 176.4Khz will be now rejected by the driver
+	New: GSIF Interface for GigaStudio
+	
+5. 18.3.25 -> Productversion 5.18
+------------------------------
+    Bugfix: Sometimes wrong SRC when two files with different Samplerate are played
+    Bugfix: Master Slider not relative for Aureon Sky/Space
+    Bugfix: Several Sensaura related bugs
+    Bugfix: BSOD during some games
+    Bugfix: BSOD when closing RemoteControl-Application on some systems
+    New: Sensaura update
+    New: Updated look
+	
+5. 15.3.22 -> Productversion 5.15
+------------------------------
+    Bugfix: Bad Codec performance @96Khz
+	
+5. 13.3.20 -> Productversion 5.13
+------------------------------
+    New: New convention for Software-versionsnumbers
+    New: Aureon 7.1 Universe Support
+    
+5. 1. 2600 Build 14
+------------------------------
+    Bugfix: ASIO driver was not working for Cubase SX 1.06
+    New: Sensaura update
+    New: Sensaura on/off option reactivated
+    
+5. 1. 2600 Build 13
+------------------------------
+    Bugfix: "Samplerate locked" flag was not stored in Registry
+    New: Sensaura update
+
+
+5. 1. 2600 Build 12
+------------------------------
+    Bugfix: Looped Buffer when pause AC3 streams (e.g. Soft DVD Player)
+    Bugfix: Mic Gain was not working properly
+    New: Samplerate locked (e.g. for Voice over IP)
+    New: Sensaura update
+    
+5. 1. 2600 Build 11
+------------------------------
+    Bugfix: "Blue Screen of death" of some (nVidia) systems

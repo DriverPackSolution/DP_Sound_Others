@@ -1,0 +1,130 @@
+RME Intelligent Audio Solutions
+
+Hammerfall DSP System
+
+Treiber für Windows 2000/XP
+
+Hinweise zur Treiberversion 2.94(6)
+
+Neuigkeiten, Änderungen und Fixes
+
+
+2.94(6)
+Inf-Datei aktualisiert für Firmware 108 (HDSP 9652)
+
+
+2.94(5)
+Inf-Datei aktualisiert für Firmware 154 (HDSP 9632)
+
+
+2.94(4)
+Inf-Datei aktualisiert für Firmware 17 und 55 (PCI und CardBus)
+
+
+2.94(3)
+Inf-Datei aktualisiert für Firmware 16 und 54 (PCI und CardBus)
+
+
+2.94(2)
+
+TotalMix:
+
+- Kleines Speicherloch beseitigt
+
+- Automatische Submix Selektion wenn Monitor Main/Phones gewählt wird
+
+- MIDI Remote: Start von TotalMix durch Klick auf das Systray Symbol aktualisiert das LC-Display
+
+
+2.94(1)
+
+Bugfixes für HDSP 9632:
+
+- TotalMix Settings wurden nach Standby/Ruhezustand nicht geladen
+
+- Quick Access Panel Grafik Reset hinzugefügt
+
+- Level Meter Display Problem (numerisch) in bestimmten Einstellungen beseitigt
+
+
+Allgemein:
+
+- TotalMix MIDI Remote: Mute und Solo Buttons wurden nicht immer korrekt angezeigt
+
+
+Hinweis: Die Handbücher der HDSP Serie wurden aktualisiert. Bitte laden Sie sich die neueste Version hier herunter:
+
+http://www.rme-audio.de/download/handbucher.htm
+
+
+-------------------
+
+2.94
+
+TotalMix:
+
+- Seit 2.93(3) war ASIO Direct Monitoring deaktiviert 
+- Internal Loopback optimiert (digitale I/Os)
+
+Bekannte Probleme:
+Wird die CardBus-Karte erst eingesteckt nachdem das Notebook komplette gebootet hat, ist die Liste der MIDI Ports in TotalMix (für Remote Control) ungültig. Um die Liste zu resetten ist TotalMix zu beenden und neu zu starten. Dieses Problem betrifft NUR die MIDI Fernsteuerung von TotalMix nach einem Boot mit späterem Einstecken der CardBus Karte. Das Entfernen und Wiedereinstecken der Karte im laufenden Betrieb, selbst wenn das Notebook zwischendurch im StandBy oder Ruhezustand war, führt nicht zu diesem Problem.
+
+-------------------
+
+2.93(3)
+
+TotalMix:
+
+- Performance bei offenem Matrix Fenster deutlich verbessert
+- Tooltip wird gelöscht wenn Fenster mit ESC geschlossen wird
+- Tooltip wird gelöscht wenn Maus schnell über den Fensterrand gezogen wird
+- Grafikprobleme bei 9632 und RPM gefixt
+
+Allgemein:
+
+- Plug and Play Verhalten des Settingsdialoges optimiert (CardBus, Notebook)
+- Interner Bugfix (Registry Speicherung) der bisher keinen Fehler verursachte
+
+-------------------
+
+Hinweis: seit Version 2.90 wird das auf dem MME-Treiber basierende, Host-kontrollierte automatische Monitoring (Samplitude, Sequoia, SAWStudio) nicht mehr unterstützt.
+
+-------------------
+
+
+Dieser Treiber erfordert eventuell ein Update der Firmware des Hammerfall DSP Systems. Dies geschieht über das HDSP Flash Tool, erhältlich auf unserer Website:
+
+http://www.rme-audio.de/download/fut_win_dsp.zip
+
+
+Erste Treiber-Installation:
+Verweisen Sie während der Installation in das Verzeichnis, in dem sich die Treiberdateien befinden. Nähere Hinweise siehe Handbuch auf der RME Treiber-CD.
+
+
+*********************************
+
+!!!!! Treiber Update: !!!!!
+
+Dieser Treiber enthält eine neue hdsp32.inf Datei. Um zu verhindern, dass Windows 2000/XP eine ältere hdsp32.inf benutzt (aus einer früheren Treiberinstallation), darf Windows KEINESFALLS selbst nach dem neuen Treiber suchen! Stattdessen ist eine manuelle Installation notwendig:
+
+
+- Über Systemsteuerung /System /Gerätemanager /Audio, Video und Gamecontroller /RME Hammerfall DSP oder HDSP 96xx /Eigenschaften /Treiber gelangen Sie zum Button 'Treiber aktualisieren'. Wählen Sie 'Software von einer Liste installieren...', dann 'Weiter', dann 'Nicht suchen, sondern den zu installierenden Treiber selbst wählen', dann 'Datenträger'. Verweisen Sie auf das Verzeichnis, in dem sich der neue Treiber befindet.
+
+- Nach der Installation ist ein Kaltstart notwendig. Bei Digiface/Multiface muss sichergestellt werden, dass die I/O-Box resettet wird. Dies geschieht durch kurzzeitiges Abziehen des Firewire-Kabels, beim CardBus-system durch kurzzeitiges Abziehen des Netzteilsteckers von der I/O-Box.
+
+- Nach dem Neustart öffnen Sie TotalMix und klicken auf Preset 1.
+
+*********************************
+
+
+Erläuterung zu den Treiberdateien:
+
+hdsp.sys: Windows Hardware Treiber
+hdsp32.exe: Settingsdialog
+hdspmix.exe: TotalMix
+hdspasio.dll: ASIO Treiber
+hdspmme.dll: MME und MIDI Treiber
+
+Copyright RME 02/2009
+Alle Rechte vorbehalten. Windows 2000/XP ist ein Warenzeichen der Microsoft Corporation. ASIO, Cubase und VST sind Warenzeichen der Steinberg Media Technologies AG. ADAT ist ein Warenzeichen der Alesis Corp. Hammerfall ist ein registriertes Warenzeichen von RME Deutschland.
+

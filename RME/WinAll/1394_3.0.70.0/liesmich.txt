@@ -1,0 +1,464 @@
+RME Intelligent Audio Solutions
+
+Fireface 800 / 400 / UFX / UCX
+
+Treiber für Windows XP/Vista/7/8 32/64 Bit
+
+Hinweise zur Treiberversion 3.070
+
+Allgemeine Neuigkeiten, Änderungen und Fixes
+
+-------------------
+
+V 3.070 (19.12.2012, aktuelle Firmware: 2.77 / 1.71 / 341 / 23)
+
+- Neues TotalMix FX 0.989 (UFX, UCX)
+
+-------------------
+
+V 3.069 (27.08.2012, aktuelle Firmware: 2.77 / 1.71 / 341 / 23)
+
+- Neues TotalMix FX 0.984 (UFX, UCX)
+
+-------------------
+
+V 3.068 (12.07.2012, aktuelle Firmware: 2.77 / 1.71 / 341 / 23)
+
+- Neues TotalMix FX 0.983 (UFX, UCX)
+
+
+-------------------
+
+V 3.067 (17.01.2012, aktuelle Firmware: 2.77 / 1.70 / 340)
+
+- Support für Fireface UCX hinzugefügt
+
+- Neues TotalMix FX 0.963 (UFX, UCX)
+
+
+-------------------
+
+V 3.062 (09.11.2011, aktuelle Firmware: 2.77 / 1.70 / 340)
+
+- Neues TotalMix FX 0.96 (UFX)
+
+- Settingsdialog: Falsche Einstellungen im Mehrgerätebetrieb beseitigt
+
+
+-------------------
+
+V 3.059 (10.10.2011, aktuelle Firmware: 2.77 / 1.70 / 340)
+
+- Neues TotalMix FX 0.95 (UFX)
+
+- Neue Option 'Lock Registry' im Settingsdialog, About
+
+- Store/Read Flash im Settingsdialog arbeitete nicht korrekt
+
+- Kleinere Verbesserungen
+
+
+-------------------
+
+V 3.047 (21.06.2011, aktuelle Firmware: 2.77 / 1.70 / 339)
+
+- Neues TotalMix FX 0.942 (UFX)
+
+
+-------------------
+
+V 3.046 (17.06.2011, aktuelle Firmware: 2.77 / 1.70 / 339)
+
+Allgemein:
+
+- ASIO: Support für kAsioCanInputMonitor hinzugefügt
+
+- Neues TotalMix FX 0.941 (UFX)
+
+
+-------------------
+
+V 3.044 (01.04.2011, aktuelle Firmware: 2.77 / 1.70 / 336)
+
+- Alle Dateien auf Sprachneutral umgestellt
+
+-------------------
+
+V 3.043 (18.03.2011, aktuelle Firmware: 2.77 / 1.70 / 336)
+
+- Neues TotalMix FX 0.93 (UFX)
+
+- TM FX Hilfe und der Settingsdialog werden unter Win 64 richtig installiert
+
+- Settingsdialog speichert seine Position
+
+- Settingsdialog FF400/800: Buffersize 4096 bei QS entfernt (mehr als 2048 unterstützt die Hardware nicht)
+
+- Settingsdialog: Pitch Menü/Listbox verbessert
+
+- Settingsdialog: Frequenzauswahlbox verbessert
+
+- Diverse kleinere Verbesserungen im WDM-Treiber
+
+- WDM UFX: ADAT 2 1/2 heisst nicht mehr SPDIF
+
+- FF 800 Stand-alone Kanal 1: Limiter-Zustand wird korrekt abgespeichert
+
+- Multiclient Playback Mixing auf gleichen Kanälen
+
+- FF 400: Encoder auf ungültigen Kanälen führte zum Absturz
+
+
+- TotalMix Update (FF 400/FF 800):
+
+- - 4 Fadergruppen definierbar. Diese können über 'Save All Presets' gespeichert werden.
+
+- - Undo des letzten Presetwechsels
+
+- - Neue Optionen zur Deaktivierung des Mackie Protocol und der Level Meter
+
+- - Level Meter Daten zum Mackie Protocol hinzugefügt
+
+- - Post Fader Mode hinzugefügt (Mackie: F16. An: MIDI Kanal 1, Note On A 4. Aus: MIDI Kanal 1, Note Off A 4)
+
+- - Direkte Submix-Auswahl via Control Change Commands (Channel 1/2: BC 68/69 xx, Channel 3/4: BC 6A/6B xx etc.)
+
+
+
+-------------------
+
+V 3.034 (17.12.2010, aktuelle Firmware: 2.77 / 1.70 / 336)
+
+- Neue TotalMix FX Hilfe
+
+- Fehlende ADAT WDM Devices in inf Datei hinzugefügt
+
+
+-------------------
+
+V 3.033 (3.12.2010, aktuelle Firmware: 2.77 / 1.70 / 336)
+
+- Neues TotalMix FX 0.924
+
+
+-------------------
+
+V 3.032 (8.11.2010, aktuelle Firmware: 2.77 / 1.70 / 332)
+
+- ASIO Samplefrequenz kann jetzt bei parallel laufendem DIGICheck verändert werden
+
+
+-------------------
+
+V 3.031 (5.11.2010, aktuelle Firmware: 2.77 / 1.70 / 332)
+
+- TotalMix FX 0.915
+
+- Grössere Buffer für Double und Quad Speed im Settingsdialog
+
+- Mögliches Aufhängen beim Umstellen der Samplerate beseitigt
+
+- Einstellung des Kopfhörerpegels im FF400 Settingsdialog war vertauscht 
+
+- Latenz kann jetzt im laufenden Betrieb mehrerer ASIO-Anwendugen verändert werden (wichtig für parallelen Betrieb von DIGICheck)
+
+
+-------------------
+
+V 3.027 (4.10.2010, aktuelle Firmware: 2.77 / 1.70 / 328)
+
+- Unterstützt das Fireface UFX.  TotalMix FX 0.91.
+
+
+--------------------
+
+V 3.020 (23.08.2010, aktuelle Firmware: 2.77 / 1.70)
+
+- Sonar WDM KS: 16 Bit Modus implementiert
+
+-------------------
+
+V 3.018 (19.08.2010, aktuelle Firmware: 2.77 / 1.70)
+
+- Sonar WDM KS: Workaround zur Erkennung implementiert
+
+-------------------
+
+V 3.017 (17.08.2010, aktuelle Firmware: 2.77 / 1.70)
+
+- TMS für ASIO lässt sich im Settingsdialog abschalten
+
+- Zufällige Verzögerung beim Start des ASIO-Treibers beseitigt
+
+
+-------------------
+
+V 3.016 (30.06.2010, aktuelle Firmware: 2.77 / 1.70)
+
+- Das FF 800 zeigte unter WDM nicht alle Kanäle
+
+- Im Mehrkartenbetrieb synchronisieren sich die Dialogtabs (Buffergrösse, Samplerate)
+
+- Die Einstellung Front/Rear des Eingangs 1 wird jetzt sofort übernommen
+
+- Im Clock Mode Slave wird nun vor einer falschen Eingangfrequenz gewarnt
+
+
+-------------------
+
+V 3.015 (23.04.2010, aktuelle Firmware: 2.77 / 1.70)
+
+- Doppelten 24 Bit Eintrag in WDM Eigenschaften entfernt
+
+- Namen in inf-Datei korrigiert (Settings und Mixer Fenster wurde immer gestartet)
+
+- Store/Read im Settingsdialog anders platziert (Problem in XP)
+
+
+-------------------
+
+V 3.014 (22.04.2010, aktuelle Firmware: 2.77 / 1.70)
+
+- Fireface 800 hatte einen MIDI I/O zu viel
+
+-------------------
+
+V 3.013 (19.04.2010, aktuelle Firmware: 2.77 / 1.70)
+
+- Änderung der Samplefrequenz funktionierte unter ASIO und WDM-KS nicht wie erwartet
+
+- Prüfung der Firmwareversion zum Settingsdialog hinzugefügt
+
+- Werkspresets von FF 400 und FF 800 waren vertauscht
+
+
+-------------------
+
+V 3.012 (29.03.2010, aktuelle Firmware: 2.77 / 1.70)
+
+- Neue Kernroutinen, besserer P&P Support, diverse BSOD beseitigt
+
+- Standby bei laufender Wiedergabe möglich
+
+- Verbesserte Kompatibilität zum Windows 7 FW-Treiber
+
+- Neuer Settingsdialog mit Vorgabe der Samplefrequenz für WDM
+
+- Verbesserte WDM Kompatibilität, Lautsprecher Surround Routinen überarbeitet
+
+
+-------------------
+
+V 2.9992 (18.01.2010, aktuelle Firmware: 2.77 / 1.70)
+
+- Änderung der Reihenfolge mehrerer Geräte unter verschiedenen Betriebssystemen gefixt
+
+-------------------
+
+V 2.9991 (11.12.2009, aktuelle Firmware: 2.77 / 1.70)
+
+- MME-Support entfernt (fireface_mme.dll)
+
+-------------------
+
+V 2.999 (27.11.2009, aktuelle Firmware: 2.77 / 1.70)
+
+- Unter Windows 7 64 Bit leuchtete nach Standby die HOST LED fälschlicherweise.
+
+
+-------------------
+
+V 2.998 (5.11.2009, aktuelle Firmware: 2.77 / 1.70)
+
+- Dieser Treiber erfordert Firmware 2.77 bzw. 1.70!
+
+- Änderung des Übertragungsmodus um einen Bug in Windows 7 zu umgehen
+
+- Zusätzlicher Reset nach Sleep um einen Bug in Windows 7 zu umgehen
+
+- ADM Bug für OEMs beseitigt (fehlende Initialisierung wenn ASIO nicht benutzt wird)
+
+
+-------------------
+
+V 2.993 (13.10.2009, aktuelle Firmware: 2.70 / 2.47 / 1.69)
+
+- WDM: Anpassung für Adobe Auditions DirectSound ASIO Wrapper (8-Kanal Input Device entfernt)
+
+-------------------
+
+V 2.992 (01.10.2009, aktuelle Firmware: 2.70 / 2.47 / 1.69)
+
+- Bug der Version 2.98 beseitigt: Treiber-Update unter XP führte am Ende zum Absturz (BSOD)
+
+-------------------
+
+V 2.98 (28.09.2009, aktuelle Firmware: 2.70 / 2.47 / 1.69)
+
+- Kompatibel zu Windows 7 (siehe Hinweis unten)
+
+- Zuverlässiges Beenden eines ASIO-Threads auch in schwierigen Situationen
+
+- Prozessverwaltung für Multiclient-ASIO funktionierte auf einigen Rechnern nicht wie erwartet
+
+- Settingsdialog: Neue Icons
+
+- Settingsdialog: MMCSS Schalter entfernt
+
+- TotalMix: Neuer Skin und neue Icons
+
+- TotalMix: Scrolling nur der Fadersektion, Quickpanels bleiben rechts stehen.
+
+- TotalMix Matrix: Fehlender Refresh bei Änderung der I/O Labels ergänzt
+
+- TotalMix: Passwort zum Sperren des Mixers hinzugefügt
+
+- TotalMix: Bugfix Faderfox Auswahl des Submix in dritter Reihe
+
+- TotalMix: Die Option 'Ignore I/O Labels' arbeitete nicht korrekt
+
+
+-------------------
+
+V 2.95 (30.01.2009, aktuelle Firmware: 2.70 / 2.47 / 1.67)
+
+- Mixer wird nach Standby neu geladen
+
+- Offset um einen ASIO Buffer im LTC Mode hinzugefügt
+
+
+-------------------
+
+V 2.94 (15.12.2008, aktuelle Firmware: 2.70 / 2.47 / 1.67)
+
+- FF400: LTC Funktion verbessert
+
+- FF400/800: MIDI Output Performance optimiert
+
+
+-------------------
+
+V 2.91 (31.10.2008, aktuelle Firmware: 2.70 / 2.47 / 1.67)
+
+- ASIO: Stop konnte in Sonar einen BSOD verursachen
+
+- TotalMix: Support für Faderfox TM1 hinzugefügt
+
+
+-------------------
+
+V 2.898 (22.08.2008, aktuelle Firmware: 2.70 / 2.47 / 1.67)
+
+- ASIO: Speicherloch beseitigt. Dies trat bei jedem Start/Stop von ASIO in Grösse der aktuellen Buffer Size auf, und blieb daher normalerweise ohne Einfluss und unbemerkt.
+
+- Eine erzwungene Treiberinstallation (kein Plug and Play, sondern mittels Add Hardware als Legacy hardware) sollte keinen BSOD mehr verursachen.
+
+- TotalMix: OVER LED um 1 Pixel verschoben.
+
+
+-------------------
+
+V 2.896 (9.07.2008, aktuelle Firmware: 2.70 / 2.47 / 1.67)
+
+- Vista: MMCSS-Einstellung wird gespeichert, und MMCSS ist per Default auf 'Aus'
+
+-------------------
+
+V 2.895 (2.07.2008, aktuelle Firmware: 2.70 / 2.47 / 1.67)
+
+- Vista: MMCSS kann im Settings / About Dialog deaktiviert werden
+
+-------------------
+
+V 2.894 (16.06.2008, aktuelle Firmware: 2.70 / 2.47 / 1.67)
+
+
+- Vista: verbesserte Prioritätsbehandlung des Audio-Threads
+
+- Vista: Neue Routinen für das Startup-Bestätigungsproblem hinzugefügt
+
+
+-------------------
+
+V 2.89 (5.06.2008, aktuelle Firmware: 2.70 / 2.47 / 1.67)
+
+
+- WDM: Speaker Setup bestimmt nun ob eine 8- oder 6-Kanal Wiedergabe erfolgt.
+
+- WDM: Pitch-Shift Problem bei externer Clock beseitigt
+
+
+-------------------
+
+V 2.87 (16.05.2008, aktuelle Firmware: 2.70 / 2.47 / 1.67)
+
+
+- Support für DirectMusic MIDI hinzugefügt
+
+
+-------------------
+
+V 2.86 (4.03.2008, aktuelle Firmware: 2.66 / 2.47 / 1.66)
+
+
+- TotalMix: Support für eigene Bitmaps. Nähere Informationen sind im RME Forum zu finden.
+
+- TotalMix: 1 Pixel Offset auf dem Bus Menü Hintergrund beseitigt
+
+- TotalMix: Neue Option 'Level Meter Text Color'
+
+- WDM: 8-Kanal Wiedergabe funktionierte nicht korrekt
+
+-------------------
+
+V 2.85 (6.02.2008, aktuelle Firmware: 2.66 / 2.47 / 1.65)
+
+
+- TotalMix: Code geändert um Abstürze bei Namensänderung der Kanäle im Mischer zu vermeiden
+
+- TotalMix: Darstellungsproblem auf Blindplatten bei Namensänderung beseitigt
+
+- TotalMix: Neue Option 'Ignore I/O Labels'
+
+- ASIO: ASIO Treiber konnte abstürzen wenn kein Fireface vorhanden war
+
+
+-------------------
+
+
+Erste Treiber-Installation:
+Verweisen Sie während der Installation in das Verzeichnis, in dem sich die Treiberdateien befinden. Nähere Hinweise siehe Handbuch auf der RME Treiber-CD.
+
+
+*********************************
+
+!!!!! Treiber Update: !!!!!
+
+Dieser Treiber enthält eine neue fireface.inf Datei. Um zu verhindern dass Windows eine ältere fireface.inf benutzt (aus einer früheren Treiberinstallation), darf Windows KEINESFALLS selbst nach dem neuen Treiber suchen! Stattdessen ist eine manuelle Installation notwendig:
+
+
+- Über Systemsteuerung /System /Gerätemanager /Audio, Video und Gamecontroller /RME Fireface 800 /Eigenschaften /Treiber gelangen Sie zum Button 'Treiber aktualisieren'. Wählen Sie 'Software von einer Liste installieren...', dann 'Weiter', dann 'Nicht suchen, sondern den zu installierenden Treiber selbst wählen', dann 'Datenträger'. Verweisen Sie auf das Verzeichnis, in dem sich der neue Treiber befindet.
+
+- Nach dem Update muss der Rechner neu gestartet werden.
+
+- Nach dem Neustart öffnen Sie TotalMix und klicken  mit gedrückter Strg-Taste auf Preset 1.
+
+*********************************
+
+
+Erläuterung zu den Treiberdateien:
+
+fireface.cat: Katalog-Datei für Signierung
+fireface.sys: Windows Hardware Treiber, WDM Audio und MIDI
+fireface_64.sys: Windows 64 Bit Hardware Treiber, WDM Audio und MIDI
+fireface.exe: Settingsdialog
+firefacemix.exe: TotalMix
+fireface_asio.dll: ASIO Treiber
+fireface_asio_64.dll: 64 Bit ASIO Treiber
+fireface.inf: Hardware Installationsanweisung für Windows XP/Vista/7
+TotalMixFX.exe: TotalMix FX für Fireface UFX
+TotalMixFX.chm: Hilfedatei für TotalMix FX
+
+
+Copyright RME 12/2012
+Alle Rechte vorbehalten. Windows XP/Vista/7/8 sind Warenzeichen der Microsoft Corporation. ASIO, Cubase und VST sind Warenzeichen der Steinberg Media Technologies GmbH. ADAT ist ein Warenzeichen der Alesis Corp.

@@ -1,0 +1,180 @@
+;
+; File:    MA763006.INF  (If the name is changed, make the
+;                         proper changes in the uninstaller.)
+; Authors:  Jeff Claar, Nemesis
+; Copyright 2003 Midiman/M-Audio
+;
+; Midiman/M-Audio Transit USB Driver .INF File
+;
+
+
+[Version]
+signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%Maudio%
+DriverVer=09/18/2003,5.10.00.3509
+;CatalogFile=ma763006.cat
+
+[SourceDisksNames]
+1=%MAudioDisk%,,,
+
+[SourceDisksFiles]
+ma763006.sys=1
+ma98_006.sys=1
+ma006cpl.cpl=1
+
+[ControlFlags]
+;ExcludeFromSelect=*
+
+[DestinationDirs]
+DefaultDestDir=10,system32\drivers
+DriverCopyFiles=10,system32\drivers
+ControlPanelCopyFiles=11
+Driver9XCopyFiles=10,system32\drivers
+
+
+
+[Manufacturer]
+%Maudio%=M_AUDIO
+
+[M_AUDIO]
+; Transit USB VID and PID
+%maavsusb.DeviceDesc%=maavsusb,USB\VID_0763&PID_2006&MI_00
+
+[maavsusb]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+; to make ME installation silent
+;CopyFiles=Driver9XCopyFiles,ControlPanelCopyFiles
+AddReg=maavsusb.AddReg
+
+[maavsusb.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_Filter%,maavsusb.InterfaceWave
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_Filter%,maavsusb.InterfaceWave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_Filter%,maavsusb.InterfaceWave
+
+[maavsusb.InterfaceWave]
+AddReg=maavsusb.InterfaceWave.AddReg
+
+[maavsusb.InterfaceWave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%maavsusb.Wave.szPname%
+HKR,,CurveType,1,01,00,00,00
+
+[maavsusb.InterfaceAC3]
+AddReg=maavsusb.InterfaceAC3.AddReg
+
+[maavsusb.InterfaceAC3.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%maavsusb.AC3.szPname%
+HKR,,CurveType,1,01,00,00,00
+
+[maavsusb.IFOutOnly]
+AddReg=maavsusb.IFOutOnly.AddReg
+
+[maavsusb.IFOutOnly.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%maavsusb.Wave96.szPname%
+HKR,,CurveType,1,01,00,00,00
+
+[maavsusb.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=DriverCopyFiles,ControlPanelCopyFiles
+AddReg=maavsusb.AddReg,maavsusb.Branding.AddReg
+
+[maavsusb.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_Filter%,maavsusb.InterfaceWave
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_Filter%,maavsusb.InterfaceWave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_Filter%,maavsusb.InterfaceWave
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_Filter_AC3%,maavsusb.InterfaceAC3
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_Filter_AC3%,maavsusb.InterfaceAC3
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_Filter_OutputOnly%,maavsusb.IFOutOnly
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_Filter_OutputOnly%,maavsusb.IFOutOnly
+
+; Branding
+[maavsusb.Branding.AddReg]
+; Branding a URL is no longer supported.
+;HKR,Branding,url,,"http://www.m-audio.com/"
+HKR,Branding,icon,,"ma763006.sys,101"
+HKR,Branding,bitmap,,"ma763006.sys,102"
+
+[maavsusb.AddReg]
+HKR,,DevLoader,,*NTKERN
+HKR,,NTMPDriver,,MA763006.sys
+
+;the system audio drivers require the following information
+;to establish support by the Windows multimedia system for a port-class audio adapter.
+HKR,,SetupPreferredAudioDevices,3,01,00,00,00
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,MA763006.sys
+HKR,,NTMPDriver,,"MA763006.sys,sbemul.sys"
+HKR,,CLSID,,{17CCA71B-ECD7-11D0-B908-00A0C9223196}
+HKR,Drivers,SubClasses,,"wave,midi,mixer,aux"
+
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\aux\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%maavsusb.GenericDesc%
+HKR,Drivers\midi\wdmaud.drv,Description,,%maavsusb.GenericDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%maavsusb.GenericDesc%
+HKR,Drivers\aux\wdmaud.drv,Description,,%maavsusb.GenericDesc%
+
+; Media categories
+HKLM,%MediaCategories%\%MAudioGUID.LineMicInGUID%,Name,,%LineMicInName%
+HKLM,%MediaCategories%\%MAudioGUID.LineMinInDescGUID%,Name,,%LineMicInDesc%
+
+[DriverCopyFiles]
+MA763006.sys
+
+[Driver9XCopyFiles]
+ma763006.sys,MA98_006.sys
+
+[ControlPanelCopyFiles]
+ma006cpl.cpl
+
+[maavsusb.NT.Services]
+AddService=ma763006, 0x00000002, maavsusb.ServiceInstall
+
+[maavsusb.ServiceInstall]
+DisplayName=%maavsusb.DeviceDesc%
+ServiceType=%SERVICE_KERNEL_DRIVER%
+StartType=%SERVICE_DEMAND_START%
+ErrorControl=%SERVICE_ERROR_NORMAL%
+ServiceBinary=%10%\system32\drivers\MA763006.sys
+
+
+[Strings]
+; non-localizeable
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSSTRING_Filter="{9B365890-165F-11D0-A195-0020AFD156E4}"
+KSSTRING_Filter_AC3="{02310D1E-B665-42f8-8D42-3216009C3CD8}"
+KSSTRING_Filter_OutputOnly="{D3F79852-AE20-48a6-8740-7DF08C336394}"
+
+SERVICE_KERNEL_DRIVER=1
+SERVICE_DEMAND_START=3
+SERVICE_ERROR_NORMAL=1
+
+; Media categories
+MAudioGUID.LineMicInGUID="{26664B37-B256-4344-8071-2F005E3B71D5}"
+MAudioGUID.LineMinInDescGUID="{268DB084-5923-43a9-B21E-EF6652E04A9F}"
+
+;localizeable
+Maudio="M-Audio"
+MAudioDisk="M-Audio Transit USB Driver Disk"
+maavsusb.DeviceDesc="M-Audio Transit USB"
+maavsusb.Wave.szPname="M-Audio Transit USB"
+maavsusb.Wave96.szPname="M-Audio Transit USB (96kHz)"
+maavsusb.AC3.szPname="M-Audio Transit USB AC3"
+maavsusb.GenericDesc="M-Audio Transit USB"
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+LineMicInName="Line/Mic In"
+LineMicInDesc="Microphone Boost (+26dB)"

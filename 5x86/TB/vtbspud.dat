@@ -1,0 +1,439 @@
+##############################################################################
+#
+# VTBSPUD.DAT - Additional registry entries needed by cwcspud.vxd, but which
+#               blow out Microsoft's 64K INF file limit.
+#
+# This file is a supplement to the file cwcspud.dat.
+#
+# Copyright (c) 1998 Voyetra Turtle Beach.
+#
+# This file we add additional entries into the registry as well
+# as override the resources in the cwcspud.dat.  This gets installed
+# so that it gets read after cwcspud.dat.
+#
+#
+##############################################################################
+[SPuD\Algorithms\3D]
+MaxHostHrtf3D,1,01,00,00,00
+
+# ##########################
+# voyetra device confgigurations.
+#
+# 0003 == Santa Cruz Dual codec configuration.
+#      == codecs slaved.
+[SPuD\DeviceConfig]
+0003,1,54,00,00,00,\
+       03,00,00,00,\
+       00,00,00,00,\
+       00,00,00,00,\
+       02,00,00,00,\
+       00,00,00,00,\
+       00,00,00,00,\
+       01,00,00,00,\
+       05,00,00,00,\
+       01,00,00,00,\
+       06,00,00,00,\
+       00,00,00,00,\
+       01,00,00,00,\
+       01,00,00,00,\
+       03,00,00,00,\
+       01,00,00,00,\
+       00,00,00,00,\
+       01,00,00,00,\
+       03,00,00,00,\
+       00,00,00,00,\
+       01,00,00,00
+
+# ##########################
+# voyetra device confgigurations.
+#
+# 0003 == Santa Cruz Dual codec configuration.
+#      == codecs on separate lines.
+[SPuD\DeviceConfig]
+8003,1,54,00,00,00,\
+       03,00,00,00,\
+       00,00,00,00,\
+       00,00,00,00,\
+       02,00,00,00,\
+       00,00,00,00,\
+       08,00,00,00,\
+       01,00,00,00,\
+       05,00,00,00,\
+       01,00,00,00,\
+       06,00,00,00,\
+       00,00,00,00,\
+       01,00,00,00,\
+       01,00,00,00,\
+       00,00,00,00,\
+       01,00,00,00,\
+       00,00,00,00,\
+       01,00,00,00,\
+       03,00,00,00,\
+       00,00,00,00,\
+       01,00,00,00
+
+##############################################
+# 003b == Santa Cruz Dual codec 4297a & 4274 configuration.
+#      == codecs on same sdout
+#      == spdif out enabled on 4297a
+
+[SPuD\DeviceConfig]
+003b,1,5C,00,00,00,\
+       3B,00,00,00,\
+       00,00,00,00,\
+       00,00,00,00,\
+       02,00,00,00,\
+       00,00,00,00,\
+       00,00,00,00,\
+       01,00,00,00,\
+       05,00,00,00,\
+       01,00,00,00,\
+       06,00,00,00,\
+       00,00,00,00,\
+       01,00,00,00,\
+       01,00,00,00,\
+       03,00,00,00,\
+       02,00,00,00,\
+       00,00,00,00,\
+       01,00,00,00,\
+       01,00,00,00,\
+       03,00,00,00,\
+       00,00,00,00,\
+       00,00,00,00
+
+############################################################
+# Replacement device mapping to support all revisions and FABS of
+# the 4294 codec.  The cwcspud.dat file looks for a specific
+# codec part ID, rev ID and fab ID.
+
+[SPuD\DeviceMapping\12-FF-FF]
+,,CS4298
+
+############################################################
+#
+# The name of the wave table sample set, different
+# from the name of the DLS sample set.  This is used in NT.
+#
+[SPuD\Algorithms\WaveTable]
+WtSampleSet,,%10%\cwcdata\cwcwtsmp.dat
+
+# ###########################################################3
+#
+# Voyetra 10 band eq.  Not used for now, but a place holder to show
+# how it is done.
+#
+[SPuD\Tasks\Vtb EQ 10-Band]
+CompatibleVersions,1,00,00,00,01
+DSPType,1,01,00,00,00
+EntryPointLabel,,EqEntryPoint
+FileName,,%10%\cwcdata\vtbeq.osp
+InputPorts,1,00,00,00,00
+OutputPorts,1,00,00,00,00
+Resources,1,44,00,00,00,\
+            00,00,00,00,97,09,00,00,\
+            02,00,00,00,40,00,00,00,\
+            02,00,00,00,54,02,00,00,\
+            02,00,00,00,28,00,00,00,\
+            03,00,00,00,80,00,00,00,\
+            03,00,00,00,80,00,00,00,\
+            03,00,00,00,80,00,00,00,\
+            03,00,00,00,00,02,00,00
+TaskID,1,01,00,be,00
+Version,1,00,00,00,01
+
+
+# ###############################
+#
+# Override of cwc4612.osp to have a version of this that does
+# performance monitoring.
+#
+[SPuD\Parts\CS4612\SP]
+FileName,,%10%\cwcdata\vtb4612.osp
+DSPType,1,01,00,00,00
+NumStreams,1,60,00,00,00
+Resources,1,d4,e0,7e,e1,f8,fc,fe,ff,7f,27,9f,4f,26,13,09,84,42,d1,50,28, \
+            96,ca,e5,f2,f9,4c,be,5f,ac,57,ab,55,aa,ed,ea,75
+DefectFlags,1,00,00,00,00
+FeatureFlags,1,00,00,00,00
+
+[SPuD\Parts\CS4630\SP]
+FileName,,%10%\cwcdata\vtb4630.osp
+DSPType,1,01,00,00,00
+NumStreams,1,80,00,00,00
+Resources,1,20,f0,ca,08,02,01,80,40,a0,c8,68,34,1b,8d,c6,e3,f1,e8,bc,5e,2d,\
+  17,0b,85,c2,a9,f0,f8,ff,fe,ff,7f,3f,d7,4f,27
+DefectFlags,1,00,00,00,00
+FeatureFlags,1,00,00,00,00
+
+
+#################################
+#
+# foreground/middleground/background tasks
+# with enlarged parameter blocks to accomidate performance 
+# information.
+#
+[SPuD\Tasks\Foreground]
+CompatibleVersions,1,00,00,00,01
+DSPType,1,01,00,00,00
+EntryPointLabel,,FGTaskTreeHeaderCode
+FileName,,
+InputPorts,1,00,00,00,00
+OutputPorts,1,00,00,00,00
+Resources,1,14,00,00,00,\
+            02,00,00,00,e4,00,00,00,\
+            02,00,00,00,80,00,00,00
+TaskID,1,01,00,00,00
+Version,1,00,00,00,01
+
+[SPuD\Tasks\Middleground]
+CompatibleVersions,1,00,00,00,01
+DSPType,1,01,00,00,00
+EntryPointLabel,,TaskTreeHeaderCode
+FileName,,
+InputPorts,1,00,00,00,00
+OutputPorts,1,00,00,00,00
+Resources,1,14,00,00,00,\
+            02,00,00,00,e4,00,00,00,\
+            02,00,00,00,40,00,00,00
+TaskID,1,14,00,00,00
+Version,1,00,00,00,01
+
+[SPuD\Tasks\Background]
+CompatibleVersions,1,00,00,00,01
+DSPType,1,01,00,00,00
+EntryPointLabel,,TaskTreeHeaderCode
+FileName,,
+InputPorts,1,00,00,00,00
+OutputPorts,1,00,00,00,00
+Resources,1,14,00,00,00,\
+            02,00,00,00,e4,00,00,00,\
+            02,00,00,00,24,00,00,00
+TaskID,1,02,00,00,00
+Version,1,00,00,00,01
+
+[SPuD\Tasks\Vtb Pulse IO]
+CompatibleVersions,1,00,00,00,01
+DSPType,1,01,00,00,00
+EntryPointLabel,,Pulse_IO
+FileName,,%10%\cwcdata\vtbdiag.osp
+InputPorts,1,00,00,00,00
+OutputPorts,1,00,00,00,00
+Resources,1,14,00,00,00,\
+            00,00,00,00,20,00,00,00,\
+            02,00,00,00,40,00,00,00
+TaskID,1,02,00,be,00
+Version,1,00,00,00,01
+
+
+[SPuD\Tasks\Vtb Pulse AC97]
+CompatibleVersions,1,00,00,00,01
+DSPType,1,01,00,00,00
+EntryPointLabel,,Pulse_AC97
+FileName,,%10%\cwcdata\vtbdiag.osp
+InputPorts,1,00,00,00,00
+OutputPorts,1,00,00,00,00
+Resources,1,14,00,00,00,\
+            00,00,00,00,20,00,00,00,\
+            02,00,00,00,40,00,00,00
+TaskID,1,03,00,be,00
+Version,1,00,00,00,01
+
+
+[SPuD\Tasks\Vtb Snoop Input]
+CompatibleVersions,1,00,00,00,01
+DSPType,1,01,00,00,00
+EntryPointLabel,,TbSnoopInput
+FileName,,%10%\cwcdata\vtbsnoop.osp
+InputPorts,1,00,00,00,00
+OutputPorts,1,00,00,00,00
+Resources,1,14,00,00,00,\
+            00,00,00,00,0c,00,00,00,\
+            02,00,00,00,40,00,00,00
+TaskID,1,10,00,be,00
+Version,1,00,00,00,01
+
+[SPuD\Tasks\Vtb Direct Spdif Write Back]
+CompatibleVersions,1,00,00,00,01
+DSPType,1,01,00,00,00
+EntryPointLabel,,VtbSpdifDirectWriteBack
+FileName,,%10%\cwcdata\vtbspdwb.osp
+InputPorts,1,00,00,00,00
+OutputPorts,1,01,00,00,00
+Resources,1,1c,00,00,00,\
+            00,00,00,00,2a,00,00,00,\
+            02,00,00,00,40,00,00,00,\
+            03,00,00,00,00,01,00,00
+TaskID,1,04,00,be,00
+Version,1,00,00,00,01
+
+[SPuD\Tasks\Vtb-6-Chan-Src]
+CompatibleVersions,1,00,00,00,01
+DSPType,1,01,00,00,00
+EntryPointLabel,,Demux6ChanSrc
+FileName,,%10%\cwcdata\vtb6chan.osp
+InputPorts,1,00,00,00,00
+OutputPorts,1,00,00,00,00
+Resources,1,24,00,00,00,\
+            00,00,00,00,64,00,00,00,\
+            02,00,00,00,40,00,00,00,\
+            02,00,00,00,50,00,00,00,\
+            03,00,00,00,00,04,00,00
+TaskID,1,05,00,be,00
+Version,1,00,00,00,01
+
+[SPuD\Tasks\Vtb-6-Chan-Snoop]
+CompatibleVersions,1,00,00,00,01
+DSPType,1,01,00,00,00
+EntryPointLabel,,Demux6ChanSnoop
+FileName,,%10%\cwcdata\vtb6chan.osp
+InputPorts,1,00,00,00,00
+OutputPorts,1,00,00,00,00
+Resources,1,14,00,00,00,\
+            00,00,00,00,1c,00,00,00,\
+            02,00,00,00,40,00,00,00
+TaskID,1,06,00,be,00
+Version,1,00,00,00,01
+
+
+[SPuD\Tasks\PCM Reader 64]
+CompatibleVersions,1,00,00,00,01
+DSPType,1,01,00,00,00
+EntryPointLabel,,NullAlgorithm
+FileName,,
+InputPorts,1,01,00,00,00
+OutputPorts,1,00,00,00,00
+Resources,1,1c,00,00,00,\
+            00,00,00,00,22,00,00,00,\
+            02,00,00,00,40,00,00,00,\
+            03,00,00,00,00,04,00,00
+TaskID,1,07,00,be,00
+Version,1,00,00,00,01
+
+[SPuD\Tasks\Vtb-Cent-Sub]
+CompatibleVersions,1,00,00,00,01
+DSPType,1,01,00,00,00
+EntryPointLabel,,VtbCenterSubMix
+FileName,,%10%\cwcdata\vtb6chan.osp
+InputPorts,1,00,00,00,00
+OutputPorts,1,00,00,00,00
+Resources,1,1c,00,00,00,\
+            00,00,00,00,28,00,00,00,\
+            02,00,00,00,40,00,00,00,\
+            03,00,00,00,80,00,00,00
+TaskID,1,08,00,be,00
+Version,1,00,00,00,01
+
+[SPuD\Tasks\Vtb-DMA-Buffer]
+CompatibleVersions,1,00,00,00,01
+DSPType,1,01,00,00,00
+EntryPointLabel,,DmaBuffer
+FileName,,%10%\cwcdata\vtbsnoop.osp
+InputPorts,1,00,00,00,00
+OutputPorts,1,00,00,00,00
+Resources,1,24,00,00,00,\
+            00,00,00,00,46,00,00,00,\
+            02,00,00,00,40,00,00,00,\
+            02,00,00,00,18,00,00,00,\
+            03,00,00,00,40,00,00,00
+TaskID,1,11,00,be,00
+Version,1,00,00,00,01
+
+[SPuD\Tasks\Vtb-SRC-Extra]
+CompatibleVersions,1,00,00,00,01
+DSPType,1,01,00,00,00
+EntryPointLabel,,S16_upSRC
+FileName,,
+InputPorts,1,00,00,00,00
+OutputPorts,1,00,00,00,00
+Resources,1,24,00,00,00,\
+			00,00,00,00,6a,02,00,00,\
+			02,00,00,00,40,00,00,00,\
+			03,00,00,00,40,00,00,00,\
+			03,00,00,00,80,00,00,00
+TaskID,1,12,00,be,00
+Version,1,00,00,00,01
+
+[SPuD\Tasks\ModemCtl]
+CompatibleVersions,1,00,00,00,01
+DSPType,1,01,00,00,00
+EntryPointLabel,,ModemCtlEntryPoint
+FileName,,%10%\cwcdata\cwcmdctl.osp
+InputPorts,1,00,00,00,00
+OutputPorts,1,00,00,00,00
+Resources,1,14,00,00,00,\
+            00,00,00,00,30,00,00,00, \
+            02,00,00,00,40,00,00,00
+TaskID,1,10,0b,00,00
+Version,1,00,00,00,01
+
+[SPuD\Tasks\EQ Peak Meters]
+CompatibleVersions,1,00,00,00,01
+DSPType,1,01,00,00,00
+EntryPointLabel,,PMEntryPoint
+FileName,,%10%\cwcdata\cwcpm.osp
+InputPorts,1,00,00,00,00
+OutputPorts,1,00,00,00,00
+Resources,1,1c,00,00,00,\
+            00,00,00,00,00,01,00,00,\
+            02,00,00,00,40,00,00,00,\
+            02,00,00,00,28,00,00,00
+TaskID,1,14,0a,00,00
+Version,1,00,00,00,01
+
+[SPuD\Tasks\Vtb-FG-Sync-Xmit]
+CompatibleVersions,1,00,00,00,01
+DSPType,1,01,00,00,00
+EntryPointLabel,,SyncFgTx
+FileName,,%10%\cwcdata\vtbspdwb.osp
+InputPorts,1,00,00,00,00
+OutputPorts,1,00,00,00,00
+Resources,1,1c,00,00,00,\
+            00,00,00,00,19,00,00,00,\
+            02,00,00,00,40,00,00,00,\
+            03,00,00,00,80,00,00,00
+TaskID,1,13,00,be,00
+Version,1,00,00,00,01
+
+
+
+[SPuD\Tasks\Vtb-MP3-SRC-Extra]
+CompatibleVersions,1,00,00,00,01
+DSPType,1,01,00,00,00
+EntryPointLabel,,S16_upSRC
+FileName,,
+InputPorts,1,00,00,00,00
+OutputPorts,1,00,00,00,00
+Resources,1,24,00,00,00,\
+			00,00,00,00,d8,01,00,00,\
+			02,00,00,00,40,00,00,00,\
+			03,00,00,00,40,00,00,00,\
+			03,00,00,00,80,00,00,00
+TaskID,1,14,00,be,00
+Version,1,00,00,00,01
+
+
+[SPuD\Tasks\Vtb I2s Input]
+CompatibleVersions,1,00,00,00,01
+DSPType,1,01,00,00,00
+EntryPointLabel,,I2sInputTask
+FileName,,%10%\cwcdata\vtbspdwb.osp
+InputPorts,1,00,00,00,00
+OutputPorts,1,00,00,00,00
+Resources,1,14,00,00,00,\
+            00,00,00,00,40,00,00,00,\
+            02,00,00,00,40,00,00,00
+TaskID,1,15,00,be,00
+Version,1,00,00,00,01
+
+[SPuD\Tasks\Vtb I2s Output]
+CompatibleVersions,1,00,00,00,01
+DSPType,1,01,00,00,00
+EntryPointLabel,,I2sOutputTask
+FileName,,%10%\cwcdata\vtbspdwb.osp
+InputPorts,1,00,00,00,00
+OutputPorts,1,00,00,00,00
+Resources,1,14,00,00,00,\
+            00,00,00,00,40,00,00,00,\
+            02,00,00,00,40,00,00,00
+TaskID,1,16,00,be,00
+Version,1,00,00,00,01

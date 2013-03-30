@@ -1,0 +1,72 @@
+;----------------------------------------------------------------------
+;M-Audio FW series Driver Setup Information file
+;Copyright (c) 2003-2004 Thesycon GmbH / BridgeCo AG
+;----------------------------------------------------------------------
+
+;******************************************************************************
+; Version section
+;------------------------------------------------------------------------------
+[Version]
+Signature="$Windows NT$"
+Provider=%S_Provider%
+DriverVer=12/20/2004,1.1.0.0
+;CatalogFile=
+
+; we use a private setup device class
+Class=MAudioNullDriver
+ClassGUID={9C0AE968-BB15-441c-B351-02677DC098F3}
+
+
+;******************************************************************************
+; Class Install sections
+;------------------------------------------------------------------------------
+[ClassInstall32] 
+AddReg=_AddReg_ClassInstall
+
+[_AddReg_ClassInstall]
+HKR,,,,"%S_DeviceClassDisplayName%"
+HKR,,Icon,,"-19"
+
+
+;******************************************************************************
+; Manufacturer
+;------------------------------------------------------------------------------
+[Manufacturer]
+%S_Provider%=_Devices
+
+
+;******************************************************************************
+; Device section
+;------------------------------------------------------------------------------
+[_Devices]
+%S_DeviceDesc_1%=_Install, AVC\M-Audio&Ozonic&TYP_1&ID_0
+%S_DeviceDesc_1%=_Install, AVC\M-Audio&FWSolo&TYP_1&ID_0
+%S_DeviceDesc_1%=_Install, AVC\M-Audio&FW_Solo&TYP_1&ID_0
+%S_DeviceDesc_1%=_Install, AVC\M-Audio&FW410&TYP_1&ID_0
+
+;******************************************************************************
+; Install Sections
+;------------------------------------------------------------------------------
+[_Install]
+
+[_Install.Services]
+AddService = , 0x00000002
+
+
+
+;******************************************************************************
+; Text Strings
+;------------------------------------------------------------------------------
+[Strings]
+
+;
+; Localizable Strings
+;
+
+; device class display name, shown in Device Manager
+S_DeviceClassDisplayName="M-Audio Null Driver"
+
+S_Provider="M-Audio"
+
+S_DeviceDesc_1="M-Audio AVC driver"
+

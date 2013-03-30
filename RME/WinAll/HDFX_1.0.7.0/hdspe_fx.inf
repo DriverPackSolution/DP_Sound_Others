@@ -1,0 +1,806 @@
+;==============================================================
+
+[Version]
+Signature = "$Windows NT$"
+Class = MEDIA
+ClassGUID = {4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider = RME
+DriverVer = 11/29/2012,1.0.7.0
+CatalogFile = hdspe_fx.cat
+
+;==============================================================
+
+[SourceDisksNames]
+1 = "RME HDSPe FX Driver Installation Disk",,,
+
+[SourceDisksFiles]
+
+hdspe_fx.sys = 1
+hdspe_fx_64.sys = 1
+hdspe_fx.exe = 1
+TotalMixFX.exe = 1
+TotalMixFX.chm = 1
+hdspe_fx.inf = 1
+hdspe_fx_asio.dll = 1
+hdspe_fx_asio_64.dll = 1
+
+;==============================================================
+
+[DestinationDirs]
+hdspe_fx.CopyFiles.Kern = 12
+hdspe_fx.CopyFiles.User = 11
+hdspe_fx.CopyFiles.User64 = 10,SysWOW64
+hdspe_fx.CopyFiles.Asio64 = 11
+hdspe_fx.CopyFiles.Inf = 11
+
+[hdspe_fx.CopyFiles.Kern]
+hdspe_fx.sys
+hdspe_fx_64.sys
+
+[hdspe_fx.CopyFiles.User]
+hdspe_fx_asio.dll
+hdspe_fx.exe
+TotalMixFX.exe
+TotalMixFX.chm
+
+[hdspe_fx.CopyFiles.User64]
+hdspe_fx_asio.dll
+hdspe_fx.exe
+TotalMixFX.exe
+TotalMixFX.chm
+
+[hdspe_fx.CopyFiles.Asio64]
+hdspe_fx_asio_64.dll
+hdspe_fx.exe
+TotalMixFX.exe
+TotalMixFX.chm
+
+[hdspe_fx.CopyFiles.Inf]
+hdspe_fx.inf
+
+;==============================================================
+
+[Manufacturer]
+RME = Devices,NTX86,NTAMD64
+
+;==========
+
+[Devices]
+
+%DeviceDescMadi% = hdspe_fx_madi, PCI\VEN_10EE&DEV_3FC7&REV_D5
+%DeviceDescMadiface% = hdspe_fx_madi, PCI\VEN_10EE&DEV_3FC7&REV_D6
+
+;==========
+
+[Devices.NTX86]
+
+%DeviceDescMadi% = hdspe_fx_madi, PCI\VEN_10EE&DEV_3FC7&REV_D5
+%DeviceDescMadiface% = hdspe_fx_madi, PCI\VEN_10EE&DEV_3FC7&REV_D6
+
+;==========
+
+[Devices.NTAMD64]
+
+%DeviceDescMadi% = hdspe_fx_madi, PCI\VEN_10EE&DEV_3FC7&REV_D5
+%DeviceDescMadiface% = hdspe_fx_madi, PCI\VEN_10EE&DEV_3FC7&REV_D6
+
+;==============================================================
+
+[hdspe_fx_madi.NTX86]
+Include = ks.inf, wdmaudio.inf
+Needs = KS.Registration, WDMAUDIO.Registration
+CopyFiles = hdspe_fx.CopyFiles.Kern, hdspe_fx.CopyFiles.User, hdspe_fx.CopyFiles.Inf
+AddReg = hdspe_fx.AddReg, hdspe_fx_32.AddReg, hdspe_fx_madi.AddReg
+Reboot = 1
+
+;==========
+
+[hdspe_fx_madi.NTAMD64]
+Include = ks.inf, wdmaudio.inf
+Needs = KS.Registration, WDMAUDIO.Registration
+CopyFiles = hdspe_fx.CopyFiles.Kern, hdspe_fx.CopyFiles.User64, hdspe_fx.CopyFiles.Inf, hdspe_fx.CopyFiles.Asio64
+AddReg = hdspe_fx.AddReg, hdspe_fx_64.AddReg, hdspe_fx_madi.AddReg
+Reboot = 1
+
+;==============================================================
+
+[hdspe_fx_madi.NTX86.Services]
+AddService = hdspe_fx, 0x00000002, hdspe_fx_Service_Inst
+
+;==========
+
+[hdspe_fx_madi.NTAMD64.Services]
+AddService = hdspe_fx, 0x00000002, hdspe_fx_Service_Inst_64
+
+;==============================================================
+
+[hdspe_fx_Service_Inst]
+DisplayName   = %hdspe_fx.SvcDesc%
+ServiceType   = 1                  ; SERVICE_KERNEL_DRIVER
+StartType     = 3                  ; SERVICE_DEMAND_START
+ErrorControl  = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary = %10%\system32\drivers\hdspe_fx.sys
+
+;==========
+
+[hdspe_fx_Service_Inst_64]
+DisplayName   = %hdspe_fx.SvcDesc%
+ServiceType   = 1                  ; SERVICE_KERNEL_DRIVER
+StartType     = 3                  ; SERVICE_DEMAND_START
+ErrorControl  = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary = %10%\system32\drivers\hdspe_fx_64.sys
+
+;==============================================================
+
+[hdspe_fx.AddReg]
+
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%hdspe_fx.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv,Description,,%hdspe_fx.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%hdspe_fx.DeviceDesc%
+
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\HDSPe_FX,DisplayName,,"RME HDSPe FX (WDM)"
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\HDSPe_FX,DisplayVersion,,"1.0.7.0"
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\HDSPe_FX,UninstallString,,"rundll32.exe setupapi.dll,InstallHinfSection DefaultUninstall 132 %11%\hdspe_fx.inf"
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\HDSPe_FX,Publisher,,"RME Intelligent Audio Solutions"
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\HDSPe_FX,UrlInfoAbout,,"http://www.rme-audio.de"
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\HDSPe_FX,UrlUpdateInfo,,"http://www.rme-audio.de"
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\HDSPe_FX,HelpLink,,"http://www.rme-audio.de"
+
+HKLM,SOFTWARE\ASIO\%ASIO_NAME%,CLSID,0,%ASIO_GUID%
+HKLM,SOFTWARE\ASIO\%ASIO_NAME%,Description,0,%ASIO_NAME%
+HKCR,CLSID\%ASIO_GUID%,,0,%ASIO_NAME%
+HKCR,CLSID\%ASIO_GUID%\InProcServer32,ThreadingModel,0,Apartment
+
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Run,HDSPe_FX_Tray1,,"hdspe_fx.exe"
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Run,FirefaceMixTray2,,"TotalMixFX.exe"
+
+;==========
+
+[hdspe_fx_32.AddReg]
+
+HKR,,Driver,,hdspe_fx.sys
+HKR,,NTMPDriver,,"hdspe_fx.sys"
+
+HKCR,CLSID\%ASIO_GUID%\InProcServer32,,0,%11%\hdspe_fx_asio.dll
+
+;==========
+
+[hdspe_fx_64.AddReg]
+
+HKR,,Driver,,hdspe_fx_64.sys
+HKR,,NTMPDriver,,"hdspe_fx_64.sys"
+
+HKCR,CLSID\%ASIO_GUID%\InProcServer32,,0,%11%\hdspe_fx_asio_64.dll
+
+HKLM,SOFTWARE\Wow6432Node\ASIO\%ASIO_NAME%,CLSID,0,%ASIO_GUID%
+HKLM,SOFTWARE\Wow6432Node\ASIO\%ASIO_NAME%,Description,0,%ASIO_NAME%
+HKCR,Wow6432Node\CLSID\%ASIO_GUID%,,0,%ASIO_NAME%
+HKCR,Wow6432Node\CLSID\%ASIO_GUID%\InProcServer32,,0,%11%\hdspe_fx_asio.dll
+HKCR,Wow6432Node\CLSID\%ASIO_GUID%\InProcServer32,ThreadingModel,0,Apartment
+
+;==============================================================
+
+[DefaultUninstall]
+DelReg = Remove
+DelFiles = hdspe_fx.CopyFiles.Inf, hdspe_fx.CopyFiles.User, hdspe_fx.CopyFiles.User64, hdspe_fx.CopyFiles.Kern, hdspe_fx.CopyFiles.Asio64
+Reboot = 0
+
+[Remove]
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\HDSPe_FX
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Run,HDSPe_FX_Tray1,,"hdspe_fx.exe"
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Run,FirefaceMixTray2,,"TotalMixFX.exe"
+HKLM,SOFTWARE\ASIO\%ASIO_NAME%
+HKCR,CLSID\%ASIO_GUID%
+
+;==============================================================
+
+[hdspe_fx_madi.NTX86.Interfaces]
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,hdspe_fx.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,hdspe_fx.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave3%,hdspe_fx.Interface.Wave3
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave4%,hdspe_fx.Interface.Wave4
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave5%,hdspe_fx.Interface.Wave5
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave6%,hdspe_fx.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave7%,hdspe_fx.Interface.Wave7
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave8%,hdspe_fx.Interface.Wave8
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave9%,hdspe_fx.Interface.Wave9
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave10%,hdspe_fx.Interface.Wave10
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave11%,hdspe_fx.Interface.Wave11
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave12%,hdspe_fx.Interface.Wave12
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave13%,hdspe_fx.Interface.Wave13
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave14%,hdspe_fx.Interface.Wave14
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave15%,hdspe_fx.Interface.Wave15
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave16%,hdspe_fx.Interface.Wave16
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave17%,hdspe_fx.Interface.Wave17
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave18%,hdspe_fx.Interface.Wave18
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave19%,hdspe_fx.Interface.Wave19
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave20%,hdspe_fx.Interface.Wave20
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave21%,hdspe_fx.Interface.Wave21
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave22%,hdspe_fx.Interface.Wave22
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave23%,hdspe_fx.Interface.Wave23
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave24%,hdspe_fx.Interface.Wave24
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave25%,hdspe_fx.Interface.Wave25
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave26%,hdspe_fx.Interface.Wave26
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave27%,hdspe_fx.Interface.Wave27
+
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,hdspe_fx.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,hdspe_fx.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave3%,hdspe_fx.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave4%,hdspe_fx.Interface.Wave4
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave5%,hdspe_fx.Interface.Wave5
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave6%,hdspe_fx.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave7%,hdspe_fx.Interface.Wave7
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave8%,hdspe_fx.Interface.Wave8
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave9%,hdspe_fx.Interface.Wave9
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave10%,hdspe_fx.Interface.Wave10
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave11%,hdspe_fx.Interface.Wave11
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave12%,hdspe_fx.Interface.Wave12
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave13%,hdspe_fx.Interface.Wave13
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave14%,hdspe_fx.Interface.Wave14
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave15%,hdspe_fx.Interface.Wave15
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave16%,hdspe_fx.Interface.Wave16
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave17%,hdspe_fx.Interface.Wave17
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave18%,hdspe_fx.Interface.Wave18
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave19%,hdspe_fx.Interface.Wave19
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave20%,hdspe_fx.Interface.Wave20
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave21%,hdspe_fx.Interface.Wave21
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave22%,hdspe_fx.Interface.Wave22
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave23%,hdspe_fx.Interface.Wave23
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave24%,hdspe_fx.Interface.Wave24
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave25%,hdspe_fx.Interface.Wave25
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave26%,hdspe_fx.Interface.Wave26
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave27%,hdspe_fx.Interface.Wave27
+
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,hdspe_fx.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,hdspe_fx.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave3%,hdspe_fx.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave4%,hdspe_fx.Interface.Wave4
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave5%,hdspe_fx.Interface.Wave5
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave6%,hdspe_fx.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave7%,hdspe_fx.Interface.Wave7
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave8%,hdspe_fx.Interface.Wave8
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave9%,hdspe_fx.Interface.Wave9
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave10%,hdspe_fx.Interface.Wave10
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave11%,hdspe_fx.Interface.Wave11
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave12%,hdspe_fx.Interface.Wave12
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave13%,hdspe_fx.Interface.Wave13
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave14%,hdspe_fx.Interface.Wave14
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave15%,hdspe_fx.Interface.Wave15
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave16%,hdspe_fx.Interface.Wave16
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave17%,hdspe_fx.Interface.Wave17
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave18%,hdspe_fx.Interface.Wave18
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave19%,hdspe_fx.Interface.Wave19
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave20%,hdspe_fx.Interface.Wave20
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave21%,hdspe_fx.Interface.Wave21
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave22%,hdspe_fx.Interface.Wave22
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave23%,hdspe_fx.Interface.Wave23
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave24%,hdspe_fx.Interface.Wave24
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave25%,hdspe_fx.Interface.Wave25
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave26%,hdspe_fx.Interface.Wave26
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave27%,hdspe_fx.Interface.Wave27
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi1%,hdspe_fx.Interface.Midi1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi2%,hdspe_fx.Interface.Midi2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi3%,hdspe_fx.Interface.Midi3
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi4%,hdspe_fx.Interface.Midi4
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi1%,hdspe_fx.Interface.Midi1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi2%,hdspe_fx.Interface.Midi2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi3%,hdspe_fx.Interface.Midi3
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi4%,hdspe_fx.Interface.Midi4
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi1%,hdspe_fx.Interface.Midi1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi2%,hdspe_fx.Interface.Midi2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi3%,hdspe_fx.Interface.Midi3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi4%,hdspe_fx.Interface.Midi4
+
+;==========
+
+[hdspe_fx_madi.NTAMD64.Interfaces]
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,hdspe_fx.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,hdspe_fx.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave3%,hdspe_fx.Interface.Wave3
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave4%,hdspe_fx.Interface.Wave4
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave5%,hdspe_fx.Interface.Wave5
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave6%,hdspe_fx.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave7%,hdspe_fx.Interface.Wave7
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave8%,hdspe_fx.Interface.Wave8
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave9%,hdspe_fx.Interface.Wave9
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave10%,hdspe_fx.Interface.Wave10
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave11%,hdspe_fx.Interface.Wave11
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave12%,hdspe_fx.Interface.Wave12
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave13%,hdspe_fx.Interface.Wave13
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave14%,hdspe_fx.Interface.Wave14
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave15%,hdspe_fx.Interface.Wave15
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave16%,hdspe_fx.Interface.Wave16
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave17%,hdspe_fx.Interface.Wave17
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave18%,hdspe_fx.Interface.Wave18
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave19%,hdspe_fx.Interface.Wave19
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave20%,hdspe_fx.Interface.Wave20
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave21%,hdspe_fx.Interface.Wave21
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave22%,hdspe_fx.Interface.Wave22
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave23%,hdspe_fx.Interface.Wave23
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave24%,hdspe_fx.Interface.Wave24
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave25%,hdspe_fx.Interface.Wave25
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave26%,hdspe_fx.Interface.Wave26
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave27%,hdspe_fx.Interface.Wave27
+
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,hdspe_fx.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,hdspe_fx.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave3%,hdspe_fx.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave4%,hdspe_fx.Interface.Wave4
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave5%,hdspe_fx.Interface.Wave5
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave6%,hdspe_fx.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave7%,hdspe_fx.Interface.Wave7
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave8%,hdspe_fx.Interface.Wave8
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave9%,hdspe_fx.Interface.Wave9
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave10%,hdspe_fx.Interface.Wave10
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave11%,hdspe_fx.Interface.Wave11
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave12%,hdspe_fx.Interface.Wave12
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave13%,hdspe_fx.Interface.Wave13
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave14%,hdspe_fx.Interface.Wave14
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave15%,hdspe_fx.Interface.Wave15
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave16%,hdspe_fx.Interface.Wave16
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave17%,hdspe_fx.Interface.Wave17
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave18%,hdspe_fx.Interface.Wave18
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave19%,hdspe_fx.Interface.Wave19
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave20%,hdspe_fx.Interface.Wave20
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave21%,hdspe_fx.Interface.Wave21
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave22%,hdspe_fx.Interface.Wave22
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave23%,hdspe_fx.Interface.Wave23
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave24%,hdspe_fx.Interface.Wave24
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave25%,hdspe_fx.Interface.Wave25
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave26%,hdspe_fx.Interface.Wave26
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave27%,hdspe_fx.Interface.Wave27
+
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,hdspe_fx.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,hdspe_fx.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave3%,hdspe_fx.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave4%,hdspe_fx.Interface.Wave4
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave5%,hdspe_fx.Interface.Wave5
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave6%,hdspe_fx.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave7%,hdspe_fx.Interface.Wave7
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave8%,hdspe_fx.Interface.Wave8
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave9%,hdspe_fx.Interface.Wave9
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave10%,hdspe_fx.Interface.Wave10
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave11%,hdspe_fx.Interface.Wave11
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave12%,hdspe_fx.Interface.Wave12
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave13%,hdspe_fx.Interface.Wave13
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave14%,hdspe_fx.Interface.Wave14
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave15%,hdspe_fx.Interface.Wave15
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave16%,hdspe_fx.Interface.Wave16
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave17%,hdspe_fx.Interface.Wave17
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave18%,hdspe_fx.Interface.Wave18
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave19%,hdspe_fx.Interface.Wave19
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave20%,hdspe_fx.Interface.Wave20
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave21%,hdspe_fx.Interface.Wave21
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave22%,hdspe_fx.Interface.Wave22
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave23%,hdspe_fx.Interface.Wave23
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave24%,hdspe_fx.Interface.Wave24
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave25%,hdspe_fx.Interface.Wave25
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave26%,hdspe_fx.Interface.Wave26
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave27%,hdspe_fx.Interface.Wave27
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi1%,hdspe_fx.Interface.Midi1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi2%,hdspe_fx.Interface.Midi2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi3%,hdspe_fx.Interface.Midi3
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi4%,hdspe_fx.Interface.Midi4
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi1%,hdspe_fx.Interface.Midi1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi2%,hdspe_fx.Interface.Midi2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi3%,hdspe_fx.Interface.Midi3
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi4%,hdspe_fx.Interface.Midi4
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi1%,hdspe_fx.Interface.Midi1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi2%,hdspe_fx.Interface.Midi2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi3%,hdspe_fx.Interface.Midi3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi4%,hdspe_fx.Interface.Midi4
+
+;==============================================================
+
+[hdspe_fx.Interface.Wave1]
+AddReg=hdspe_fx.I.Wave1.AddReg
+
+[hdspe_fx.Interface.Wave2]
+AddReg=hdspe_fx.I.Wave2.AddReg
+
+[hdspe_fx.Interface.Wave3]
+AddReg=hdspe_fx.I.Wave3.AddReg
+
+[hdspe_fx.Interface.Wave4]
+AddReg=hdspe_fx.I.Wave4.AddReg
+
+[hdspe_fx.Interface.Wave5]
+AddReg=hdspe_fx.I.Wave5.AddReg
+
+[hdspe_fx.Interface.Wave6]
+AddReg=hdspe_fx.I.Wave6.AddReg
+
+[hdspe_fx.Interface.Wave7]
+AddReg=hdspe_fx.I.Wave7.AddReg
+
+[hdspe_fx.Interface.Wave8]
+AddReg=hdspe_fx.I.Wave8.AddReg
+
+[hdspe_fx.Interface.Wave9]
+AddReg=hdspe_fx.I.Wave9.AddReg
+
+[hdspe_fx.Interface.Wave10]
+AddReg=hdspe_fx.I.Wave10.AddReg
+
+[hdspe_fx.Interface.Wave11]
+AddReg=hdspe_fx.I.Wave11.AddReg
+
+[hdspe_fx.Interface.Wave12]
+AddReg=hdspe_fx.I.Wave12.AddReg
+
+[hdspe_fx.Interface.Wave13]
+AddReg=hdspe_fx.I.Wave13.AddReg
+
+[hdspe_fx.Interface.Wave14]
+AddReg=hdspe_fx.I.Wave14.AddReg
+
+[hdspe_fx.Interface.Wave15]
+AddReg=hdspe_fx.I.Wave15.AddReg
+
+[hdspe_fx.Interface.Wave16]
+AddReg=hdspe_fx.I.Wave16.AddReg
+
+[hdspe_fx.Interface.Wave17]
+AddReg=hdspe_fx.I.Wave17.AddReg
+
+[hdspe_fx.Interface.Wave18]
+AddReg=hdspe_fx.I.Wave18.AddReg
+
+[hdspe_fx.Interface.Wave19]
+AddReg=hdspe_fx.I.Wave19.AddReg
+
+[hdspe_fx.Interface.Wave20]
+AddReg=hdspe_fx.I.Wave20.AddReg
+
+[hdspe_fx.Interface.Wave21]
+AddReg=hdspe_fx.I.Wave21.AddReg
+
+[hdspe_fx.Interface.Wave22]
+AddReg=hdspe_fx.I.Wave22.AddReg
+
+[hdspe_fx.Interface.Wave23]
+AddReg=hdspe_fx.I.Wave23.AddReg
+
+[hdspe_fx.Interface.Wave24]
+AddReg=hdspe_fx.I.Wave24.AddReg
+
+[hdspe_fx.Interface.Wave25]
+AddReg=hdspe_fx.I.Wave25.AddReg
+
+[hdspe_fx.Interface.Wave26]
+AddReg=hdspe_fx.I.Wave26.AddReg
+
+[hdspe_fx.Interface.Wave27]
+AddReg=hdspe_fx.I.Wave27.AddReg
+
+;===
+
+[hdspe_fx.Interface.Midi1]
+AddReg=hdspe_fx.I.Midi1.AddReg
+
+[hdspe_fx.Interface.Midi2]
+AddReg=hdspe_fx.I.Midi2.AddReg
+
+[hdspe_fx.Interface.Midi3]
+AddReg=hdspe_fx.I.Midi3.AddReg
+
+[hdspe_fx.Interface.Midi4]
+AddReg=hdspe_fx.I.Midi4.AddReg
+
+;===
+
+[hdspe_fx.I.Wave1.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%hdspe_fx.Wave1.szPname%
+
+[hdspe_fx.I.Wave2.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%hdspe_fx.Wave2.szPname%
+
+[hdspe_fx.I.Wave3.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%hdspe_fx.Wave3.szPname%
+
+[hdspe_fx.I.Wave4.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%hdspe_fx.Wave4.szPname%
+
+[hdspe_fx.I.Wave5.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%hdspe_fx.Wave5.szPname%
+
+[hdspe_fx.I.Wave6.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%hdspe_fx.Wave6.szPname%
+
+[hdspe_fx.I.Wave7.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%hdspe_fx.Wave7.szPname%
+
+[hdspe_fx.I.Wave8.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%hdspe_fx.Wave8.szPname%
+
+[hdspe_fx.I.Wave9.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%hdspe_fx.Wave9.szPname%
+
+[hdspe_fx.I.Wave10.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%hdspe_fx.Wave10.szPname%
+
+[hdspe_fx.I.Wave11.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%hdspe_fx.Wave11.szPname%
+
+[hdspe_fx.I.Wave12.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%hdspe_fx.Wave12.szPname%
+
+[hdspe_fx.I.Wave13.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%hdspe_fx.Wave13.szPname%
+
+[hdspe_fx.I.Wave14.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%hdspe_fx.Wave14.szPname%
+
+[hdspe_fx.I.Wave15.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%hdspe_fx.Wave15.szPname%
+
+[hdspe_fx.I.Wave16.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%hdspe_fx.Wave16.szPname%
+
+[hdspe_fx.I.Wave17.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%hdspe_fx.Wave17.szPname%
+
+[hdspe_fx.I.Wave18.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%hdspe_fx.Wave18.szPname%
+
+[hdspe_fx.I.Wave19.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%hdspe_fx.Wave19.szPname%
+
+[hdspe_fx.I.Wave20.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%hdspe_fx.Wave20.szPname%
+
+[hdspe_fx.I.Wave21.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%hdspe_fx.Wave21.szPname%
+
+[hdspe_fx.I.Wave22.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%hdspe_fx.Wave22.szPname%
+
+[hdspe_fx.I.Wave23.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%hdspe_fx.Wave23.szPname%
+
+[hdspe_fx.I.Wave24.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%hdspe_fx.Wave24.szPname%
+
+[hdspe_fx.I.Wave25.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%hdspe_fx.Wave25.szPname%
+
+[hdspe_fx.I.Wave26.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%hdspe_fx.Wave26.szPname%
+
+[hdspe_fx.I.Wave27.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%hdspe_fx.Wave27.szPname%
+
+;===
+
+[hdspe_fx.I.Midi1.AddReg]
+HKR,,CSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%hdspe_fx.Midi1.szPname%
+
+[hdspe_fx.I.Midi2.AddReg]
+HKR,,CSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%hdspe_fx.Midi2.szPname%
+
+[hdspe_fx.I.Midi3.AddReg]
+HKR,,CSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%hdspe_fx.Midi3.szPname%
+
+[hdspe_fx.I.Midi4.AddReg]
+HKR,,CSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%hdspe_fx.Midi4.szPname%
+
+;==============================================================
+
+[hdspe_fx_madi.AddReg]
+
+HKLM,%MediaCategories%\%GUID.Analog_12%,Name,,"Analog (1+2)"
+HKLM,%MediaCategories%\%GUID.Analog_12%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.Phones%,Name,,"Phones"
+HKLM,%MediaCategories%\%GUID.Phones%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.AES1%,Name,,"AES (1+2)"
+HKLM,%MediaCategories%\%GUID.AES1%,Display,1,00,00,00,00
+
+HKLM,%MediaCategories%\%GUID.MADIFX1%,Name,,"MADI (1-8)"
+HKLM,%MediaCategories%\%GUID.MADIFX1%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.MADIFX2%,Name,,"MADI (9-16)"
+HKLM,%MediaCategories%\%GUID.MADIFX2%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.MADIFX3%,Name,,"MADI (17-24)"
+HKLM,%MediaCategories%\%GUID.MADIFX3%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.MADIFX4%,Name,,"MADI (25-32)"
+HKLM,%MediaCategories%\%GUID.MADIFX4%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.MADIFX5%,Name,,"MADI (33-40)"
+HKLM,%MediaCategories%\%GUID.MADIFX5%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.MADIFX6%,Name,,"MADI (41-48)"
+HKLM,%MediaCategories%\%GUID.MADIFX6%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.MADIFX7%,Name,,"MADI (49-56)"
+HKLM,%MediaCategories%\%GUID.MADIFX7%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.MADIFX8%,Name,,"MADI (57-64)"
+HKLM,%MediaCategories%\%GUID.MADIFX8%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.MADIFX9%,Name,,"MADI (65-72)"
+HKLM,%MediaCategories%\%GUID.MADIFX9%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.MADIFX10%,Name,,"MADI (73-80)"
+HKLM,%MediaCategories%\%GUID.MADIFX10%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.MADIFX11%,Name,,"MADI (81-88)"
+HKLM,%MediaCategories%\%GUID.MADIFX11%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.MADIFX12%,Name,,"MADI (89-96)"
+HKLM,%MediaCategories%\%GUID.MADIFX12%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.MADIFX13%,Name,,"MADI (97-104)"
+HKLM,%MediaCategories%\%GUID.MADIFX13%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.MADIFX14%,Name,,"MADI (105-112)"
+HKLM,%MediaCategories%\%GUID.MADIFX14%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.MADIFX15%,Name,,"MADI (113-120)"
+HKLM,%MediaCategories%\%GUID.MADIFX15%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.MADIFX16%,Name,,"MADI (121-128)"
+HKLM,%MediaCategories%\%GUID.MADIFX16%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.MADIFX17%,Name,,"MADI (129-136)"
+HKLM,%MediaCategories%\%GUID.MADIFX17%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.MADIFX18%,Name,,"MADI (137-144)"
+HKLM,%MediaCategories%\%GUID.MADIFX18%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.MADIFX19%,Name,,"MADI (145-152)"
+HKLM,%MediaCategories%\%GUID.MADIFX19%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.MADIFX20%,Name,,"MADI (153-160)"
+HKLM,%MediaCategories%\%GUID.MADIFX20%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.MADIFX21%,Name,,"MADI (161-168)"
+HKLM,%MediaCategories%\%GUID.MADIFX21%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.MADIFX22%,Name,,"MADI (169-176)"
+HKLM,%MediaCategories%\%GUID.MADIFX22%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.MADIFX23%,Name,,"MADI (177-184)"
+HKLM,%MediaCategories%\%GUID.MADIFX23%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.MADIFX24%,Name,,"MADI (185-192)"
+HKLM,%MediaCategories%\%GUID.MADIFX24%,Display,1,00,00,00,00
+
+;==============================================================
+
+[Strings]
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+GUID.Analog_12 = "{BE8C3700-EE19-4411-AFB2-C14F37B770F2}"
+GUID.AES1      = "{BE8C3711-EE19-4411-AFB2-C14F37B770F2}"
+GUID.MADIFX1   = "{BE8C3719-EE19-4411-AFB2-C14F37B770F2}"
+GUID.MADIFX2   = "{BE8C371A-EE19-4411-AFB2-C14F37B770F2}"
+GUID.MADIFX3   = "{BE8C371B-EE19-4411-AFB2-C14F37B770F2}"
+GUID.MADIFX4   = "{BE8C371C-EE19-4411-AFB2-C14F37B770F2}"
+GUID.MADIFX5   = "{BE8C371D-EE19-4411-AFB2-C14F37B770F2}"
+GUID.MADIFX6   = "{BE8C371E-EE19-4411-AFB2-C14F37B770F2}"
+GUID.MADIFX7   = "{BE8C371F-EE19-4411-AFB2-C14F37B770F2}"
+GUID.MADIFX8   = "{BE8C3720-EE19-4411-AFB2-C14F37B770F2}"
+GUID.MADIFX9   = "{BE8C3721-EE19-4411-AFB2-C14F37B770F2}"
+GUID.MADIFX10  = "{BE8C3722-EE19-4411-AFB2-C14F37B770F2}"
+GUID.MADIFX11  = "{BE8C3723-EE19-4411-AFB2-C14F37B770F2}"
+GUID.MADIFX12  = "{BE8C3724-EE19-4411-AFB2-C14F37B770F2}"
+GUID.MADIFX13  = "{BE8C3725-EE19-4411-AFB2-C14F37B770F2}"
+GUID.MADIFX14  = "{BE8C3726-EE19-4411-AFB2-C14F37B770F2}"
+GUID.MADIFX15  = "{BE8C3727-EE19-4411-AFB2-C14F37B770F2}"
+GUID.MADIFX16  = "{BE8C3728-EE19-4411-AFB2-C14F37B770F2}"
+GUID.MADIFX17  = "{BE8C3729-EE19-4411-AFB2-C14F37B770F2}"
+GUID.MADIFX18  = "{BE8C372A-EE19-4411-AFB2-C14F37B770F2}"
+GUID.MADIFX19  = "{BE8C372B-EE19-4411-AFB2-C14F37B770F2}"
+GUID.MADIFX20  = "{BE8C372C-EE19-4411-AFB2-C14F37B770F2}"
+GUID.MADIFX21  = "{BE8C372D-EE19-4411-AFB2-C14F37B770F2}"
+GUID.MADIFX22  = "{BE8C372E-EE19-4411-AFB2-C14F37B770F2}"
+GUID.MADIFX23  = "{BE8C372F-EE19-4411-AFB2-C14F37B770F2}"
+GUID.MADIFX24  = "{BE8C3730-EE19-4411-AFB2-C14F37B770F2}"
+GUID.Phones    = "{BE8C3744-EE19-4411-AFB2-C14F37B770F2}"
+
+;==============================================================
+
+DiskDescription = "RME Driver Installation Disk"
+DeviceDescMadi = "RME HDSPe MADI FX"
+DeviceDescMadiface = "RME MADIface XT"
+
+hdspe_fx.DeviceDesc = "RME HDSPe FX series PnP driver"
+hdspe_fx.SvcDesc = "RME HDSPe FX Audio Device"
+
+hdspe_fx.Wave1.szPname  = "HDSPe FX Analog"
+hdspe_fx.Wave2.szPname  = "HDSPe FX AES"
+hdspe_fx.Wave3.szPname  = "HDSPe FX Phones"
+hdspe_fx.Wave4.szPname  = "HDSPe FX MADI (1-8)"
+hdspe_fx.Wave5.szPname  = "HDSPe FX MADI (9-16)"
+hdspe_fx.Wave6.szPname  = "HDSPe FX MADI (17-24)"
+hdspe_fx.Wave7.szPname  = "HDSPe FX MADI (25-32)"
+hdspe_fx.Wave8.szPname  = "HDSPe FX MADI (33-40)"
+hdspe_fx.Wave9.szPname  = "HDSPe FX MADI (41-48)"
+hdspe_fx.Wave10.szPname  = "HDSPe FX MADI (49-56)"
+hdspe_fx.Wave11.szPname = "HDSPe FX MADI (57-64)"
+hdspe_fx.Wave12.szPname = "HDSPe FX MADI (65-72)"
+hdspe_fx.Wave13.szPname = "HDSPe FX MADI (73-80)"
+hdspe_fx.Wave14.szPname = "HDSPe FX MADI (81-88)"
+hdspe_fx.Wave15.szPname = "HDSPe FX MADI (89-96)"
+hdspe_fx.Wave16.szPname = "HDSPe FX MADI (97-104)"
+hdspe_fx.Wave17.szPname = "HDSPe FX MADI (105-112)"
+hdspe_fx.Wave18.szPname = "HDSPe FX MADI (113-120)"
+hdspe_fx.Wave19.szPname = "HDSPe FX MADI (121-128)"
+hdspe_fx.Wave20.szPname = "HDSPe FX MADI (129-136)"
+hdspe_fx.Wave21.szPname = "HDSPe FX MADI (137-144)"
+hdspe_fx.Wave22.szPname = "HDSPe FX MADI (145-152)"
+hdspe_fx.Wave23.szPname = "HDSPe FX MADI (153-160)"
+hdspe_fx.Wave24.szPname = "HDSPe FX MADI (161-168)"
+hdspe_fx.Wave25.szPname = "HDSPe FX MADI (169-176)"
+hdspe_fx.Wave26.szPname = "HDSPe FX MADI (177-184)"
+hdspe_fx.Wave27.szPname = "HDSPe FX MADI (185-192)"
+
+hdspe_fx.Midi1.szPname   = "HDSPe FX MIDI"
+hdspe_fx.Midi2.szPname   = "HDSPe FX MADI1 MIDI"
+hdspe_fx.Midi3.szPname   = "HDSPe FX MADI2 MIDI"
+hdspe_fx.Midi4.szPname   = "HDSPe FX MADI3 MIDI"
+
+KSNAME_Wave1  = "hmfxwave0"
+KSNAME_Wave2  = "hmfxwave1"
+KSNAME_Wave3  = "hmfxwave2"
+KSNAME_Wave4  = "hmfxwave3"
+KSNAME_Wave5  = "hmfxwave4"
+KSNAME_Wave6  = "hmfxwave5"
+KSNAME_Wave7  = "hmfxwave6"
+KSNAME_Wave8  = "hmfxwave7"
+KSNAME_Wave9  = "hmfxwave8"
+KSNAME_Wave10 = "hmfxwave9"
+KSNAME_Wave11 = "hmfxwaveA"
+KSNAME_Wave12 = "hmfxwaveB"
+KSNAME_Wave13 = "hmfxwaveC"
+KSNAME_Wave14 = "hmfxwaveD"
+KSNAME_Wave15 = "hmfxwaveE"
+KSNAME_Wave16 = "hmfxwaveF"
+KSNAME_Wave17 = "hmfxwaveG"
+KSNAME_Wave18 = "hmfxwaveH"
+KSNAME_Wave19 = "hmfxwaveI"
+KSNAME_Wave20 = "hmfxwaveJ"
+KSNAME_Wave21 = "hmfxwaveK"
+KSNAME_Wave22 = "hmfxwaveL"
+KSNAME_Wave23 = "hmfxwaveM"
+KSNAME_Wave24 = "hmfxwaveN"
+KSNAME_Wave25 = "hmfxwaveO"
+KSNAME_Wave26 = "hmfxwaveP"
+KSNAME_Wave27 = "hmfxwaveQ"
+
+KSNAME_Midi1  = "hmfxmidi1"
+KSNAME_Midi2  = "hmfxmidi2"
+KSNAME_Midi3  = "hmfxmidi3"
+KSNAME_Midi4  = "hmfxmidi4"
+
+Proxy.CLSID        = "{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO   = "{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER  = "{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE = "{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+
+ASIO_NAME = "ASIO HDSPe FX"
+ASIO_GUID = "{164D78FD-5AD0-48b3-8CAC-E08471200D5B}"
+
+;==============================================================

@@ -1,0 +1,1472 @@
+;*****************************************************************************
+;
+; VTBWDM.INF - Device description file for Windows 98 & Windows 2000
+;              installation of the CS461x driver files.
+;
+; Copyright (c) 1996-2000 Voyetra Turtle Beach.
+;
+;*****************************************************************************
+[Version]
+;
+; This needs to change for each WHQL submission.
+;
+; NOTE: When we submit change the PW4193.catalog file to
+;       match the driver version number.
+;
+CatalogFile=PW4193.cat
+Signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+provider=%CSMfgName%
+DriverVer=06/23/2003, 5.12.01.4193
+
+[ControlFlags]
+;
+; Exclude all devices from Select Device list
+;
+; This make inf checker happy :)
+;
+ExcludeFromSelect = *
+
+[Manufacturer]
+%CSMfgName%=TurtleBeach
+
+[TurtleBeach]
+%tbcspud.DeviceDesc%   = tbcspud,  PCI\VEN_1013&DEV_6003&SUBSYS_33575053
+%tbcwdm.DeviceDesc%    = tbcwdm,   TURTLE_BEACH\SANTA_CRUZ_WDM_INTERFACE
+%tbcgame.DeviceDesc%   = tbcgame,  TURTLE_BEACH\*PNPB02F
+
+[DestinationDirs]
+tbcspud.CopyList    = 10,system32\drivers
+tbcspud.NT.CopyList = 10,system32\drivers
+CS4610DSP.CopyList  = 10,tbcdata
+cwcwtsmp.CopyList   = 10,tbcdata
+tbcwdm.CopyList     = 10,system32\drivers
+sensaura.CopyList   = 10,system
+tbctray.CopyList   = 11
+DefaultDestDir      = 12
+MSJSTICK.CopyList = 11          ; LDID_SYS
+GAMEPORT.CopyList = 11          ; LDID_SYS
+Audio3D.CopyList=11
+
+;
+;********************************** Win98 Install *****************************
+;
+[tbcspud]
+CopyFiles=tbcspud.CopyList, CS4610DSP.CopyList
+AddReg=CSCAud.tbcspud.AddReg, tbcspud.AddReg
+DriverVer=06/23/2003, 5.12.01.4193
+;KnownRegEntries=tbcspud.KnownRegEntries
+
+;[tbcspud.KnownRegEntries]
+;IsWin98Gold=keep
+
+;[IsWin98Gold]
+;1=HKLM,Software\Microsoft\Windows\CurentVersion,VersionNumber,0,4.10.1998
+
+[tbcspud.Interfaces]
+AddInterface=%CRYSTAL_SPUD_GUID%,%CRYSTAL_SPUD%,CSCAud.Int.SPuD
+AddInterface=%CRYSTAL_SPUD3_GUID%,%CRYSTAL_SPUD3%,CSCAud.Int.SPuD3
+
+
+
+
+[tbcspud.AddReg]
+HKLM,System\CurrentControlSet\Services\tbcspud,Start,1,03,00,00,00
+HKLM,System\CurrentControlSet\Services\tbcspud,Type,1,01,00,00,00
+HKLM,System\CurrentControlSet\Services\tbcspud,ErrorControl,1,01,00,00,00
+HKLM,%KEY_BASESP%\inst,WinDir,,%10%
+HKLM,%KEY_BASESP%\inst,File0,,%10%\tbcdata\cwcspud.dat
+HKLM,%KEY_BASESP%\inst,File1,,%10%\tbcdata\vtbspud.dat
+HKLM,%KEY_BASESP%\inst,File2,,%10%\tbcdata\vtbwdm.dat
+HKLM,%KEY_BASESP%\Trans,WinDir,,%10%
+HKLM,%KEY_BASESP%\Algorithms\Basics,IsW9x,1,01,00,00,00
+HKLM,%KEY_BASESP%\Algorithms\Basics,WinPath,,%10%
+
+; Set DriverType to 3 for WDM
+HKLM,%KEY_OS%\SCruz46xx,DriverType,1,03,00,00,00
+HKCU,%KEY_MM%\MIDIMap,CurrentInstrument,,wdmaud.drv<0000>
+
+
+
+[tbcwdm]
+AlsoInstall=KS.Registration(ks.inf), WDMAUDIO.Registration(wdmaudio.inf)
+CopyFiles=tbcwdm.CopyList, tbctray.CopyList, cwcwtsmp.CopyList, sensaura.CopyList, Audio3D.CopyList
+AddReg=CSCAud.tbcwdm.AddReg, guids.AddReg, tbcwdm.AddReg, CSCAud.tbcwdmC.AddReg, Audio3D.AddReg
+DriverVer=06/23/2003, 5.12.01.4193
+
+[tbcwdm.AddReg]
+HKLM,%KEY_RUNONCE%,vtbspudc.dll,,"RunDll32 %10%\tbcdata\vtbspudc.dll,Rundll32RegisterServer"
+HKLM,%KEY_RUN%,TraySantaCruz,,"%11%\tbctray.exe"
+
+[tbcwdm.Interfaces]
+AddInterface=%MSKSCATEGORY_AUDIO%,%KSNAME_Wave%,CSCAud.Int.Wave
+AddInterface=%MSKSCATEGORY_RENDER%,%KSNAME_Wave%,CSCAud.Int.Wave
+AddInterface=%MSKSCATEGORY_CAPTURE%,%KSNAME_Wave%,CSCAud.Int.Wave
+AddInterface=%MSKSCATEGORY_AUDIO%,%KSNAME_Topology%,CSCAud.Int.Topology
+AddInterface=%MSKSCATEGORY_AUDIO%,%KSNAME_UART%,CSCAud.Int.UART
+AddInterface=%MSKSCATEGORY_RENDER%,%KSNAME_UART%,CSCAud.Int.UART
+AddInterface=%MSKSCATEGORY_CAPTURE%,%KSNAME_UART%,CSCAud.Int.UART
+AddInterface=%MSKSCATEGORY_AUDIO%,%KSNAME_DMusic%,CSCAud.Int.DLS
+AddInterface=%MSKSCATEGORY_RENDER%,%KSNAME_DMusic%,CSCAud.Int.DLS
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; VTB Wave Devices
+;;
+AddInterface=%MSKSCATEGORY_AUDIO%,%KSNAME_Wave%OutFront,CSCAud.Int.WOFront
+AddInterface=%MSKSCATEGORY_RENDER%,%KSNAME_Wave%OutFront,CSCAud.Int.WOFront
+AddInterface=%MSKSCATEGORY_AUDIO%,%KSNAME_Wave%OutRear,CSCAud.Int.WORear
+AddInterface=%MSKSCATEGORY_RENDER%,%KSNAME_Wave%OutRear,CSCAud.Int.WORear
+AddInterface=%MSKSCATEGORY_AUDIO%,%KSNAME_Wave%Out56,CSCAud.Int.WO56
+AddInterface=%MSKSCATEGORY_RENDER%,%KSNAME_Wave%Out56,CSCAud.Int.WO56
+AddInterface=%MSKSCATEGORY_AUDIO%,%KSNAME_Wave%OutSpdif,CSCAud.Int.WOSpdif
+AddInterface=%MSKSCATEGORY_RENDER%,%KSNAME_Wave%OutSpdif,CSCAud.Int.WOSpdif
+AddInterface=%MSKSCATEGORY_AUDIO%,%KSNAME_Wave%InSecondaryRec,CSCAud.Int.WI2Rec
+AddInterface=%MSKSCATEGORY_CAPTURE%,%KSNAME_Wave%InSecondaryRec,CSCAud.Int.WI2Rec
+
+
+
+[MSJSTICK]
+LogConfig=BasicJoyStick.LC0,BasicJoystick.LC1
+CopyFiles=MSJSTICK.CopyList, GAMEPORT.CopyList
+AddReg=JOYSTICK.AddReg, MSJSTICK.AddReg
+UpdateInis=MSJSTICK.UpdateInis
+;KnownFiles=MSJSTICK.KnownFiles
+
+[tbcgame]
+;Include=joystick.inf
+Needs=MSJSTICK
+;;AlsoInstall=MSJSTICK(joystick.inf)
+AddReg=tbcgame.AddReg
+DriverVer=06/23/2003, 5.12.01.4193
+
+
+[tbcgame.AddReg]
+
+[MSJSTICK.CopyList]
+vjoyd.vxd,,
+msjstick.drv,,
+
+
+[GAMEPORT.CopyList]
+msanalog.vxd,,
+
+[JOYSTICK.AddReg]
+HKR,,DevLoader,,mmdevldr.vxd
+HKR,Drivers,MIGRATED,,0
+HKR,Drivers\joystick,,,
+
+[MSJSTICK.AddReg]
+HKR,,Driver,,vjoyd.vxd
+HKR,Drivers\joystick\msjstick.drv,Description,,%*PNPB02F.DeviceDesc%
+HKR,Drivers\joystick\msjstick.drv,Driver,,msjstick.drv
+HKR,Drivers,SubClasses,,"joystick"
+
+
+[BasicJoyStick.LC0]
+ConfigPriority=HARDWIRED
+IOConfig=201-201(3ff::)
+
+[BasicJoyStick.LC1]
+ConfigPriority=HARDWIRED
+IOConfig=200-207(3ff::)
+
+[MSJSTICK.UpdateInis]
+system.ini,drivers,"joystick="
+
+;
+;**************************** Windows 2000 Install ****************************
+;
+[tbcspud.NT]
+CopyFiles=tbcspud.NT.CopyList, CS4610DSP.CopyList
+AddReg=CSCAud.tbcspud.NT.AddReg
+;, tbcspud.NT.AddReg 
+DriverVer=06/23/2003, 5.12.01.4193
+
+[tbcspud.NT.Interfaces]
+AddInterface=%CRYSTAL_SPUD_GUID%,%CRYSTAL_SPUD%,CSCAud.Int.SPuD
+AddInterface=%CRYSTAL_SPUD3_GUID%,%CRYSTAL_SPUD3%,CSCAud.Int.SPuD3
+
+[tbcspud.NT.Services]
+AddService = tbcspud, 0x00000002, tbcspud_Service_Inst
+
+
+
+[tbcspud_Service_Inst]
+DisplayName   = %tbcspud.SvcDesc%
+ServiceType   = 1                  ; SERVICE_KERNEL_DRIVER
+StartType     = 3                  ; SERVICE_DEMAND_START
+ErrorControl  = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary = %10%\system32\drivers\tbcspud.sys
+;chkinf says we have to do this here for xp. well, at least for entries under key_base
+AddReg=CSCAud.tbcspud_Service.AddReg, tbcspud_Service.NT.AddReg, tbcwdm_Service.NT.AddReg, CSCAud.tbcwdm_Service.NT.AddReg
+
+[tbcspud_Service.NT.AddReg]
+;NOTE NOTE NOTE vtbspud will now be tbcspud!
+HKR,SCruz46xx\inst,WinDir,,\SystemRoot
+HKR,SCruz46xx\inst,File0,,\SystemRoot\tbcdata\cwcspud.dat
+HKR,SCruz46xx\inst,File1,,\SystemRoot\tbcdata\vtbspud.dat
+HKR,SCruz46xx\inst,File2,,\SystemRoot\tbcdata\vtbwdm.dat
+HKR,SCruz46xx\Trans,WinDir,,\SystemRoot
+; Set DriverType to 3 for WDM
+HKLM,%KEY_OS%\SCruz46xx,DriverType,1,03,00,00,00
+HKCU,%KEY_MM%\MIDIMap,CurrentInstrument,,wdmaud.drv<0000>
+
+[tbcwdm.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration, WDMAUDIO.FDMA
+CopyFiles=tbcwdm.CopyList, tbctray.CopyList, cwcwtsmp.CopyList, sensaura.CopyList, Audio3D.CopyList
+AddReg=CSCAud.tbcwdmC.AddReg, guids.AddReg 
+;tbcwdm.NT.AddReg moved to service install as per chkinf
+DriverVer=06/23/2003, 5.12.01.4193
+
+[tbcwdm_Service.NT.AddReg]
+HKLM,%KEY_RUNONCE%,vtbspudc.dll,,"RunDll32 %10%\tbcdata\vtbspudc.dll DllRegisterServer"
+HKLM,%KEY_RUN%,TraySantaCruz,,"%11%\tbctray.exe"
+;
+;Registering the MP3 filter
+;
+;HKLM,%KEY_RUNONCE%,cwcmp3.ax,,"RunDll32 %10%\tbcdata\cwcmp3.ax DllRegisterServer"
+
+;THESE WILL GO UNDER TBCWDM NOT VTBSPUD!!!!!!!!
+HKR,SCruz46xx\Strings,Install,,%InstallControlPanel%
+HKR,SCruz46xx\Strings,MenuRun,,%TrayMenuRun%
+HKR,SCruz46xx\Strings,MenuMixerDlg,,%TrayMenuMixerDlg%
+HKR,SCruz46xx\Strings,MenuExit,,%TrayMenuExit%
+HKR,SCruz46xx\Strings,DialogMute,,%TrayDialogMute%
+HKR,SCruz46xx\Strings,DialogVolume,,%TrayDialogVolume%
+HKR,SCruz46xx\Strings,ToolTip,,%TrayToolTip%
+
+[tbcwdm.NT.Interfaces]
+AddInterface=%MSKSCATEGORY_AUDIO%,%KSNAME_Wave%,CSCAud.Int.Wave
+AddInterface=%MSKSCATEGORY_RENDER%,%KSNAME_Wave%,CSCAud.Int.Wave
+AddInterface=%MSKSCATEGORY_CAPTURE%,%KSNAME_Wave%,CSCAud.Int.Wave
+;for some reason, chkinf insists that these should be under Wave!
+AddInterface=%MSKSCATEGORY_AUDIO%,%KSNAME_Topology%,CSCAud.Int.Topology
+AddInterface=%MSKSCATEGORY_AUDIO%,%KSNAME_UART%,CSCAud.Int.UART
+AddInterface=%MSKSCATEGORY_RENDER%,%KSNAME_UART%,CSCAud.Int.UART
+AddInterface=%MSKSCATEGORY_CAPTURE%,%KSNAME_UART%,CSCAud.Int.UART
+AddInterface=%MSKSCATEGORY_AUDIO%,%KSNAME_DMusic%,CSCAud.Int.DLS
+AddInterface=%MSKSCATEGORY_RENDER%,%KSNAME_DMusic%,CSCAud.Int.DLS
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; VTB Wave Devices
+;;
+;again chkinf insists that these go under Wave!
+AddInterface=%MSKSCATEGORY_AUDIO%,%KSNAME_Wave%OutFront,CSCAud.Int.WOFront
+AddInterface=%MSKSCATEGORY_RENDER%,%KSNAME_Wave%OutFront,CSCAud.Int.WOFront
+AddInterface=%MSKSCATEGORY_AUDIO%,%KSNAME_Wave%OutRear,CSCAud.Int.WORear
+AddInterface=%MSKSCATEGORY_RENDER%,%KSNAME_Wave%OutRear,CSCAud.Int.WORear
+AddInterface=%MSKSCATEGORY_AUDIO%,%KSNAME_Wave%Out56,CSCAud.Int.WO56
+AddInterface=%MSKSCATEGORY_RENDER%,%KSNAME_Wave%Out56,CSCAud.Int.WO56
+AddInterface=%MSKSCATEGORY_AUDIO%,%KSNAME_Wave%OutSpdif,CSCAud.Int.WOSpdif
+AddInterface=%MSKSCATEGORY_RENDER%,%KSNAME_Wave%OutSpdif,CSCAud.Int.WOSpdif
+AddInterface=%MSKSCATEGORY_AUDIO%,%KSNAME_Wave%InSecondaryRec,CSCAud.Int.WI2Rec
+AddInterface=%MSKSCATEGORY_CAPTURE%,%KSNAME_Wave%InSecondaryRec,CSCAud.Int.WI2Rec
+
+
+[tbcwdm.NT.Services]
+AddService = tbcwdm, 0x00000002, tbcwdm_Service_Inst
+
+[tbcwdm_Service_Inst]
+DisplayName   = %tbcwdm.SvcDesc%
+ServiceType   = 1                  ; SERVICE_KERNEL_DRIVER
+StartType     = 3                  ; SERVICE_DEMAND_START
+ErrorControl  = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary = %10%\system32\drivers\tbcwdm.sys
+;MOVE TO TBCSPUD MAKE ALL THE SAME!
+;AddReg = tbcwdm_Service.NT.AddReg, CSCAud.tbcwdm_Service.NT.AddReg
+
+[CSCAud.tbcwdm_Service.NT.AddReg]
+;for 2k/xp
+
+;HKLM,%KEY_RUN%,SoundFusion,,"RunDll32 cwcprops.cpl,CrystalControlWnd"
+;*****************************************************************************
+;
+; Equalization Settings
+;
+;*****************************************************************************
+HKR,SCruz46xx\Algorithms\Equalization,ArmEQ,1,01,00,00,00
+HKR,SCruz46xx\Algorithms\Equalization,EnableEQ,1,00,00,00,00
+HKR,SCruz46xx\Algorithms\Equalization,EnableEQPeakMeters,1,01,00,00,00
+HKR,SCruz46xx\Algorithms\Equalization,ShowEQPeakMetersControl,1,01,00,00,00
+HKR,SCruz46xx\Algorithms\Equalization\48000,CurrentNoOfBands,1,0a,00,00,00
+HKR,SCruz46xx\Algorithms\Equalization\48000,NumberOfBands,1,0a,00,00,00
+
+;*****************************************************************************
+; Equalizer Presets
+;*****************************************************************************
+; Default preset
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\CurrentSet,Name,,"Synthesizer"
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\CurrentSet,GainTable,1,01,01,01,00,ff,ff,00,00,02,03
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\CurrentSet,FrequencyTable,1,14,00,4b,00,87,00,fa,00,f4,01,\
+  e8,03,d0,07,a0,0f,40,1f,98,3a
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\CurrentSet,BandwidthTable,1,38,00,46,00,84,00,2c,01,58,02,\
+  b0,04,60,09,68,10,90,1f,10,27
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\CurrentSet,Flags,1,01,00,00,00
+
+; Built-in preset (Classical)
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\Classical,GainTable,1,02,01,00,00,ff,ff,fe,fd,fc,fb
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\Classical,FrequencyTable,1,14,00,4b,00,87,00,fa,00,f4,01,\
+  e8,03,d0,07,a0,0f,40,1f,98,3a
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\Classical,BandwidthTable,1,38,00,46,00,84,00,2c,01,58,02,\
+  b0,04,60,09,68,10,90,1f,10,27
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\Classical,Flags,1,01,00,00,00
+
+; Built-in preset (Flat)
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\Flat,GainTable,1,00,00,00,00,00,00,00,00,00,00
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\Flat,FrequencyTable,1,14,00,4b,00,87,00,fa,00,f4,01,\
+  e8,03,d0,07,a0,0f,40,1f,98,3a
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\Flat,BandwidthTable,1,38,00,46,00,84,00,2c,01,58,02,\
+  b0,04,60,09,68,10,90,1f,10,27
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\Flat,Flags,1,01,00,00,00
+
+; Built-in preset (Jazz)
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\Jazz,GainTable,1,03,02,ff,00,fd,fd,fe,ff,01,03
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\Jazz,FrequencyTable,1,14,00,4b,00,87,00,fa,00,f4,01,\
+  e8,03,d0,07,a0,0f,40,1f,98,3a
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\Jazz,BandwidthTable,1,38,00,46,00,84,00,2c,01,58,02,\
+  b0,04,60,09,68,10,90,1f,10,27
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\Jazz,Flags,1,01,00,00,00
+
+; Built-in preset (Pop)
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\Pop,GainTable,1,fc,fe,01,03,03,02,00,00,fe,fc
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\Pop,FrequencyTable,1,14,00,4b,00,87,00,fa,00,f4,01,\
+  e8,03,d0,07,a0,0f,40,1f,98,3a
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\Pop,BandwidthTable,1,38,00,46,00,84,00,2c,01,58,02,\
+  b0,04,60,09,68,10,90,1f,10,27
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\Pop,Flags,1,01,00,00,00
+
+; Built-in preset (Rock)
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\Rock,GainTable,1,03,01,ff,fe,fd,fc,fe,00,01,02
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\Rock,FrequencyTable,1,14,00,4b,00,87,00,fa,00,f4,01,\
+  e8,03,d0,07,a0,0f,40,1f,98,3a
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\Rock,BandwidthTable,1,38,00,46,00,84,00,2c,01,58,02,\
+  b0,04,60,09,68,10,90,1f,10,27
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\Rock,Flags,1,01,00,00,00
+
+; Built-in preset (Synthesizer)
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\Synthesizer,GainTable,1,01,01,01,00,ff,ff,00,00,02,03
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\Synthesizer,FrequencyTable,1,14,00,4b,00,87,00,fa,00,f4,01,\
+  e8,03,d0,07,a0,0f,40,1f,98,3a
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\Synthesizer,BandwidthTable,1,38,00,46,00,84,00,2c,01,58,02,\
+  b0,04,60,09,68,10,90,1f,10,27
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\Synthesizer,Flags,1,01,00,00,00
+
+; Built-in preset (Vocal)
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\Vocal,GainTable,1,ff,fd,fd,01,03,03,02,01,00,ff
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\Vocal,FrequencyTable,1,14,00,4b,00,87,00,fa,00,f4,01,\
+  e8,03,d0,07,a0,0f,40,1f,98,3a
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\Vocal,BandwidthTable,1,38,00,46,00,84,00,2c,01,58,02,\
+  b0,04,60,09,68,10,90,1f,10,27
+HKR,SCruz46xx\Algorithms\Equalization\48000\10-Bands\Vocal,Flags,1,01,00,00,00
+
+;*****************************************************************************
+;
+; Control panel applet control
+;
+; Value 0 : Icon not shown on TaskBar
+; Value 1 : Icon shown on TaskBar
+; Value 2 : SoundFusion applet is not accessible (neither from TaskBar nor
+;             control panel)
+;
+;*****************************************************************************
+HKR,SCruz46xx\ControlPanel,ShowPageEQ,1,01,00,00,00
+HKR,SCruz46xx\ControlPanel,ShowPageSPDIF,1,01,00,00,00
+HKR,SCruz46xx\ControlPanel,ShowPageSynth,1,01,00,00,00
+HKR,SCruz46xx\ControlPanel,ShowPageHelp,1,01,00,00,00
+HKR,SCruz46xx\ControlPanel,ShowTaskbarIcon,1,01,00,00,00
+HKR,SCruz46xx\ControlPanel,EnablePopupHelp,1,01,00,00,00
+HKR,SCruz46xx\ControlPanel,MakePreferredDevice,1,01,00,00,00
+HKR,SCruz46xx\Algorithms\Basics,EnableSensaura3D,1,03,00,00,00
+HKR,SCruz46xx\Algorithms\Basics,EnableEAX,1,01,00,00,00
+HKLM,Software\Sensaura\crlds3d,MacroFX,1,01,00,00,00
+HKR,SCruz46xx\Algorithms\Basics,EnableMultiDrive,1,01,00,00,00
+HKR,SCruz46xx\Algorithms\Basics,ChannelConfig,1,03,00,00,00
+HKR,SCruz46xx\Algorithms\Basics,SpeakerGeometry,1,14,00,00,00
+HKR,SCruz46xx\Algorithms\Basics,Enable3DAcceleration,1,01,00,00,00
+HKR,SCruz46xx\Algorithms\Basics,Enable2DAcceleration,1,01,00,00,00
+HKR,SCruz46xx\Algorithms\Basics,EnableStereoExpansion,1,00,00,00,00
+HKR,SCruz46xx\Algorithms\Basics,EnableMP3Acceleration,1,01,00,00,00
+HKR,SCruz46xx\Algorithms\Basics,EnableExternalMidi,1,01,00,00,00
+HKR,SCruz46xx\Algorithms\Basics,ShowMP3AccelerationControl,1,01,00,00,00
+HKR,SCruz46xx\Algorithms\SPDIF,LEDColorSPDIF,1,ff,00,00,00
+HKR,SCruz46xx\Algorithms\SPDIF,SPDIFEnableInput,1,00,00,00,00
+HKR,SCruz46xx\Algorithms\SPDIF,SPDIFOutputSource,1,00,00,00,00
+;
+; Currently this needs to be a one to allow the speaker configuration
+; to be read from the registry. 
+;
+HKR,SCruz46xx\Algorithms\Basics,EnableSpeakerConfig,1,01,00,00,00
+
+
+;*****************************************************************************
+;
+; This will disable the line on the mixer.  Disabling both Master
+; and Headphones will invalidate the topology.
+; 00 = Enabled; 01 = Disabled
+;
+HKR,SCruz46xx\Docking,DisableMaster,1,00
+HKR,SCruz46xx\Docking,DisableRecord,1,00
+HKR,SCruz46xx\Docking,DisableHPhone,1,00
+HKR,SCruz46xx\Docking,DisableFront,1,00
+HKR,SCruz46xx\Docking,DisableRear,1,00
+HKR,SCruz46xx\Docking,DisableMonoOut,1,01
+
+HKR,SCruz46xx\Docking,DisableStereoMix,1,00
+
+HKR,SCruz46xx\Docking,DisableCd,1,00
+HKR,SCruz46xx\Docking,DisableMic,1,00
+HKR,SCruz46xx\Docking,DisableLine,1,00
+HKR,SCruz46xx\Docking,DisableAux,1,00
+HKR,SCruz46xx\Docking,DisableZV,1,00
+;Video isn't available on CS4294
+HKR,SCruz46xx\Docking,DisableVideo,1,00
+;SPDIF isn't available on CS4294, but is available on CS46xx
+HKR,SCruz46xx\Docking,DisableSPDIF,1,00
+;Phone and Beep aren't available on CS4294 or CS4298
+HKR,SCruz46xx\Docking,DisablePhone,1,00
+HKR,SCruz46xx\Docking,DisableBeep,1,00
+
+HKR,SCruz46xx\Docking,DisableDockMaster,1,00
+HKR,SCruz46xx\Docking,DisableDockHPhone,1,00
+HKR,SCruz46xx\Docking,DisableDockCd,1,00
+HKR,SCruz46xx\Docking,DisableDockMic,1,00
+HKR,SCruz46xx\Docking,DisableDockLine,1,00
+HKR,SCruz46xx\Docking,DisableDockAux,1,01
+;Video and S/P-DIF aren't available on CS4294
+HKR,SCruz46xx\Docking,DisableDockVideo,1,01
+HKR,SCruz46xx\Docking,DisableDockSPDIF,1,01
+
+;
+; This will tell us whether the lines will be on the notebook or the
+; docking station when we are docked (must be enabled to do that) 
+; Set to 00=use the notebook;
+; Set to 01=use the docking station.
+;
+HKR,SCruz46xx\Docking,UseDockMaster,1,01
+HKR,SCruz46xx\Docking,UseDockHPhone,1,01
+HKR,SCruz46xx\Docking,UseDockCd,1,00
+HKR,SCruz46xx\Docking,UseDockMic,1,01
+HKR,SCruz46xx\Docking,UseDockLine,1,01
+HKR,SCruz46xx\Docking,UseDockAux,1,01
+HKR,SCruz46xx\Docking,UseDockVideo,1,01
+HKR,SCruz46xx\Docking,UseDockSPDIF,1,00
+
+; add tbcdata for cpl if missing
+HKR,SCruz46xx\Algorithms\Basics,tbsctrl,,"%10%\tbcdata\tbsctrl.exe"
+
+[CSCAud.tbcspud.NT.AddReg]
+HKR,,Driver,,tbcspud.sys
+HKR,,NTMPDriver,,"tbcspud.sys"
+HKR,,DevLoader,,"*ntkern"
+; doesn't work for spud but wdm, but do both just in case
+HKR,Branding,url,,"http://www.turtle-beach.com/"
+HKR,Branding,bitmap,,"%10%\tbcdata\tbtree.bmp"
+HKR,Branding,icon,,"%10%\tbcdata\tbtree.ico"
+
+[tbcgame.NT]
+Include=gameport.inf
+Needs=Standard_Port.NT
+AddReg=tbcgame.NT.AddReg
+DriverVer=06/23/2003, 5.12.01.4193
+
+[tbcgame.NT.AddReg]
+
+[tbcgame.NT.Services]
+AddService = gameenum, 0x00000002, cwcgame_Service_Inst
+
+[cwcgame_Service_Inst]
+DisplayName    = %tbcgame.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 0                  ; SERVICE_ERROR_IGNORE
+ServiceBinary  = %12%\gameenum.sys
+LoadOrderGroup = Extended Base
+
+                                                                                                        
+;
+;********************************** Common Install ****************************
+;
+[CSCAud.Int.SPuD]
+AddReg=CSCAud.Int.SPuD.AddReg
+
+[CSCAud.Int.SPuD.AddReg]
+HKR,,FriendlyName,,%CSCAud.SPuD.szPname%
+
+[CSCAud.Int.SPuD3]
+AddReg=CSCAud.Int.SPuD3.AddReg
+
+[CSCAud.Int.SPuD3.AddReg]
+;,%cwcspud3.DeviceDesc% is NOT defined in ours or crystal's!!!
+HKR,,FriendlyName,,%CSCAud.SPuD3.szPname%
+
+[CSCAud.Int.Wave]
+AddReg=CSCAud.Int.Wave.AddReg
+
+[CSCAud.Int.Wave.AddReg]
+HKR,,CLSID,,%MSProxy.CLSID%
+HKR,,FriendlyName,,%CSCAud.Wave.szPname%
+HKR,,VirtualSourceDefault,1,00,80,FC,FF
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; VTB Wave Devices
+;;
+[CSCAud.Int.WOFront]
+AddReg=CSCAud.Int.WOFront.AddReg
+
+[CSCAud.Int.WOFront.AddReg]
+HKR,,CLSID,,%MSProxy.CLSID%
+HKR,,FriendlyName,,%CSCAud.WaveOutFront.szPname%
+
+[CSCAud.Int.WORear]
+AddReg=CSCAud.Int.WORear.AddReg
+
+[CSCAud.Int.WORear.AddReg]
+HKR,,CLSID,,%MSProxy.CLSID%
+HKR,,FriendlyName,,%CSCAud.WaveOutRear.szPname%
+
+[CSCAud.Int.WO56]
+AddReg=CSCAud.Int.WO56.AddReg
+
+[CSCAud.Int.WO56.AddReg]
+HKR,,CLSID,,%MSProxy.CLSID%
+HKR,,FriendlyName,,%CSCAud.WaveOut56.szPname%
+
+[CSCAud.Int.WOSpdif]
+AddReg=CSCAud.Int.WOSpdif.AddReg
+
+[CSCAud.Int.WOSpdif.AddReg]
+HKR,,CLSID,,%MSProxy.CLSID%
+HKR,,FriendlyName,,%CSCAud.WaveOutSpdif.szPname%
+
+
+[CSCAud.Int.WI2Rec]
+AddReg=CSCAud.Int.WI2Rec.AddReg
+
+[CSCAud.Int.WI2Rec.AddReg]
+HKR,,CLSID,,%MSProxy.CLSID%
+HKR,,FriendlyName,,%CSCAud.WaveInSecondaryRec.szPname%
+
+
+[CSCAud.Int.Topology]
+AddReg=CSCAud.Int.Topo.AddReg
+
+[CSCAud.Int.Topo.AddReg]
+HKR,,CLSID,,%MSProxy.CLSID%
+HKR,,FriendlyName,,%CSCAud.Topology.szPname%
+
+[CSCAud.Int.UART]
+AddReg=CSCAud.Int.UART.AddReg
+
+[CSCAud.Int.UART.AddReg]
+HKR,,CLSID,,%MSProxy.CLSID%
+HKR,,FriendlyName,,%CSCAud.UART.szPname%
+
+[CSCAud.Int.DLS]
+AddReg=CSCAud.Int.DLS.AddReg
+
+[CSCAud.Int.DLS.AddReg]
+HKR,,CLSID,,%MSProxy.CLSID%
+HKR,,FriendlyName,,%CSCAud.DLS.szPname%
+
+[CSCAud.tbcspud.AddReg]
+HKR,,Driver,,tbcspud.sys
+HKR,,NTMPDriver,,"tbcspud.sys"
+HKR,,DevLoader,,"*ntkern"
+HKLM,%KEY_BASESP%\Algorithms\MP3\Renderer,Enabled,1,01,00,00,00
+HKLM,%KEY_BASESP%\Algorithms\Power,ClkRunMode,1,01,00,00,00
+HKLM,%KEY_BASESP%\Algorithms\WaveTable,Enable,1,01,00,00,00 
+HKLM,%KEY_BASESP%\Algorithms\WaveTable,CurrentHWVoicesLimit,1,20,00,00,00
+HKLM,%KEY_BASESP%\Algorithms\WaveTable,CurrentSWVoicesLimit,1,20,00,00,00
+HKLM,%KEY_BASESP%\Algorithms\WaveTable,VoiceAllocationMethod,1,00,00,00,00
+HKLM,%KEY_BASESP%\Algorithms\WaveTable,StaticImage,1,01,00,00,00
+HKLM,%KEY_BASESP%\Algorithms\WaveTable,OverrideDefaultSet,1,00,00,00,00
+HKLM,%KEY_BASESP%\Algorithms\WaveTable,OverrideSetFilename,,""
+HKLM,%KEY_BASESP%\Algorithms\Joystick,Enable,1,01,00,00,00   
+HKLM,%KEY_BASESP%\Algorithms\HWVolume,Enable,1,00,00,00,00   
+HKLM,%KEY_BASESP%\Algorithms\3D,Enable,1,01,00,00,00   
+
+;
+; This section is for the limits for 3D positional audio and Wave Table.
+;
+HKLM,%KEY_BASESP%\Limits\3D_44K,Maximum,1,08,00,00,00
+HKLM,%KEY_BASESP%\Limits\3D_44K,Minimum,1,01,00,00,00
+HKLM,%KEY_BASESP%\Limits\3D_44K,TaskType,1,00,03,00,00
+HKLM,%KEY_BASESP%\Limits\3D_44K,Version,1,00,00,00,00
+HKLM,%KEY_BASESP%\Limits\3D_32K,Maximum,1,08,00,00,00
+HKLM,%KEY_BASESP%\Limits\3D_32K,Minimum,1,01,00,00,00
+HKLM,%KEY_BASESP%\Limits\3D_32K,TaskType,1,10,03,00,00
+HKLM,%KEY_BASESP%\Limits\3D_32K,Version,1,00,00,00,00
+HKLM,%KEY_BASESP%\Limits\3D_22K,Maximum,1,08,00,00,00
+HKLM,%KEY_BASESP%\Limits\3D_22K,Minimum,1,01,00,00,00
+HKLM,%KEY_BASESP%\Limits\3D_22K,TaskType,1,20,03,00,00
+HKLM,%KEY_BASESP%\Limits\3D_22K,Version,1,00,00,00,00
+HKLM,%KEY_BASESP%\Limits\DLSVoices,Maximum,1,40,00,00,00
+HKLM,%KEY_BASESP%\Limits\DLSVoices,Minimum,1,10,00,00,00
+HKLM,%KEY_BASESP%\Limits\DLSVoices,TaskType,1,22,01,00,00
+HKLM,%KEY_BASESP%\Limits\DLSVoices,Version,1,00,00,00,00
+HKLM,%KEY_BASESP%\Limits\PCM,Maximum,1,20,00,00,00
+HKLM,%KEY_BASESP%\Limits\PCM,Minimum,1,01,00,00,00
+HKLM,%KEY_BASESP%\Limits\PCM,TaskType,1,07,00,00,00
+HKLM,%KEY_BASESP%\Limits\PCM,Version,1,00,00,00,00
+
+
+[CSCAud.tbcwdmC.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,tbcwdm.sys
+HKR,,NTMPDriver,,"tbcwdm.sys,sbemul.sys"
+HKR,Drivers,SubClasses,,"wave,mixer,midi"
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Description,,%tbcwdm.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%tbcwdm.DeviceDesc%
+HKR,Drivers\wave\wdmaud.drv,Description,,%tbcwdm.DeviceDesc%
+;add branding here too.  don't know which os will pay attention to
+HKR,Branding,url,,"http://www.turtle-beach.com/"
+HKR,Branding,bitmap,,"%10%\tbcdata\tbtree.bmp"
+HKR,Branding,icon,,"%10%\tbcdata\tbtree.ico"
+
+;**********************************************************************
+
+
+;
+; Hardware Defaults - These are default settings to be used in the hardware.
+; The register value XXYY translates to ...,1,yy,xx.  These are the default
+; values of the driver.
+;
+; --- NOTE These are NOT used by the Santa Cruz driver, instead we use the
+;     same settings we used on the VXD driver.
+;
+HKR,Ac9x,MasterVolume,1,08,08
+HKR,Ac9x,HPhoneVolume,1,08,08
+HKR,Ac9x,MonoOutVolume,1,08,80
+HKR,Ac9x,BeepVolume,1,00,00
+HKR,Ac9x,PhoneVolume,1,08,80
+HKR,Ac9x,MicVolume,1,08,80
+HKR,Ac9x,LineInVolume,1,08,08
+HKR,Ac9x,CdVolume,1,08,08
+HKR,Ac9x,VideoVolume,1,08,08
+HKR,Ac9x,AuxVolume,1,08,08
+HKR,Ac9x,PcmOutVolume,1,08,08
+HKR,Ac9x,RecordSelect,1,00,00
+HKR,Ac9x,RecordGain,1,08,08
+HKR,Ac9x,GeneralPurpose,1,00,00
+HKR,Ac9x,3dControl,1,00,00
+
+HKR,HwCtrl,MidiVolume,1,00,00,a6,ff
+HKR,HwCtrl,MidiMute,1,00,00,00,00
+
+;
+; This is the default stereo mix record volume for systems that capture a
+; mix that was mixed on the DSP.
+HKR,HwCtrl,DSPStereoMixVolume,1,00,00,00,00
+
+;
+; Volume Ranges - These take the place of tables.  Use these to adjust the dB 
+; range of the slider (dB*65536).  By default, they are set to the hardware's 
+; minimum and maximum values.  The formula for determining the value of the 
+; range is: hex(dB*65536) = 0xWWXXYYZZ.
+; WWXXYYZZ translates to ...,1,ZZ,YY,XX,WW
+;
+HKR,Mixer,MasterMin,1,00,80,a1,ff
+HKR,Mixer,MasterMax,1,00,00,00,00
+HKR,Mixer,MasterStep,1,00,80,01,00
+
+HKR,Mixer,MultiMasterMin,1,00,80,a1,ff
+HKR,Mixer,MultiMasterMax,1,00,00,00,00
+HKR,Mixer,MultiMasterStep,1,00,80,01,00
+
+HKR,Mixer,MidiMin,1,00,80,a1,ff
+HKR,Mixer,MidiMax,1,00,00,00,00
+HKR,Mixer,MidiStep,1,00,80,01,00
+
+HKR,Mixer,HPhoneMin,1,00,80,a1,ff
+HKR,Mixer,HPhoneMax,1,00,00,00,00
+HKR,Mixer,HPhoneStep,1,00,80,01,00
+
+HKR,Mixer,FrontMin,1,00,80,a1,ff
+HKR,Mixer,FrontMax,1,00,00,00,00
+HKR,Mixer,FrontStep,1,00,80,01,00
+
+HKR,Mixer,RearMin,1,00,80,a1,ff
+HKR,Mixer,RearMax,1,00,00,00,00
+HKR,Mixer,RearStep,1,00,80,01,00
+
+HKR,Mixer,CdMin,1,00,80,dd,ff
+HKR,Mixer,CdMax,1,00,00,0c,00
+HKR,Mixer,CdStep,1,00,80,01,00
+
+HKR,Mixer,MicMin,1,00,80,dd,ff
+HKR,Mixer,MicMax,1,00,00,0c,00
+HKR,Mixer,MicStep,1,00,80,01,00
+
+HKR,Mixer,LineMin,1,00,80,dd,ff
+HKR,Mixer,LineMax,1,00,00,0c,00
+HKR,Mixer,LineStep,1,00,80,01,00
+
+HKR,Mixer,AuxMin,1,00,80,dd,ff
+HKR,Mixer,AuxMax,1,00,00,0c,00
+HKR,Mixer,AuxStep,1,00,80,01,00
+
+HKR,Mixer,VideoMin,1,00,80,dd,ff
+HKR,Mixer,VideoMax,1,00,00,0c,00
+HKR,Mixer,VideoStep,1,00,80,01,00
+
+HKR,Mixer,PhoneMin,1,00,80,dd,ff
+HKR,Mixer,PhoneMax,1,00,00,0c,00
+HKR,Mixer,PhoneStep,1,00,80,01,00
+
+HKR,Mixer,BeepMin,1,00,00,d3,ff
+HKR,Mixer,BeepMax,1,00,00,00,00
+HKR,Mixer,BeepStep,1,00,00,03,00
+
+HKR,Mixer,ZVMin,1,00,00,a6,ff
+HKR,Mixer,ZVMax,1,00,00,00,00 
+HKR,Mixer,ZVStep,1,00,80,01,00
+
+HKR,Mixer,SPDIFMin,1,00,00,a6,ff
+HKR,Mixer,SPDIFMax,1,00,00,00,00 
+HKR,Mixer,SPDIFStep,1,00,80,01,00
+
+;
+; Volume controls attached to muxes all use a uniform volume setup.
+;
+HKR,Mixer,RecordMin,1,00,00,00,00
+HKR,Mixer,RecordMax,1,00,80,16,00
+HKR,Mixer,RecordStep,1,00,80,01,00
+    
+HKR,Mixer,MonoOutMin,1,00,80,a1,ff
+HKR,Mixer,MonoOutMax,1,00,00,00,00
+HKR,Mixer,MonoOutStep,1,00,80,01,00
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; 
+;; TB Santa cruz mixer settings.
+;; NOTE: These are ported from the VXD driver, but notice that
+;; the left and right are never programmed differently, so
+;; As a result the code only pays attention to the left volume.
+;;
+;;
+HKR,Config\Mixer,MasterVolumeLeft,,"44975"
+HKR,Config\Mixer,MasterVolumeRight,,"44975"
+HKR,Config\Mixer,MasterMute,,"0"
+HKR,Config\Mixer,HeadphoneVolumeLeft,,"44975"
+HKR,Config\Mixer,HeadphoneVolumeRight,,"44975"
+HKR,Config\Mixer,HeadphoneMute,,"0"
+HKR,Config\Mixer,MonoOutVolume,,"44975"
+HKR,Config\Mixer,MonoOutMute,,"0"
+HKR,Config\Mixer,MonoOutSelect,,"0"
+HKR,Config\Mixer,WaveOutVolumeLeft,,"44975"
+HKR,Config\Mixer,WaveOutVolumeRight,,"44975"
+HKR,Config\Mixer,WaveOutMute,,"0"
+HKR,Config\Mixer,SynthVolumeLeft,,"44975"
+HKR,Config\Mixer,SynthVolumeRight,,"44975"
+HKR,Config\Mixer,SynthMute,,"0"
+HKR,Config\Mixer,PhoneVolume,,"44975"
+HKR,Config\Mixer,PhoneMute,,"1"
+HKR,Config\Mixer,AuxVolumeLeft,,"44975"
+HKR,Config\Mixer,AuxVolumeRight,,"44975"
+HKR,Config\Mixer,AuxMute,,"0"
+HKR,Config\Mixer,CDVolumeLeft,,"44975"
+HKR,Config\Mixer,CDVolumeRight,,"44975"
+HKR,Config\Mixer,CDMute,,"0"
+HKR,Config\Mixer,LineInVolumeLeft,,"44975"
+HKR,Config\Mixer,LineInVolumeRight,,"44975"
+HKR,Config\Mixer,LineInMute,,"1"
+HKR,Config\Mixer,VideoVolumeLeft,,"44975"
+HKR,Config\Mixer,VideoVolumeRight,,"44975"
+HKR,Config\Mixer,VideoMute,,"1"
+HKR,Config\Mixer,MicVolume,,"44975"
+HKR,Config\Mixer,MicMute,,"1"
+HKR,Config\Mixer,MicBoost,,"1"
+HKR,Config\Mixer,MicSelect,,"0"
+HKR,Config\Mixer,MonoInVolume,,"44975"
+HKR,Config\Mixer,MonoInMute,,"1"
+HKR,Config\Mixer,ZVVolumeLeft,,"44975"
+HKR,Config\Mixer,ZVVolumeRight,,"44975"
+HKR,Config\Mixer,ZVMute,,"1"
+HKR,Config\Mixer,SurroundVolumeLeft,,"44975"
+HKR,Config\Mixer,SurroundVolumeRight,,"44975"
+HKR,Config\Mixer,SurroundMute,,"0"
+HKR,Config\Mixer,MasterFader,,"0"
+HKR,Config\Mixer,WaveFader,,"0"
+HKR,Config\Mixer,DSFader,,"0"
+HKR,Config\Mixer,SynthFader,,"0"
+HKR,Config\Mixer,CDFader,,"0"
+HKR,Config\Mixer,AuxFader,,"0"
+HKR,Config\Mixer,LineInFader,,"0"
+HKR,Config\Mixer,VideoFader,,"0"
+HKR,Config\Mixer,ZVFader,,"0"
+HKR,Config\Mixer,MicFader,,"0"
+HKR,Config\Mixer,TelephoneFader,,"0"
+HKR,Config\Mixer,MonoInFader,,"0"
+HKR,Config\Mixer,FrontWaveVolumeLeft,,"32768"
+HKR,Config\Mixer,FrontWaveVolumeRight,,"32768"
+HKR,Config\Mixer,FrontWaveMute,,"0"
+HKR,Config\Mixer,RearWaveVolumeLeft,,"32768"
+HKR,Config\Mixer,RearWaveVolumeRight,,"32768"
+HKR,Config\Mixer,RearWaveMute,,"0"
+HKR,Config\Mixer,ThirdWaveVolumeLeft,,"32768"
+HKR,Config\Mixer,ThirdWaveVolumeRight,,"32768"
+HKR,Config\Mixer,ThirdWaveMute,,"0"
+HKR,Config\Mixer,SPDifOutVolumeLeft,,"32768"
+HKR,Config\Mixer,SPDifOutVolumeRight,,"32768"
+HKR,Config\Mixer,SPDifOutMute,,"0"
+HKR,Config\Mixer,Async2VolumeLeft,,"32768"
+HKR,Config\Mixer,Async2VolumeRight,,"32768"
+HKR,Config\Mixer,Async2Mute,,"0"
+HKR,Config\Mixer,SPDIFMonVolumeLeft,,"32768"
+HKR,Config\Mixer,SPDIFMonVolumeRight,,"32768"
+HKR,Config\Mixer,SPDIFMonMute,,"1"
+HKR,Config\Mixer,SPDIFFader,,"0"
+
+HKR,Config\Mixer,wss_fx1_volume,,"44975"
+HKR,Config\Mixer,wss_fx1_mute,,"1"
+HKR,Config\Mixer,wss_fx1_fader,,"0"
+HKR,Config\Mixer,wss_fx1_waveout_volume,,"44975"
+HKR,Config\Mixer,wss_fx1_waveout_mute,,"0"
+HKR,Config\Mixer,wss_fx1_synth_volume,,"44975"
+HKR,Config\Mixer,wss_fx1_synth_mute,,"0"
+HKR,Config\Mixer,wss_fx1_synth_dc_volume,,"44975"
+HKR,Config\Mixer,wss_fx1_synth_dc_mute,,"0"
+HKR,Config\Mixer,wss_fx1_digital_cd_volume,,"44975"
+HKR,Config\Mixer,wss_fx1_digital_cd_mute,,"0"
+HKR,Config\Mixer,wss_fx1_rec2_volume,,"44975"
+HKR,Config\Mixer,wss_fx1_rec2_mute,,"0"
+HKR,Config\Mixer,wss_fx2_volume,,"44975"
+HKR,Config\Mixer,wss_fx2_mute,,"1"
+HKR,Config\Mixer,wss_fx2_fader,,"0"
+HKR,Config\Mixer,wss_fx2_waveout_volume,,"44975"
+HKR,Config\Mixer,wss_fx2_waveout_mute,,"0"
+HKR,Config\Mixer,wss_fx2_synth_volume,,"44975"
+HKR,Config\Mixer,wss_fx2_synth_mute,,"0"
+HKR,Config\Mixer,wss_fx2_synth_dc_volume,,"49152"
+HKR,Config\Mixer,wss_fx2_synth_dc_mute,,"0"
+HKR,Config\Mixer,wss_fx2_digital_cd_volume,,"44975"
+HKR,Config\Mixer,wss_fx2_digital_cd_mute,,"0"
+HKR,Config\Mixer,wss_fx2_rec2_volume,,"44975"
+HKR,Config\Mixer,wss_fx2_rec2_mute,,"0"
+HKR,Config\Mixer,wss_eq_enable,,"0"
+HKR,Config\Mixer,wss_eq_peak_enable,,"0"
+HKR,Config\Mixer,wss_eq_20hz_level,,"32768"
+HKR,Config\Mixer,wss_eq_75hz_level,,"32768"
+HKR,Config\Mixer,wss_eq_135hz_level,,"32768"
+HKR,Config\Mixer,wss_eq_250hz_level,,"32768"
+HKR,Config\Mixer,wss_eq_500hz_level,,"32768"
+HKR,Config\Mixer,wss_eq_1000hz_level,,"32768"
+HKR,Config\Mixer,wss_eq_2000hz_level,,"32768"
+HKR,Config\Mixer,wss_eq_4000hz_level,,"32768"
+HKR,Config\Mixer,wss_eq_8000hz_level,,"32768"
+HKR,Config\Mixer,wss_eq_15000hz_level,,"32768"
+
+HKR,Config\Mixer,SpeakerConfig,,"0"
+HKR,Config\Mixer,VersaJack,,"0"
+HKR,Config\Mixer,DigitalCD,,"0"
+HKR,Config\Mixer,DigitalWaveTable,,"0"
+HKR,Config\Mixer,Fx1Select,,"0"
+HKR,Config\Mixer,Fx2Select,,"11"
+
+
+;*****************************************************************************
+;
+; Mux Value:
+;
+; 0 - Microphone  1 - CD          2 - Video       3 - Aux
+; 4 - Line        5 - LoopBack    7 - Phone
+;
+;*****************************************************************************
+HKR,Config\Mixer,RecMuxValue,,"6"
+HKR,Config\Mixer,RecPhoneVolumeLeft,,"44975"
+HKR,Config\Mixer,RecPhoneVolumeRight,,"44975"
+HKR,Config\Mixer,RecAuxVolumeLeft,,"44975"
+HKR,Config\Mixer,RecAuxVolumeRight,,"44975"
+HKR,Config\Mixer,RecCDVolumeLeft,,"44975"
+HKR,Config\Mixer,RecCDVolumeRight,,"44975"
+HKR,Config\Mixer,RecLineInVolumeLeft,,"44975"
+HKR,Config\Mixer,RecLineInVolumeRight,,"44975"
+HKR,Config\Mixer,RecMicVolumeLeft,,"44975"
+HKR,Config\Mixer,RecMicVolumeRight,,"44975"
+HKR,Config\Mixer,RecLoopVolumeLeft,,"44975"
+HKR,Config\Mixer,RecLoopVolumeRight,,"44975"
+HKR,Config\Mixer,RecVideoVolumeLeft,,"44975"
+HKR,Config\Mixer,RecVideoVolumeRight,,"44975"
+
+HKR,Config\Mixer,Rec2MuxValue,,"3"
+HKR,Config\Mixer,Rec2PhoneVolumeLeft,,"44975"
+HKR,Config\Mixer,Rec2PhoneVolumeRight,,"44975"
+HKR,Config\Mixer,Rec2AuxVolumeLeft,,"44975"
+HKR,Config\Mixer,Rec2AuxVolumeRight,,"44975"
+HKR,Config\Mixer,Rec2CDVolumeLeft,,"44975"
+HKR,Config\Mixer,Rec2CDVolumeRight,,"44975"
+HKR,Config\Mixer,Rec2LineInVolumeLeft,,"44975"
+HKR,Config\Mixer,Rec2LineInVolumeRight,,"44975"
+HKR,Config\Mixer,Rec2MicVolumeLeft,,"44975"
+HKR,Config\Mixer,Rec2MicVolumeRight,,"44975"
+HKR,Config\Mixer,Rec2LoopVolumeLeft,,"44975"
+HKR,Config\Mixer,Rec2LoopVolumeRight,,"44975"
+HKR,Config\Mixer,Rec2VideoVolumeLeft,,"44975"
+HKR,Config\Mixer,Rec2VideoVolumeRight,,"44975"
+
+;*********************************************
+;
+; Table Driven Volumes
+;
+; The tables may have up to 64 entries, which are interpreted as decimal
+; values.  If these tables are missing, the default tables are used.  The
+; interpretation of the table entries are as follows:
+;
+; Sources: Wave, Synth, ZV Port
+;
+
+;     65535  ==    0.0 dB
+;         0  ==  -90.0 dB
+;
+; Destinations: Master, Headphone, Mono Out
+;
+;         0  ==    0.0 dB
+;        63  ==  -94.5 dB
+;
+; Sources: Phone, Aux, CD, Line In, Mic, Video
+;
+;         0  ==  +12.0 dB
+;         8  ==    0.0 dB
+;        31  ==  -34.5 dB
+;
+; Source: Mono In
+;
+;         0  ==    0.0 dB
+;        15  ==  -45.0 dB
+;
+;
+;*****************************************************************************
+HKR,Config\Mixer,WaveVolumeTable,,"0,6143,10239,13311,16383,19455,22527,25599,28671,30719,32767,34815,36863,38911,40959,43007,45055,46079,47103,47615,48127,48639,49151,49663,50175,50687,51199,51711,52223,52735,53247,53759,54271,54783,55295,55807,56319,56663,57003,57343,57687,58027,58367,58711,59051,59391,59735,60075,60415,60759,61099,61439,61783,62123,62463,62807,63147,63487,63831,64171,64511,64855,65195,65535"
+HKR,Config\Mixer,SynthVolumeTable,,"0,6143,10239,13311,16383,19455,22527,25599,28671,30719,32767,34815,36863,38911,40959,43007,45055,46079,47103,47615,48127,48639,49151,49663,50175,50687,51199,51711,52223,52735,53247,53759,54271,54783,55295,55807,56319,56663,57003,57343,57687,58027,58367,58711,59051,59391,59735,60075,60415,60759,61099,61439,61783,62123,62463,62807,63147,63487,63831,64171,64511,64855,65195,65535"
+HKR,Config\Mixer,ZVInVolumeTable,,"0,6143,10239,13311,16383,19455,22527,25599,28671,30719,32767,34815,36863,38911,40959,43007,45055,46079,47103,47615,48127,48639,49151,49663,50175,50687,51199,51711,52223,52735,53247,53759,54271,54783,55295,55807,56319,56663,57003,57343,57687,58027,58367,58711,59051,59391,59735,60075,60415,60759,61099,61439,61783,62123,62463,62807,63147,63487,63831,64171,64511,64855,65195,65535"
+HKR,Config\Mixer,ZVInVolumeTable,,"0,135,268,402,536,671,806,943,1080,1217,1356,1496,1638,1781,1926,2072,2221,2373,2527,2685,2846,3011,3181,3357,3538,3727,3923,4128,4342,4568,4807,5061,5332,5620,5930,6263,6624,7015,7442,7907,8417,8978,9597,10280,11037,11877,12812,13855,15018,16319,17777,19411,21245,23306,25624,28234,31174,34488,38226,42444,47206,52586,58664,65535"
+HKR,Config\Mixer,SPDIFMonVolumeTable,,"0,781,1562,2343,3124,3906,4687,5469,6252,7034,7817,8600,9384,10168,10952,11737,12523,13309,14096,14884,15673,16463,17254,18047,18843,19640,20439,21240,22045,22853,23664,24479,25300,26125,26957,27795,28641,29495,30360,31236,32126,33029,33948,34886,35846,36829,37839,38880,39956,41071,42230,43440,44707,46039,47444,48932,50516,52206,54017,55965,58069,60349,62829,65535"
+HKR,Config\Mixer,FXReturnVolumeTable,,"0,6143,10239,13311,16383,19455,22527,25599,28671,30719,32767,34815,36863,38911,40959,43007,45055,46079,47103,47615,48127,48639,49151,49663,50175,50687,51199,51711,52223,52735,53247,53759,54271,54783,55295,55807,56319,56663,57003,57343,57687,58027,58367,58711,59051,59391,59735,60075,60415,60759,61099,61439,61783,62123,62463,62807,63147,63487,63831,64171,64511,64855,65195,65535"
+HKR,Config\Mixer,EQLevelTable,,"0,1,2,3,4,5,6,7,8,9,10,11,11,12,12,13,13,14,14,15,16"
+HKR,Config\Mixer,ReccordLevelTable,,"0,6143,10239,13311,16383,19455,22527,25599,28671,30719,32767,34815,36863,38911,40959,43007,45055,46079,47103,47615,48127,48639,49151,49663,50175,50687,51199,51711,52223,52735,53247,53759,54271,54783,55295,55807,56319,56663,57003,57343,57687,58027,58367,58711,59051,59391,59735,60075,60415,60759,61099,61439,61783,62123,62463,62807,63147,63487,63831,64171,64511,64855,65195,65535"
+HKR,Config\Mixer,MasterVolumeTable,,"63,58,54,51,48,45,42,39,36,34,32,30,28,26,24,22,20,19,18,17,17,16,16,15,15,14,14,13,13,12,12,11,11,10,10,9,9,8,8,8,7,7,7,6,6,6,5,5,5,4,4,4,3,3,3,2,2,2,1,1,1,0,0,0"
+HKR,Config\Mixer,HeadphoneVolumeTable,,"31,30,29,28,28,27,26,25,25,24,23,22,22,21,20,19,19,18,17,17,17,16,16,15,15,14,14,13,13,12,12,11,11,10,10,9,9,8,8,8,7,7,7,6,6,6,5,5,5,4,4,4,3,3,3,2,2,2,1,1,1,0,0,0"
+HKR,Config\Mixer,MonoOutVolumeTable,,"63,58,54,51,48,45,42,39,36,34,32,30,28,26,24,22,20,19,18,17,17,16,16,15,15,14,14,13,13,12,12,11,11,10,10,9,9,8,8,8,7,7,7,6,6,6,5,5,5,4,4,4,3,3,3,2,2,2,1,1,1,0,0,0"
+HKR,Config\Mixer,PhoneVolumeTable,,"31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8"
+HKR,Config\Mixer,AuxVolumeTable,,"31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1"
+HKR,Config\Mixer,CDVolumeTable,,"31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2"
+HKR,Config\Mixer,LineInVolumeTable,,"31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2"
+HKR,Config\Mixer,MicVolumeTable,,"31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13"
+HKR,Config\Mixer,VideoVolumeTable,,"31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8"
+HKR,Config\Mixer,MonoInVolumeTable,,"15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0"
+HKR,Config\Mixer,SurroundVolumeTable,,"63,58,54,51,48,45,42,39,36,34,32,30,28,26,24,22,20,19,18,17,17,16,16,15,15,14,14,13,13,12,12,11,11,10,10,9,9,8,8,8,7,7,7,6,6,6,5,5,5,4,4,4,3,3,3,2,2,2,1,1,1,0,0,0"
+HKR,Config\Mixer,CLFEVolumeTable,,"63,58,54,51,48,45,42,39,36,34,32,30,28,26,24,22,20,19,18,17,17,16,16,15,15,14,14,13,13,12,12,11,11,10,10,9,9,8,8,8,7,7,7,6,6,6,5,5,5,4,4,4,3,3,3,2,2,2,1,1,1,0,0,0"
+
+;
+; Record levels
+;
+; There are two record references that are used when setting record levels
+; with the mixer.
+;
+; RecMaxVol<xxxx> -- This is the setting on the mixer slider below which
+;                    the codec record gain is set to zero and we use the
+;                    digital attenuation to control the recording level.
+; RecMaxGain<xxxx> -- this is the maximum gain to set the record level to when
+;                    the record slider
+; The <xxxx> value above is replaced with Phone,Aux,CD,LineIn,Video,Mic,MonoIn,Mix
+HKR,Config\Mixer,RecMaxVolPhone,,"32767"
+HKR,Config\Mixer,RecMaxGainPhone,,"15"
+HKR,Config\Mixer,RecMaxVolAux,,"4096"
+HKR,Config\Mixer,RecMaxGainAux,,"15"
+HKR,Config\Mixer,RecMaxVolCd,,"32767"
+HKR,Config\Mixer,RecMaxGainCd,,"15"
+HKR,Config\Mixer,RecMaxVolLineIn,,"32767"
+HKR,Config\Mixer,RecMaxGainLineIn,,"15"
+HKR,Config\Mixer,RecMaxVolVideo,,"32767"
+HKR,Config\Mixer,RecMaxGainVideo,,"15"
+HKR,Config\Mixer,RecMaxVolMic,,"65535"
+HKR,Config\Mixer,RecMaxGainMic,,"00"
+HKR,Config\Mixer,RecMaxVolMonoIn,,"32767"
+HKR,Config\Mixer,RecMaxGainMonoIn,,"15"
+HKR,Config\Mixer,RecMaxVolMix,,"32767"
+HKR,Config\Mixer,RecMaxGainMix,,"15"
+
+[CSCAud.tbcwdm.AddReg]
+;for 9x
+;HKLM,%KEY_RUN%,SoundFusion,,"RunDll32 cwcprops.cpl,CrystalControlWnd"
+;*****************************************************************************
+;
+; Equalization Settings
+;
+;*****************************************************************************
+HKLM,%KEY_EQ%,ArmEQ,1,01,00,00,00
+HKLM,%KEY_EQ%,EnableEQ,1,00,00,00,00
+HKLM,%KEY_EQ%,EnableEQPeakMeters,1,01,00,00,00
+HKLM,%KEY_EQ%,ShowEQPeakMetersControl,1,01,00,00,00
+HKLM,%KEY_EQ%\48000,CurrentNoOfBands,1,0a,00,00,00
+HKLM,%KEY_EQ%\48000,NumberOfBands,1,0a,00,00,00
+
+;*****************************************************************************
+; Equalizer Presets
+;*****************************************************************************
+; Default preset
+HKLM,%KEY_EQ%\48000\10-Bands\CurrentSet,Name,,"Synthesizer"
+HKLM,%KEY_EQ%\48000\10-Bands\CurrentSet,GainTable,1,01,01,01,00,ff,ff,00,00,02,03
+HKLM,%KEY_EQ%\48000\10-Bands\CurrentSet,FrequencyTable,1,14,00,4b,00,87,00,fa,00,f4,01,\
+  e8,03,d0,07,a0,0f,40,1f,98,3a
+HKLM,%KEY_EQ%\48000\10-Bands\CurrentSet,BandwidthTable,1,38,00,46,00,84,00,2c,01,58,02,\
+  b0,04,60,09,68,10,90,1f,10,27
+HKLM,%KEY_EQ%\48000\10-Bands\CurrentSet,Flags,1,01,00,00,00
+
+; Built-in preset (Classical)
+HKLM,%KEY_EQ%\48000\10-Bands\Classical,GainTable,1,02,01,00,00,ff,ff,fe,fd,fc,fb
+HKLM,%KEY_EQ%\48000\10-Bands\Classical,FrequencyTable,1,14,00,4b,00,87,00,fa,00,f4,01,\
+  e8,03,d0,07,a0,0f,40,1f,98,3a
+HKLM,%KEY_EQ%\48000\10-Bands\Classical,BandwidthTable,1,38,00,46,00,84,00,2c,01,58,02,\
+  b0,04,60,09,68,10,90,1f,10,27
+HKLM,%KEY_EQ%\48000\10-Bands\Classical,Flags,1,01,00,00,00
+
+; Built-in preset (Flat)
+HKLM,%KEY_EQ%\48000\10-Bands\Flat,GainTable,1,00,00,00,00,00,00,00,00,00,00
+HKLM,%KEY_EQ%\48000\10-Bands\Flat,FrequencyTable,1,14,00,4b,00,87,00,fa,00,f4,01,\
+  e8,03,d0,07,a0,0f,40,1f,98,3a
+HKLM,%KEY_EQ%\48000\10-Bands\Flat,BandwidthTable,1,38,00,46,00,84,00,2c,01,58,02,\
+  b0,04,60,09,68,10,90,1f,10,27
+HKLM,%KEY_EQ%\48000\10-Bands\Flat,Flags,1,01,00,00,00
+
+; Built-in preset (Jazz)
+HKLM,%KEY_EQ%\48000\10-Bands\Jazz,GainTable,1,03,02,ff,00,fd,fd,fe,ff,01,03
+HKLM,%KEY_EQ%\48000\10-Bands\Jazz,FrequencyTable,1,14,00,4b,00,87,00,fa,00,f4,01,\
+  e8,03,d0,07,a0,0f,40,1f,98,3a
+HKLM,%KEY_EQ%\48000\10-Bands\Jazz,BandwidthTable,1,38,00,46,00,84,00,2c,01,58,02,\
+  b0,04,60,09,68,10,90,1f,10,27
+HKLM,%KEY_EQ%\48000\10-Bands\Jazz,Flags,1,01,00,00,00
+
+; Built-in preset (Pop)
+HKLM,%KEY_EQ%\48000\10-Bands\Pop,GainTable,1,fc,fe,01,03,03,02,00,00,fe,fc
+HKLM,%KEY_EQ%\48000\10-Bands\Pop,FrequencyTable,1,14,00,4b,00,87,00,fa,00,f4,01,\
+  e8,03,d0,07,a0,0f,40,1f,98,3a
+HKLM,%KEY_EQ%\48000\10-Bands\Pop,BandwidthTable,1,38,00,46,00,84,00,2c,01,58,02,\
+  b0,04,60,09,68,10,90,1f,10,27
+HKLM,%KEY_EQ%\48000\10-Bands\Pop,Flags,1,01,00,00,00
+
+; Built-in preset (Rock)
+HKLM,%KEY_EQ%\48000\10-Bands\Rock,GainTable,1,03,01,ff,fe,fd,fc,fe,00,01,02
+HKLM,%KEY_EQ%\48000\10-Bands\Rock,FrequencyTable,1,14,00,4b,00,87,00,fa,00,f4,01,\
+  e8,03,d0,07,a0,0f,40,1f,98,3a
+HKLM,%KEY_EQ%\48000\10-Bands\Rock,BandwidthTable,1,38,00,46,00,84,00,2c,01,58,02,\
+  b0,04,60,09,68,10,90,1f,10,27
+HKLM,%KEY_EQ%\48000\10-Bands\Rock,Flags,1,01,00,00,00
+
+; Built-in preset (Synthesizer)
+HKLM,%KEY_EQ%\48000\10-Bands\Synthesizer,GainTable,1,01,01,01,00,ff,ff,00,00,02,03
+HKLM,%KEY_EQ%\48000\10-Bands\Synthesizer,FrequencyTable,1,14,00,4b,00,87,00,fa,00,f4,01,\
+  e8,03,d0,07,a0,0f,40,1f,98,3a
+HKLM,%KEY_EQ%\48000\10-Bands\Synthesizer,BandwidthTable,1,38,00,46,00,84,00,2c,01,58,02,\
+  b0,04,60,09,68,10,90,1f,10,27
+HKLM,%KEY_EQ%\48000\10-Bands\Synthesizer,Flags,1,01,00,00,00
+
+; Built-in preset (Vocal)
+HKLM,%KEY_EQ%\48000\10-Bands\Vocal,GainTable,1,ff,fd,fd,01,03,03,02,01,00,ff
+HKLM,%KEY_EQ%\48000\10-Bands\Vocal,FrequencyTable,1,14,00,4b,00,87,00,fa,00,f4,01,\
+  e8,03,d0,07,a0,0f,40,1f,98,3a
+HKLM,%KEY_EQ%\48000\10-Bands\Vocal,BandwidthTable,1,38,00,46,00,84,00,2c,01,58,02,\
+  b0,04,60,09,68,10,90,1f,10,27
+HKLM,%KEY_EQ%\48000\10-Bands\Vocal,Flags,1,01,00,00,00
+
+;*****************************************************************************
+;
+; Control panel applet control
+;
+; Value 0 : Icon not shown on TaskBar
+; Value 1 : Icon shown on TaskBar
+; Value 2 : SoundFusion applet is not accessible (neither from TaskBar nor
+;             control panel)
+;
+;*****************************************************************************
+HKLM,%KEY_BASESP%\ControlPanel,ShowPageEQ,1,01,00,00,00
+HKLM,%KEY_BASESP%\ControlPanel,ShowPageSPDIF,1,01,00,00,00
+HKLM,%KEY_BASESP%\ControlPanel,ShowPageSynth,1,01,00,00,00
+HKLM,%KEY_BASESP%\ControlPanel,ShowPageHelp,1,01,00,00,00
+HKLM,%KEY_BASESP%\ControlPanel,ShowTaskbarIcon,1,01,00,00,00
+HKLM,%KEY_BASESP%\ControlPanel,EnablePopupHelp,1,01,00,00,00
+HKLM,%KEY_BASESP%\ControlPanel,MakePreferredDevice,1,01,00,00,00
+HKLM,%KEY_BASESP%\Algorithms\Basics,EnableSensaura3D,1,03,00,00,00
+HKLM,%KEY_BASESP%\Algorithms\Basics,EnableEAX,1,01,00,00,00
+HKLM,Software\Sensaura\crlds3d,MacroFX,1,01,00,00,00
+HKLM,%KEY_BASESP%\Algorithms\Basics,EnableMultiDrive,1,01,00,00,00
+HKLM,%KEY_BASESP%\Algorithms\Basics,ChannelConfig,1,03,00,00,00
+HKLM,%KEY_BASESP%\Algorithms\Basics,SpeakerGeometry,1,14,00,00,00
+HKLM,%KEY_BASESP%\Algorithms\Basics,Enable3DAcceleration,1,01,00,00,00
+HKLM,%KEY_BASESP%\Algorithms\Basics,Enable2DAcceleration,1,01,00,00,00
+HKLM,%KEY_BASESP%\Algorithms\Basics,EnableStereoExpansion,1,00,00,00,00
+HKLM,%KEY_BASESP%\Algorithms\Basics,EnableMP3Acceleration,1,01,00,00,00
+HKLM,%KEY_BASESP%\Algorithms\Basics,EnableExternalMidi,1,01,00,00,00
+HKLM,%KEY_BASESP%\Algorithms\Basics,ShowMP3AccelerationControl,1,01,00,00,00
+HKLM,%KEY_BASESP%\Algorithms\SPDIF,LEDColorSPDIF,1,ff,00,00,00
+HKLM,%KEY_BASESP%\Algorithms\SPDIF,SPDIFEnableInput,1,00,00,00,00
+HKLM,%KEY_BASESP%\Algorithms\SPDIF,SPDIFOutputSource,1,00,00,00,00
+;
+; Currently this needs to be a one to allow the speaker configuration
+; to be read from the registry. 
+;
+HKLM,%KEY_BASESP%\Algorithms\Basics,EnableSpeakerConfig,1,01,00,00,00
+
+
+;*****************************************************************************
+;
+; This will disable the line on the mixer.  Disabling both Master
+; and Headphones will invalidate the topology.
+; 00 = Enabled; 01 = Disabled
+;
+HKLM,%KEY_BASESP%\Docking,DisableMaster,1,00
+HKLM,%KEY_BASESP%\Docking,DisableRecord,1,00
+HKLM,%KEY_BASESP%\Docking,DisableHPhone,1,00
+HKLM,%KEY_BASESP%\Docking,DisableFront,1,00
+HKLM,%KEY_BASESP%\Docking,DisableRear,1,00
+HKLM,%KEY_BASESP%\Docking,DisableMonoOut,1,01
+
+HKLM,%KEY_BASESP%\Docking,DisableStereoMix,1,00
+
+HKLM,%KEY_BASESP%\Docking,DisableCd,1,00
+HKLM,%KEY_BASESP%\Docking,DisableMic,1,00
+HKLM,%KEY_BASESP%\Docking,DisableLine,1,00
+HKLM,%KEY_BASESP%\Docking,DisableAux,1,00
+HKLM,%KEY_BASESP%\Docking,DisableZV,1,00
+;Video isn't available on CS4294
+HKLM,%KEY_BASESP%\Docking,DisableVideo,1,00
+;SPDIF isn't available on CS4294, but is available on CS46xx
+HKLM,%KEY_BASESP%\Docking,DisableSPDIF,1,00
+;Phone and Beep aren't available on CS4294 or CS4298
+HKLM,%KEY_BASESP%\Docking,DisablePhone,1,00
+HKLM,%KEY_BASESP%\Docking,DisableBeep,1,00
+
+HKLM,%KEY_BASESP%\Docking,DisableDockMaster,1,00
+HKLM,%KEY_BASESP%\Docking,DisableDockHPhone,1,00
+HKLM,%KEY_BASESP%\Docking,DisableDockCd,1,00
+HKLM,%KEY_BASESP%\Docking,DisableDockMic,1,00
+HKLM,%KEY_BASESP%\Docking,DisableDockLine,1,00
+HKLM,%KEY_BASESP%\Docking,DisableDockAux,1,01
+;Video and S/P-DIF aren't available on CS4294
+HKLM,%KEY_BASESP%\Docking,DisableDockVideo,1,01
+HKLM,%KEY_BASESP%\Docking,DisableDockSPDIF,1,01
+
+;
+; This will tell us whether the lines will be on the notebook or the
+; docking station when we are docked (must be enabled to do that) 
+; Set to 00=use the notebook;
+; Set to 01=use the docking station.
+;
+HKLM,%KEY_BASESP%\Docking,UseDockMaster,1,01
+HKLM,%KEY_BASESP%\Docking,UseDockHPhone,1,01
+HKLM,%KEY_BASESP%\Docking,UseDockCd,1,00
+HKLM,%KEY_BASESP%\Docking,UseDockMic,1,01
+HKLM,%KEY_BASESP%\Docking,UseDockLine,1,01
+HKLM,%KEY_BASESP%\Docking,UseDockAux,1,01
+HKLM,%KEY_BASESP%\Docking,UseDockVideo,1,01
+HKLM,%KEY_BASESP%\Docking,UseDockSPDIF,1,00
+
+
+
+
+[CSCAud.tbcspud_Service.AddReg]
+HKR,SCruz46xx\Algorithms\MP3\Renderer,Enabled,1,01,00,00,00
+HKR,SCruz46xx\Algorithms\Power,ClkRunMode,1,01,00,00,00
+HKR,SCruz46xx\Algorithms\WaveTable,Enable,1,01,00,00,00 
+HKR,SCruz46xx\Algorithms\WaveTable,CurrentHWVoicesLimit,1,20,00,00,00
+HKR,SCruz46xx\Algorithms\WaveTable,CurrentSWVoicesLimit,1,20,00,00,00
+HKR,SCruz46xx\Algorithms\WaveTable,VoiceAllocationMethod,1,00,00,00,00
+HKR,SCruz46xx\Algorithms\WaveTable,StaticImage,1,01,00,00,00
+HKR,SCruz46xx\Algorithms\WaveTable,OverrideDefaultSet,1,00,00,00,00
+HKR,SCruz46xx\Algorithms\WaveTable,OverrideSetFilename,,""
+HKR,SCruz46xx\Algorithms\Joystick,Enable,1,01,00,00,00   
+HKR,SCruz46xx\Algorithms\HWVolume,Enable,1,00,00,00,00   
+HKR,SCruz46xx\Algorithms\3D,Enable,1,01,00,00,00   
+
+;
+; This section is for the limits for 3D positional audio and Wave Table.
+;
+HKR,SCruz46xx\Limits\3D_44K,Maximum,1,08,00,00,00
+HKR,SCruz46xx\Limits\3D_44K,Minimum,1,01,00,00,00
+HKR,SCruz46xx\Limits\3D_44K,TaskType,1,00,03,00,00
+HKR,SCruz46xx\Limits\3D_44K,Version,1,00,00,00,00
+HKR,SCruz46xx\Limits\3D_32K,Maximum,1,08,00,00,00
+HKR,SCruz46xx\Limits\3D_32K,Minimum,1,01,00,00,00
+HKR,SCruz46xx\Limits\3D_32K,TaskType,1,10,03,00,00
+HKR,SCruz46xx\Limits\3D_32K,Version,1,00,00,00,00
+HKR,SCruz46xx\Limits\3D_22K,Maximum,1,08,00,00,00
+HKR,SCruz46xx\Limits\3D_22K,Minimum,1,01,00,00,00
+HKR,SCruz46xx\Limits\3D_22K,TaskType,1,20,03,00,00
+HKR,SCruz46xx\Limits\3D_22K,Version,1,00,00,00,00
+HKR,SCruz46xx\Limits\DLSVoices,Maximum,1,40,00,00,00
+HKR,SCruz46xx\Limits\DLSVoices,Minimum,1,10,00,00,00
+HKR,SCruz46xx\Limits\DLSVoices,TaskType,1,22,01,00,00
+HKR,SCruz46xx\Limits\DLSVoices,Version,1,00,00,00,00
+HKR,SCruz46xx\Limits\PCM,Maximum,1,20,00,00,00
+HKR,SCruz46xx\Limits\PCM,Minimum,1,01,00,00,00
+HKR,SCruz46xx\Limits\PCM,TaskType,1,07,00,00,00
+HKR,SCruz46xx\Limits\PCM,Version,1,00,00,00,00
+
+
+[tbcspud.CopyList]
+tbcspud.sys
+;ka.. gotta use the tbcosw98.sys for now.  ugh.
+tbcos.sys,tbcosw98.sys
+
+[tbcspud.NT.CopyList]
+tbcspud.sys
+tbcos.sys,tbcosnt5.sys
+
+[CS4610DSP.CopyList]
+cwclang.dat
+cwcspud.dat
+cwc4630.osp
+cwc4612.osp
+cwc3d.osp
+cwcasync.osp
+cwcdatac.osp
+cwceq.osp
+;cwcmp3.osp
+cwcsndct.osp
+cwcsnoop.osp
+cwcspat.osp
+cwcdls.osp
+cwcdlsrs.osp
+cwcdlscs.osp
+cwcptadj.osp
+cwcpm.osp
+
+;; Sensaura files
+cwcs3ddd.osp
+cwcs3dmx.osp
+cwcs3dps.osp
+cwcs3dmc.osp
+cwcs3dsn.osp
+;; Turtle Beach Files
+vtbspud.dat
+vtbwdm.dat
+vtbeq.osp
+vtb4612.osp
+vtb4630.osp
+vtbdiag.osp
+vtbsnoop.osp
+vtbspdwb.osp
+vtb6chan.osp
+Cwcmdctl.osp
+cwcsfgtx.osp
+vtbspudc.dll
+;cwcmp3.ax
+tbsctrl.exe
+tbtree.ico
+tbtree.bmp
+
+[tbcwdm.CopyList]
+tbcwdm.sys
+
+[sensaura.CopyList]
+crlds3d.dll
+
+[tbctray.CopyList]
+tbclang.dll 
+;added for wu
+tbctray.exe
+tbccpnl.cpl
+
+[cwcwtsmp.CopyList]
+cwcdls8.cls
+
+[Audio3D.CopyList]
+a3d.dll,Audio3D.dll,,4
+Audio3D.dll
+
+[Audio3D.AddReg]
+HKCR,Audio3D,,0,Audio3DObject
+HKCR,Audio3D\CLSID,,0,%Audio3D_CLSID%
+HKCR,CLSID\%Audio3D_CLSID%,,0,Audio3DObject
+HKCR,CLSID\%Audio3D_CLSID%\InProcServer32,,0,Audio3D.dll
+HKCR,CLSID\%Audio3D_CLSID%\InProcServer32,ThreadingModel,0,Apartment
+;extra a3d stuff
+HKLM,%A3dClReg%,,0,A3dApi Object
+HKLM,%A3dClReg%\InprocServer32,,0,A3dapi.dll
+HKLM,%A3dClReg%\InprocServer32,ThreadingModel,0,Apartment
+HKLM,%A3dClReg2%,,0,A3dDAL Object
+HKLM,%A3dClReg2%\InprocServer32,,0,a3d.dll
+HKLM,%A3dClReg2%\InprocServer32,ThreadingModel,0,Apartment
+HKLM,SOFTWARE\CLASSES\A3dApi,,0,A3dApi Object
+HKLM,SOFTWARE\CLASSES\A3dApi\CLSID,,0,{92FA2C24-253C-11d2-90FB-006008A1F441}
+HKLM,SOFTWARE\CLASSES\A3d,,0,A3d Object
+HKLM,SOFTWARE\CLASSES\A3d\CLSID,,0,{d8f1eee0-f634-11cf-8700-00a0245d918b}
+HKLM,SOFTWARE\CLASSES\A3dDAL,,0,A3dDAL Object
+HKLM,SOFTWARE\CLASSES\A3dDAL\CLSID,,0,{442D12A1-2641-11d2-90FB-006008A1F441}
+
+[guids.AddReg]
+;
+; Crystal Nodes
+;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; TB Media catagories
+;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; WARNING.  WARNING. WARNING.
+;
+; Adding the path specification solves the problem with installing
+; the drivers with a programatic install where it would prompt
+; for where the files are located.
+;
+; However adding this causes the Win ME and Win 98 InfCatREady Test
+; to fail.  (ka) The reason for the failure is that the drivers are
+; not yet in the location that the inf expects them to be in for the
+; purposes of the test.
+
+;[SourceDisksNames]
+;100=%Disk1Name%,,,%10%\TBC_DRV\drivers\wdm
+;
+;[SourceDisksNames.x86]
+;100=%Disk1Name%,,
+
+[SourceDisksNames]
+100=%Disk1Name%,,
+
+[SourceDisksFiles]
+cwc4612.osp=100
+cwc4630.osp=100
+cwc3d.osp=100
+cwcasync.osp=100
+cwcdatac.osp=100
+cwcdls.osp=100
+cwcdlsrs.osp=100
+cwcdlscs.osp=100
+cwceq.osp=100
+cwclang.dat=100
+;cwcmp3.osp=100
+cwcsndct.osp=100
+cwcsnoop.osp=100
+cwcspat.osp=100
+cwcspud.dat=100
+tbcspud.sys=100
+tbcosnt5.sys=100
+tbcosw98.sys=100
+tbcwdm.sys=100
+cwcdls8.cls=100
+crlds3d.dll=100
+tbclang.dll=100
+tbctray.exe=100
+tbccpnl.cpl=100
+cwcpm.osp=100
+cwcptadj.osp=100
+cwcsnoop.osp=100
+;cwcmp3.ax=100
+audio3d.dll=100
+;;
+;; Sensaura files
+;;
+cwcs3ddd.osp=100
+cwcs3dmx.osp=100
+cwcs3dps.osp=100
+cwcs3dmc.osp=100
+cwcs3dsn.osp=100
+;;
+;; Turtle Beach Files
+;;
+vtbspud.dat=100
+vtbwdm.dat=100
+vtbeq.osp=100
+vtb4612.osp=100
+vtb4630.osp=100
+vtbdiag.osp=100
+vtbsnoop.osp=100
+vtbspdwb.osp=100
+vtb6chan.osp=100
+vtbspudc.dll=100
+tbsctrl.exe=100
+tbtree.ico=100
+tbtree.bmp=100
+Cwcmdctl.osp=100
+cwcsfgtx.osp=100
+
+
+
+[Strings]
+Disk1Name="Santa Cruz(tm) WDM Driver Disk 1"
+CSMfgName="Voyetra Turtle Beach"
+tbcspud.DeviceDesc="Santa Cruz(tm)"
+tbcwdm.DeviceDesc="Santa Cruz(tm) WDM Interface"
+tbcgame.DeviceDesc="Santa Cruz(tm) Game Port"
+CSCAud.SPuD.szPname="Santa Cruz(tm) SPuD"
+CSCAud.SPuD3.szPname="Santa Cruz(tm) SPuD3"
+*PNPB02F.DeviceDesc="Gameport Joystick"
+
+;---- TbcTray ----
+;TbccpnlName="Santa Cruz(tm)"
+;TbccpnlDescription="Turtle Beach Santa Cruz Control Panel"
+InstallControlPanel="Turtle Beach Santa Cruz Control Panel not installed.\nPlease run the Turtle Beach Santa Cruz Control Panel setup program."
+TrayMenuRun="&Santa Cruz Control Panel"
+TrayMenuMixerDlg="Master &Volume"
+TrayMenuExit="&Close"
+TrayDialogMute="Mute"
+TrayDialogVolume="Volume"
+TrayToolTip="Turtle Beach Santa Cruz"
+
+;
+; Guids
+; 
+MSKSCATEGORY_AUDIO      ="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+MSKSCATEGORY_RENDER     ="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+MSKSCATEGORY_CAPTURE    ="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+MSProxy.CLSID           ="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+Audio3D_CLSID		="{D8F1EEE0-F634-11CF-8700-00A0245D918B}"
+A3dClReg				="SOFTWARE\CLASSES\CLSID\{92FA2C24-253C-11d2-90FB-006008A1F441}"
+A3dClReg2				="SOFTWARE\CLASSES\CLSID\{442D12A1-2641-11d2-90FB-006008A1F441}"
+
+;
+; The strings cannot be longer than 31 characters.
+;
+CSCAud.Wave.szPname="Santa Cruz(tm)"
+CSCAud.Topology.szPname="Santa Cruz Mixer"
+CSCAud.UART.szPname="Santa Cruz External MIDI"
+CSCAud.DLS.szPname="Santa Cruz DLS Synth"
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; VTB extra wave devices
+;;
+CSCAud.WaveOutFront.szPname="Santa Cruz Front Wave"
+CSCAud.WaveOutRear.szPname="Santa Cruz Rear Wave"
+CSCAud.WaveOut56.szPname="Santa Cruz Chan 5/6"
+CSCAud.WaveOutSpdif.szPname="Santa Cruz Digital Out"
+CSCAud.WaveInSecondaryRec.szPname="Santa Cruz Secondary Rec"
+
+
+
+;MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+KSNAME_Wave="Wave"
+KSNAME_UART="UART"
+KSNAME_Topology="Topology"
+KSNAME_DMusic="DMusic"
+
+;these are used for winme
+KEY_BASESP="SYSTEM\CurrentControlSet\Services\tbcspud\SCruz46xx"
+KEY_EQ="SYSTEM\CurrentControlSet\Services\tbcspud\SCruz46xx\Algorithms\Equalization"
+KEY_RUN="SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
+KEY_RUNONCE="SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce"
+CRYSTAL_SPUD_GUID = "{C84710EC-F725-11d1-94BA-00C04FBF8E70}"
+CRYSTAL_SPuD="SPuD"
+CRYSTAL_SPUD3_GUID = "{C84710ED-F725-11D1-94BA-00C04FBF8E70}"
+CRYSTAL_SPUD3="SPuD3"
+KEY_OS="SOFTWARE\Turtle Beach"
+KEY_MM="Software\Microsoft\Windows\CurrentVersion\Multimedia"
+
+
+; CRYSTAL_CWCDLS_GUID = "{22060BC5-49C6-11d3-B75A-00105A9D79B9}" 
+;
+; These strings are not displayed anywhere.  They are only used in the registry
+; for a service description.
+;
+tbcspud.SvcDesc = "Santa Cruz Driver"
+tbcwdm.SvcDesc  = "Santa Cruz WDM Driver"
+tbcgame.SvcDesc = "Santa Cruz Game Port"
+

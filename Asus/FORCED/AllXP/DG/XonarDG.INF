@@ -1,0 +1,428 @@
+; Copyright 1999-2010, ASUSTeK.
+
+[Version]
+Signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+provider=%ProviderName%
+DriverVer=03/10/2011,5.12.8.1794
+CatalogFile=cmudaxp.cat
+CatalogFile.ntamd64=cmudaxp64.cat
+
+[SourceDisksNames]
+222=%DiskDescription%,,,
+
+[SourceDisksFiles.amd64]
+cmudaxp64.sys=222
+cmudaxp.dll=222
+CmiFltr.dll=222
+
+[SourceDisksFiles]
+CmiFltr.dll=222
+cmudaxp.dll=222
+cmudaxp.sys=222
+
+[Manufacturer]
+%MfgName%=ASUSTeK,NTamd64
+
+[ASUSTeK]
+%CMI8788.DeviceDesc%=CMPCI,    PCI\VEN_13F6&DEV_8788&SUBSYS_84671043
+
+[ASUSTeK.NTamd64]
+%CMI8788.DeviceDesc%=CMPCIX64,    PCI\VEN_13F6&DEV_8788&SUBSYS_84671043
+
+
+[CMPCI]
+AlsoInstall=ks.registration(ks.inf),wdmaudio.registration(wdmaudio.inf)
+CopyFiles=CMUDA.CopyList, CMUDAProp.CopyList, C3D.CopyList
+AddReg=CMUDA.AddReg, UDA_NAMES.AddReg
+
+[CMPCI.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_RearWave%,CMPCI.RearWave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_RearWave%,CMPCI.RearWave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_RearWave%,CMPCI.RearWave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_RearTopo%,CMPCI.RearTopo
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_RearTopo%,CMPCI.RearTopo
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FPWave%, CMPCI.FrontWave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FPWave%, CMPCI.FrontWave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_FPWave%,CMPCI.FrontWave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FPTopo%, CMPCI.FrontTopo
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_FPTopo%, CMPCI.FrontTopo
+
+;; converter {{
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_CPWave%, CMPCI.ConvWave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_CPWave%, CMPCI.ConvWave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_CPWave%,CMPCI.ConvWave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_CPTopo%, CMPCI.ConvTopo
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_CPTopo%, CMPCI.ConvTopo
+;; converter }}
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,CMPCI.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,CMPCI.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,CMPCI.Interface.UART
+
+
+;;================= Windows 2000 ====================
+[CMPCI.NTX86]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=CMUDA.CopyList, CMUDAProp.CopyList, C3D32.CopyList
+AddReg=CMUDA.AddReg, UDA_NAMES.AddReg
+
+[CMPCI.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_RearWave%,CMPCI.RearWave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_RearWave%,CMPCI.RearWave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_RearWave%,CMPCI.RearWave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_RearTopo%,CMPCI.RearTopo
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_RearTopo%, CMPCI.RearTopo
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FPWave%, CMPCI.FrontWave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FPWave%, CMPCI.FrontWave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_FPWave%,CMPCI.FrontWave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FPTopo%, CMPCI.FrontTopo
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_FPTopo%, CMPCI.FrontTopo
+
+;; converter {{
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_CPWave%, CMPCI.ConvWave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_CPWave%, CMPCI.ConvWave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_CPWave%,CMPCI.ConvWave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_CPTopo%, CMPCI.ConvTopo
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_CPTopo%, CMPCI.ConvTopo
+;; converter }}
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,CMPCI.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,CMPCI.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,CMPCI.Interface.UART
+
+
+[CMPCIX64]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=CMUDA64.CopyList, CMUDAProp64.CopyList, C3D.CopyList, C3D64.CopyList
+AddReg=CMUDA.AddReg, UDA_NAMES.AddReg
+
+[CMPCIX64.HW]
+AddReg = UDAXP.NTAMD64.HW.AddReg
+
+[CMPCIX64.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_RearWave%,CMPCI.RearWave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_RearWave%,CMPCI.RearWave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_RearWave%,CMPCI.RearWave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_RearTopo%,CMPCI.RearTopo
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_RearTopo%, CMPCI.RearTopo
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FPWave%, CMPCI.FrontWave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FPWave%, CMPCI.FrontWave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_FPWave%,CMPCI.FrontWave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FPTopo%, CMPCI.FrontTopo
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_FPTopo%, CMPCI.FrontTopo
+;; converter {{
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_CPWave%, CMPCI.ConvWave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_CPWave%, CMPCI.ConvWave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_CPWave%,CMPCI.ConvWave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_CPTopo%, CMPCI.ConvTopo
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_CPTopo%, CMPCI.ConvTopo
+;; converter }}
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,CMPCI.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,CMPCI.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,CMPCI.Interface.UART
+
+[CMPCIX64.RearWave]
+AddReg=CMPCI.RearWave.AddReg
+
+[CMPCIX64.RearWave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%RearWave.szPname%
+
+[CMPCIX64.Interface.UART]
+AddReg=CMPCI.Interface.UART.AddReg
+
+[CMPCIX64.Interface.UART.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%CMPCI.UART.szPname%
+
+[CMPCIX64.RearTopo]
+AddReg=CMPCI.RearTopo.AddReg
+
+[CMPCIX64.RearTopo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%RearTopo.szPname%
+
+[CMPCIX64.FrontWave]
+AddReg=CMPCI.FrontWave.AddReg
+
+[CMPCIX64.FrontWave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FrontWave.szPname%
+
+[CMPCIX64.FrontTopo]
+AddReg=CMPCI.FrontTopo.AddReg
+
+[CMPCIX64.FrontTopo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FrontTopo.szPname%
+
+
+
+[CMPCI.RearWave]
+AddReg=CMPCI.RearWave.AddReg
+
+[CMPCI.RearWave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%RearWave.szPname%
+
+[CMPCI.Interface.UART]
+AddReg=CMPCI.Interface.UART.AddReg
+
+[CMPCI.Interface.UART.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%CMPCI.UART.szPname%
+
+[CMPCI.RearTopo]
+AddReg=CMPCI.RearTopo.AddReg
+
+[CMPCI.RearTopo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%RearTopo.szPname%
+
+[CMPCI.FrontWave]
+AddReg=CMPCI.FrontWave.AddReg
+
+[CMPCI.FrontWave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FrontWave.szPname%
+
+[CMPCI.FrontTopo]
+AddReg=CMPCI.FrontTopo.AddReg
+
+[CMPCI.FrontTopo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FrontTopo.szPname%
+
+
+
+;; converter {{
+
+;; i386
+[CMPCI.ConvWave]
+AddReg=CMPCI.ConvWave.AddReg
+
+[CMPCI.ConvWave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%ConvWave.szPname%
+
+[CMPCI.ConvTopo]
+AddReg=CMPCI.ConvTopo.AddReg
+
+[CMPCI.ConvTopo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%ConvTopo.szPname%
+
+;; x64
+[CMPCIX64.ConvWave]
+AddReg=CMPCI.ConvWave.AddReg
+
+[CMPCIX64.ConvWave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%ConvWave.szPname%
+
+[CMPCIX64.ConvTopo]
+AddReg=CMPCI.ConvTopo.AddReg
+
+[CMPCIX64.ConvTopo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%ConvTopo.szPname%
+
+;; converter }}
+
+
+
+[CMUDA.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,cmudaxp.sys
+HKR,,NTMPDriver,,"cmudaxp.sys,sbemul.sys"
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\wave\wdmaud.drv,Description,,%CMUDA.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv, Description,,%CMUDA.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%CMUDA.DeviceDesc%
+HKR,,SetupPreferredAudioDevices,3,01,00,00,00
+HKR,"Settings","USER_PlaySilence",0x00010001,0x01,0,0,0
+HKR,"Settings","EnableMpuPort",   0x00010001,0x00,0,0,0
+HKR,"Settings","MagicVoiceSupportStereoMix",0x00010001,0x01,0,0,0
+;master volume default set in middle 
+HKR,"Settings","MasterVolL",      0x00000001,0xc9,0xfa,0xf9,0xff
+HKR,"Settings","MasterVolR",      0x00000001,0xc9,0xfa,0xf9,0xff
+;HKR,"Settings","DisableMicBoost", 0x00010001,0x01,0,0,0
+;HKR,"Settings","FrontMicBoostL",  0x00010001,0x01,0,0,0
+HKR,"Settings","DisableSpdifIn",  0x00010001,0x01,0,0,0
+HKR,"Settings","DisableCD",  0x00010001,0x01,0,0,0
+
+
+[UDA_NAMES.AddReg]
+HKLM,%MediaCategories%\%UDAGUID.Spdif%,Name,,%UDANode.Spdif%
+HKLM,%MediaCategories%\%UDAGUID.Spdif%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%UDAGUID.Video%,Name,,%UDANode.Video%
+HKLM,%MediaCategories%\%UDAGUID.Video%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%UDAGUID.StereoMix%,Name,,%UDANode.StereoMix%
+HKLM,%MediaCategories%\%UDAGUID.StereoMix%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%UDAGUID.Aux%,Name,,%UDANode.Aux%
+HKLM,%MediaCategories%\%UDAGUID.Aux%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%UDAGUID.WaveRecord%,Name,,%UDANode.WaveRecord%
+HKLM,%MediaCategories%\%UDAGUID.WaveRecord%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%UDAGUID.LineIn1%,Name,,%UDANode.LineIn1%
+HKLM,%MediaCategories%\%UDAGUID.LineIn1%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%UDAGUID.LineIn2%,Name,,%UDANode.LineIn2%
+HKLM,%MediaCategories%\%UDAGUID.LineIn2%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%UDAGUID.InputMonitor%,Name,,%UDANode.InputMonitor%
+HKLM,%MediaCategories%\%UDAGUID.InputMonitor%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%UDAGUID.SpdifValid%,Name,,%UDANode.SpdifValid%
+HKLM,%MediaCategories%\%UDAGUID.SpdifValid%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%UDAGUID.SpdifInSel2%,Name,,%UDANode.SpdifInSel2%
+HKLM,%MediaCategories%\%UDAGUID.SpdifInSel2%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%UDAGUID.AltIn%,Name,,%UDANode.AltIn%
+HKLM,%MediaCategories%\%UDAGUID.AltIn%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%UDAGUID.FrontMicIn%,Name,,%UDANode.FrontMicIn%
+HKLM,%MediaCategories%\%UDAGUID.FrontMicIn%,Display,1,00,00,00,00
+
+
+[DestinationDirs]
+CMUDA64.CopyList     = 10,system32\drivers
+CMUDAProp64.CopyList = 10,system32
+C3D.CopyList         = 10,system
+C3D64.CopyList	     = 10,syswow64
+C3D32.CopyList 	     = 10, system
+CMUDA.CopyList       = 10,system32\drivers
+CMUDAProp.CopyList   = 10,system32
+DefaultDestDir       = 11
+
+[CMUDA.CopyList]
+cmudaxp.sys
+
+[CMUDAprop.CopyList]
+cmudaxp.dll
+
+[C3D32.CopyList]
+CmiFltr.dll
+
+[CMUDA64.CopyList]
+cmudaxp.sys,cmudaxp64.sys,,0x00000004
+
+[CMUDAprop64.CopyList]
+cmudaxp.dll
+
+[C3D.CopyList]
+CmiFltr.dll
+
+[C3D64.CopyList]
+CmiFltr.dll
+
+[CMPCIX64.Services]
+AddService = cmudaxp, 0x00000002, CMUDA_Service_Inst
+
+
+[CMPCI.NTX86.Services]
+AddService = cmudaxp, 0x00000002, CMUDA_Service_Inst
+
+[CMUDA_Service_Inst]
+DisplayName   = %CMUDA.SvcDesc%
+ServiceType   = 1                  ; SERVICE_KERNEL_DRIVER
+StartType     = 3                  ; SERVICE_DEMAND_START
+ErrorControl  = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary = %10%\system32\drivers\cmudaxp.sys
+
+[UDAXP.NTAMD64.HW.AddReg]
+HKR,,DeviceType,0x10001,0x0000001D
+HKR,,Security,,"D:P(A;;GA;;;SY)(A;;GRGWGX;;;BA)(A;;GRGWGX;;;WD)(A;;GRGWGX;;;RC)"
+
+[Strings]
+ProviderName="ASUSTeK"
+MfgName="ASUSTeK"
+DiskDescription="ASUS Xonar DG Audio Driver"
+CMUDA.DeviceDesc="ASUS Xonar DG Audio Device"
+RearWave.szPname="ASUS Xonar DG Audio"
+RearTopo.szPname="ASUS Xonar DG Audio Mixer"
+FrontWave.szPname="ASUS Xonar DG Front Panel"
+FrontTopo.szPname="ASUS Xonar DG Front Panel Mixer"
+
+;; converter {{
+ConvWave.szPname="ASUS Xonar DG Audio Converter"
+ConvTopo.szPname="ASUS Xonar DG Audio Converter Mixer"
+;; converter }}
+
+
+CMUDA.SvcDesc = "ASUS Xonar DG Audio Interface"
+CMI8788.DeviceDesc="ASUS Xonar DG Audio Device"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+CMPCI.UART.szPname="MPU-401"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+KSNAME_RearWave="AA_Wave"
+KSNAME_RearTopo="AA_Topology"
+KSNAME_FPWave="AB_Wave"
+KSNAME_FPTopo="AB_Topology"
+
+;; converter {{
+KSNAME_CPWave="CP_Wave"
+KSNAME_CPTopo="CP_Topology"
+;; converter }}
+
+KSNAME_UART="UART"
+
+
+;; Nodes (non-localizeable)
+UDAGUID.PhoneVolume     ="{0A8C1A87-42B0-11D2-95D2-00C04FB925D3}"
+UDAGUID.PhoneMute       ="{0A8C1A88-42B0-11D2-95D2-00C04FB925D3}"
+UDAGUID.MonoOutSelect   ="{0A8C1AA9-42B0-11D2-95D2-00C04FB925D3}"
+UDAGUID.Spdif           ="{5AEA5794-AA8A-4aaf-AB8B-4854C97B5D90}"
+UDAGUID.Video           ="{32E06BEE-BD20-48b8-9552-E5240EAF05BC}"
+UDAGUID.StereoMix       ="{3EC8502B-5D89-4d2d-A78A-FF45CA18A3B7}"
+UDAGUID.Aux             ="{AF24C5CC-A32D-479f-9FFB-BFD00E135BA9}"
+UDAGUID.AuxPhone        ="{1A607E05-8C29-43B0-8E60-FB24D266EAE8}"
+UDAGUID.MonoIn          ="{51C53816-3407-4BA0-8B4D-B4FCADC65A54}"
+UDAGUID.PcBeep          ="{697e35a2-97c8-42d1-a138-2de6a64a8bc3}"
+UDAGUID.WaveRecord      ="{209A9FAC-0A88-4ec9-AEF4-84C01BD5477F}"
+UDAGUID.LineIn1         ="{3a8fe731-da60-4bd7-ad6f-7e16e40c8a84}"
+UDAGUID.LineIn2         ="{3b5c45cb-2e4c-4a64-8bf3-5f648ce235d6}"
+UDAGUID.InputMonitor    ="{E23E291E-1B5B-4657-B046-0190383ABCA1}"
+UDAGUID.SpdifInSel2     ="{80755448-5BF6-49d1-A63A-9DB6D0B8A74F}"
+UDAGUID.SpdifValid      ="{D0DF1519-7207-4135-9EFD-934061113FFA}"
+UDAGUID.SpdifInReverse  ="{7F728EE3-0459-4ec8-B0F3-CCFDCCB9086C}"
+UDAGUID.AltIn           ="{F35C2296-20FF-46e8-BDAF-56B5DDFC9CFB}"
+UDAGUID.FrontMicIn      ="{E9E1310D-3D9E-4b83-AA92-B6A2EC208B8C}"
+
+
+;; Nodes (localizeable)
+UDANode.PhoneVolume     ="Phone Volume"
+UDANode.PhoneMute       ="Phone Mute"
+UDANode.MonoOutSelect   ="Mono Out Select"
+UDANode.Spdif           ="SPDIF In"
+UDANode.Video           ="TV Tuner Audio"
+UDANode.StereoMix       ="Stereo Mix"
+UDANode.Aux             ="Aux"
+UDANode.AuxPhone        ="Aux/Phone"
+UDANode.MonoIn          ="Mono In"
+UDANode.PcBeep          ="PC Beep"
+UDANode.WaveRecord      ="Wave"
+UDANode.LineIn1         ="Front Line-In 1"
+UDANode.LineIn2         ="Front Line-In 2"
+UDANode.InputMonitor    ="Monitoring"
+UDANode.SpdifInSel2     ="Front Panel S/PDIF-IN"
+UDANode.SpdifValid      ="Validity Check"
+UDANode.SpdifInReverse  ="Reverse S/PDIF-IN Format"
+UDANode.AltIn           ="ALT"
+UDANode.FrontMicIn      ="Front Mic"
+
+Audio3D_CLSID="{D8F1EEE0-F634-11CF-8700-00A0245D918B}"
+

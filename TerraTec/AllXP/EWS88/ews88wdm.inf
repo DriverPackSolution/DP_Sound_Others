@@ -1,0 +1,1256 @@
+;===============================================================
+; TerraTec EWS88 MT 
+; Driver Install Script for WDM
+;---------------------------------------------------------------
+; Copyright: (c) 2001 - 2006, TerraTec Electronic GmbH
+;
+; History:
+;   21-Sep-05 (CL)  - 64Bit Migration
+;   30-Jun-03 (CL)  - PHASE 88 Extension
+;   17-Sep-02 (Cl)  - Mic28 Extensions (Midi 2)
+;   15-Aug-01 (Cl)  - Faulty ASIO Setup for EWS88D
+;   08-Aug-01 (FMB) - some changes for update from VxD
+;   24-Apr-01 (FMB) - changes for different card types
+;   25-May-00 (cl)  - created
+;===============================================================
+
+
+[Version]
+Signature=$CHICAGO$
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%Provider%
+DriverVer =03/08/2007,5.51.3.142
+CatalogFile=ews88wdm.cat
+
+[DestinationDirs]
+DefaultDestDir=10
+EWS.SystemCopyList=12
+EWS_AMD64.SystemCopyList=12
+ASIO.CopyList=11
+ASIO_AMD_WOW64.CopyList=10,SysWOW64
+ASIO_AMD64.CopyList=11
+
+
+[Manufacturer]
+%Manufacturer%=TerraTec, NTX86, NTAMD64
+
+;================= 32 bit Win2000=================
+[TerraTec]
+%DeviceNameEws88mt%=EWS88MT,PCI\VEN_1412&DEV_1712&SUBSYS_1115153B
+%DeviceNameEws88mtMaster%=EWS88MT,PCI\VEN_1412&DEV_1712&SUBSYS_1125153B
+%DeviceNameEws88Adat%=EWS88D.Device,PCI\VEN_1412&DEV_1712&SUBSYS_112B153B
+%DeviceNameEws88AdatMaster%=EWS88D.Device,PCI\VEN_1412&DEV_1712&SUBSYS_112C153B
+%DeviceName_EWX2496%=EWX2496.Device,PCI\VEN_1412&DEV_1712&SUBSYS_1130153B
+%DeviceNamePhase88%=PHASE88.Device,PCI\VEN_1412&DEV_1712&SUBSYS_1151153B
+
+
+;================= 32 bit XP =================
+[TerraTec.NTX86]
+%DeviceNameEws88mt%=EWS88MT,PCI\VEN_1412&DEV_1712&SUBSYS_1115153B
+%DeviceNameEws88mtMaster%=EWS88MT,PCI\VEN_1412&DEV_1712&SUBSYS_1125153B
+%DeviceNameEws88Adat%=EWS88D.Device,PCI\VEN_1412&DEV_1712&SUBSYS_112B153B
+%DeviceNameEws88AdatMaster%=EWS88D.Device,PCI\VEN_1412&DEV_1712&SUBSYS_112C153B
+%DeviceName_EWX2496%=EWX2496.Device,PCI\VEN_1412&DEV_1712&SUBSYS_1130153B
+%DeviceNamePhase88%=PHASE88.Device,PCI\VEN_1412&DEV_1712&SUBSYS_1151153B
+
+
+;================= AMD 64 bit ====================
+[TerraTec.NTAMD64]
+%DeviceNameEws88mt%=EWS88MT,PCI\VEN_1412&DEV_1712&SUBSYS_1115153B
+%DeviceNameEws88mtMaster%=EWS88MT,PCI\VEN_1412&DEV_1712&SUBSYS_1125153B
+%DeviceNameEws88Adat%=EWS88D.Device,PCI\VEN_1412&DEV_1712&SUBSYS_112B153B
+%DeviceNameEws88AdatMaster%=EWS88D.Device,PCI\VEN_1412&DEV_1712&SUBSYS_112C153B
+%DeviceName_EWX2496%=EWX2496.Device,PCI\VEN_1412&DEV_1712&SUBSYS_1130153B
+%DeviceNamePhase88%=PHASE88.Device,PCI\VEN_1412&DEV_1712&SUBSYS_1151153B
+
+
+[EWS88MT]
+AlsoInstall=ks.registration(ks.inf),wdmaudio.registration(wdmaudio.inf)
+CopyFiles=EWS.SystemCopyList, ASIO.CopyList
+AddReg=EWS88MT.AddReg, EWS88.ASIO.AddReg
+DelReg=EWS88.ASIO.DelReg
+
+
+;-------------------------------------------------------------------------------
+
+[EWS88D.Device]
+AlsoInstall=ks.registration(ks.inf),wdmaudio.registration(wdmaudio.inf)
+CopyFiles=EWS.SystemCopyList, ASIO.CopyList
+AddReg=EWS88D.AddReg, EWS88.ASIO.AddReg
+DelReg=EWS88.ASIO.DelReg
+
+;-------------------------------------------------------------------------------
+
+[EWX2496.Device]
+AlsoInstall=ks.registration(ks.inf),wdmaudio.registration(wdmaudio.inf)
+CopyFiles=EWS.SystemCopyList, ASIO.CopyList
+AddReg=EWX2496.AddReg, EWX2496.ASIO.AddReg
+DelReg=EWX2496.ASIO.DelReg
+
+;-------------------------------------------------------------------------------
+
+[PHASE88.Device]
+AlsoInstall=ks.registration(ks.inf),wdmaudio.registration(wdmaudio.inf)
+CopyFiles=EWS.SystemCopyList, ASIO.CopyList
+AddReg=PHASE88.AddReg, PHASE88.ASIO.AddReg
+DelReg=PHASE88.ASIO.DelReg
+
+
+[EWS88MT.Interface.Wave]
+AddReg=EWS88MT.Interface.Wave.AddReg
+
+[EWS88MT.Interface.WaveMT_12]
+AddReg=EWS88MT.Interface.Wave12.AddReg
+
+[EWS88MT.Interface.WaveMT_34]
+AddReg=EWS88MT.Interface.Wave34.AddReg
+
+[EWS88MT.Interface.WaveMT_56]
+AddReg=EWS88MT.Interface.Wave56.AddReg
+
+[EWS88MT.Interface.WaveMT_78]
+AddReg=EWS88MT.Interface.Wave78.AddReg
+
+[EWS88MT.Interface.SPDIF]
+AddReg=EWS88MT.Interface.SPDIF.AddReg
+
+[EWS88MT.Interface.DMIX]
+AddReg=EWS88MT.Interface.DMix.AddReg
+
+[EWS88MT.Interface.Topology]
+AddReg=EWS88MT.Interface.Topo.AddReg
+
+[EWS88MT.Interface.TopoMT]
+AddReg=EWS88MT.Interface.ToMT.AddReg
+
+[EWS88MT.Interface.Midi1]
+AddReg=EWS88MT.Interface.Midi1.AddReg
+
+[EWS88MT.Interface.Midi2]
+AddReg=EWS88MT.Interface.Midi2.AddReg
+
+
+
+;---------------------------------------------------------
+; Nasty, AddReg Section Name must not exceed xx Characters 
+;---------------------------------------------------------
+[EWS88MT.Interface.Wave.AddReg]
+HKR,,FriendlyName,,%String3%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[EWS88MT.Interface.Wave12.AddReg]
+HKR,,FriendlyName,,%String7%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[EWS88MT.Interface.Wave34.AddReg]
+HKR,,FriendlyName,,%String8%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[EWS88MT.Interface.Wave56.AddReg]
+HKR,,FriendlyName,,%String9%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[EWS88MT.Interface.Wave78.AddReg]
+HKR,,FriendlyName,,%String10%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[EWS88MT.Interface.SPDIF.AddReg]
+HKR,,FriendlyName,,%String11%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[EWS88MT.Interface.DMIX.AddReg]
+HKR,,FriendlyName,,%String14%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[EWS88MT.Interface.Topo.AddReg]
+HKR,,FriendlyName,,%String4%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[EWS88MT.Interface.ToMT.AddReg]
+HKR,,FriendlyName,,%String5%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[EWS88MT.Interface.Midi1.AddReg]
+HKR,,FriendlyName,,%String13%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[EWS88MT.Interface.Midi2.AddReg]
+HKR,,FriendlyName,,%String15%
+HKR,,CLSID,,%Proxy.CLSID%
+
+
+
+;=============================================================================
+;	EWS88D Interfaces 
+;=============================================================================
+
+
+[EWS88D.Interface.Wave]
+AddReg=EWS88D.Interface.Wave.AddReg
+
+[EWS88D.Interface.WaveMT_12]
+AddReg=EWS88D.Interface.Wave12.AddReg
+
+[EWS88D.Interface.WaveMT_34]
+AddReg=EWS88D.Interface.Wave34.AddReg
+
+[EWS88D.Interface.WaveMT_56]
+AddReg=EWS88D.Interface.Wave56.AddReg
+
+[EWS88D.Interface.WaveMT_78]
+AddReg=EWS88D.Interface.Wave78.AddReg
+
+[EWS88D.Interface.SPDIF]
+AddReg=EWS88D.Interface.SPDIF.AddReg
+
+[EWS88D.Interface.DMIX]
+AddReg=EWS88D.Interface.DMIX.AddReg
+
+[EWS88D.Interface.Topology]
+AddReg=EWS88D.Interface.Topo.AddReg
+
+[EWS88D.Interface.TopoMT]
+AddReg=EWS88D.Interface.ToMT.AddReg
+
+[EWS88D.Interface.Midi1]
+AddReg=EWS88D.Interface.Midi1.AddReg
+
+[EWS88D.Interface.Midi2]
+AddReg=EWS88D.Interface.Midi2.AddReg
+
+;---------------------------------------------------------
+; Friendly Names for EWS88D Devices
+; Nasty, AddReg Section Name must not exceed xx Characters 
+;---------------------------------------------------------
+
+[EWS88D.Interface.Wave.AddReg]
+HKR,,FriendlyName,,%String16%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[EWS88D.Interface.Wave12.AddReg]
+HKR,,FriendlyName,,%String18%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[EWS88D.Interface.Wave34.AddReg]
+HKR,,FriendlyName,,%String19%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[EWS88D.Interface.Wave56.AddReg]
+HKR,,FriendlyName,,%String20%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[EWS88D.Interface.Wave78.AddReg]
+HKR,,FriendlyName,,%String21%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[EWS88D.Interface.SPDIF.AddReg]
+HKR,,FriendlyName,,%String22%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[EWS88D.Interface.DMIX.AddReg]
+HKR,,FriendlyName,,%String25%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[EWS88D.Interface.Topo.AddReg]
+HKR,,FriendlyName,,%String17%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[EWS88D.Interface.ToMT.AddReg]
+HKR,,FriendlyName,,%String27%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[EWS88D.Interface.Midi1.AddReg]
+HKR,,FriendlyName,,%String24%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[EWS88D.Interface.Midi2.AddReg]
+HKR,,FriendlyName,,%String26%
+HKR,,CLSID,,%Proxy.CLSID%
+
+;=============================================================================
+;	EWX2496 Interfaces 
+;=============================================================================
+
+
+[EWX2496.Interface.WaveAnalog]
+AddReg=EWX2496.Interface.WaveAN.AddReg
+
+[EWX2496.Interface.SPDIF]
+AddReg=EWX2496.Interface.SPDIF.AddReg
+
+[EWX2496.Interface.DMIX]
+AddReg=EWX2496.Interface.DMix.AddReg
+
+[EWX2496.Interface.Midi1]
+AddReg=EWX2496.Interface.Midi1.AddReg
+
+[EWX2496.Interface.TopoMT]
+AddReg=EWX2496.Interface.ToMT.AddReg
+
+;---------------------------------------------------------
+; Friendly Names for EWX2496 devices
+; Nasty, AddReg Section Name must not exceed xx Characters 
+;---------------------------------------------------------
+[EWX2496.Interface.WaveAN.AddReg]
+HKR,,FriendlyName,,"EWX 24/96 Wave Analog"
+HKR,,CLSID,,%Proxy.CLSID%
+
+[EWX2496.Interface.SPDIF.AddReg]
+HKR,,FriendlyName,,"EWX 24/96 Wave S/PDIF"
+HKR,,CLSID,,%Proxy.CLSID%
+
+[EWX2496.Interface.DMIX.AddReg]
+HKR,,FriendlyName,,"EWX 24/96 WaveRec Mixer"
+HKR,,CLSID,,%Proxy.CLSID%
+
+[EWX2496.Interface.Midi1.AddReg]
+HKR,,FriendlyName,,"EWX 24/96 MIDI"
+HKR,,CLSID,,%Proxy.CLSID%
+
+[EWX2496.Interface.ToMT.AddReg]
+HKR,,FriendlyName,,"EWX 24/96 Virt. Mix"
+HKR,,CLSID,,%Proxy.CLSID%
+
+;=============================================================================
+;	PHASE88 Interfaces 
+;=============================================================================
+
+
+[PHASE88.Interface.WaveMT_12]
+AddReg=PHASE88.Interface.Wave12.AddReg
+
+[PHASE88.Interface.WaveMT_34]
+AddReg=PHASE88.Interface.Wave34.AddReg
+
+[PHASE88.Interface.WaveMT_56]
+AddReg=PHASE88.Interface.Wave56.AddReg
+
+[PHASE88.Interface.WaveMT_78]
+AddReg=PHASE88.Interface.Wave78.AddReg
+
+[PHASE88.Interface.SPDIF]
+AddReg=PHASE88.Interface.SPDIF.AddReg
+
+[PHASE88.Interface.DMIX]
+AddReg=PHASE88.Interface.DMIX.AddReg
+
+[PHASE88.Interface.Topology]
+AddReg=PHASE88.Interface.Topo.AddReg
+
+[PHASE88.Interface.TopoMT]
+AddReg=PHASE88.Interface.ToMT.AddReg
+
+[PHASE88.Interface.Midi1]
+AddReg=PHASE88.Interface.Midi1.AddReg
+
+[PHASE88.Interface.Midi2]
+AddReg=PHASE88.Interface.Midi2.AddReg
+
+;---------------------------------------------------------
+; Friendly Names for PHASE88 Devices
+; Nasty, AddReg Section Name must not exceed xx Characters 
+;---------------------------------------------------------
+
+
+[PHASE88.Interface.Wave12.AddReg]
+HKR,,FriendlyName,,"PHASE88 Wave 1/2"
+HKR,,CLSID,,%Proxy.CLSID%
+
+[PHASE88.Interface.Wave34.AddReg]
+HKR,,FriendlyName,,"PHASE88 Wave 3/4"
+HKR,,CLSID,,%Proxy.CLSID%
+
+[PHASE88.Interface.Wave56.AddReg]
+HKR,,FriendlyName,,"PHASE88 Wave 5/6"
+HKR,,CLSID,,%Proxy.CLSID%
+
+[PHASE88.Interface.Wave78.AddReg]
+HKR,,FriendlyName,,"PHASE88 Wave 7/8"
+HKR,,CLSID,,%Proxy.CLSID%
+
+[PHASE88.Interface.SPDIF.AddReg]
+HKR,,FriendlyName,,"PHASE88 Digital"
+HKR,,CLSID,,%Proxy.CLSID%
+
+[PHASE88.Interface.DMIX.AddReg]
+HKR,,FriendlyName,,"PHASE88 Dig. Mix. Record"
+HKR,,CLSID,,%Proxy.CLSID%
+
+
+[PHASE88.Interface.ToMT.AddReg]
+HKR,,FriendlyName,,"PHASE88 Mixer"
+HKR,,CLSID,,%Proxy.CLSID%
+
+[PHASE88.Interface.Midi1.AddReg]
+HKR,,FriendlyName,,"PHASE88 MIDI Port 1"
+HKR,,CLSID,,%Proxy.CLSID%
+
+[PHASE88.Interface.Midi2.AddReg]
+HKR,,FriendlyName,,"PHASE88 MIDI Port 2"
+HKR,,CLSID,,%Proxy.CLSID%
+
+;-------------------------------------------------------------------------------
+[EWS88MT.AddReg]
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\wave\wdmaud.drv,Description,,%String3%
+
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Description,,%String4%
+
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Description,,%String13%
+
+[EWS88D.AddReg]
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\wave\wdmaud.drv,Description,,%String16%
+
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Description,,%String17%
+
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Description,,%String24%
+
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4823-D820-11d3-943D-0040339FD9C2}
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4823-D820-11d3-943D-0040339FD9C2},Display,0x00010001,0
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4823-D820-11d3-943D-0040339FD9C2},Name,,"Wave 1/2"
+
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4824-D820-11d3-943D-0040339FD9C2}
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4824-D820-11d3-943D-0040339FD9C2},Display,0x00010001,0
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4824-D820-11d3-943D-0040339FD9C2},Name,,"Wave 3/4"
+
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4825-D820-11d3-943D-0040339FD9C2}
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4825-D820-11d3-943D-0040339FD9C2},Display,0x00010001,0
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4825-D820-11d3-943D-0040339FD9C2},Name,,"Wave 5/6"
+
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4826-D820-11d3-943D-0040339FD9C2}
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4826-D820-11d3-943D-0040339FD9C2},Display,0x00010001,0
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4826-D820-11d3-943D-0040339FD9C2},Name,,"Wave 7/8"
+
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4827-D820-11d3-943D-0040339FD9C2}
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4827-D820-11d3-943D-0040339FD9C2},Display,0x00010001,0
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4827-D820-11d3-943D-0040339FD9C2},Name,,"Digital"
+
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4828-D820-11d3-943D-0040339FD9C2}
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4828-D820-11d3-943D-0040339FD9C2},Display,0x00010001,0
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4828-D820-11d3-943D-0040339FD9C2},Name,,"Digital Mixer
+
+;-------------------------------------------------------------------------------
+
+[EWX2496.AddReg]
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\wave\wdmaud.drv,Description,,"EWX 24/96 Wave Analog"
+
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Description,,"EWX 24/96 MIDI"
+
+;-------------------------------------------------------------------------------
+
+
+[PHASE88.AddReg]
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\wave\wdmaud.drv,Description,,"PHASE88 Wave 1/2"
+
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Description,,"PHASE88 Mixer"
+
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Description,,"PHASE88 MIDI Port 1"
+
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4823-D820-11d3-943D-0040339FD9C2}
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4823-D820-11d3-943D-0040339FD9C2},Display,0x00010001,0
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4823-D820-11d3-943D-0040339FD9C2},Name,,"Wave 1/2"
+
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4824-D820-11d3-943D-0040339FD9C2}
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4824-D820-11d3-943D-0040339FD9C2},Display,0x00010001,0
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4824-D820-11d3-943D-0040339FD9C2},Name,,"Wave 3/4"
+
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4825-D820-11d3-943D-0040339FD9C2}
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4825-D820-11d3-943D-0040339FD9C2},Display,0x00010001,0
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4825-D820-11d3-943D-0040339FD9C2},Name,,"Wave 5/6"
+
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4826-D820-11d3-943D-0040339FD9C2}
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4826-D820-11d3-943D-0040339FD9C2},Display,0x00010001,0
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4826-D820-11d3-943D-0040339FD9C2},Name,,"Wave 7/8"
+
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4827-D820-11d3-943D-0040339FD9C2}
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4827-D820-11d3-943D-0040339FD9C2},Display,0x00010001,0
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4827-D820-11d3-943D-0040339FD9C2},Name,,"Digital"
+
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4828-D820-11d3-943D-0040339FD9C2}
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4828-D820-11d3-943D-0040339FD9C2},Display,0x00010001,0
+HKLM,System\CurrentControlSet\Control\MediaCategories\{FEFB4828-D820-11d3-943D-0040339FD9C2},Name,,"Digital Mixer
+
+;=============================================================================
+;	ASIO Install (32 + 64 Bit)
+;=============================================================================
+[EWS88.ASIO.AddReg]
+HKLM,SOFTWARE\ASIO\%ASIO_EWS88NAME%,"CLSID",,%ASIO_EWS88IID%
+HKLM,SOFTWARE\ASIO\%ASIO_EWS88NAME%,"Description",,%ASIO_EWS88NAME%
+HKCR,CLSID\%ASIO_EWS88IID%,,,%ASIO_EWS88NAME%
+HKCR,CLSID\%ASIO_EWS88IID%\InProcServer32,,,"%11%\Asio88mt.dll"
+HKCR,CLSID\%ASIO_EWS88IID%\InProcServer32,ThreadingModel,,"Apartment"
+
+
+[EWS88_WOW64.ASIO.AddReg]
+; for 32Bit Applications on x64 Systems
+HKLM,SOFTWARE\Wow6432Node\ASIO\%ASIO_EWS88NAME%,"CLSID",0,%ASIO_EWS88IID%
+HKLM,SOFTWARE\Wow6432Node\ASIO\%ASIO_EWS88NAME%,"Description",,%ASIO_EWS88NAME%
+HKCR,Wow6432Node\CLSID\%ASIO_EWS88IID%,,0,%ASIO_EWS88NAME%
+HKCR,Wow6432Node\CLSID\%ASIO_EWS88IID%\InprocServer32,,0,%10%\SysWOW64\Asio88mt.dll
+HKCR,Wow6432Node\CLSID\%ASIO_EWS88IID%\InprocServer32,"ThreadingModel",0,"Apartment"
+
+[EWS88.ASIO.DelReg]
+HKCR,CLSID\%ASIO_EWS88IID%
+HKLM,SOFTWARE\ASIO\%ASIO_EWS88NAME%
+HKCR,Wow6432Node\CLSID\%ASIO_EWS88IID%
+HKLM,SOFTWARE\Wow6432Node\ASIO\%ASIO_EWS88NAME%
+
+[EWX2496.ASIO.AddReg]
+HKLM,SOFTWARE\ASIO\%ASIO_EWX2496NAME%,"CLSID",,%ASIO_EWX2496IID%
+HKLM,SOFTWARE\ASIO\%ASIO_EWX2496NAME%,"Description",,%ASIO_EWX2496NAME%
+HKCR,CLSID\%ASIO_EWX2496IID%,,,%ASIO_EWX2496NAME%
+HKCR,CLSID\%ASIO_EWX2496IID%\InProcServer32,,,"%11%\Asio88mt.dll"
+HKCR,CLSID\%ASIO_EWX2496IID%\InProcServer32,ThreadingModel,,"Apartment"
+
+[EWX2496_WOW64.ASIO.AddReg]
+; for 32Bit Applications on x64 Systems
+HKLM,SOFTWARE\Wow6432Node\ASIO\%ASIO_EWX2496NAME%,"CLSID",0,%ASIO_EWX2496IID%
+HKLM,SOFTWARE\Wow6432Node\ASIO\%ASIO_EWX2496NAME%,"Description",,%ASIO_EWX2496NAME%
+HKCR,Wow6432Node\CLSID\%ASIO_EWX2496IID%,,0,%ASIO_EWX2496NAME%
+HKCR,Wow6432Node\CLSID\%ASIO_EWX2496IID%\InprocServer32,,0,%10%\SysWOW64\Asio88mt.dll
+HKCR,Wow6432Node\CLSID\%ASIO_EWX2496IID%\InprocServer32,"ThreadingModel",0,"Apartment"
+
+[EWX2496.ASIO.DelReg]
+HKCR,CLSID\%ASIO_EWX2496IID%
+HKLM,SOFTWARE\ASIO\%ASIO_EWX2496NAME%
+HKCR,Wow6432Node\CLSID\%ASIO_EWX2496IID%
+HKLM,SOFTWARE\Wow6432Node\ASIO\%ASIO_EWX2496NAME%
+
+[PHASE88.ASIO.AddReg]
+HKLM,SOFTWARE\ASIO\%ASIO_PHASE88NAME%,"CLSID",,%ASIO_PHASE88IID%
+HKLM,SOFTWARE\ASIO\%ASIO_PHASE88NAME%,"Description",,%ASIO_PHASE88NAME%
+HKCR,CLSID\%ASIO_PHASE88IID%,,,%ASIO_PHASE88NAME%
+HKCR,CLSID\%ASIO_PHASE88IID%\InProcServer32,,,"%11%\Asio88mt.dll"
+HKCR,CLSID\%ASIO_PHASE88IID%\InProcServer32,ThreadingModel,,"Apartment"
+
+[PHASE88_WOW64.ASIO.AddReg]
+; for 32Bit Applications on x64 Systems
+HKLM,SOFTWARE\Wow6432Node\ASIO\%ASIO_PHASE88NAME%,"CLSID",0,%ASIO_PHASE88IID%
+HKLM,SOFTWARE\Wow6432Node\ASIO\%ASIO_PHASE88NAME%,"Description",,%ASIO_PHASE88NAME%
+HKCR,Wow6432Node\CLSID\%ASIO_PHASE88IID%,,0,%ASIO_PHASE88NAME%
+HKCR,Wow6432Node\CLSID\%ASIO_PHASE88IID%\InprocServer32,,0,%10%\SysWOW64\Asio88mt.dll
+HKCR,Wow6432Node\CLSID\%ASIO_PHASE88IID%\InprocServer32,"ThreadingModel",0,"Apartment"
+
+[PHASE88.ASIO.DelReg]
+HKCR,CLSID\%ASIO_PHASE88IID%
+HKLM,SOFTWARE\ASIO\%ASIO_PHASE88NAME%
+HKCR,Wow6432Node\CLSID\%ASIO_PHASE88IID%
+HKLM,SOFTWARE\Wow6432Node\ASIO\%ASIO_PHASE88NAME%
+
+;=============================================================================
+;	32Bit (Win2000) Install
+;=============================================================================
+
+
+[EWS88MT.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=EWS.SystemCopyList, ASIO.CopyList
+AddReg=EWS88MT.AddReg, EWS88.ASIO.AddReg
+DelReg=EWS88.ASIO.DelReg
+
+
+[EWS88MT.NT.Services]
+AddService = ews88mt,   0x00000002, ews_Service_Inst
+
+;-------------------------------------------------------------------------------
+
+[EWS88D.Device.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=EWS.SystemCopyList, ASIO.CopyList
+AddReg=EWS88D.AddReg, EWS88.ASIO.AddReg
+DelReg=EWS88.ASIO.DelReg
+
+
+[EWS88D.Device.NT.Services]
+AddService = ews88mt,   0x00000002, ews_Service_Inst
+
+;-------------------------------------------------------------------------------
+
+[EWX2496.Device.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=EWS.SystemCopyList, ASIO.CopyList
+AddReg=EWX2496.AddReg, EWX2496.ASIO.AddReg
+DelReg=EWX2496.ASIO.DelReg
+
+
+[EWX2496.Device.NT.Services]
+AddService = ews88mt,   0x00000002, ews_Service_Inst
+
+;-------------------------------------------------------------------------------
+
+[PHASE88.Device.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=EWS.SystemCopyList, ASIO.CopyList
+AddReg=PHASE88.AddReg, PHASE88.ASIO.AddReg
+DelReg=PHASE88.ASIO.DelReg
+
+[PHASE88.Device.NT.Services]
+AddService = ews88mt,   0x00000002, ews_Service_Inst
+
+
+;-------------------------------------------------------------------------------
+
+
+[EWS88MT.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,EWS88MT.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,EWS88MT.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,EWS88MT.Interface.Wave
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_12%,EWS88MT.Interface.WaveMT_12
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_12%,EWS88MT.Interface.WaveMT_12
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_12%,EWS88MT.Interface.WaveMT_12
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_34%,EWS88MT.Interface.WaveMT_34
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_34%,EWS88MT.Interface.WaveMT_34
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_34%,EWS88MT.Interface.WaveMT_34
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_56%,EWS88MT.Interface.WaveMT_56
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_56%,EWS88MT.Interface.WaveMT_56
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_56%,EWS88MT.Interface.WaveMT_56
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_78%,EWS88MT.Interface.WaveMT_78
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_78%,EWS88MT.Interface.WaveMT_78
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_78%,EWS88MT.Interface.WaveMT_78
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_SPDIF%,EWS88MT.Interface.SPDIF
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_SPDIF%,EWS88MT.Interface.SPDIF
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_SPDIF%,EWS88MT.Interface.SPDIF
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_DMIX%,EWS88MT.Interface.DMIX
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_DMIX%,EWS88MT.Interface.DMIX
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,EWS88MT.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_TopoMT%,EWS88MT.Interface.TopoMT
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi1%,EWS88MT.Interface.Midi1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi1%,EWS88MT.Interface.Midi1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi1%,EWS88MT.Interface.Midi1
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi2%,EWS88MT.Interface.Midi2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi2%,EWS88MT.Interface.Midi2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi2%,EWS88MT.Interface.Midi2
+;-------------------------------------------------------------------------------
+
+[EWS88D.Device.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,EWS88D.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,EWS88D.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,EWS88D.Interface.Wave
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_12%,EWS88D.Interface.WaveMT_12
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_12%,EWS88D.Interface.WaveMT_12
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_12%,EWS88D.Interface.WaveMT_12
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_34%,EWS88D.Interface.WaveMT_34
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_34%,EWS88D.Interface.WaveMT_34
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_34%,EWS88D.Interface.WaveMT_34
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_56%,EWS88D.Interface.WaveMT_56
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_56%,EWS88D.Interface.WaveMT_56
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_56%,EWS88D.Interface.WaveMT_56
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_78%,EWS88D.Interface.WaveMT_78
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_78%,EWS88D.Interface.WaveMT_78
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_78%,EWS88D.Interface.WaveMT_78
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_SPDIF%,EWS88D.Interface.SPDIF
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_SPDIF%,EWS88D.Interface.SPDIF
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_SPDIF%,EWS88D.Interface.SPDIF
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_DMIX%,EWS88D.Interface.DMIX
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_DMIX%,EWS88D.Interface.DMIX
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,EWS88D.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_TopoMT%,EWS88D.Interface.TopoMT
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi1%,EWS88D.Interface.Midi1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi1%,EWS88D.Interface.Midi1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi1%,EWS88D.Interface.Midi1
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi2%,EWS88D.Interface.Midi2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi2%,EWS88D.Interface.Midi2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi2%,EWS88D.Interface.Midi2
+
+;-------------------------------------------------------------------------------
+
+[EWX2496.Device.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_12%,EWX2496.Interface.WaveAnalog
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_12%,EWX2496.Interface.WaveAnalog
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_12%,EWX2496.Interface.WaveAnalog
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_SPDIF%,EWX2496.Interface.SPDIF
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_SPDIF%,EWX2496.Interface.SPDIF
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_SPDIF%,EWX2496.Interface.SPDIF
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_DMIX%,EWX2496.Interface.DMIX
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_DMIX%,EWX2496.Interface.DMIX
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi1%,EWX2496.Interface.Midi1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi1%,EWX2496.Interface.Midi1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi1%,EWX2496.Interface.Midi1
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_TopoMT%,EWX2496.Interface.TopoMT
+
+;-------------------------------------------------------------------------------
+
+[PHASE88.Device.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_12%,PHASE88.Interface.WaveMT_12
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_12%,PHASE88.Interface.WaveMT_12
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_12%,PHASE88.Interface.WaveMT_12
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_34%,PHASE88.Interface.WaveMT_34
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_34%,PHASE88.Interface.WaveMT_34
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_34%,PHASE88.Interface.WaveMT_34
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_56%,PHASE88.Interface.WaveMT_56
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_56%,PHASE88.Interface.WaveMT_56
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_56%,PHASE88.Interface.WaveMT_56
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_78%,PHASE88.Interface.WaveMT_78
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_78%,PHASE88.Interface.WaveMT_78
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_78%,PHASE88.Interface.WaveMT_78
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_SPDIF%,PHASE88.Interface.SPDIF
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_SPDIF%,PHASE88.Interface.SPDIF
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_SPDIF%,PHASE88.Interface.SPDIF
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_DMIX%,PHASE88.Interface.DMIX
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_DMIX%,PHASE88.Interface.DMIX
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_DMIX%,PHASE88.Interface.DMIX
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi1%,PHASE88.Interface.Midi1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi1%,PHASE88.Interface.Midi1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi1%,PHASE88.Interface.Midi1
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi2%,PHASE88.Interface.Midi2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi2%,PHASE88.Interface.Midi2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi2%,PHASE88.Interface.Midi2
+
+
+;=============================================================================
+;	32Bit (XP) Install
+;=============================================================================
+
+
+[EWS88MT.NTX86]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=EWS.SystemCopyList, ASIO.CopyList
+AddReg=EWS88MT.AddReg, EWS88.ASIO.AddReg
+DelReg=EWS88.ASIO.DelReg
+
+
+[EWS88MT.NTX86.Services]
+AddService = ews88mt,   0x00000002, ews_Service_Inst
+
+;-------------------------------------------------------------------------------
+
+[EWS88D.Device.NTX86]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=EWS.SystemCopyList, ASIO.CopyList
+AddReg=EWS88D.AddReg, EWS88.ASIO.AddReg
+DelReg=EWS88.ASIO.DelReg
+
+
+[EWS88D.Device.NTX86.Services]
+AddService = ews88mt,   0x00000002, ews_Service_Inst
+
+;-------------------------------------------------------------------------------
+
+[EWX2496.Device.NTX86]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=EWS.SystemCopyList, ASIO.CopyList
+AddReg=EWX2496.AddReg, EWX2496.ASIO.AddReg
+DelReg=EWX2496.ASIO.DelReg
+
+
+[EWX2496.Device.NTX86.Services]
+AddService = ews88mt,   0x00000002, ews_Service_Inst
+
+;-------------------------------------------------------------------------------
+
+[PHASE88.Device.NTX86]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=EWS.SystemCopyList, ASIO.CopyList
+AddReg=PHASE88.AddReg, PHASE88.ASIO.AddReg
+DelReg=PHASE88.ASIO.DelReg
+
+[PHASE88.Device.NTX86.Services]
+AddService = ews88mt,   0x00000002, ews_Service_Inst
+
+
+;-------------------------------------------------------------------------------
+
+
+[EWS88MT.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,EWS88MT.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,EWS88MT.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,EWS88MT.Interface.Wave
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_12%,EWS88MT.Interface.WaveMT_12
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_12%,EWS88MT.Interface.WaveMT_12
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_12%,EWS88MT.Interface.WaveMT_12
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_34%,EWS88MT.Interface.WaveMT_34
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_34%,EWS88MT.Interface.WaveMT_34
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_34%,EWS88MT.Interface.WaveMT_34
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_56%,EWS88MT.Interface.WaveMT_56
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_56%,EWS88MT.Interface.WaveMT_56
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_56%,EWS88MT.Interface.WaveMT_56
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_78%,EWS88MT.Interface.WaveMT_78
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_78%,EWS88MT.Interface.WaveMT_78
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_78%,EWS88MT.Interface.WaveMT_78
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_SPDIF%,EWS88MT.Interface.SPDIF
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_SPDIF%,EWS88MT.Interface.SPDIF
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_SPDIF%,EWS88MT.Interface.SPDIF
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_DMIX%,EWS88MT.Interface.DMIX
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_DMIX%,EWS88MT.Interface.DMIX
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,EWS88MT.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_TopoMT%,EWS88MT.Interface.TopoMT
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi1%,EWS88MT.Interface.Midi1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi1%,EWS88MT.Interface.Midi1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi1%,EWS88MT.Interface.Midi1
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi2%,EWS88MT.Interface.Midi2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi2%,EWS88MT.Interface.Midi2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi2%,EWS88MT.Interface.Midi2
+;-------------------------------------------------------------------------------
+
+[EWS88D.Device.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,EWS88D.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,EWS88D.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,EWS88D.Interface.Wave
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_12%,EWS88D.Interface.WaveMT_12
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_12%,EWS88D.Interface.WaveMT_12
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_12%,EWS88D.Interface.WaveMT_12
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_34%,EWS88D.Interface.WaveMT_34
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_34%,EWS88D.Interface.WaveMT_34
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_34%,EWS88D.Interface.WaveMT_34
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_56%,EWS88D.Interface.WaveMT_56
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_56%,EWS88D.Interface.WaveMT_56
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_56%,EWS88D.Interface.WaveMT_56
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_78%,EWS88D.Interface.WaveMT_78
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_78%,EWS88D.Interface.WaveMT_78
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_78%,EWS88D.Interface.WaveMT_78
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_SPDIF%,EWS88D.Interface.SPDIF
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_SPDIF%,EWS88D.Interface.SPDIF
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_SPDIF%,EWS88D.Interface.SPDIF
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_DMIX%,EWS88D.Interface.DMIX
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_DMIX%,EWS88D.Interface.DMIX
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,EWS88D.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_TopoMT%,EWS88D.Interface.TopoMT
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi1%,EWS88D.Interface.Midi1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi1%,EWS88D.Interface.Midi1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi1%,EWS88D.Interface.Midi1
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi2%,EWS88D.Interface.Midi2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi2%,EWS88D.Interface.Midi2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi2%,EWS88D.Interface.Midi2
+
+;-------------------------------------------------------------------------------
+
+[EWX2496.Device.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_12%,EWX2496.Interface.WaveAnalog
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_12%,EWX2496.Interface.WaveAnalog
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_12%,EWX2496.Interface.WaveAnalog
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_SPDIF%,EWX2496.Interface.SPDIF
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_SPDIF%,EWX2496.Interface.SPDIF
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_SPDIF%,EWX2496.Interface.SPDIF
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_DMIX%,EWX2496.Interface.DMIX
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_DMIX%,EWX2496.Interface.DMIX
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi1%,EWX2496.Interface.Midi1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi1%,EWX2496.Interface.Midi1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi1%,EWX2496.Interface.Midi1
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_TopoMT%,EWX2496.Interface.TopoMT
+
+;-------------------------------------------------------------------------------
+
+[PHASE88.Device.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_12%,PHASE88.Interface.WaveMT_12
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_12%,PHASE88.Interface.WaveMT_12
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_12%,PHASE88.Interface.WaveMT_12
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_34%,PHASE88.Interface.WaveMT_34
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_34%,PHASE88.Interface.WaveMT_34
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_34%,PHASE88.Interface.WaveMT_34
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_56%,PHASE88.Interface.WaveMT_56
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_56%,PHASE88.Interface.WaveMT_56
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_56%,PHASE88.Interface.WaveMT_56
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_78%,PHASE88.Interface.WaveMT_78
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_78%,PHASE88.Interface.WaveMT_78
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_78%,PHASE88.Interface.WaveMT_78
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_SPDIF%,PHASE88.Interface.SPDIF
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_SPDIF%,PHASE88.Interface.SPDIF
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_SPDIF%,PHASE88.Interface.SPDIF
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_DMIX%,PHASE88.Interface.DMIX
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_DMIX%,PHASE88.Interface.DMIX
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_DMIX%,PHASE88.Interface.DMIX
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi1%,PHASE88.Interface.Midi1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi1%,PHASE88.Interface.Midi1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi1%,PHASE88.Interface.Midi1
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi2%,PHASE88.Interface.Midi2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi2%,PHASE88.Interface.Midi2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi2%,PHASE88.Interface.Midi2
+
+
+;=============================================================================
+;	AMD64Bit (XP + 2003) Install
+;=============================================================================
+
+
+[EWS88MT.NTAMD64]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=EWS_AMD64.SystemCopyList, ASIO_AMD64.CopyList, ASIO_AMD_WOW64.CopyList
+AddReg=EWS88MT.AddReg, EWS88.ASIO.AddReg, EWS88_WOW64.ASIO.AddReg
+DelReg=EWS88.ASIO.DelReg
+
+
+[EWS88MT.NTAMD64.Services]
+AddService = ews88mt,   0x00000002, ews_Service_Inst
+
+;-------------------------------------------------------------------------------
+
+[EWS88D.Device.NTAMD64]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=EWS_AMD64.SystemCopyList, ASIO_AMD64.CopyList, ASIO_AMD_WOW64.CopyList
+AddReg=EWS88D.AddReg, EWS88.ASIO.AddReg, EWS88_WOW64.ASIO.AddReg
+DelReg=EWS88.ASIO.DelReg
+
+
+[EWS88D.Device.NTAMD64.Services]
+AddService = ews88mt,   0x00000002, ews_Service_Inst
+
+;-------------------------------------------------------------------------------
+
+[EWX2496.Device.NTAMD64]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=EWS_AMD64.SystemCopyList, ASIO_AMD64.CopyList, ASIO_AMD_WOW64.CopyList
+AddReg=EWX2496.AddReg, EWX2496.ASIO.AddReg, EWX2496_WOW64.ASIO.AddReg
+DelReg=EWX2496.ASIO.DelReg
+
+
+[EWX2496.Device.NTAMD64.Services]
+AddService = ews88mt,   0x00000002, ews_Service_Inst
+
+;-------------------------------------------------------------------------------
+
+[PHASE88.Device.NTAMD64]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=EWS_AMD64.SystemCopyList, ASIO_AMD64.CopyList, ASIO_AMD_WOW64.CopyList
+AddReg=PHASE88.AddReg, PHASE88.ASIO.AddReg, PHASE88_WOW64.ASIO.AddReg
+DelReg=PHASE88.ASIO.DelReg
+
+[PHASE88.Device.NTAMD64.Services]
+AddService = ews88mt,   0x00000002, ews_Service_Inst
+
+
+;-------------------------------------------------------------------------------
+
+
+[EWS88MT.NTAMD64.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,EWS88MT.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,EWS88MT.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,EWS88MT.Interface.Wave
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_12%,EWS88MT.Interface.WaveMT_12
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_12%,EWS88MT.Interface.WaveMT_12
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_12%,EWS88MT.Interface.WaveMT_12
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_34%,EWS88MT.Interface.WaveMT_34
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_34%,EWS88MT.Interface.WaveMT_34
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_34%,EWS88MT.Interface.WaveMT_34
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_56%,EWS88MT.Interface.WaveMT_56
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_56%,EWS88MT.Interface.WaveMT_56
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_56%,EWS88MT.Interface.WaveMT_56
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_78%,EWS88MT.Interface.WaveMT_78
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_78%,EWS88MT.Interface.WaveMT_78
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_78%,EWS88MT.Interface.WaveMT_78
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_SPDIF%,EWS88MT.Interface.SPDIF
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_SPDIF%,EWS88MT.Interface.SPDIF
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_SPDIF%,EWS88MT.Interface.SPDIF
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_DMIX%,EWS88MT.Interface.DMIX
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_DMIX%,EWS88MT.Interface.DMIX
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,EWS88MT.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_TopoMT%,EWS88MT.Interface.TopoMT
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi1%,EWS88MT.Interface.Midi1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi1%,EWS88MT.Interface.Midi1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi1%,EWS88MT.Interface.Midi1
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi2%,EWS88MT.Interface.Midi2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi2%,EWS88MT.Interface.Midi2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi2%,EWS88MT.Interface.Midi2
+;-------------------------------------------------------------------------------
+
+[EWS88D.Device.NTAMD64.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,EWS88D.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,EWS88D.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,EWS88D.Interface.Wave
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_12%,EWS88D.Interface.WaveMT_12
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_12%,EWS88D.Interface.WaveMT_12
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_12%,EWS88D.Interface.WaveMT_12
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_34%,EWS88D.Interface.WaveMT_34
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_34%,EWS88D.Interface.WaveMT_34
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_34%,EWS88D.Interface.WaveMT_34
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_56%,EWS88D.Interface.WaveMT_56
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_56%,EWS88D.Interface.WaveMT_56
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_56%,EWS88D.Interface.WaveMT_56
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_78%,EWS88D.Interface.WaveMT_78
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_78%,EWS88D.Interface.WaveMT_78
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_78%,EWS88D.Interface.WaveMT_78
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_SPDIF%,EWS88D.Interface.SPDIF
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_SPDIF%,EWS88D.Interface.SPDIF
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_SPDIF%,EWS88D.Interface.SPDIF
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_DMIX%,EWS88D.Interface.DMIX
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_DMIX%,EWS88D.Interface.DMIX
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,EWS88D.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_TopoMT%,EWS88D.Interface.TopoMT
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi1%,EWS88D.Interface.Midi1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi1%,EWS88D.Interface.Midi1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi1%,EWS88D.Interface.Midi1
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi2%,EWS88D.Interface.Midi2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi2%,EWS88D.Interface.Midi2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi2%,EWS88D.Interface.Midi2
+
+;-------------------------------------------------------------------------------
+
+[EWX2496.Device.NTAMD64.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_12%,EWX2496.Interface.WaveAnalog
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_12%,EWX2496.Interface.WaveAnalog
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_12%,EWX2496.Interface.WaveAnalog
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_SPDIF%,EWX2496.Interface.SPDIF
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_SPDIF%,EWX2496.Interface.SPDIF
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_SPDIF%,EWX2496.Interface.SPDIF
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_DMIX%,EWX2496.Interface.DMIX
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_DMIX%,EWX2496.Interface.DMIX
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi1%,EWX2496.Interface.Midi1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi1%,EWX2496.Interface.Midi1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi1%,EWX2496.Interface.Midi1
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_TopoMT%,EWX2496.Interface.TopoMT
+
+;-------------------------------------------------------------------------------
+
+[PHASE88.Device.NTAMD64.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_12%,PHASE88.Interface.WaveMT_12
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_12%,PHASE88.Interface.WaveMT_12
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_12%,PHASE88.Interface.WaveMT_12
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_34%,PHASE88.Interface.WaveMT_34
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_34%,PHASE88.Interface.WaveMT_34
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_34%,PHASE88.Interface.WaveMT_34
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_56%,PHASE88.Interface.WaveMT_56
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_56%,PHASE88.Interface.WaveMT_56
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_56%,PHASE88.Interface.WaveMT_56
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveMT_78%,PHASE88.Interface.WaveMT_78
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveMT_78%,PHASE88.Interface.WaveMT_78
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveMT_78%,PHASE88.Interface.WaveMT_78
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_SPDIF%,PHASE88.Interface.SPDIF
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_SPDIF%,PHASE88.Interface.SPDIF
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_SPDIF%,PHASE88.Interface.SPDIF
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_DMIX%,PHASE88.Interface.DMIX
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_DMIX%,PHASE88.Interface.DMIX
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_DMIX%,PHASE88.Interface.DMIX
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi1%,PHASE88.Interface.Midi1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi1%,PHASE88.Interface.Midi1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi1%,PHASE88.Interface.Midi1
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi2%,PHASE88.Interface.Midi2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi2%,PHASE88.Interface.Midi2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi2%,PHASE88.Interface.Midi2
+
+
+;-------------------------------------------------------------------------------
+
+
+[ews_Service_Inst]
+DisplayName    = %ews88mt.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_SYSTEM_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\ews88wdm.sys
+
+;===============================================================
+;   COPY LISTS
+;===============================================================
+
+[EWS.SystemCopyList]
+ews88wdm.sys,,
+
+[EWS_AMD64.SystemCopyList]
+ews88wdm.sys,ews88wdm64.sys,
+
+[ASIO.CopyList]
+Asio88mt.dll
+
+[ASIO_AMD64.CopyList]
+Asio88mt.dll, Asio88mt64.dll,
+
+[ASIO_AMD_WOW64.CopyList]
+Asio88mt.dll
+
+
+[SourceDisksNames]
+1=%DiskName%,,0000-0000
+
+[SourceDisksFiles]
+ews88wdm.sys=1
+Asio88Mt.dll=1
+
+
+[Strings]
+ClassName="Sound, video and game controllers"
+Manufacturer="TerraTec "
+Provider="TerraTec "
+DiskName="TerraTec Driver CD"
+
+DeviceNameEws88mtMaster   ="EWS88 MT (Master)"
+DeviceNameEws88mt         ="EWS88 MT"
+DeviceNameEws88Adat       ="EWS88 D"
+DeviceNameEws88AdatMaster ="EWS88 D (Master)"
+DeviceName_EWX2496        ="EWX 24/96"
+DeviceNamePHASE88         ="PHASE88"
+DeviceNameIce             ="Envy 24"
+														 
+String3 ="EWS88 MT System Wave"
+String4 ="EWS88 MT System Mixer"
+String5 ="EWS88 MT Multitrack Mixer"
+String7 ="EWS88 MT Wave 1/2"
+String8 ="EWS88 MT Wave 3/4"
+String9 ="EWS88 MT Wave 5/6"
+String10="EWS88 MT Wave 7/8"
+String11="EWS88 MT Wave S/PDIF"		  
+String12="EWS88 MT Interleaved Wave"
+String13="EWS88 MT MIDI"
+String14="EWS88 MT Dig. Mix. Record"
+String15="EWS88 MT MIDI Port 2"
+
+String16="EWS88 D System Wave"
+String17="EWS88 D System Mixer"
+String18="EWS88 D Wave 1/2"
+String19="EWS88 D Wave 3/4"
+String20="EWS88 D Wave 5/6"
+String21="EWS88 D Wave 7/8"
+String22="EWS88 D Wave S/PDIF"		  
+String23="EWS88 D Interleaved Wave"
+String24="EWS88 D MIDI"
+String25="EWS88 D Dig. Mix. Record"
+String26="EWS88 D MIDI Port 2"
+String27="EWS88 D Multitrack Mixer"
+
+wdmaud.SvcDesc = "WDM Audio Driver"
+swmidi.SvcDesc = "EWS88 WDM Midi"
+ews88mt.SvcDesc= "EWS88 WDM Audio"
+
+Proxy.CLSID        ="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO   ="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER  ="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE ="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+;FMB TEST: ChkInf says the follwing strings must be fix="WAVE"
+;KSNAME_Wave="WAVE"
+;This forces the Systemout to be enumerated at first
+KSNAME_Wave="AveSYS"
+KSNAME_WaveMT_12="WaveMT_12"
+KSNAME_WaveMT_34="WaveMT_34"
+KSNAME_WaveMT_56="WaveMT_56"
+KSNAME_WaveMT_78="WaveMT_78"
+KSNAME_SPDIF    ="_0SPDIF"
+KSNAME_DMIX     ="_1DMIX"
+KSNAME_WaveMT_INTLVD="WaveMT_INTLVD"
+KSNAME_Midi1    ="Midi1"
+KSNAME_Midi2    ="Midi2"
+KSNAME_Topology ="Topology"
+KSNAME_TopoMT   ="TopoMT"
+
+
+;----------------------------------------------------------
+; ASIO
+;----------------------------------------------------------
+
+ASIO_EWS88IID       ="{D48916ED-526A-4546-B1E4-3DC8D3DA3E0F}"
+ASIO_EWS88NAME      ="ASIO for EWS88 MT/D"
+
+ASIO_EWX2496IID     ="{D48916ED-526A-4546-B1E4-3DC8D3DA3E0E}"
+ASIO_EWX2496NAME    ="ASIO for EWX 24/96"
+
+ASIO_PHASE88IID       ="{D48916ED-526A-4546-B1E4-3DC8D3DA3E10}"
+ASIO_PHASE88NAME      ="ASIO for PHASE 88"
+
+

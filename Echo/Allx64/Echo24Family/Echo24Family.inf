@@ -1,0 +1,196 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Echo24Family.inf
+;;
+;; Installation file (.inf) for Gina24, Layla24, Mona, Mia, and Mia MIDI
+;;
+;; (c) Copyright 2008 Echo Digital Audio 
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+[Version]
+Signature="$CHICAGO$"
+Provider=%Echo%
+ClassGUID={4D36E96C-E325-11CE-BFC1-08002BE10318}
+Class=Media
+CatalogFile.NTamd64=Echo24Family.cat
+DriverVer=12/08/2009,8.5
+
+
+;-------------------------------------------------------------------------------
+;
+; Driver information
+;
+;-------------------------------------------------------------------------------
+
+[Manufacturer]
+%Echo%   = Echo,NTamd64
+
+[Echo.NTamd64]
+%Echo.Gina24Desc% = Echo24, PCI\VEN_1057&DEV_1801&SUBSYS_0050ECC0	; 56301
+%Echo.Gina24Desc% = Echo24, PCI\VEN_1057&DEV_3410&SUBSYS_0051ECC0	; 56361
+
+%Echo.Layla24Desc% = Echo24, PCI\VEN_1057&DEV_3410&SUBSYS_0060ECC0
+
+%Echo.MonaDesc% = Echo24, PCI\VEN_1057&DEV_1801&SUBSYS_0070ECC0	    ; 80 MHz 56301
+%Echo.MonaDesc% = Echo24, PCI\VEN_1057&DEV_1801&SUBSYS_0071ECC0	    ; 66 MHz 56301
+%Echo.MonaDesc% = Echo24, PCI\VEN_1057&DEV_3410&SUBSYS_0072ECC0	    ; 56361
+
+%Echo.MiaDesc% = Echo24, PCI\VEN_1057&DEV_3410&SUBSYS_0080ECC0		; Mia
+%Echo.MiaMidiDesc% = Echo24, PCI\VEN_1057&DEV_3410&SUBSYS_0081ECC0	; Mia MIDI
+
+
+;-------------------------------------------------------------------------------
+;
+; General installation section
+;
+;-------------------------------------------------------------------------------
+
+[Echo24.NTamd64]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+AddReg=Echo24.AddReg,Echo24_names.AddReg
+CopyFiles=Echo24.CopyFiles
+
+
+;-------------------------------------------------------------------------------
+;
+; Service Installation
+;
+;-------------------------------------------------------------------------------
+
+[Echo24.NTamd64.Services]
+AddService = echo24, 0x00000002 , Echo24_Service_Inst
+
+[Echo24_Service_Inst]
+DisplayName    = %Echo24.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+;LoadOrderGroup = ExtendedBase
+ServiceBinary = %10%\system32\drivers\echo24.sys
+
+
+
+;-------------------------------------------------------------------------------
+;
+; Add stuff to registry
+;
+;-------------------------------------------------------------------------------
+
+[Echo24.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi"
+HKR,,Driver,,echo24.sys
+HKR,,NTMPDriver,,"echo24.sys"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%Echo24WaveDesc%
+HKR,Drivers\midi\wdmaud.drv,Description,,%Echo24MidiDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%Echo24MixerDesc%
+
+
+[Echo24_names.AddReg]
+HKLM,%MediaCategories%\%GUID.PCMRender%,Name,,%Friendly.PCMRender%
+HKLM,%MediaCategories%\%GUID.PCMCapture%,Name,,%Friendly.PCMCapture%
+HKLM,%MediaCategories%\%GUID.AC3Render%,Name,,%Friendly.AC3Render%
+
+HKLM,%MediaCategories%\%GUID.AnalogOutBridge%,Name,,%Friendly.AnalogOutBridge%
+HKLM,%MediaCategories%\%GUID.AnalogInBridge%,Name,,%Friendly.AnalogInBridge%
+HKLM,%MediaCategories%\%GUID.DigitalOutBridge%,Name,,%Friendly.DigitalOutBridge%
+HKLM,%MediaCategories%\%GUID.DigitalInBridge%,Name,,%Friendly.DigitalInBridge%
+HKLM,%MediaCategories%\%GUID.VirtualOutBridge%,Name,,%Friendly.VirtualOutBridge%
+
+HKLM,%MediaCategories%\%GUID.MidiOut%,Name,,%Friendly.MidiOut%
+HKLM,%MediaCategories%\%GUID.MidiIn%,Name,,%Friendly.MidiIn%
+
+HKLM,%MediaCategories%\%GUID.Bridge%,Name,,%Friendly.Bridge%
+
+
+;-------------------------------------------------------------------------------
+;
+; Copy files
+;
+;-------------------------------------------------------------------------------
+
+[DestinationDirs] 
+Echo24.CopyFiles = 12 
+
+[SourceDisksNames]
+0=%DiskId1%
+
+[SourceDisksFiles]
+echo24.sys=0
+
+[Echo24.CopyFiles]
+echo24.sys
+
+
+
+;-------------------------------------------------------------------------------
+;
+; Strings
+;
+;-------------------------------------------------------------------------------
+
+[Strings]
+
+
+;
+; Localizable Strings
+;
+Echo.Gina24Desc = "Gina24"
+Echo.Layla24Desc = "Layla24"
+Echo.MonaDesc = "Mona"
+Echo.MiaDesc = "Mia"
+Echo.MiaMidiDesc = "Mia MIDI"
+
+Echo24WaveDesc = "Echo24 wave driver"
+Echo24MidiDesc = "Echo24 MIDI driver"
+Echo24MixerDesc = "Echo24 mixer driver"
+DiskId1 = "Echo Digital Audio Installation Disk"
+Echo = "Echo Digital Audio"
+Echo24.SvcDesc="Echo24 Service"
+wdmaud.SvcDesc = "Microsoft WDM Virtual Wave Driver"
+
+
+
+;
+; GUIDs and friendly names
+;
+GUID.PCMRender = "{ADD18F93-A3C8-4F28-9B70-000DEF396F30}"
+GUID.PCMCapture = "{9826BC1C-54A1-4E15-87B4-71A1E57830D8}"
+GUID.AC3Render = "{14CE9F3C-477C-4E59-AEC1-2CAF628CC5F3}"
+
+Friendly.PCMRender = "PCM render"
+Friendly.PCMCapture = "PCM capture"
+Friendly.AC3Render = "Compressed audio render"
+
+GUID.AnalogOutBridge="{3A80F564-21DC-4d02-A822-D27C4E6DBB9B}"
+GUID.AnalogInBridge="{36CAA29A-FB2A-4f29-AB8F-5964BD356BBC}"
+GUID.DigitalOutBridge="{07C1516D-659E-45c8-AA2C-25D97867DBC0}"
+GUID.DigitalInBridge="{9261037F-73C7-44ee-A331-72148E5CE144}"
+GUID.VirtualOutBridge="{9E1FB85F-8A3E-4fb6-BFDE-A63987961276}"
+
+Friendly.AnalogOutBridge="Analog out bridge"
+Friendly.AnalogInBridge="Analog in bridge"
+Friendly.DigitalOutBridge="Digital out bridge"
+Friendly.DigitalInBridge="Digital in bridge"
+Friendly.VirtualOutBridge="Virtual out bridge"
+
+GUID.MidiOut="{91134FFE-C06D-420f-853B-2D5FF93FB1E6}"
+GUID.MidiIn="{31DBD634-C547-4862-AA92-DE4145B4E9B2}"
+
+Friendly.MidiOut="MIDI render"
+Friendly.MidiIn="MIDI capture"
+
+GUID.Bridge="{56C0CCBA-89CF-4551-A14A-417025B9C2C2}"
+
+Friendly.Bridge="Bridge"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"

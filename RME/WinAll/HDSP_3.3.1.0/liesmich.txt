@@ -1,0 +1,343 @@
+RME  Intelligent Audio Solutions
+
+HDSP Serie (AES-32, MADI, 9652, 9632, Multiface, Digiface, RPM)
+
+HDSPe Serie (PCI, MADI, MADIface, ExpressCard, RayDAT, AES, AIO)
+
+Treiber für Windows XP/Vista/7/8, 32 und 64 Bit
+
+Wichtige Informationen: Treiber Version 3.31
+
+Dies ist der HDSP(e) Serie WDM Streaming Treiber, der zusätzliche Merkmale wie WDM Streaming, Kernel Streaming, 64 Bit Unterstützung und volle Vista/7 Kompatibilität beinhaltet. Er unterstützt alle Karten und Systeme der HDSP und HDSPe Serie gleichzeitig. Auch die neuen PCI Express Karten werden unterstützt. Das TCO kann mit der HDSP AES-32, HDSPe PCI oder der HDSPe MADI betrieben werden, jedoch nicht mit der HDSP 9632.
+
+
+Hinweise zum Treiber
+-----------------
+
+- Der Treiber erfordert eine neue Firmware (Flash), wenn bisher mit dem alten Treiber 2.94 gearbeitet wurde.
+
+- Der Treiber unterstützt kein MME.
+
+- Dieser Treiber erfordert eine neue Version von DIGICheck, Version 5 oder höher, erhältlich auf der RME Website, Sektion Downloads/DIGICheck.
+
+
+Installation
+-------------
+
+Neuester Treiber:
+http://www.rme-audio.de/download/hdsp_wdm_3xxx.zip
+
+
+Der Treiber erfordert eine neue Firmware (Flash Update Tool, FUT), wenn bisher mit dem alten Treiber 2.94 oder älter gearbeitet wurde.
+
+Firmware HDSP Karten:
+http://www.rme-audio.de/download/fut_wdm_dsp.zip
+
+Firmware HDSPe Karten:
+http://www.rme-audio.de/download/fut_wdm_dspe.zip
+
+Die Firmware kann nur aktualisiert werden wenn der Treiber bereits installiert ist.
+
+
+Sowohl Treiberinstallation als auch Firmware-Update sind im Handbuch detailliert beschrieben!
+
+
+*** Erstmalige Installation von RME Audio Interfaces unter Windows 7/8 ***
+
+Die im Handbuch beschriebene Vorgehensweise ist korrekt und bleibt weiter gültig, bis auf den Start der Treiberinstallation. In Windows 7 hat Microsoft den automatischen Start des Treibersoftware-Aktualisieren-Dialogs entfernt. Daher muss nach der fehlgeschlagenen Installation der Dialog manuell gestartet werden.
+
+- Taste Win, Geräte-Manager eingeben, und diesen per Enter aus der Liste starten.
+
+- Das Gerät erscheint mit einem gelben Warndreieck. Normalerweise schon korrekt in der Rubrik Audio-, Video- und Gamecontroller (Plug & Play erkennt ein Multimedia-Gerät).
+
+- Mit rechter Maustaste auf das Gerät klicken, im Kontextmenü 'Treibersoftware aktualisieren' auswählen.
+
+- Es erscheint der Dialog 'Treibersoftware aktualisieren'. Die restliche Vorgehensweise entspricht der im Handbuch beschriebenen.
+
+
+----------------------
+
+Update 3.31, 16.11.2012
+
+- Lock Mixer verriegelt TotalMix nun vollständig 
+
+----------------------
+
+Update 3.30, 06.11.2012
+
+- Neue TCO Option 23.976 
+
+----------------------
+
+Update 3.29, 07.05.2012
+
+- Beim Wechsel der Samplefrequenz konnte es zu einem Problem (Stop) mit Programmen kommen, die kASIOResetRequest nicht unterstützen 
+
+- Nur AIO: Bei angestecktem AI4S-192 Modul funktionierte der Phones Out unter Win 7 nicht wie erwartet, unter XP kam es zu falschen Devicenamen
+
+
+----------------------
+
+Update 3.27, 14.12.2011
+
+- Settingsdialog: Clock State konnte falsche Info zeigen (MADIface)
+
+- Settingsdialog: Beschriftung 'ADAT' bei einigen Karten auf 'Optical' geändert
+
+
+----------------------
+
+Update 3.26, 03.08.2011
+
+- Bugfix HDSPe MADI: seit Firmware 28 war bei 32-Bit Wiedergabe MIDI over MADI gestört
+
+- RPM: Settingsdialog war unvollständig implementiert
+
+- HDSPe PCI/ExpressCard: ohne angeschlossene Box erschien 'ock' in der Samplefrequenzauswahl
+
+- HDSPe AES: WDM Devices im Settingsdialog beeinflusste die Anzahl der ASIO-Kanäle
+
+- Generell WDM: Der Treiber wertete den Zustand des Interleaved-Buttons älterer Treiber aus, was zum Verlust der Surround-Wiedergabe führen konnte
+
+- Generell WDM: Bei Einstellung von Stereo im Lautsprecher-Setup wurden bei einer Stereo-Wiedergabe die ersten 8 Kanäle blockiert
+
+
+----------------------
+
+Update 3.24, 09.05.2011
+
+- Verbesserte TCO-Funktion. Für eine optimale, Sample-genaue Synchronisation via APP sollten folgende Firmwareversionen verwendet werden: HDSPe MADI Rev. 28, HDSPe RayDAT Rev. 12, HDSPe AES Rev. 8, HDSPe AIO Rev. 12, oder jeweils höher.
+
+
+----------------------
+
+Update 3.21, 14.03.2011
+
+
+- Der Settingsdialog wird unter Win 64 richtig installiert
+
+- Settingsdialog komplett überarbeitet
+
+- Settingsdialog speichert seine Position
+
+- WDM Treiber komplett überarbeitet. Samplefrequenz wird nun im Settingsdialopg vorgegeben (Win 7).
+
+- Multiclient Playback Mixing auf gleichen Kanälen
+
+- Optimierte Callbacks für Mehrkartenbetrieb auf Mehrprozessormaschinen
+
+
+- TotalMix Update:
+
+- - 4 Fadergruppen definierbar. Diese können über 'Save All Presets' gespeichert werden.
+
+- - Undo des letzten Presetwechsels
+
+- - Neue Optionen zur Deaktivierung des Mackie Protocol und der Level Meter
+
+- - Level Meter Daten zum Mackie Protocol hinzugefügt
+
+- - Post Fader Mode hinzugefügt (Mackie: F16. An: MIDI Kanal 1, Note On A 4. Aus: MIDI Kanal 1, Note Off A 4)
+
+- - Direkte Submix-Auswahl via Control Change Commands (Channel 1/2: BC 68/69 xx, Channel 3/4: BC 6A/6B xx etc.)
+
+
+----------------------
+
+Update 3.085, 05.08.2010
+
+- MADIface: Quad Speed funktionierte nicht im Slave Modus
+- HDSP 9632: Firmware 152 fehlte in der inf, daher wurde die Karte nicht erkannt
+
+----------------------
+
+Update 3.084, 08.07.2010
+
+- TCO: Timecode-Offset für Magix Software geändert.
+- TotalMix: Tooltips auf den Preset-Buttons funktionierten nicht
+- HDSPe AIO: Auf dem WDM Lautsprecher-Device kann nun eine 6/8-Kanal Surround Wiedergabe erfolgen
+
+----------------------
+
+Update 3.083, 19.02.2010
+
+- HDSP MADI Settingsdialog: TCO entfernt
+- About Dialog: Vista MMCSS Option entfernt
+- WDM: SPDIF AC-3 wird nur von SPDIF-Devices unterstützt
+- WDM: MADIface hatte kein Lautsprecher-Device
+- WDM: DVD Mehrkanal-Wiedergabe analog auf Lautsprecher-Device (in der Lautsprecher-Konfiguration 5.1 bzw. 7.1 einstellen)
+- ADAT Sync (HDSP9652, Multiface, Digiface): Seit Cubendo 4 funktionierte APP nicht mehr korrekt
+
+
+----------------------
+
+Update 3.082, 20.10.2009
+
+- Support für Flash Tool 2.19
+
+----------------------
+
+Update 3.081, 12.08.2009
+
+- Das Speichern der Buffer Size funktionierte auf einigen Systemen seit 3.079 nicht mehr
+
+
+----------------------
+
+Update 3.080, 28.05.2009
+
+- Multiclient-ASIO arbeitete seit 3.079 nicht mehr korrekt mit mehreren Karten
+
+
+----------------------
+
+Update 3.079, 14.05.2009
+
+- Settingsdialog: Eingabe eines Passwortes speichert die aktuelle Konfiguration für Rechnerneustart
+
+- Settings und TM: Experimentelle Erweiterung für 6-Karten-Betrieb. Auswahl in TM per Klick mit gedrückter Umschalt-Taste 
+
+- Inkompatibilität des Treibers zu Karten mit PLX (PCIe zu PCI) Bridge beseitigt
+
+- Zuverlässiges Beenden eines ASIO-Threads auch in schwierigen Situationen
+
+- Prozessverwaltung für Multiclient-ASIO funktionierte auf einigen Rechnern nicht wie erwartet
+
+- TotalMix: Neuer Skin und neue Icons
+
+- Settingsdialog: Neue Icons
+
+
+----------------------
+
+Update 3.077, 27.03.2009
+
+- TM: Scrolling nur der Fadersektion, Quickpanels bleiben rechts stehen.
+
+- TM: Fehlender Refresh bei Änderung der I/O Labels ergänzt
+
+----------------------
+
+Update 3.076, 16.03.2009
+
+- TM: Nur AIO: Kleiner Darstellungsfehler in Mixer View AI4S-192
+
+- TM: Raster in der Matrix entsprach bei diversen Karten nicht der I/O-Reihenfolge
+
+- TM: Position der Over LED korrigiert
+
+- WDM: Anpassung für Adobe Auditions DirectSound ASIO Wrapper (8-Kanal Input Device entfernt)
+
+
+----------------------
+
+Update 3.075, 25.02.2009
+
+- Nur RayDAT: Eine Limitierung der WDM Devices führte auch zur Abschaltung von ASIO-Kanälen
+
+
+----------------------
+
+Stilles Update 3.074 (4), 17.02.2009
+
+- ASIO: Latency Information der AES und AES-32 angepasst
+
+
+----------------------
+
+Stilles Update 3.074 (3), 3.02.2009
+
+- TotalMix: Bugfix Faderfox Auswahl des Submix in dritter Reihe
+
+- ASIO APP: Verbessertes Verhalten bei gestopptem Timecode
+
+----------------------
+
+Update 3.074, 5.01.2009
+
+- TotalMix: Diverse Änderungen für die HDSPe AIO (Kanalreihenfolge, Benennung und Presets)
+
+- Neue Firmware V9 für die HDSPe AIO
+
+- TotalMix: MS Processing im Menü Options für die gesamte HDSPe Serie hinzugefügt
+
+- ASIO APP: Fehlendes Run Flag blockierte in Nuendo 4 die Transportfunktion
+
+----------------------
+
+Update 3.073, 28.10.2008
+
+- APP: Bei Verlust von LTC sprang der Cursor an den Anfang
+
+- Neue Firmware ID 154 der HDSP 9632 zur inf-Datei hinzugefügt
+
+----------------------
+
+Update 3.072, 8.10.2008
+
+- BSOD beim Herunterfahren des Computers beseitigt
+
+- BSOD bei ASIOStop beseitigt
+
+----------------------
+
+Update 3.071, 8.09.2008
+
+- TotalMix: Namensanzeige über den Preset-Knöpfen war deaktiviert
+
+- Settingsdialog: Sync In Knopf funktionierte bei RayDAT und AIO nicht korrekt.
+
+----------------------
+
+Update 3.069, 26.08.2008
+
+- Settingsdialog: Mehrere kleine Textänderungen
+
+- Settingsdialog DDS: Wenn DDS eingeschaltet wurde aber nicht aktiv war (AutoSync Mode) konnten bei diversen Karten keine Mehrfachen der aktuell anliegenden Samplefrequenz aktiviert werden (notwendig z.B. im SMUX Betrieb).
+
+- TotalMix: Unterstützung für die Faderfox TM1 Remote Control hinzugefügt
+
+- TotalMix: Mackie Control F16 aktiviert Post Modus
+
+- Die Werkspresets von HDSPe MADI und MADIface mischen nun auf -12 dB bei den Kanälen 63/64.
+
+----------------------
+
+Update 3.068, 22.08.2008
+
+- HDSPe PCI (Multiface/Digiface) unterstützt nun das TCO. Dies erfordert Firmware 14.*
+
+- TotalMix: OVER LED um 1 Pixel verschoben.
+
+- TotalMix: Ordner für eigene Bitmaps muss nun bmp_hdsp heissen (vorher bmp). Damit ist es nun möglich unterschiedliche Bitmaps für den Fireface-Mixer (bmp) und den HDSP-Mixer (bmp_hdsp) zu nutzen.
+
+- WDM: Im Settingsdialog der HDSP 9652 und des Digiface lässt sich die Anzahl der WDM Devices begrenzen. Der Dialog prüft ausserdem die eingebene Zahl auf Gültigkeit.
+
+- Werkspresets der HDSPe MADI / MADIface korrigiert.
+
+- Vista: MMCSS kann im Settings / About Dialog aktiviert werden (nicht empfohlen).
+
+*Hinweis: Diese Version unterstützt nur ASIO-Timecode und keine Umwandlung von LTC nach MTC. Ausserdem gibt es folgende (Hardware-bedingte) Einschränkung:
+Wenn aus dem eingehenden Timecode auch eine Audio-Clock erzeugt werden soll ist ein BNC-Kabel vom Wordclock-Ausgang des TCO zum Wordclock-Eingang des Multiface/Digiface notwendig. In diesem Fall muss im Settingsdialog Pref. Sync Ref auf TCO und Clock Mode auf AutoSync gestellt sein. Dient der eingehende Timecode nicht zum Takten der Karte, ist die Verbindung nicht erforderlich.
+
+----------------------
+
+Update 3.067, 7.08.2008
+
+- Komplette neue Speicherverwaltung zur Vermeidung von BSODs
+
+----------------------
+
+Update 3.066, 6.08.2008
+
+- WDM: Speaker Setup bestimmt nun ob eine 8- oder 6-Kanal Wiedergabe erfolgt.
+
+- Support für DirectMusic MIDI hinzugefügt
+
+
+----------------------
+
+
+Copyright RME 11/2012
+Alle Rechte vorbehalten. Windows XP/Vista/7/8 sind Warenzeichen der Microsoft Corporation. ASIO ist ein Warenzeichen der Steinberg Media Technologies GmbH.
+

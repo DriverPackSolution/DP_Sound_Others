@@ -1,0 +1,11 @@
+[Initialize]
+Dsxgmixer=yes
+CopyCatFile=yes
+IgnoreSign=no
+IgnoreSignInstall=no
+UseApiFor2000=no
+
+[Docking]
+Ydsxgdk=no
+
+[DriverInf]

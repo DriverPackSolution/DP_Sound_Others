@@ -1,0 +1,18 @@
+
+**********************************************************
+SysLoad install log (x64)
+Log started: 11 Jan 2010 12:04:04 am
+
+inf length is 6089
+C:\Windows\inf\oem81.inf contains device ID PCI\VEN_1057&DEV_1801&SUBSYS_0050ECC0	; 56301
+Removed INF C:\Windows\inf\oem81.inf with result 1
+SetupCopyOEMInf result 0; new INF path 
+UpdateDriverForPlugAndPlayDevices for device ID PCI\VEN_1057&DEV_1801&SUBSYS_0050ECC0	; 56301 with result 0
+UpdateDriverForPlugAndPlayDevices for device ID PCI\VEN_1057&DEV_3410&SUBSYS_0051ECC0	; 56361 with result 0
+UpdateDriverForPlugAndPlayDevices for device ID PCI\VEN_1057&DEV_3410&SUBSYS_0060ECC0 with result 0
+UpdateDriverForPlugAndPlayDevices for device ID PCI\VEN_1057&DEV_1801&SUBSYS_0070ECC0	    ; 80 MHz 56301 with result 0
+UpdateDriverForPlugAndPlayDevices for device ID PCI\VEN_1057&DEV_1801&SUBSYS_0071ECC0	    ; 66 MHz 56301 with result 0
+UpdateDriverForPlugAndPlayDevices for device ID PCI\VEN_1057&DEV_3410&SUBSYS_0072ECC0	    ; 56361 with result 0
+UpdateDriverForPlugAndPlayDevices for device ID PCI\VEN_1057&DEV_3410&SUBSYS_0080ECC0		; Mia with result 0
+UpdateDriverForPlugAndPlayDevices for device ID PCI\VEN_1057&DEV_3410&SUBSYS_0081ECC0	; Mia MIDI with result 0
+SysLoad exit

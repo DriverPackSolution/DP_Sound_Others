@@ -1,0 +1,134 @@
+;
+; File:    MA763010.INF   (If the name is changed, make the proper changes in the uninstaller)
+; Copyright 2004 Midiman/M-Audio
+; Midiman/M-Audio Fast Track Driver .INF File
+;
+[Version]
+signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%MAUDIO%
+DriverVer=8/26/2004,5.10.0.3515
+LayoutFile=ks.inf,wdmaudio.inf
+
+[SourceDisksNames]
+1=%MAudioDisk%,,,
+
+[SourceDisksFiles]
+MA763010.sys=1
+MA010CPL.CPL=1
+
+[ControlFlags]
+;ExcludeFromSelect=*
+
+[DestinationDirs]
+DefaultDestDir=10,system32\drivers
+DriverCopyFiles=10,system32\drivers
+ControlPanelCopyFiles=11
+;CoinstCopyFilesSection=11
+
+[Manufacturer]
+%MAUDIO%=M_AUDIO
+
+[M_AUDIO]
+; FastTrack VID and PID
+%maavsusb.DeviceDesc%=maavsusb,USB\VID_0763&PID_2010&MI_00
+
+[maavsusb.InterfaceWave]
+AddReg=maavsusb.InterfaceWave.AddReg
+
+[maavsusb.InterfaceWave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%maavsusb.Wave.szPname%
+HKR,,CurveType,1,01,00,00,00
+
+[maavsusb.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=DriverCopyFiles,ControlPanelCopyFiles
+AddReg=maavsusb.AddReg,maavsusb.Branding.AddReg
+
+;[maavsusb.NT.CoInstallers]
+;CopyFiles=CoinstCopyFilesSection
+;AddReg=maavsusb.NT.CoInstallers_AddReg
+
+;[CoInstCopyFilesSection]
+;FTInstFix.dll
+
+;[maavsusb.NT.CoInstallers_AddReg]
+;HKR,,CoInstallers32,0x00010000,"FTInstfix.dll,FTCoInstProc"
+
+[maavsusb.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_Filter%,maavsusb.InterfaceWave
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_Filter%,maavsusb.InterfaceWave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_Filter%,maavsusb.InterfaceWave
+
+; Branding
+[maavsusb.Branding.AddReg]
+; Branding a URL is no longer supported.
+;HKR,Branding,url,,"http://www.m-audio.com/"
+HKR,Branding,icon,,"MA763010.SYS,101"
+HKR,Branding,bitmap,,"MA763010.SYS,102"
+
+[maavsusb.AddReg]
+HKR,,DevLoader,,*NTKERN
+HKR,,NTMPDriver,,MA763010.SYS
+
+;the system audio drivers require the following information
+;to establish support by the Windows multimedia system for a port-class audio adapter.
+HKR,,SetupPreferredAudioDevices,3,01,00,00,00
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,MA763010.SYS
+HKR,,NTMPDriver,,"MA763010.SYS,sbemul.sys"
+HKR,,CLSID,,{17CCA71B-ECD7-11D0-B908-00A0C9223196}
+HKR,Drivers,SubClasses,,"wave,midi,mixer,aux"
+
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\aux\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%maavsusb.GenericDesc%
+HKR,Drivers\midi\wdmaud.drv,Description,,%maavsusb.GenericDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%maavsusb.GenericDesc%
+HKR,Drivers\aux\wdmaud.drv,Description,,%maavsusb.GenericDesc%
+
+[DriverCopyFiles]
+MA763010.sys
+
+[ControlPanelCopyFiles]
+MA010CPL.CPL
+
+[maavsusb.NT.Services]
+AddService=MA763010, 0x00000002, maavsusb.ServiceInstall
+
+[maavsusb.ServiceInstall]
+DisplayName=%maavsusb.DeviceDesc%
+ServiceType=%SERVICE_KERNEL_DRIVER%
+StartType=%SERVICE_DEMAND_START%
+ErrorControl=%SERVICE_ERROR_NORMAL%
+ServiceBinary=%10%\system32\drivers\MA763010.sys
+
+[Strings]
+; non-localizeable
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSSTRING_Filter="{9B365890-165F-11D0-A195-0020AFD156E4}"
+
+; Media category for mixer.
+MAudioGUID.LRMixer="{77EC1F9D-4353-4225-BB48-D70188F5C932}"
+
+SERVICE_KERNEL_DRIVER=1
+SERVICE_DEMAND_START=3
+SERVICE_ERROR_NORMAL=1
+
+;localizeable
+Maudio="M-Audio"
+MAudioDisk="M-Audio Fast Track Driver Disk"
+maavsusb.DeviceDesc="M-Audio Fast Track"
+maavsusb.Wave.szPname="M-Audio Fast Track"
+maavsusb.GenericDesc="M-Audio Fast Track"
+Control.LRMixer="Mono input (Left channel only)"
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"

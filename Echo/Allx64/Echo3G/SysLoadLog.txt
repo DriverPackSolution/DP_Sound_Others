@@ -1,0 +1,11 @@
+
+**********************************************************
+SysLoad install log (x64)
+Log started: 10 Jan 2010 11:58:22 pm
+
+inf length is 5382
+C:\Windows\inf\oem79.inf contains device ID PCI\VEN_1057&DEV_3410&SUBSYS_0100ECC0
+Removed INF C:\Windows\inf\oem79.inf with result 1
+SetupCopyOEMInf result 0; new INF path 
+UpdateDriverForPlugAndPlayDevices for device ID PCI\VEN_1057&DEV_3410&SUBSYS_0100ECC0 with result 0
+SysLoad exit

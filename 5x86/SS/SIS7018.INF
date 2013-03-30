@@ -1,0 +1,1399 @@
+;Copyright (c) 1990-2001 Silicon Integrated Systems Corporation All rights Reserved
+;
+;Module Name:
+;   sis7018.INF
+;
+;Abstract:
+;    INF file for installing SiS7018 WDM Driver
+
+[Version]
+Signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+provider=%SiSMfg%
+CatalogFile=sis7018.cat
+;LayoutFile=layout.inf, layout1.inf, layout2.inf
+DriverVer=09/26/2001,5.10.00.6140
+
+[SourceDisksNames]
+1=%SourceDiskName%,,,""
+
+[SourceDisksFiles]
+sis7018.sys=1
+;sis7018.inf=1
+Uninst2k.exe=1
+
+[Manufacturer]
+%SiSMfg%=SiS
+
+
+[ControlFlags]
+
+ExcludeFromSelect=PCI\VEN_1039&DEV_7018&SUBSYS_ffffffff
+
+
+[SiS]
+;%SiS7018.DeviceDesc%=SiS7018,     PCI\VEN_1039&DEV_7018
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_370100E0
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_370200E0
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_01B61014
+%SiS7018.DeviceDesc%=IBM,          PCI\VEN_1039&DEV_7018&SUBSYS_01B71014
+%SiS7018.DeviceDesc%=IBM,          PCI\VEN_1039&DEV_7018&SUBSYS_01B81014
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_01F91014
+%SiS7018.DeviceDesc%=AC3_SPDIF,    PCI\VEN_1039&DEV_7018&SUBSYS_02011014
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_01661019
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_05281019
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_05421019
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_05601019
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_09701019
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_09731019
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_09951019
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_09991019
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_0A011019
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_0A081019
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_0A141019
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_0A371019
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_0A381019
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_0A391019
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_0A401019
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_0A411019
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_0A421019
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_0A431019
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_0A441019
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_0A451019
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_0A461019
+%SiS7018.DeviceDesc%=ECS4CH,       PCI\VEN_1039&DEV_7018&SUBSYS_0F031019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60001019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60011019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60021019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60031019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60041019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60051019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60061019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60071019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60081019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60091019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60101019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60111019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60121019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60131019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60141019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60151019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60161019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60171019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60181019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60191019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60201019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60211019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60221019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60231019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60241019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60251019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60261019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60271019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60281019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60291019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60301019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60311019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60321019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60331019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60341019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60351019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60361019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60371019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60381019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60391019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60401019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60411019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60421019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60431019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60441019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60451019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60461019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60471019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60481019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60491019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60501019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60511019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60521019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60531019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60541019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60551019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60561019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60571019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60581019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60591019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_60601019
+%SiS7018.DeviceDesc%=ECS,      PCI\VEN_1039&DEV_7018&SUBSYS_70181019
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_70181019
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_000E1025
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_00181025
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_80D51033
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_00011039
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_10001039
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_70181039
+%SiS7018.DeviceDesc%=ASUS,         PCI\VEN_1039&DEV_7018&SUBSYS_14531043
+%SiS7018.DeviceDesc%=ASUS2,        PCI\VEN_1039&DEV_7018&SUBSYS_14731043
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_800B1043
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_80321043
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_80351043
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_80E11043
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_80E21043
+%SiS7018.DeviceDesc%=Sony,         PCI\VEN_1039&DEV_7018&SUBSYS_80D4104D
+%SiS7018.DeviceDesc%=Sony,         PCI\VEN_1039&DEV_7018&SUBSYS_80E2104D
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_70181054
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_70101071
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_70181071
+%SiS7018.DeviceDesc%=AC3_SPDIF,    PCI\VEN_1039&DEV_7018&SUBSYS_71201071
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_71211071
+%SiS7018.DeviceDesc%=AC3_SPDIF,    PCI\VEN_1039&DEV_7018&SUBSYS_75211071
+%SiS7018.DeviceDesc%=AC3_SPDIF,    PCI\VEN_1039&DEV_7018&SUBSYS_75221071
+%SiS7018.DeviceDesc%=AC3_SPDIF,    PCI\VEN_1039&DEV_7018&SUBSYS_75231071
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_73331071
+%SiS7018.DeviceDesc%=AC3_SPDIF3,   PCI\VEN_1039&DEV_7018&SUBSYS_77621071
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_5330107D
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_5350107D
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_7018107D
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_630E1098
+%SiS7018.DeviceDesc%=Trigem,       PCI\VEN_1039&DEV_7018&SUBSYS_7141109F
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_32091170
+%SiS7018.DeviceDesc%=Shuttle,      PCI\VEN_1039&DEV_7018&SUBSYS_06301297
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_101613BD
+%SiS7018.DeviceDesc%=AC3_SPDIF,    PCI\VEN_1039&DEV_7018&SUBSYS_101B13BD
+%SiS7018.DeviceDesc%=AC3_SPDIF,    PCI\VEN_1039&DEV_7018&SUBSYS_102213BD
+%SiS7018.DeviceDesc%=AC3_SPDIF,    PCI\VEN_1039&DEV_7018&SUBSYS_180413BD
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_20111458
+%SiS7018.DeviceDesc%=AC3_SPDIF,    PCI\VEN_1039&DEV_7018&SUBSYS_A0001458
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_400A1462
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_208914A4
+%SiS7018.DeviceDesc%=GVC,          PCI\VEN_1039&DEV_7018&SUBSYS_213414A4
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_213614A4
+%SiS7018.DeviceDesc%=AC3_SPDIF,    PCI\VEN_1039&DEV_7018&SUBSYS_213714A4
+%SiS7018.DeviceDesc%=IBM,          PCI\VEN_1039&DEV_7018&SUBSYS_219314CD
+%SiS7018.DeviceDesc%=IBM,          PCI\VEN_1039&DEV_7018&SUBSYS_219414CD
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_21C114CD
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_21C714CD
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_040114FF
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_110014FF
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_8808152D
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_11031558
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_18001558
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_20001558
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_22001558
+%SiS7018.DeviceDesc%=AC3_SPDIF,    PCI\VEN_1039&DEV_7018&SUBSYS_22021558
+%SiS7018.DeviceDesc%=AC3_SPDIF,    PCI\VEN_1039&DEV_7018&SUBSYS_22041558
+%SiS7018.DeviceDesc%=AC3_SPDIF,    PCI\VEN_1039&DEV_7018&SUBSYS_22051558
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_50141558
+%SiS7018.DeviceDesc%=AC3_SPDIF,    PCI\VEN_1039&DEV_7018&SUBSYS_51041558
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_60001558
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_70181563
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_00741565
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_00811565
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_00901565
+%SiS7018.DeviceDesc%=AlphaTop,     PCI\VEN_1039&DEV_7018&SUBSYS_B500156D
+%SiS7018.DeviceDesc%=AlphaTop,     PCI\VEN_1039&DEV_7018&SUBSYS_B510156D
+%SiS7018.DeviceDesc%=AlphaTop,     PCI\VEN_1039&DEV_7018&SUBSYS_B725156D
+%SiS7018.DeviceDesc%=AlphaTop,     PCI\VEN_1039&DEV_7018&SUBSYS_B900156D
+%SiS7018.DeviceDesc%=AlphaTop,     PCI\VEN_1039&DEV_7018&SUBSYS_B901156D
+%SiS7018.DeviceDesc%=Uniwill,      PCI\VEN_1039&DEV_7018&SUBSYS_50011584
+%SiS7018.DeviceDesc%=Uniwill,      PCI\VEN_1039&DEV_7018&SUBSYS_50021584
+%SiS7018.DeviceDesc%=Uniwill,      PCI\VEN_1039&DEV_7018&SUBSYS_50031584
+%SiS7018.DeviceDesc%=Uniwill,      PCI\VEN_1039&DEV_7018&SUBSYS_50041584
+%SiS7018.DeviceDesc%=Uniwill,      PCI\VEN_1039&DEV_7018&SUBSYS_50051584
+%SiS7018.DeviceDesc%=Uniwill,      PCI\VEN_1039&DEV_7018&SUBSYS_50061584
+%SiS7018.DeviceDesc%=Uniwill,      PCI\VEN_1039&DEV_7018&SUBSYS_50071584
+%SiS7018.DeviceDesc%=Procomp,      PCI\VEN_1039&DEV_7018&SUBSYS_000115C5
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_011115C5
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_316015D5
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_636015D5
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_716015D5
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_816715D5
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_838315D5
+%SiS7018.DeviceDesc%=AC3_SPDIF,    PCI\VEN_1039&DEV_7018&SUBSYS_20051631
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_085016CD
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_085116CD
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_085216CD
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_085316CD
+%SiS7018.DeviceDesc%=AC3_SPDIF2,   PCI\VEN_1039&DEV_7018&SUBSYS_200117C4
+%SiS7018.DeviceDesc%=AC3_SPDIF,    PCI\VEN_1039&DEV_7018&SUBSYS_021817C4
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_A161270F
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_A164270F
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_A171270F
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_A181270F
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_A183270F
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_A561270F
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_630E3411
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_0022A0A0
+%SiS7018.DeviceDesc%=SiS7018,      PCI\VEN_1039&DEV_7018&SUBSYS_0069A0A0
+
+
+[DestinationDirs]
+DefaultDestDir       	= 10,system32\drivers ; %SystemRoot%\system32\drivers
+SiS7018.CopyList	= 10,system32\drivers
+Uninstall.CopyList   	= 24,Progra~1\SiS7018\Uninst
+
+[SiS7018]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=SiS7018.CopyList, Uninstall.CopyList
+AddReg=SiS7018.AddReg,SiS7018_NAMES.AddReg, SiS7018_OEM.AddReg,Uninstall.AddReg, Special_Support_0.AddReg
+
+[AC3_SPDIF]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=SiS7018.CopyList, Uninstall.CopyList
+AddReg=SiS7018.AddReg,SiS7018_NAMES.AddReg, SiS7018_OEM.AddReg,Uninstall.AddReg, Special_Support_1.AddReg
+
+[IBM]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=SiS7018.CopyList, Uninstall.CopyList
+AddReg=SiS7018.AddReg,SiS7018_NAMES.AddReg, SiS7018_OEM.AddReg,Uninstall.AddReg, Special_Support_2.AddReg
+
+[Sony]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=SiS7018.CopyList, Uninstall.CopyList
+AddReg=SiS7018.AddReg,SiS7018_NAMES.AddReg, Sony.AddReg,Uninstall.AddReg, Special_Support_4.AddReg
+
+[Uniwill]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=SiS7018.CopyList, Uninstall.CopyList
+AddReg=SiS7018.AddReg,SiS7018_NAMES.AddReg, Uniwill.AddReg,Uninstall.AddReg, Special_Support_3.AddReg
+
+[ASUS]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=SiS7018.CopyList, Uninstall.CopyList
+AddReg=SiS7018.AddReg,SiS7018_NAMES.AddReg, ASUS.AddReg,Uninstall.AddReg, Special_Support_0.AddReg
+
+[Procomp]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=SiS7018.CopyList, Uninstall.CopyList
+AddReg=SiS7018.AddReg,SiS7018_NAMES.AddReg, Procomp.AddReg,Uninstall.AddReg, Special_Support_6.AddReg
+
+[AlphaTop]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=SiS7018.CopyList, Uninstall.CopyList
+AddReg=SiS7018.AddReg,SiS7018_NAMES.AddReg, SiS7018_OEM.AddReg,Uninstall.AddReg, Special_Support_10.AddReg
+
+[Shuttle]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=SiS7018.CopyList, Uninstall.CopyList
+AddReg=SiS7018.AddReg,SiS7018_NAMES.AddReg, SiS7018_OEM.AddReg,Uninstall.AddReg, Special_Support_7.AddReg
+
+
+[GVC]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=SiS7018.CopyList, Uninstall.CopyList
+AddReg=SiS7018.AddReg,SiS7018_NAMES.AddReg, SiS7018_OEM.AddReg,Uninstall.AddReg, Special_Support_8.AddReg
+
+
+[Trigem]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=SiS7018.CopyList, Uninstall.CopyList
+AddReg=SiS7018.AddReg,SiS7018_NAMES.AddReg, Trigem.AddReg,Uninstall.AddReg, Special_Support_9.AddReg
+
+
+
+[SiS7018.CopyList]
+sis7018.sys
+
+
+[SiS7018.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,SiS7018.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,SiS7018.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wavetable%,SiSAudioWDM.I.Wavetable
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wavetable%,SiSAudioWDM.I.Wavetable
+
+
+[AC3_SPDIF.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,SiS7018.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,SiS7018.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wavetable%,SiSAudioWDM.I.Wavetable
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wavetable%,SiSAudioWDM.I.Wavetable
+
+[IBM.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,SiS7018.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,SiS7018.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wavetable%,SiSAudioWDM.I.Wavetable
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wavetable%,SiSAudioWDM.I.Wavetable
+
+[Sony.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,SiS7018.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,SiS7018.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wavetable%,SiSAudioWDM.I.Wavetable
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wavetable%,SiSAudioWDM.I.Wavetable
+
+[Uniwill.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,SiS7018.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,SiS7018.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wavetable%,SiSAudioWDM.I.Wavetable
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wavetable%,SiSAudioWDM.I.Wavetable
+
+
+[Procomp.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,SiS7018.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,SiS7018.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wavetable%,SiSAudioWDM.I.Wavetable
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wavetable%,SiSAudioWDM.I.Wavetable
+
+[AlphaTop.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,SiS7018.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,SiS7018.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wavetable%,SiSAudioWDM.I.Wavetable
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wavetable%,SiSAudioWDM.I.Wavetable
+
+[Shuttle.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,SiS7018.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,SiS7018.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wavetable%,SiSAudioWDM.I.Wavetable
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wavetable%,SiSAudioWDM.I.Wavetable
+
+[GVC.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,SiS7018.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,SiS7018.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wavetable%,SiSAudioWDM.I.Wavetable
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wavetable%,SiSAudioWDM.I.Wavetable
+
+[ASUS.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,SiS7018.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,SiS7018.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wavetable%,SiSAudioWDM.I.Wavetable
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wavetable%,SiSAudioWDM.I.Wavetable
+
+[Trigem.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,SiS7018.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,SiS7018.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,SiS7018.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wavetable%,SiSAudioWDM.I.Wavetable
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wavetable%,SiSAudioWDM.I.Wavetable
+
+[SiS7018.Interface.Wave]
+AddReg=SiS7018.I.Wave.AddReg
+
+[SiS7018.I.Wave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%SiS7018.Wave.szPname%
+
+[SiS7018.Interface.Topology]
+AddReg=SiS7018.I.Topo.AddReg
+
+[SiS7018.I.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%SiS7018.Topology.szPname%
+
+
+[SiSAudioWDM.I.Wavetable]
+AddReg=SiSAudioWDM.I.WTBL.AddReg
+
+[SiSAudioWDM.I.WTBL.AddReg]
+HKR,,FriendlyName,,%SiSAudioWDM.Wavetable.szPname%
+HKR,,CLSID,,%Proxy.CLSID%
+
+
+
+[SiS7018.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,sis7018.sys
+HKR,,NTMPDriver,,"sis7018.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer,aux"
+
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\aux\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%SiS7018.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv, Description,,%SiS7018.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%SiS7018.DeviceDesc%
+HKR,Drivers\aux\wdmaud.drv,Description,,%SiS7018.DeviceDesc%
+
+[SiS7018.Services]
+AddService = SiS7018, 0x00000002, SiS7018_Service_Inst
+
+[AC3_SPDIF.Services]
+AddService = SiS7018, 0x00000002, SiS7018_Service_Inst
+
+[IBM.Services]
+AddService = SiS7018, 0x00000002, SiS7018_Service_Inst
+
+[Sony.Services]
+AddService = SiS7018, 0x00000002, SiS7018_Service_Inst
+
+[Uniwill.Services]
+AddService = SiS7018, 0x00000002, SiS7018_Service_Inst
+
+[ASUS.Services]
+AddService = SiS7018, 0x00000002, SiS7018_Service_Inst
+
+[Procomp.Services]
+AddService = SiS7018, 0x00000002, SiS7018_Service_Inst
+
+[AlphaTop.Services]
+AddService = SiS7018, 0x00000002, SiS7018_Service_Inst
+
+[Shuttle.Services]
+AddService = SiS7018, 0x00000002, SiS7018_Service_Inst
+
+[GVC.Services]
+AddService = SiS7018, 0x00000002, SiS7018_Service_Inst
+
+[Trigem.Services]
+AddService = SiS7018, 0x00000002, SiS7018_Service_Inst
+
+[SiS7018_Service_Inst]
+DisplayName   = %SiS7018.SvcDesc%
+ServiceType   = 1                  ; SERVICE_KERNEL_DRIVER
+StartType     = 3                  ; SERVICE_DEMAND_START
+ErrorControl  = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary = %10%\system32\drivers\sis7018.sys
+
+[SiS7018_NAMES.AddReg]
+;; Nodes
+HKLM,%MediaCategories%\%ICHGUID.PhoneVolume%,Name,,%ICHNode.PhoneVolume%
+HKLM,%MediaCategories%\%ICHGUID.PhoneVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ICHGUID.PhoneMute%,Name,,%ICHNode.PhoneMute%
+HKLM,%MediaCategories%\%ICHGUID.PhoneMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ICHGUID.LineInMute%,Name,,%ICHNode.LineInMute%
+HKLM,%MediaCategories%\%ICHGUID.LineInMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ICHGUID.MainMix%,Name,,%ICHNode.MainMix%
+HKLM,%MediaCategories%\%ICHGUID.MainMix%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ICHGUID.3DBypass%,Name,,%ICHNode.3DBypass%
+HKLM,%MediaCategories%\%ICHGUID.3DBypass%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ICHGUID.3DEnable%,Name,,%ICHNode.3DEnable%
+HKLM,%MediaCategories%\%ICHGUID.3DEnable%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ICHGUID.BeepMix%,Name,,%ICHNode.BeepMix%
+HKLM,%MediaCategories%\%ICHGUID.BeepMix%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ICHGUID.HPVolume%,Name,,%ICHNode.HPVolume%
+HKLM,%MediaCategories%\%ICHGUID.HPVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ICHGUID.HPMute%,Name,,%ICHNode.HPMute%
+HKLM,%MediaCategories%\%ICHGUID.HPMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ICHGUID.MonoOutSelect%,Name,,%ICHNode.MonoOutSelect%
+HKLM,%MediaCategories%\%ICHGUID.MonoOutSelect%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ICHGUID.WaveInSelect%,Name,,%ICHNode.WaveInSelect%
+HKLM,%MediaCategories%\%ICHGUID.WaveInSelect%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ICHGUID.MasterInVolume%,Name,,%ICHNode.MasterInVolume%
+HKLM,%MediaCategories%\%ICHGUID.MasterInVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ICHGUID.MasterInMute%,Name,,%ICHNode.MasterInMute%
+HKLM,%MediaCategories%\%ICHGUID.MasterInMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ICHGUID.MicInVolume%,Name,,%ICHNode.MicInVolume%
+HKLM,%MediaCategories%\%ICHGUID.MicInVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ICHGUID.MicInMute%,Name,,%ICHNode.MicInMute%
+HKLM,%MediaCategories%\%ICHGUID.MicInMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ICHGUID.SimulStereo%,Name,,%ICHNode.SimulStereo%
+HKLM,%MediaCategories%\%ICHGUID.SimulStereo%,Display,1,00,00,00,00
+
+HKLM,%MediaCategories%\%T2AUDIOGUID.WaveTable%,Name,,%T2AUDIOPin.WaveTable%
+HKLM,%MediaCategories%\%T2AUDIOGUID.WaveTable%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%T2AUDIOGUID.LineOut%,Name,,%T2AUDIOPin.LineOut%
+HKLM,%MediaCategories%\%T2AUDIOGUID.LineOut%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%T2AUDIOGUID.Microphone%,Name,,%T2AUDIOPin.Microphone%
+HKLM,%MediaCategories%\%T2AUDIOGUID.Microphone%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%T2AUDIOGUID.PcBeep%,Name,,%T2AUDIOPin.PcBeep%
+HKLM,%MediaCategories%\%T2AUDIOGUID.PcBeep%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%T2AUDIOGUID.Video%,Name,,%T2AUDIOPin.Video%
+HKLM,%MediaCategories%\%T2AUDIOGUID.Video%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%T2AUDIOGUID.Phone%,Name,,%T2AUDIOPin.Phone%
+HKLM,%MediaCategories%\%T2AUDIOGUID.Phone%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%T2AUDIOGUID.PCMOut%,Name,,%T2AUDIOPin.PCMOut%
+HKLM,%MediaCategories%\%T2AUDIOGUID.PCMOut%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%T2AUDIOGUID.LineIn%,Name,,%T2AUDIOPin.LineIn%
+HKLM,%MediaCategories%\%T2AUDIOGUID.LineIn%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%T2AUDIOGUID.SteroMix%,Name,,%T2AUDIOPin.SteroMix%
+HKLM,%MediaCategories%\%T2AUDIOGUID.SteroMix%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%T2AUDIOGUID.MonoMix%,Name,,%T2AUDIOPin.MonoMix%
+HKLM,%MediaCategories%\%T2AUDIOGUID.MonoMix%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%T2AUDIOGUID.3DControl%,Name,,%T2AUDIOPin.3DControl%
+HKLM,%MediaCategories%\%T2AUDIOGUID.3DControl%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%T2AUDIOGUID.3DDepth%,Name,,%T2AUDIOPin.3DDepth%
+HKLM,%MediaCategories%\%T2AUDIOGUID.3DDepth%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%T2AUDIOGUID.I2S%,Name,,%T2AUDIOPin.I2S%
+HKLM,%MediaCategories%\%T2AUDIOGUID.I2S%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%T2AUDIOGUID.SPDIF%,Name,,%T2AUDIOPin.SPDIF%
+HKLM,%MediaCategories%\%T2AUDIOGUID.SPDIF%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%T2AUDIOGUID.SPDIFDES%,Name,,%T2AUDIOPin.SPDIFDES%
+HKLM,%MediaCategories%\%T2AUDIOGUID.SPDIFDES%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%T2AUDIOGUID.CSSPDIF%,Name,,%T2AUDIOPin.CSSPDIF%
+HKLM,%MediaCategories%\%T2AUDIOGUID.CSSPDIF%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%T2AUDIOGUID.CSSPDIFDES%,Name,,%T2AUDIOPin.CSSPDIFDES%
+HKLM,%MediaCategories%\%T2AUDIOGUID.CSSPDIFDES%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%T2AUDIOGUID.MONOOUT%,Name,,%T2AUDIOPin.MONOOUT%
+HKLM,%MediaCategories%\%T2AUDIOGUID.MONOOUT%,Display,1,00,00,00,00
+
+
+HKLM,%MediaCategories%\%SiSGUID.20db%,Name,,%SiSPin.20db%
+HKLM,%MediaCategories%\%SiSGUID.20db%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SiSGUID.MICSEL%,Name,,%SiSPin.MICSEL%
+HKLM,%MediaCategories%\%SiSGUID.MICSEL%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SiSGUID.LOUDNESS%,Name,,%SiSPin.LOUDNESS%
+HKLM,%MediaCategories%\%SiSGUID.LOUDNESS%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SiSGUID.BASS%,Name,,%SiSPin.BASS%
+HKLM,%MediaCategories%\%SiSGUID.BASS%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SiSGUID.TREBLE%,Name,,%SiSPin.TREBLE%
+HKLM,%MediaCategories%\%SiSGUID.TREBLE%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SiSGUID.S3DDEPTHVOLUME%,Name,,%SiSPin.S3DDEPTHVOLUME%
+HKLM,%MediaCategories%\%SiSGUID.S3DDEPTHVOLUME%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SiSGUID.S3DDEPTHMUTE%,Name,,%SiSPin.S3DDEPTHMUTE%
+HKLM,%MediaCategories%\%SiSGUID.S3DDEPTHMUTE%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%T2AUDIOGUID.3DCENTER%,Name,,%T2AUDIOPin.3DCENTER%
+HKLM,%MediaCategories%\%T2AUDIOGUID.3DCENTER%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SiSGUID.S3DCENTERVOLUME%,Name,,%SiSPin.S3DCENTERVOLUME%
+HKLM,%MediaCategories%\%SiSGUID.S3DCENTERVOLUME%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SiSGUID.20dbout%,Name,,%SiSPin.20dbout%
+HKLM,%MediaCategories%\%SiSGUID.20dbout%,Display,1,00,00,00,00
+
+HKLM,%MediaCategories%\%SiSGUID.MICSELOUT%,Name,,%SiSPin.MICSELOUT%
+HKLM,%MediaCategories%\%SiSGUID.MICSELOUT%,Display,1,00,00,00,00
+
+HKLM,%MediaCategories%\%SiSGUID.SPDIFMUTE%,Name,,%SiSNODE.SPDIFMUTE%
+HKLM,%MediaCategories%\%SiSGUID.SPDIFMUTE%,Display,1,00,00,00,00
+
+HKLM,%MediaCategories%\%SiSGUID.CSSPDIFMUTE%,Name,,%SiSNODE.CSSPDIFMUTE%
+HKLM,%MediaCategories%\%SiSGUID.CSSPDIFMUTE%,Display,1,00,00,00,00
+
+HKLM,%MediaCategories%\%SiSGUID.CHANNEL6_DEST%,Name,,%SiSPin.CHANNEL6_DEST%
+HKLM,%MediaCategories%\%SiSGUID.CHANNEL6_DEST%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SiSGUID.LFE_SOURCE%,Name,,%SiSPin.LFE_SOURCE%
+HKLM,%MediaCategories%\%SiSGUID.LFE_SOURCE%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SiSGUID.CENTER_SOURCE%,Name,,%SiSPin.CENTER_SOURCE%
+HKLM,%MediaCategories%\%SiSGUID.CENTER_SOURCE%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SiSGUID.SURROUND_L_SOURCE%,Name,,%SiSPin.SURROUND_L_SOURCE%
+HKLM,%MediaCategories%\%SiSGUID.SURROUND_L_SOURCE%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SiSGUID.SURROUND_R_SOURCE%,Name,,%SiSPin.SURROUND_R_SOURCE%
+HKLM,%MediaCategories%\%SiSGUID.SURROUND_R_SOURCE%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SiSGUID.CHANNEL6_MUTE%,Name,,%SiSNODE.CHANNEL6_MUTE%
+HKLM,%MediaCategories%\%SiSGUID.CHANNEL6_MUTE%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SiSGUID.CHANNEL6_FAKE%,Name,,%SiSNODE.CHANNEL6_FAKE%
+HKLM,%MediaCategories%\%SiSGUID.CHANNEL6_FAKE%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SiSGUID.LFE_VOLUME%,Name,,%SiSNODE.LFE_VOLUME%
+HKLM,%MediaCategories%\%SiSGUID.LFE_VOLUME%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SiSGUID.LFE_MUTE%,Name,,%SiSNODE.LFE_MUTE%
+HKLM,%MediaCategories%\%SiSGUID.LFE_MUTE%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SiSGUID.CENTER_VOLUME%,Name,,%SiSNODE.CENTER_VOLUME%
+HKLM,%MediaCategories%\%SiSGUID.CENTER_VOLUME%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SiSGUID.CENTER_MUTE%,Name,,%SiSNODE.CENTER_MUTE%
+HKLM,%MediaCategories%\%SiSGUID.CENTER_MUTE%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SiSGUID.SURROUND_R_VOLUME%,Name,,%SiSNODE.SURROUND_R_VOLUME%
+HKLM,%MediaCategories%\%SiSGUID.SURROUND_R_VOLUME%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SiSGUID.SURROUND_R_MUTE%,Name,,%SiSNODE.SURROUND_R_MUTE%
+HKLM,%MediaCategories%\%SiSGUID.SURROUND_R_MUTE%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SiSGUID.SURROUND_L_VOLUME%,Name,,%SiSNODE.SURROUND_L_VOLUME%
+HKLM,%MediaCategories%\%SiSGUID.SURROUND_L_VOLUME%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SiSGUID.SURROUND_L_MUTE%,Name,,%SiSNODE.SURROUND_L_MUTE%
+HKLM,%MediaCategories%\%SiSGUID.SURROUND_L_MUTE%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SiSGUID.Channel4%,Name,,%SiSPin.Channel4%
+HKLM,%MediaCategories%\%SiSGUID.Channel4%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SiSGUID.LineInAsRear%,Name,,%SiSPin.LineInAsRear%
+HKLM,%MediaCategories%\%SiSGUID.LineInAsRear%,Display,1,00,00,00,00
+
+;;[SNDEFT_NAMES.AddReg]
+;; Pins
+HKLM,%MediaCategories%\%SEFTGUID.VirtHallPin%,Name,,%SEFTPin.VirtHallPin%
+HKLM,%MediaCategories%\%SEFTGUID.VirtHallPin%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SEFTGUID.VirtPubPin%,Name,,%SEFTPin.VirtPubPin%
+HKLM,%MediaCategories%\%SEFTGUID.VirtPubPin%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SEFTGUID.VirtStadiumPin%,Name,,%SEFTPin.VirtStadiumPin%
+HKLM,%MediaCategories%\%SEFTGUID.VirtStadiumPin%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SEFTGUID.VirtSurroundPin%,Name,,%SEFTPin.VirtSurroundPin%
+HKLM,%MediaCategories%\%SEFTGUID.VirtSurroundPin%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SEFTGUID.VirtKaraokPin%,Name,,%SEFTPin.VirtKaraokPin%
+HKLM,%MediaCategories%\%SEFTGUID.VirtKaraokPin%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SEFTGUID.VirtPitchShiftPin%,Name,,%SEFTPin.VirtPitchShiftPin%
+HKLM,%MediaCategories%\%SEFTGUID.VirtPitchShiftPin%,Display,1,00,00,00,00
+
+;; Nodes
+HKLM,%MediaCategories%\%SEFTGUID.SurroundSelect%,Name,,%SEFTNode.SurroundSelect%
+HKLM,%MediaCategories%\%SEFTGUID.SurroundSelect%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SEFTGUID.SurroundMute%,Name,,%SEFTNode.SurroundMute%
+HKLM,%MediaCategories%\%SEFTGUID.SurroundMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SEFTGUID.VirtHallMute%,Name,,%SEFTNode.VirtHallMute%
+HKLM,%MediaCategories%\%SEFTGUID.VirtHallMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SEFTGUID.VirtPubMute%,Name,,%SEFTNode.VirtPubMute%
+HKLM,%MediaCategories%\%SEFTGUID.VirtPubMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SEFTGUID.VirtStadiumMute%,Name,,%SEFTNode.VirtStadiumMute%
+HKLM,%MediaCategories%\%SEFTGUID.VirtStadiumMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SEFTGUID.VirtPitchShiftVol%,Name,,%SEFTNode.VirtPitchShiftVol%
+HKLM,%MediaCategories%\%SEFTGUID.VirtPitchShiftVol%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SEFTGUID.VirtKaraokMute%,Name,,%SEFTNode.VirtKaraokMute%
+HKLM,%MediaCategories%\%SEFTGUID.VirtKaraokMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SEFTGUID.VirtVoiceCancel%,Name,,%SEFTNode.VirtVoiceCancel%
+HKLM,%MediaCategories%\%SEFTGUID.VirtVoiceCancel%,Display,1,00,00,00,00
+
+
+;; for sony
+;;
+HKLM,%MediaCategories%\%SonyGUID.MasterVolume%,Name,,%SonyPin.MasterVolume%
+HKLM,%MediaCategories%\%SonyGUID.MasterVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SonyGUID.Line%,Name,,%SonyPin.Line%
+HKLM,%MediaCategories%\%SonyGUID.Line%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SonyGUID.Aux%,Name,,%SonyPin.Aux%
+HKLM,%MediaCategories%\%SonyGUID.Aux%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SonyGUID.Video%,Name,,%SonyPin.Video%
+HKLM,%MediaCategories%\%SonyGUID.Video%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SonyGUID.CD%,Name,,%SonyPin.CD%
+HKLM,%MediaCategories%\%SonyGUID.CD%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SonyGUID.Microphone%,Name,,%SonyPin.Microphone%
+HKLM,%MediaCategories%\%SonyGUID.Microphone%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SonyGUID.Wavetable%,Name,,%SonyPin.Wavetable%
+HKLM,%MediaCategories%\%SonyGUID.Wavetable%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%SonyGUID.RecordingControl%,Name,,%SonyPin.RecordingControl%
+HKLM,%MediaCategories%\%SonyGUID.RecordingControl%,Display,1,00,00,00,00
+
+
+
+[SiS7018_OEM.AddReg]
+;;Default register value at driver startup
+;;Uncomment some one of the lines if you want to overwrite the default setting
+;;The value in these outcommented lines is the driver default. You can change
+;;the register values (and uncomment the line) to overwrite the driver default.
+;;low byte comes first, values are hexadezimal.
+HKR,Settings,MasterVolume,1,2,2                 ;-3dB
+HKR,Settings,MonooutVolume,1,2,80               ;-3dB and Muted
+HKR,Settings,ToneControls,1,2,2                 ;7.5dB
+HKR,Settings,BeepVolume,1,2,0                   ;-3dB
+HKR,Settings,PhoneVolume,1,2,0                  ;9dB
+HKR,Settings,MicVolume,1,42,80                  ;muted
+HKR,Settings,LineInVolume,1,2,2                 ;9dB
+HKR,Settings,CDVolume,1,2,2                     ;9dB
+HKR,Settings,VideoVolume,1,2,2                  ;9dB
+HKR,Settings,AUXVolume,1,2,2                    ;9dB
+HKR,Settings,PCMOutVolume,1,7,7                 ;1.5dB
+HKR,Settings,RecordSelect,1,0,0                 ;select Mic
+HKR,Settings,RecordGain,1,4,4                   ;
+HKR,Settings,GeneralPurpose,1,0,0               ;pre 3D, 3D off, loudness off, mono=mix, mic1
+HKR,Settings,3DControl,1,D,D                    ;86.7%
+HKR,Settings,WaveOutVolume,1,0,0                ;0dB
+HKR,Settings,WaveTableVolume,1,19,19            ;-6.25dB
+HKR,Settings,SPDIFVolume,1,1,0                  ;SPDIF muted
+HKR,Settings,CSSPDIF,1,0,0                      ;SPDIF muted(just for crystal)
+HKR,Settings,WMCENTER,1,0,1                     ;Center Speaker(just for Wolfson)
+HKR,Settings,WMSURROUND,1,0,1                   ;Surround Speaker(just for Wolfson)
+HKR,Settings,Codec5A,1,0,0                      ;CMedia codec 5A
+
+HKR,Settings,DisablePhone,1,0
+HKR,Settings,DisableVideo,1,0
+HKR,Settings,DisablePCBeep,1,0
+HKR,Settings,DisableAux,1,0
+HKR,Settings,DisableCD,1,0
+HKR,Settings,DisableLineOut,1,0
+
+HKR,Settings,DisableStereoMixIn,1,0
+HKR,Settings,DisablePhoneIn,1,0
+HKR,Settings,DisableVideoIn,1,0
+HKR,Settings,DisableAuxIn,1,0
+HKR,Settings,DisableCDIn,1,0
+HKR,Settings,DisableLineIn,1,0
+HKR,Settings,DisableMicIn,1,1
+HKR,Settings,FirstTime,1,1,0
+
+
+[Procomp.AddReg]
+HKR,Settings,MasterVolume,1,2,2                 ;-3dB
+HKR,Settings,MonooutVolume,1,2,80               ;-3dB and Muted
+HKR,Settings,ToneControls,1,2,2                 ;7.5dB
+HKR,Settings,BeepVolume,1,2,0                   ;-3dB
+HKR,Settings,PhoneVolume,1,2,0                  ;9dB
+HKR,Settings,MicVolume,1,42,80                  ;muted
+HKR,Settings,LineInVolume,1,2,2                 ;9dB
+HKR,Settings,CDVolume,1,2,2                     ;9dB
+HKR,Settings,VideoVolume,1,2,82                 ;9dB
+HKR,Settings,AUXVolume,1,2,2                    ;9dB
+HKR,Settings,PCMOutVolume,1,7,7                 ;1.5dB
+HKR,Settings,RecordSelect,1,0,0                 ;select Mic
+HKR,Settings,RecordGain,1,C,C                   ;18dB
+HKR,Settings,GeneralPurpose,1,0,0               ;pre 3D, 3D off, loudness off, mono=mix, mic1
+HKR,Settings,3DControl,1,D,D                    ;86.7%
+HKR,Settings,WaveOutVolume,1,0,0                ;0dB
+HKR,Settings,WaveTableVolume,1,19,19            ;-6.25dB
+HKR,Settings,SPDIFVolume,1,1,0                  ;SPDIF muted
+HKR,Settings,CSSPDIF,1,0,0                      ;SPDIF muted(just for crystal)
+HKR,Settings,WMCENTER,1,0,1                     ;Center Speaker(just for Wolfson)
+HKR,Settings,WMSURROUND,1,0,1                   ;Surround Speaker(just for Wolfson)
+HKR,Settings,Codec5A,1,0,0                      ;CMedia codec 5A
+
+HKR,Settings,DisablePhone,1,0
+HKR,Settings,DisableVideo,1,0
+HKR,Settings,DisablePCBeep,1,0
+HKR,Settings,DisableAux,1,0
+HKR,Settings,DisableCD,1,0
+HKR,Settings,DisableLineOut,1,0
+
+HKR,Settings,DisableStereoMixIn,1,0
+HKR,Settings,DisablePhoneIn,1,0
+HKR,Settings,DisableVideoIn,1,0
+HKR,Settings,DisableAuxIn,1,0
+HKR,Settings,DisableCDIn,1,0
+HKR,Settings,DisableLineIn,1,0
+HKR,Settings,DisableMicIn,1,1
+HKR,Settings,FirstTime,1,1,0
+
+[ASUS.AddReg]
+
+HKR,Settings,MasterVolume,1,2,2                 ;-3dB
+HKR,Settings,MonooutVolume,1,2,80               ;-3dB and Muted
+HKR,Settings,ToneControls,1,2,2                 ;7.5dB
+HKR,Settings,BeepVolume,1,2,0                   ;-3dB
+HKR,Settings,PhoneVolume,1,2,0                  ;9dB
+HKR,Settings,MicVolume,1,2,80                  ;muted
+HKR,Settings,LineInVolume,1,2,2                 ;9dB
+HKR,Settings,CDVolume,1,2,2                     ;9dB
+HKR,Settings,VideoVolume,1,2,2                  ;9dB
+HKR,Settings,AUXVolume,1,2,2                    ;9dB
+HKR,Settings,PCMOutVolume,1,7,7                 ;1.5dB
+HKR,Settings,RecordSelect,1,0,0                 ;select Mic
+HKR,Settings,RecordGain,1,C,C                   ;18dB
+HKR,Settings,GeneralPurpose,1,0,0               ;pre 3D, 3D off, loudness off, mono=mix, mic1
+HKR,Settings,3DControl,1,D,D                    ;86.7%
+HKR,Settings,WaveOutVolume,1,0,0                ;0dB
+HKR,Settings,WaveTableVolume,1,19,19            ;-6.25dB
+HKR,Settings,SPDIFVolume,1,1,0                  ;SPDIF muted
+HKR,Settings,CSSPDIF,1,0,0                      ;SPDIF muted(just for crystal)
+HKR,Settings,WMCENTER,1,0,1                     ;Center Speaker(just for Wolfson)
+HKR,Settings,WMSURROUND,1,0,1                   ;Surround Speaker(just for Wolfson)
+HKR,Settings,Codec5A,1,0,0                      ;CMedia codec 5A
+
+HKR,Settings,DisablePhone,1,1
+HKR,Settings,DisableVideo,1,0
+HKR,Settings,DisablePCBeep,1,0
+HKR,Settings,DisableAux,1,1
+HKR,Settings,DisableCD,1,0
+HKR,Settings,DisableLineOut,1,0
+
+HKR,Settings,DisableStereoMixIn,1,0
+HKR,Settings,DisablePhoneIn,1,1
+HKR,Settings,DisableVideoIn,1,0
+HKR,Settings,DisableAuxIn,1,1
+HKR,Settings,DisableCDIn,1,0
+HKR,Settings,DisableLineIn,1,0
+HKR,Settings,DisableMicIn,1,1
+HKR,Settings,FirstTime,1,1,0
+
+
+[Uniwill.AddReg]
+
+HKR,Settings,MasterVolume,1,2,2                 ;-3dB
+HKR,Settings,MonooutVolume,1,2,80               ;-3dB and Muted
+HKR,Settings,ToneControls,1,2,2                 ;7.5dB
+HKR,Settings,BeepVolume,1,2,0                   ;-3dB
+HKR,Settings,PhoneVolume,1,8,80                  ;0dB
+HKR,Settings,MicVolume,1,42,80                  ;muted
+HKR,Settings,LineInVolume,1,2,2                 ;9dB
+HKR,Settings,CDVolume,1,2,2                     ;9dB
+HKR,Settings,VideoVolume,1,2,2                  ;9dB
+HKR,Settings,AUXVolume,1,2,2                    ;9dB
+HKR,Settings,PCMOutVolume,1,7,7                 ;1.5dB
+HKR,Settings,RecordSelect,1,0,0                 ;select Mic
+HKR,Settings,RecordGain,1,C,C                   ;18dB
+HKR,Settings,GeneralPurpose,1,0,0               ;pre 3D, 3D off, loudness off, mono=mix, mic1
+HKR,Settings,3DControl,1,D,D                    ;86.7%
+HKR,Settings,WaveOutVolume,1,0,0                ;0dB
+HKR,Settings,WaveTableVolume,1,19,19            ;-6.25dB
+HKR,Settings,SPDIFVolume,1,1,0                  ;SPDIF muted
+HKR,Settings,CSSPDIF,1,0,0                      ;SPDIF muted(just for crystal)
+HKR,Settings,WMCENTER,1,0,1                     ;Center Speaker(just for Wolfson)
+HKR,Settings,WMSURROUND,1,0,1                   ;Surround Speaker(just for Wolfson)
+HKR,Settings,Codec5A,1,0,0                      ;CMedia codec 5A
+
+HKR,Settings,DisablePhone,1,1
+HKR,Settings,DisableVideo,1,0
+HKR,Settings,DisablePCBeep,1,0
+HKR,Settings,DisableAux,1,0
+HKR,Settings,DisableCD,1,0
+HKR,Settings,DisableLineOut,1,0
+
+HKR,Settings,DisableStereoMixIn,1,0
+HKR,Settings,DisablePhoneIn,1,1
+HKR,Settings,DisableVideoIn,1,0
+HKR,Settings,DisableAuxIn,1,0
+HKR,Settings,DisableCDIn,1,0
+HKR,Settings,DisableLineIn,1,0
+HKR,Settings,DisableMicIn,1,1
+HKR,Settings,FirstTime,1,1,0
+
+[Sony.AddReg]
+
+HKR,Settings,MasterVolume,1,5,5                 ;-7.5dB
+HKR,Settings,MonooutVolume,1,0,80               ;0dB and Muted
+HKR,Settings,ToneControls,1,2,2                 ;7.5dB
+HKR,Settings,BeepVolume,1,0,80                  ;0dB and Muted
+HKR,Settings,PhoneVolume,1,08,80                ;0dB and Muted
+HKR,Settings,MicVolume,1,15,80                  ;-19.5dB and muted
+HKR,Settings,LineInVolume,1,08,08               ;0dB
+HKR,Settings,CDVolume,1,08,08                   ;0dB
+HKR,Settings,VideoVolume,1,08,08                ;0dB
+HKR,Settings,AUXVolume,1,08,08                  ;0dB
+HKR,Settings,PCMOutVolume,1,7,7                 ;1.5dB
+HKR,Settings,RecordSelect,1,0,0                 ;select Mic
+HKR,Settings,RecordGain,1,0,0                   ;0dB
+HKR,Settings,GeneralPurpose,1,0,0               ;pre 3D, 3D off, loudness off, mono=mix, mic1
+HKR,Settings,3DControl,1,D,D                    ;86.7%
+HKR,Settings,WaveOutVolume,1,0,0                ;0dB
+HKR,Settings,WaveTableVolume,1,08,08            ;0dB
+HKR,Settings,SPDIFVolume,1,1,0                  ;SPDIF muted
+HKR,Settings,CSSPDIF,1,0,0                      ;SPDIF muted(just for crystal)
+HKR,Settings,WMCENTER,1,0,1                     ;Center Speaker(just for Wolfson)
+HKR,Settings,WMSURROUND,1,0,1                   ;Surround Speaker(just for Wolfson)
+HKR,Settings,Codec5A,1,0,0                      ;CMedia codec 5A
+
+HKR,Settings,DisablePhone,1,1
+HKR,Settings,DisableVideo,1,0
+HKR,Settings,DisablePCBeep,1,1
+HKR,Settings,DisableAux,1,0
+HKR,Settings,DisableCD,1,0
+HKR,Settings,DisableLineOut,1,0
+
+HKR,Settings,DisableStereoMixIn,1,0
+HKR,Settings,DisablePhoneIn,1,1
+HKR,Settings,DisableVideoIn,1,0
+HKR,Settings,DisableAuxIn,1,0
+HKR,Settings,DisableCDIn,1,0
+HKR,Settings,DisableLineIn,1,0
+HKR,Settings,DisableMicIn,1,1
+HKR,Settings,FirstTime,1,1,0
+
+[Trigem.AddReg]
+HKR,Settings,MasterVolume,1,2,2                 ;-3dB
+HKR,Settings,MonooutVolume,1,2,80               ;-3dB and Muted
+HKR,Settings,ToneControls,1,2,2                 ;7.5dB
+HKR,Settings,BeepVolume,1,2,0                   ;-3dB
+HKR,Settings,PhoneVolume,1,2,0                  ;9dB
+HKR,Settings,MicVolume,1,42,80                  ;muted
+HKR,Settings,LineInVolume,1,2,2                 ;9dB
+HKR,Settings,CDVolume,1,2,2                     ;9dB
+HKR,Settings,VideoVolume,1,2,2                  ;9dB
+HKR,Settings,AUXVolume,1,2,2                    ;9dB
+HKR,Settings,PCMOutVolume,1,7,7                 ;1.5dB
+HKR,Settings,RecordSelect,1,0,0                 ;select Mic
+HKR,Settings,RecordGain,1,C,C                   ;18dB
+HKR,Settings,GeneralPurpose,1,0,0               ;pre 3D, 3D off, loudness off, mono=mix, mic1
+HKR,Settings,3DControl,1,D,D                    ;86.7%
+HKR,Settings,WaveOutVolume,1,0,0                ;0dB
+HKR,Settings,WaveTableVolume,1,19,19            ;-6.25dB
+HKR,Settings,SPDIFVolume,1,1,0                  ;SPDIF muted
+HKR,Settings,CSSPDIF,1,0,0                      ;SPDIF muted(just for crystal)
+HKR,Settings,WMCENTER,1,0,1                     ;Center Speaker(just for Wolfson)
+HKR,Settings,WMSURROUND,1,0,1                   ;Surround Speaker(just for Wolfson)
+HKR,Settings,Codec5A,1,0,0                      ;CMedia codec 5A
+
+HKR,Settings,DisablePhone,1,1
+HKR,Settings,DisableVideo,1,0
+HKR,Settings,DisablePCBeep,1,0
+HKR,Settings,DisableAux,1,1
+HKR,Settings,DisableCD,1,0
+HKR,Settings,DisableLineOut,1,1
+
+HKR,Settings,DisableStereoMixIn,1,0
+HKR,Settings,DisablePhoneIn,1,1
+HKR,Settings,DisableVideoIn,1,0
+HKR,Settings,DisableAuxIn,1,1
+HKR,Settings,DisableCDIn,1,0
+HKR,Settings,DisableLineIn,1,1
+HKR,Settings,DisableMicIn,1,1
+HKR,Settings,FirstTime,1,1,0
+
+
+[Special_Support_0.AddReg]
+HKR,Settings,SPDIF,1,0
+HKR,Settings,SPDIF1,1,0
+HKR,Settings,LinearMaster,1,0
+HKR,Settings,MonooutSwitch,1,0
+HKR,Settings,RecordMute,1,0
+HKR,Settings,CHANNEL6,1,0
+HKR,Settings,PROCOMP6H,1,0
+HKR,Settings,FORCESWSRC,1,0
+HKR,Settings,AC3PLAY,1,0
+HKR,Settings,MixerName,1,0
+HKR,Settings,VSID,1,0,0
+HKR,Settings,CMediaLineAsRear,1,0
+
+HKR,Settings,Switch,1,1
+HKR,Settings,MIC2,1,0
+HKR,Settings,3DDepth,1,1
+HKR,Settings,3DCenter,1,1
+HKR,Settings,Bass,1,1
+HKR,Settings,Treble,1,1
+HKR,Settings,Loudness,1,1
+
+
+;for Sharp, Clevo, GigaByte
+[Special_Support_1.AddReg]
+HKR,Settings,SPDIF,1,1
+HKR,Settings,SPDIF1,1,0
+HKR,Settings,LinearMaster,1,0
+HKR,Settings,MonooutSwitch,1,0
+HKR,Settings,RecordMute,1,0
+HKR,Settings,CHANNEL6,1,0
+HKR,Settings,PROCOMP6H,1,0
+HKR,Settings,FORCESWSRC,1,0
+HKR,Settings,AC3PLAY,1,1
+HKR,Settings,MixerName,1,0
+HKR,Settings,VSID,1,0,0
+HKR,Settings,CMediaLineAsRear,1,0
+
+HKR,Settings,Switch,1,1
+HKR,Settings,MIC2,1,0
+HKR,Settings,3DDepth,1,1
+HKR,Settings,3DCenter,1,1
+HKR,Settings,Bass,1,1
+HKR,Settings,Treble,1,1
+HKR,Settings,Loudness,1,1
+
+
+;for IBM
+[Special_Support_2.AddReg]
+HKR,Settings,SPDIF,1,0
+HKR,Settings,SPDIF1,1,1
+HKR,Settings,LinearMaster,1,0
+HKR,Settings,MonooutSwitch,1,0
+HKR,Settings,RecordMute,1,0
+HKR,Settings,CHANNEL6,1,0
+HKR,Settings,PROCOMP6H,1,0
+HKR,Settings,FORCESWSRC,1,0
+HKR,Settings,AC3PLAY,1,0
+HKR,Settings,MixerName,1,0
+HKR,Settings,VSID,1,0,0
+HKR,Settings,CMediaLineAsRear,1,0
+
+HKR,Settings,Switch,1,1
+HKR,Settings,MIC2,1,1
+HKR,Settings,3DDepth,1,1
+HKR,Settings,3DCenter,1,1
+HKR,Settings,Bass,1,1
+HKR,Settings,Treble,1,1
+HKR,Settings,Loudness,1,1
+
+
+;for Uniwill
+[Special_Support_3.AddReg]
+HKR,Settings,SPDIF,1,1
+HKR,Settings,SPDIF1,1,0
+HKR,Settings,LinearMaster,1,1
+HKR,Settings,MonooutSwitch,1,0
+HKR,Settings,RecordMute,1,0
+HKR,Settings,CHANNEL6,1,0
+HKR,Settings,PROCOMP6H,1,0
+HKR,Settings,FORCESWSRC,1,0
+HKR,Settings,AC3PLAY,1,1
+HKR,Settings,MixerName,1,0
+HKR,Settings,VSID,1,0,0
+HKR,Settings,CMediaLineAsRear,1,0
+
+HKR,Settings,Switch,1,1
+HKR,Settings,MIC2,1,0
+HKR,Settings,3DDepth,1,1
+HKR,Settings,3DCenter,1,1
+HKR,Settings,Bass,1,1
+HKR,Settings,Treble,1,1
+HKR,Settings,Loudness,1,1
+
+
+;for sony
+[Special_Support_4.AddReg]
+HKR,Settings,SPDIF,1,0
+HKR,Settings,SPDIF1,1,0
+HKR,Settings,LinearMaster,1,0
+HKR,Settings,MonooutSwitch,1,0
+HKR,Settings,RecordMute,1,0
+HKR,Settings,CHANNEL6,1,0
+HKR,Settings,PROCOMP6H,1,0
+HKR,Settings,FORCESWSRC,1,0
+HKR,Settings,AC3PLAY,1,0
+HKR,Settings,MixerName,1,1
+HKR,Settings,VSID,1,1,0
+HKR,Settings,CMediaLineAsRear,1,0
+
+HKR,Settings,Switch,1,1
+HKR,Settings,MIC2,1,0
+HKR,Settings,3DDepth,1,0
+HKR,Settings,3DCenter,1,0
+HKR,Settings,Bass,1,1
+HKR,Settings,Treble,1,1
+HKR,Settings,Loudness,1,1
+
+
+;for Procomp
+[Special_Support_6.AddReg]
+HKR,Settings,SPDIF,1,0
+HKR,Settings,SPDIF1,1,0
+HKR,Settings,LinearMaster,1,0
+HKR,Settings,MonooutSwitch,1,0
+HKR,Settings,RecordMute,1,0
+HKR,Settings,CHANNEL6,1,1
+HKR,Settings,PROCOMP6H,1,1
+HKR,Settings,FORCESWSRC,1,1
+HKR,Settings,AC3PLAY,1,0
+HKR,Settings,MixerName,1,0
+HKR,Settings,VSID,1,0,0
+HKR,Settings,CMediaLineAsRear,1,0
+
+HKR,Settings,Switch,1,1
+HKR,Settings,MIC2,1,0
+HKR,Settings,3DDepth,1,1
+HKR,Settings,3DCenter,1,1
+HKR,Settings,Bass,1,1
+HKR,Settings,Treble,1,1
+HKR,Settings,Loudness,1,1
+
+
+
+;for Shuttle
+[Special_Support_7.AddReg]
+HKR,Settings,SPDIF,1,0
+HKR,Settings,SPDIF1,1,0
+HKR,Settings,LinearMaster,1,0
+HKR,Settings,MonooutSwitch,1,1
+HKR,Settings,RecordMute,1,0
+HKR,Settings,CHANNEL6,1,0
+HKR,Settings,PROCOMP6H,1,0
+HKR,Settings,FORCESWSRC,1,0
+HKR,Settings,AC3PLAY,1,0
+HKR,Settings,MixerName,1,0
+HKR,Settings,VSID,1,0,0
+HKR,Settings,CMediaLineAsRear,1,0
+
+HKR,Settings,Switch,1,1
+HKR,Settings,MIC2,1,0
+HKR,Settings,3DDepth,1,1
+HKR,Settings,3DCenter,1,1
+HKR,Settings,Bass,1,1
+HKR,Settings,Treble,1,1
+HKR,Settings,Loudness,1,1
+
+
+;for GVC 2134
+[Special_Support_8.AddReg]
+HKR,Settings,SPDIF,1,0
+HKR,Settings,SPDIF1,1,0
+HKR,Settings,LinearMaster,1,0
+HKR,Settings,MonooutSwitch,1,0
+HKR,Settings,RecordMute,1,0
+HKR,Settings,CHANNEL6,1,1
+HKR,Settings,PROCOMP6H,1,1
+HKR,Settings,FORCESWSRC,1,0
+HKR,Settings,AC3PLAY,1,1
+HKR,Settings,MixerName,1,0
+HKR,Settings,VSID,1,0,0
+HKR,Settings,CMediaLineAsRear,1,0
+
+HKR,Settings,Switch,1,1
+HKR,Settings,MIC2,1,0
+HKR,Settings,3DDepth,1,1
+HKR,Settings,3DCenter,1,1
+HKR,Settings,Bass,1,1
+HKR,Settings,Treble,1,1
+HKR,Settings,Loudness,1,1
+
+
+;for Trigem
+[Special_Support_9.AddReg]
+HKR,Settings,SPDIF,1,0
+HKR,Settings,SPDIF1,1,1
+HKR,Settings,LinearMaster,1,0
+HKR,Settings,MonooutSwitch,1,0
+HKR,Settings,RecordMute,1,0
+HKR,Settings,CHANNEL6,1,0
+HKR,Settings,PROCOMP6H,1,0
+HKR,Settings,FORCESWSRC,1,0
+HKR,Settings,AC3PLAY,1,0
+HKR,Settings,MixerName,1,0
+HKR,Settings,VSID,1,0,0
+HKR,Settings,CMediaLineAsRear,1,0
+
+HKR,Settings,Switch,1,1
+HKR,Settings,MIC2,1,0
+HKR,Settings,3DDepth,1,1
+HKR,Settings,3DCenter,1,1
+HKR,Settings,Bass,1,1
+HKR,Settings,Treble,1,1
+HKR,Settings,Loudness,1,1
+
+;for AlphaTop
+[Special_Support_10.AddReg]
+HKR,Settings,SPDIF,1,1
+HKR,Settings,SPDIF1,1,0
+HKR,Settings,LinearMaster,1,1
+HKR,Settings,MonooutSwitch,1,0
+HKR,Settings,RecordMute,1,0
+HKR,Settings,CHANNEL6,1,0
+HKR,Settings,PROCOMP6H,1,0
+HKR,Settings,FORCESWSRC,1,0
+HKR,Settings,AC3PLAY,1,1
+HKR,Settings,MixerName,1,0
+HKR,Settings,VSID,1,0,0
+HKR,Settings,CMediaLineAsRear,1,0
+
+HKR,Settings,Switch,1,1
+HKR,Settings,MIC2,1,0
+HKR,Settings,3DDepth,1,1
+HKR,Settings,3DCenter,1,1
+HKR,Settings,Bass,1,1
+HKR,Settings,Treble,1,1
+HKR,Settings,Loudness,1,1
+
+
+[Strings]
+MSFT="Microsoft"
+SiSMfg="Silicon Integrated Systems Corp.(1.14.02)"
+SiS7018.DeviceDesc="SiS 7018 Audio Driver "
+SourceDiskName="SiS 7018 WDM Driver Disk"
+
+SiS7018.Wave.szPname="SiS 7018 Wave"
+SiS7018.Topology.szPname="SiS 7018 Mixer"
+WDM_MIDI="SiS Audio Driver"
+SiSAudioWDM.Wavetable.szPname="SiS Wavetable"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+KSNAME_Wavetable="Wavetable"
+
+SiS7018.SvcDesc = "Service for SiS7018 Driver (WDM)"
+
+;; Nodes (non-localizeable)
+ICHGUID.PhoneVolume     ="{0A8C1A87-42B0-11D2-95D2-00C04FB925D3}"
+ICHGUID.PhoneMute       ="{0A8C1A88-42B0-11D2-95D2-00C04FB925D3}"
+ICHGUID.LineInMute      ="{0A8C1A91-42B0-11D2-95D2-00C04FB925D3}"
+ICHGUID.MainMix         ="{0A8C1A9B-42B0-11D2-95D2-00C04FB925D3}"
+ICHGUID.3DBypass        ="{0A8C1A9E-42B0-11D2-95D2-00C04FB925D3}"
+ICHGUID.3DEnable        ="{766DB5A4-6E94-11D2-9ADE-00C04F8EFB68}"
+ICHGUID.BeepMix         ="{0A8C1A9F-42B0-11D2-95D2-00C04FB925D3}"
+ICHGUID.HPVolume        ="{0A8C1AA5-42B0-11D2-95D2-00C04FB925D3}"
+ICHGUID.HPMute          ="{0A8C1AA6-42B0-11D2-95D2-00C04FB925D3}"
+ICHGUID.MonoOutSelect   ="{0A8C1AA9-42B0-11D2-95D2-00C04FB925D3}"
+ICHGUID.WaveInSelect    ="{0A8C1AAE-42B0-11D2-95D2-00C04FB925D3}"
+ICHGUID.MasterInVolume  ="{0A8C1AAF-42B0-11D2-95D2-00C04FB925D3}"
+ICHGUID.MasterInMute    ="{0A8C1AB0-42B0-11D2-95D2-00C04FB925D3}"
+ICHGUID.MicInVolume     ="{0A8C1AB2-42B0-11D2-95D2-00C04FB925D3}"
+ICHGUID.MicInMute       ="{0A8C1AB3-42B0-11D2-95D2-00C04FB925D3}"
+ICHGUID.SimulStereo     ="{B3AD50B5-3849-4983-ADD7-25E6268F912D}"
+
+T2AUDIOGUID.WaveTable           ="{BC09A5E0-35B4-11d2-BE7A-0000210155AD}"
+T2AUDIOPin.WaveTable            ="Wavetable"
+T2AUDIOGUID.LineOut             ="{BC09A5E1-35B4-11d2-BE7A-0000210155AD}"
+T2AUDIOPin.LineOut              ="Line In"
+T2AUDIOGUID.Microphone          ="{BC09A5E2-35B4-11d2-BE7A-0000210155AD}"
+T2AUDIOPin.Microphone           ="Microphone"
+T2AUDIOGUID.PcBeep              ="{BC09A5E3-35B4-11d2-BE7A-0000210155AD}"
+T2AUDIOPin.PcBeep               ="PC Beep"
+T2AUDIOGUID.Video               ="{BC09A5E4-35B4-11d2-BE7A-0000210155AD}"
+T2AUDIOPin.Video                ="Video"
+T2AUDIOGUID.Phone               ="{BC09A5E5-35B4-11d2-BE7A-0000210155AD}"
+T2AUDIOPin.Phone                ="Phone"
+T2AUDIOGUID.PCMOut              ="{BC09A5E6-35B4-11d2-BE7A-0000210155AD}"
+T2AUDIOPin.PCMOut               ="PCM Out"
+T2AUDIOGUID.LineIn              ="{BC09A5E7-35B4-11d2-BE7A-0000210155AD}"
+T2AUDIOPin.LineIn               ="Line In"
+T2AUDIOGUID.SteroMix            ="{BC09A5E8-35B4-11d2-BE7A-0000210155AD}"
+T2AUDIOPin.SteroMix             ="StereoMix"
+T2AUDIOGUID.MonoMix             ="{BC09A5E9-35B4-11d2-BE7A-0000210155AD}"
+T2AUDIOPin.MonoMix              ="MonoMix"
+T2AUDIOGUID.3DControl           ="{BC09A5EA-35B4-11d2-BE7A-0000210155AD}"
+T2AUDIOPin.3DControl            ="3D Control"
+T2AUDIOGUID.3DDepth             ="{BC09A5EB-35B4-11d2-BE7A-0000210155AD}"
+T2AUDIOPin.3DDepth              ="3D Depth"
+T2AUDIOGUID.I2S                 ="{BC09A5EC-35B4-11d2-BE7A-0000210155AD}"
+T2AUDIOPin.I2S                  ="I2S"
+T2AUDIOGUID.SPDIFDES            ="{B4708337-D15A-11D2-A91F-0000E83B6F8E}"
+T2AUDIOPin.SPDIFDES              ="Spdif"
+T2AUDIOGUID.SPDIF               ="{B4708338-D15A-11D2-A91F-0000E83B6F8E}"
+T2AUDIOPin.SPDIF                ="Spdif"
+T2AUDIOGUID.CSSPDIFDES          ="{B470833A-D15A-11D2-A91F-0000E83B6F8E}"
+T2AUDIOPin.CSSPDIFDES           ="SPDIF"
+T2AUDIOGUID.CSSPDIF             ="{B470833B-D15A-11D2-A91F-0000E83B6F8E}"
+T2AUDIOPin.CSSPDIF              ="SPDIF"
+T2AUDIOGUID.MONOOUT             ="{B470833d-D15A-11D2-A91F-0000E83B6F8E}"
+T2AUDIOPin.MONOOUT              ="Mono Out"
+
+SiSGUID.20db                    ="{B470832C-D15A-11D2-A91F-0000E83B6F8E}"
+SiSGUID.MICSEL                  ="{B470832D-D15A-11D2-A91F-0000E83B6F8E}"
+SiSGUID.LOUDNESS                ="{B470832E-D15A-11D2-A91F-0000E83B6F8E}"
+SiSGUID.BASS                    ="{B470832F-D15A-11D2-A91F-0000E83B6F8E}"
+SiSGUID.TREBLE                  ="{B4708330-D15A-11D2-A91F-0000E83B6F8E}"
+SiSGUID.S3DDEPTHVOLUME          ="{B4708331-D15A-11D2-A91F-0000E83B6F8E}"
+SiSGUID.S3DDEPTHMUTE            ="{B4708332-D15A-11D2-A91F-0000E83B6F8E}"
+T2AUDIOGUID.3DCENTER            ="{B4708333-D15A-11D2-A91F-0000E83B6F8E}"
+T2AUDIOPin.3DCENTER             ="3D Center"
+SiSGUID.S3DCENTERVOLUME         ="{B4708334-D15A-11D2-A91F-0000E83B6F8E}"
+SiSGUID.20dbout                 ="{B4708335-D15A-11D2-A91F-0000E83B6F8E}"
+SiSGUID.MICSELOUT               ="{B4708336-D15A-11D2-A91F-0000E83B6F8E}"
+SiSGUID.SPDIFMUTE               ="{B4708339-D15A-11D2-A91F-0000E83B6F8E}"
+SiSGUID.CSSPDIFMUTE             ="{B470833C-D15A-11D2-A91F-0000E83B6F8E}"
+SiSGUID.CHANNEL6_DEST           ="{B470833E-D15A-11D2-A91F-0000E83B6F8E}"
+SiSGUID.LFE_SOURCE              ="{B470833F-D15A-11D2-A91F-0000E83B6F8E}"
+SiSGUID.CENTER_SOURCE           ="{B4708340-D15A-11D2-A91F-0000E83B6F8E}"
+SiSGUID.SURROUND_L_SOURCE       ="{B4708341-D15A-11D2-A91F-0000E83B6F8E}"
+SiSGUID.SURROUND_R_SOURCE       ="{B4708342-D15A-11D2-A91F-0000E83B6F8E}"
+SiSGUID.CHANNEL6_MUTE           ="{B4708343-D15A-11D2-A91F-0000E83B6F8E}"
+SiSGUID.CHANNEL6_FAKE           ="{B4708344-D15A-11D2-A91F-0000E83B6F8E}"
+SiSGUID.LFE_VOLUME              ="{B4708345-D15A-11D2-A91F-0000E83B6F8E}"
+SiSGUID.LFE_MUTE                ="{B4708346-D15A-11D2-A91F-0000E83B6F8E}"
+SiSGUID.CENTER_VOLUME           ="{B4708347-D15A-11D2-A91F-0000E83B6F8E}"
+SiSGUID.CENTER_MUTE             ="{B4708348-D15A-11D2-A91F-0000E83B6F8E}"
+SiSGUID.SURROUND_R_VOLUME       ="{B4708349-D15A-11D2-A91F-0000E83B6F8E}"
+SiSGUID.SURROUND_R_MUTE         ="{B470834A-D15A-11D2-A91F-0000E83B6F8E}"
+SiSGUID.SURROUND_L_VOLUME       ="{B470834B-D15A-11D2-A91F-0000E83B6F8E}"
+SiSGUID.SURROUND_L_MUTE         ="{B470834C-D15A-11D2-A91F-0000E83B6F8E}"
+
+;; for sony
+;;
+SonyGUID.MasterVolume           ="{B470834D-D15A-11D2-A91F-0000E83B6F8E}"
+SonyGUID.Line                   ="{B470834E-D15A-11D2-A91F-0000E83B6F8E}"
+SonyGUID.Aux                    ="{B470834F-D15A-11D2-A91F-0000E83B6F8E}"
+SonyGUID.Video                  ="{B4708350-D15A-11D2-A91F-0000E83B6F8E}"
+SonyGUID.CD                     ="{B4708351-D15A-11D2-A91F-0000E83B6F8E}"
+SonyGUID.Microphone             ="{B4708352-D15A-11D2-A91F-0000E83B6F8E}"
+SonyGUID.Wavetable              ="{B4708353-D15A-11D2-A91F-0000E83B6F8E}"
+SonyGUID.RecordingControl       ="{B4708354-D15A-11D2-A91F-0000E83B6F8E}"
+
+;;for cmedia
+SiSGUID.Channel4                ="{B4708355-D15A-11D2-A91F-0000E83B6F8E}"
+SiSGUID.LineInAsRear            ="{B4708357-D15A-11D2-A91F-0000E83B6F8E}"
+
+SonyPin.MasterVolume            ="Volume Control"
+SonyPin.Line                    ="Line"
+SonyPin.Aux                     ="Aux"
+SonyPin.Video                   ="Video"
+SonyPin.CD                      ="CD"
+SonyPin.Microphone              ="Microphone"
+SonyPin.Wavetable               ="MIDI"
+SonyPin.RecordingControl        ="Recording Control"
+
+;; Nodes (localizeable)
+ICHNode.PhoneVolume     ="Phone Volume"
+ICHNode.PhoneMute       ="Phone Mute"
+ICHNode.LineInMute      ="Line In Mute"
+ICHNode.MainMix         ="Main Mix"
+ICHNode.3DBypass        ="3D Bypass"
+ICHNode.3DEnable        ="3D Enable"
+ICHNode.BeepMix         ="Beep Mix"
+ICHNode.HPVolume        ="Headphone Volume"
+ICHNode.HPMute          ="Headphone Mute"
+ICHNode.MonoOutSelect   ="Mono Out Select"
+ICHNode.WaveInSelect    ="Wave In Select"
+ICHNode.MasterInVolume  ="Wave In Volume"
+ICHNode.MasterInMute    ="Wave In Mute"
+ICHNode.MicInVolume     ="Mic In Volume"
+ICHNode.MicInMute       ="Mic In Mute"
+ICHNode.SimulStereo     ="Simulated Stereo"
+
+SiSPin.20db             ="Microphone Boost"             ;"+20dB Gain"
+SiSPin.MICSEL           ="Alternate Mic Select"
+SiSPin.LOUDNESS         ="LOUDNESS"
+SiSPin.BASS             ="Bass"
+SiSPin.TREBLE           ="Treble"
+SiSPin.S3DDEPTHVOLUME   ="3D Depth Volume"
+SiSPin.S3DDEPTHMUTE     ="3D Enable"
+SiSPin.S3DCENTERVOLUME   ="3D Center Volume"
+SiSPin.20dbout          ="Microphone Boost"             ;"+20dB Gain"
+SiSPin.MICSELOUT        ="Alternate Mic Select"
+SiSNODE.SPDIFMUTE       ="Spdif Mute"
+SiSNODE.CSSPDIFMUTE     ="SPDIF Mute"
+SiSPin.CHANNEL6_DEST            ="5.1 Channels"
+SiSPin.LFE_SOURCE               ="LFE"
+SiSPin.CENTER_SOURCE            ="Center/LFE"
+SiSPin.SURROUND_L_SOURCE        ="Surround"
+SiSPin.SURROUND_R_SOURCE        ="Surround Right"
+SiSNODE.CHANNEL6_MUTE           ="5.1 Channels Mute"
+SiSNODE.CHANNEL6_FAKE           ="Enable Fake 6 Channels"
+SiSNODE.LFE_VOLUME              ="LFE Volume"
+SiSNODE.LFE_MUTE                ="LFE Mute"
+SiSNODE.CENTER_VOLUME           ="Center Volume"
+SiSNODE.CENTER_MUTE             ="Center Mute"
+SiSNODE.SURROUND_R_VOLUME       ="Surround Right Volume"
+SiSNODE.SURROUND_R_MUTE         ="Surround Right Mute"
+SiSNODE.SURROUND_L_VOLUME       ="Surround Left Volume"
+SiSNODE.SURROUND_L_MUTE         ="Surround Left Mute"
+
+SiSPin.Channel4                 ="4 Channels"
+SiSPin.LineInAsRear             ="Set LineIn as Rear"
+
+KEY_UNINSTALL="Software\Microsoft\Windows\CurrentVersion\Uninstall\SiS7018"
+
+;;; RealTek
+;; Pins GUID
+SEFTGUID.VirtHallPin        ="{18D5C240-23F8-11d3-92C6-52544C29295E}"
+SEFTGUID.VirtPubPin         ="{18D5C241-23F8-11d3-92C6-52544C29295E}"
+SEFTGUID.VirtStadiumPin     ="{18D5C242-23F8-11d3-92C6-52544C29295E}"
+SEFTGUID.VirtSurroundPin    ="{18D5C243-23F8-11d3-92C6-52544C29295E}"
+SEFTGUID.VirtKaraokPin      ="{BCFB9E44-24BA-11d3-92C6-52544C29295E}"
+SEFTGUID.VirtPitchShiftPin  ="{BCFB9E43-24BA-11d3-92C6-52544C29295E}"
+;; Nodes GUID
+SEFTGUID.SurroundSelect     ="{18D5C244-23F8-11d3-92C6-52544C29295E}"
+SEFTGUID.SurroundMute       ="{18D5C245-23F8-11d3-92C6-52544C29295E}"
+SEFTGUID.VirtHallMute       ="{F36EC0E0-2403-11d3-92C6-52544C29295E}"
+SEFTGUID.VirtPubMute        ="{F36EC0E1-2403-11d3-92C6-52544C29295E}"
+SEFTGUID.VirtStadiumMute    ="{F36EC0E2-2403-11d3-92C6-52544C29295E}"
+SEFTGUID.VirtPitchShiftVol  ="{BCFB9E40-24BA-11d3-92C6-52544C29295E}"
+SEFTGUID.VirtKaraokMute     ="{BCFB9E41-24BA-11d3-92C6-52544C29295E}"
+SEFTGUID.VirtVoiceCancel    ="{BCFB9E42-24BA-11d3-92C6-52544C29295E}"
+
+;; Pins Name
+SEFTPin.VirtHallPin         ="Hall"
+SEFTPin.VirtPubPin          ="Pub"
+SEFTPin.VirtStadiumPin      ="Stadium"
+SEFTPin.VirtSurroundPin     ="Surround Effect"
+SEFTPin.VirtKaraokPin       ="KaraOK Effect"
+SEFTPin.VirtPitchShiftPin   ="Pitch Shift"
+;; Nodes Name
+SEFTNode.SurroundSelect     ="Surround Select"
+SEFTNode.SurroundMute       ="Surround Mute"
+SEFTNode.VirtHallMute       ="Virtual Hall Mute"
+SEFTNode.VirtPubMute        ="Virtual Pub Mute"
+SEFTNode.VirtStadiumMute    ="Virtual Stadium Mute"
+SEFTNode.VirtPitchShiftVol  ="Pitch Shift"
+SEFTNode.VirtKaraokMute     ="KaraOK Mute"
+SEFTNode.VirtVoiceCancel    ="Voice Cancellation"
+;;; RealTek
+
+[Uninstall.CopyList]
+uninst2k.exe
+
+[Uninstall.AddReg]
+HKLM,%KEY_UNINSTALL%,DisplayName,0,"SiS Audio Driver"
+HKLM,%KEY_UNINSTALL%,UninstallString,0,"%24%\Progra~1\SiS7018\Uninst\uninst2k.exe PCI\VEN_1039&DEV_7018"

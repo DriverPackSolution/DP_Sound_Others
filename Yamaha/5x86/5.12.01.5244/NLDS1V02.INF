@@ -1,0 +1,936 @@
+;---------------------------------------------------------------------------;
+;                                                                           ;
+; Copyright (C) 1998-2001  YAMAHA Corporation  All rights reserved.         ;
+;                                                                           ;
+;---------------------------------------------------------------------------;
+
+; Feature   : YAMAHA DS-XG WDM Audio Miniport driver for Windows 98/ME/2000/Xp.
+; Version   : 5.12.01.52xx for Generic Docking/4-ch Audio Support
+; Copyright : Copyright 1998-2001, YAMAHA Corporation.
+
+; This INF file is set the "generic" DS-XG audio docking station operation.
+; Please "do" the "special" settings with DS-XG Audio Dirver customization 
+; document. Add the DS-XG Mixer Launcher Support and YMF754(DS-1E) settings.
+; This file is tuned up for SONY VAIO Note SR/C1/GT series.
+;
+;
+;
+;
+;
+
+[Version]
+;<This needs to change for each WHQL submission.>
+CatalogFile=ydsdev.cat
+Signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+provider=%YMH%
+;LayoutFile=layout.inf
+DriverVer = 08/20/2001, 5.12.01.5244
+
+[SourceDisksNames]
+77 = %YMHDISK%,,,""
+
+[SourceDisksFiles]
+Ds1.sys      = 77
+Dsxgwave.tbl = 77
+ds1.cpl      = 77
+ds1Eng.hlp   = 77
+ds1Jpn.hlp   = 77
+ds1Fre.hlp   = 77
+ds1Ita.hlp   = 77
+ds1Ger.hlp   = 77
+ds1Spa.hlp   = 77
+ds1Swe.hlp   = 77
+ds1Bra.hlp   = 77
+ds1Sch.hlp   = 77
+ds1Tch.hlp   = 77
+ds1Kor.hlp   = 77
+ds1Nor.hlp   = 77
+ds1Dut.hlp   = 77
+;dslaunch.exe = 77
+;dsxmixer.exe = 77
+;dsxaplib.dll = 77
+yac3ren.ax   = 77
+
+[Manufacturer]
+%YamahaMfg%=Yamaha
+%Microsoft%=Microsoft
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+[Yamaha]
+;%*PNPB02F.DeviceDesc%=MSJSTICK,            *PNPB02F
+%*WDM_DS1Legacy.DeviceDesc%=WDM_DS1Legacy, *YMH0100
+; <Generic SSID&SSVID Settings>
+;%*WDM_DS1Native.DeviceDesc%=WDM_DS1Native, PCI\VEN_1073&DEV_0004&SUBSYS_00041073 ; YMF724E(DS-1)
+;%*WDM_DS1Native.DeviceDesc%=WDM_DS1Native, PCI\VEN_1073&DEV_0005&SUBSYS_00051073 ; 
+;%*WDM_DS1Native.DeviceDesc%=WDM_DS1Native, PCI\VEN_1073&DEV_0006&SUBSYS_00061073 ;
+;%*WDM_DS1Native.DeviceDesc%=WDM_DS1Native, PCI\VEN_1073&DEV_0008&SUBSYS_00081073 ;
+;%*WDM_DS1Native.DeviceDesc%=WDM_DS1Native, PCI\VEN_1073&DEV_000A&SUBSYS_000A1073 ; YMF740A(DS-1L)
+;%*WDM_DS1Native.DeviceDesc%=WDM_DS1Native, PCI\VEN_1073&DEV_000C&SUBSYS_000C1073 ; YMF740C(DS-1L)
+;%*WDM_DS1Native.DeviceDesc%=WDM_DS1Native, PCI\VEN_1073&DEV_000D&SUBSYS_000D1073 ; YMF724F(DS-1)
+;%*WDM_DS1Native.DeviceDesc%=WDM_DS1Native, PCI\VEN_1073&DEV_0010&SUBSYS_00101073 ; YMF744B(DS-1S)
+;%*WDM_DS1Native.DeviceDesc%=WDM_DS1Native, PCI\VEN_1073&DEV_0012&SUBSYS_00121073 ; YMF754(DS-1E)
+;%*WDM_DS1Native.DeviceDesc%=WDM_DS1Native, PCI\VEN_1073&DEV_0020&SUBSYS_00201073 ;
+
+; <OEM Setting SSID&SSVID Settings>
+;%*WDM_DS1Native.DeviceDesc%=WDM_DS1Native, PCI\VEN_1073&DEV_0010&SUBSYS_804E104D
+;%*WDM_DS1Native.DeviceDesc%=WDM_DS1Native, PCI\VEN_1073&DEV_0010&SUBSYS_805E104D
+;%*WDM_DS1Native.DeviceDesc%=WDM_DS1Native, PCI\VEN_1073&DEV_0010&SUBSYS_8064104D
+;%*WDM_DS1Native.DeviceDesc%=WDM_DS1Native, PCI\VEN_1073&DEV_0010&SUBSYS_8072104D
+;%*WDM_DS1Native.DeviceDesc%=WDM_DS1Native, PCI\VEN_1073&DEV_0010&SUBSYS_8081104D
+%*WDM_DS1Native.DeviceDesc%=WDM_DS1Native, PCI\VEN_1073&DEV_0012&SUBSYS_8096104D
+%*WDM_DS1Native.DeviceDesc%=WDM_DS1Native, PCI\VEN_1073&DEV_0012&SUBSYS_80B0104D
+
+
+
+
+
+
+
+
+
+
+
+
+[DestinationDirs]
+DefaultDestDir         = 11
+WDM_DS1Native.CopyList = 10,system32\drivers ; %SystemRoot%\system32\drivers
+WDM_DS1Legacy.CopyList = 10,system32\drivers ; %SystemRoot%\system32\drivers
+WDM_CPL.CopyList       = 11
+
+;<YAMAHA Mixer/Launcher for Win98/Me>
+;dsmixer.copy           = 10
+;dsmixerdll.copy        = 10
+;<YAMAHA Mixer/Launcher for Win2000/Xp>
+;DSMIXER_2K.COPY        = 10,system32
+;DSLAUNCH_2K.COPY       = 10
+
+WDM_YAC3REN.COPY       = 11
+
+
+;;**************************************************************************;;
+;;            Windows 98/Me Install Section
+;;**************************************************************************;;
+
+;;--------------------------------------------------------------------------
+;;            DS-XG PCI Audio CODEC for Win98/Me
+;;--------------------------------------------------------------------------      
+[WDM_DS1Native]
+AlsoInstall=KS.Registration(ks.inf), WDMAUDIO.Registration(wdmaudio.inf)
+;Include=ks.inf, wdmaudio.inf
+;Needs=KS.Registration, WDMAUDIO.Registration
+
+;<DS-XG Mixer Disable>
+CopyFiles=WDM_DS1Native.CopyList, WDM_CPL.CopyList, WDM_YAC3REN.COPY
+AddReg=WDM_DS1Native.AddReg,WDM_DS1GUID.AddReg,WDM_DS1CUSTOM.AddReg, WDM_YAC3REN.AddReg, WDM_CUSTOM.AddReg
+
+;<DS-XG Mixer Enable>
+;CopyFiles=WDM_DS1Native.CopyList, WDM_CPL.CopyList, dsmixer.copy, dsmixerdll.copy, WDM_YAC3REN.COPY
+;AddReg=WDM_DS1Native.AddReg,WDM_DS1GUID.AddReg,WDM_DS1CUSTOM.AddReg, dsmixer.AddReg, WDM_YAC3REN.AddReg, WDM_CUSTOM.AddReg
+
+[WDM_DS1Native.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wav1%,YmhAud.Interface.Wav1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wav1%,YmhAud.Interface.Wav1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wav1%,YmhAud.Interface.Wav1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_AC97%,YmhAud.Interface.AC97
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_AC97%,YmhAud.Interface.AC97
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FMSyn1%,WDM.Interface.FMSyn1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FMSyn1%,WDM.Interface.FMSyn1
+
+[WDM_DS1CUSTOM.AddReg]
+; ---------- DigitalCD Enable ----------------------------------- ;
+;HKLM, System\CurrentControlSet\Services\Class\CDROM\0000, DigitalAudioPlay, 1,03
+; --------------------------------------------------------------- ;
+
+; ---------- MIDI Default XG Setting ---------------------------- ;
+;HKU, .DEFAULT\Software\Microsoft\Windows\CurrentVersion\Multimedia\MIDIMap,"CurrentInstrument",,"Yamaha XG"
+; --------------------------------------------------------------- ;
+
+
+
+
+
+
+;;--------------------------------------------------------------------------
+;;            DS-XG Legacy Sound System for Win98/Me
+;;--------------------------------------------------------------------------      
+[WDM_DS1Legacy]
+AlsoInstall=KS.Registration(ks.inf), WDMAUDIO.Registration(wdmaudio.inf),wdmaudio.fdma(wdmaudio.inf)
+;Include=ks.inf, wdmaudio.inf
+;Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=WDM_DS1Legacy.CopyList
+AddReg=WDM_DS1Legacy.AddReg
+LogConfig=WDM_DS1Legacy.LC2
+
+[WDM_DS1Legacy.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Uart%,WDM.Interface.Uart
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Uart%,WDM.Interface.Uart
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Uart%,WDM.Interface.Uart
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FMSyn2%,WDM.Interface.FMSyn2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FMSyn2%,WDM.Interface.FMSyn2
+
+[WDM.Interface.FMSyn2]
+AddReg=WDM.Interface.FMSyn2.AddReg
+[WDM.Interface.FMSyn2.AddReg]
+HKR,,FriendlyName,,%WDM.FMSyn2.szPname%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[WDM.Interface.Uart]
+AddReg=WDM.Interface.Uart.AddReg
+[WDM.Interface.Uart.AddReg]
+HKR,,FriendlyName,,%WDM.Uart.szPname%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[WDM_DS1Legacy.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,Ds1.sys
+HKR,,NTMPDriver,,"Ds1.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%*WDM_DS1Legacy.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv,Description,,%WDM_MIDI%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%*WDM_DS1Legacy.DeviceDesc%
+
+[WDM_DS1Legacy.CopyList]
+ds1.sys,,,0X40  ;;copyflg_overwrite_older_only
+
+[WDM_DS1Legacy.LC2]
+ConfigPriority=NORMAL
+IOConfig=220-22f,240-24f,260-26f,280-28f(3ff::)
+IOConfig=388-38b,398-39b,3a0-3a3,3a8-3ab(3ff::)
+IOConfig=330-331,300-301,332-333,334-335(3ff::)
+
+
+;;--------------------------------------------------------------------------
+;;            Microsoft Joystick for Win98/Me
+;;--------------------------------------------------------------------------      
+[MSJSTICK]
+AlsoInstall = MSJSTICK(joystick.inf)
+CopyFiles   = MSJSTICK.CopyList
+AddReg      = MSJSTICK.AddReg
+
+[MSJSTICK.AddReg]
+
+[MSJSTICK.CopyList]
+
+
+;;**************************************************************************;;
+;;            Windows2000/Xp Install Section
+;;**************************************************************************;;
+
+;;--------------------------------------------------------------------------
+;;            DS-XG PCI Audio CODEC for Win2000/Xp
+;;--------------------------------------------------------------------------   
+[WDM_DS1Native.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+
+;<DS-XG Mixer Disable>
+CopyFiles=WDM_DS1Native.CopyList, WDM_CPL.CopyList, WDM_YAC3REN.COPY
+AddReg=WDM_DS1Native.AddReg,WDM_DS1GUID.AddReg,WDM_DS1CUSTOM_NT.AddReg, WDM_YAC3REN.AddReg, WDM_CUSTOM.AddReg
+
+;<DS-XG Mixer Enable>
+;CopyFiles=WDM_DS1Native.CopyList, WDM_CPL.CopyList, DSMIXER_2K.COPY, DSLAUNCH_2K.COPY, WDM_YAC3REN.COPY
+;AddReg=WDM_DS1Native.AddReg,WDM_DS1GUID.AddReg,WDM_DS1CUSTOM_NT.AddReg, dsmixer.AddReg, WDM_YAC3REN.AddReg, WDM_CUSTOM.AddReg
+
+[WDM_DS1Native.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wav1%,YmhAud.Interface.Wav1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wav1%,YmhAud.Interface.Wav1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wav1%,YmhAud.Interface.Wav1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_AC97%,YmhAud.Interface.AC97
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_AC97%,YmhAud.Interface.AC97
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FMSyn1%,WDM.Interface.FMSyn1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FMSyn1%,WDM.Interface.FMSyn1
+
+[WDM_DS1Native.NT.Services]
+AddService = ds1, 0x00000002, ds1_Service_Inst
+
+[WDM_DS1CUSTOM_NT.AddReg]
+HKLM,Software\YAMAHA\Driver,Version,               1,01,00,00,00
+
+
+;;--------------------------------------------------------------------------
+;;            DS-XG Legacy Sound System for Win2000/Xp
+;;--------------------------------------------------------------------------      
+[WDM_DS1Legacy.NT]
+Include=ks.inf
+Include=wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+
+CopyFiles = WDM_LEGACY_2K.CopyList
+AddReg    = WDM_LEGACY_2K.AddReg
+LogConfig = WDM_DS1Legacy.LC2
+
+[WDM_DS1Legacy.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Uart%,WDM.Interface.Uart
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Uart%,WDM.Interface.Uart
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Uart%,WDM.Interface.Uart
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FMSyn2%,WDM.Interface.FMSyn2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FMSyn2%,WDM.Interface.FMSyn2
+
+[WDM_DS1Legacy.NT.Services]
+AddService = ds1, 0x00000002, ds1_Service_Inst
+
+[ds1_Service_Inst]
+DisplayName    = %wdm_DS1Native.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\Ds1.sys
+
+[WDM_LEGACY_2K.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,Ds1.sys
+HKR,,NTMPDriver,,"Ds1.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"midi"
+
+HKR,Drivers\midi\wdmaud.drv, Driver,,wdmaud.drv
+
+HKR,Drivers\midi\wdmaud.drv,Description,,%WDM_MIDI%
+
+[WDM_LEGACY_2K.CopyList]
+
+
+;;--------------------------------------------------------------------------
+;;            Microsoft Joystick for Win2000/Xp
+;;--------------------------------------------------------------------------      
+[MSJSTICK.NT]
+Include     = gameport.inf
+Needs       = Standard_Port.NT
+CopyFiles   = MSJSTICK.CopyList
+AddReg      = MSJSTICK.AddReg
+
+
+;;**************************************************************************;;
+;;            Common part for both Windows98/Me and Windows2000/Xp
+;;**************************************************************************;;
+[WDM_CUSTOM.AddReg]
+; -------------- Parameter Settings for User Needs -------------- ;
+HKR,CustParams,LoadLegacy,              1,00,00,00,00
+HKR,CustParams,LoadGamePort,            1,00,00,00,00
+;;LoadC3d                               not supported
+HKR,CustParams,LoadVsvl,                1,01,00,00,00
+HKR,CustParams,LoadSpdif,               1,01,00,00,00
+
+HKR,CustParams,MaxModVoices,            1,20,00,00,00
+HKR,CustParams,MaxWodVoices,            1,04,00,00,00
+HKR,CustParams,AC97wait,                1,00,00,00,00
+;;ShowMisc                              not supported
+
+;;MIC                                   ControlsDef 7th Byte
+;;MaxDsVoices                           not supported
+;;Max3dVoices                           not supported
+;;NoEffects                             not supported
+;;POTSVideo                             not supported
+;;Power                                 not supported
+
+; Primary AC'97 Volume EnableControl/Default/Max/Min
+;-----------------------------------------01-----------------------------11-----------------------------21-----------------------------31-----------------------------41-----------------------------51-----------------------------61-----------------------------71-----------------------------81
+HKR,CustParams,EnableControls,          1,01,01,01,00,00,01,01,00,00,00, 01,00,00,00,00,00,00,00,00,00, 00,00,00,01,01,01,01,01,01,01, 01,01,01,00,00,01,01,00,00,00, 01,01,00,01,01,00,01,00,01,00, 01,00,00,00,01,00,01,00,00,00, 00,00,00,00,00,00,00,00,00,00, 00,00,00,00,00,00,00,00,00,00, 00
+HKR,CustParams,ControlsDef,             1,8E,00,A7,96,96,00,01,01,00,00, 00,00,00,00,00,00,00,8E,00,8E, 01,8E,00,8E,00,8E,00,8E,01,8E, 00,8E,00,88,00,8E,01,00,00,00, 8E,00,00,02,96,00,96,00,96,00, 96,00,88,00,96,00,96,00,88,00, 00,00,00,00,00,00,00,00,00,00, 00,00,00,00,00,00,00,8E,00,96, 00
+HKR,CustParams,VolumeMax,               1,96,00,AD,A0,A0,00,00,00,00,00, 00,00,00,00,00,00,00,96,00,96, 00,96,00,96,00,96,00,96,00,96, 00,96,00,96,00,96,00,00,00,00, 96,00,00,00,AC,00,AC,00,AC,00, AC,00,A2,00,AC,00,AC,00,A2,00, 00,00,00,00,00,00,00,00,00,00, 00,00,00,00,00,00,00,96,00,96, 00
+HKR,CustParams,VolumeMin,               1,73,00,96,8C,8C,00,00,00,00,00, 00,00,00,00,00,00,00,7C,00,73, 00,73,00,73,00,73,00,73,00,73, 00,73,00,73,00,73,00,00,00,00, 73,00,00,00,73,00,73,00,73,00, 73,00,73,00,73,00,73,00,73,00, 00,00,00,00,00,00,00,00,00,00, 00,00,00,00,00,00,00,73,00,73, 00
+;-----------------------------------------01-----------------------------11-----------------------------21-----------------------------31-----------------------------41-----------------------------51-----------------------------61-----------------------------71-----------------------------81
+
+; Secondary AC'97 Volume EnableControl/Default/Max/Min
+;-----------------------------------------01-----------------------------11-----------------------------21-----------------------------31-----------------------------41------
+HKR,CustParams,EnableControls2,         1,00,00,00,00,00,00,00,00,00,00, 00,00,00,00,00,00,00,00,00,00, 00,00,00,00,00,00,01,01,01,01, 01,01,00,00,00,00,00,00,00,00, 00,00,00
+HKR,CustParams,ControlsDef2,            1,88,00,88,00,96,00,88,00,88,00, 88,00,8E,00,88,00,88,00,8E,00, 88,00,88,00,88,00,01,01,01,01, 01,01,00,00,96,00,00,00,00,96, 00,96,00
+HKR,CustParams,VolumeMax2,              1,A2,00,A2,00,AC,00,A2,00,A2,00, A2,00,96,00,96,00,96,00,96,00, 96,00,96,00,96,00,01,01,01,01, 01,01,01,01,96,00,00,00,00,96, 00,FA,00
+HKR,CustParams,VolumeMin2,              1,73,00,73,00,73,00,73,00,73,00, 73,00,73,00,73,00,73,00,73,00, 73,00,73,00,73,00,01,01,01,01, 01,01,01,01,73,00,00,00,00,73, 00,32,00
+;-----------------------------------------01-----------------------------11-----------------------------21-----------------------------31-----------------------------41------
+
+; Default Initial Settings
+HKR,CustParams,ReverbSwDefault,         1,01,00,00,00
+HKR,CustParams,ChorusSwDefault,         1,01,00,00,00
+HKR,CustParams,VariationSwDefault,      1,01,00,00,00
+HKR,CustParams,VlSwDefault,             1,00,00,00,00
+HKR,CustParams,karaokeSwDefault,        1,00,00,00,00
+HKR,CustParams,karaokeDelayTimeDefault, 1,96,00,00,00
+HKR,CustParams,karaokeFbGainDefault,    1,28,00,00,00
+;;C3dModeDefault                        not supported
+;;Ds1stBufferDefault                    not supported
+;;Ds2ndBufferDefault                    not supported
+;;MicDefault                            not supported
+;;Mpu401ModeDefault                     not supported
+
+; Default Settings
+HKR,CustParams,ReverbSW,                1,01,00,00,00
+HKR,CustParams,ChorusSW,                1,01,00,00,00
+HKR,CustParams,VariationSW,             1,01,00,00,00
+HKR,CustParams,VlSW,                    1,00,00,00,00
+HKR,CustParams,KaraokeSW,               1,00,00,00,00
+HKR,CustParams,KaraokeDelayTime,        1,96,00,00,00
+HKR,CustParams,karaokeFbGain,           1,28,00,00,00
+;;C3dMode                               not supported
+;;Ds1stBuffer                           not supported
+;;Ds1stFormat                           not supported
+;;Ds2ndBuffer                           not supported
+;;Ds2ndStereo                           not supported
+;;Mpu401Mode                            not supported
+
+; SRC Characteristics 1kHz(Fs@44.1kHz) Good Settings
+HKR,CustParams,ShowWaveout,             1,00,00,00,00
+HKR,CustParams,SRC,                     1,00,00,00,00
+HKR,CustParams,SrcDefault,              1,00,00,00,00
+
+
+; Micelleaous settings
+HKR,CustParams,OneIRQ,                  1,01,00,00,00
+HKR,CustParams,PCICfgSave,              1,01,00,00,00
+HKR,CustParams,FirstInstall,            1,01,00,00,00
+HKR,CustParams,MicLineExcl,             1,02,00,00,00
+HKR,CustParams,LoadUIF,                 1,01,00,00,00
+HKR,CustParams,SameSynthVol,            1,01,00,00,00
+
+
+; AC'97 PCM Volume Settings
+HKR,CustParams,PCMVolDef,               1,08,08,00,00
+HKR,CustParams,PCMVolDef2,              1,08,08,00,00
+HKR,CustParams,PCMVolWait,              1,32,00,00,00
+; RearOut Phase Invert
+HKR,CustParams,AC97SurroundInvert,      1,01,00,00,00
+
+; 8bitData Rec&Play Noise Compensate settings
+HKR,CustParams,Rec8BitNoise,            1,01,00,00,00
+
+; PCM & AC-3 SPDIF Output & SPDIF Input settings
+HKR,CustParams,SpdifMode,               1,01,00,00,00
+HKR,CustParams,SpdifModeDefault,        1,01,00,00,00
+HKR,CustParams,SpdifMute,               1,01,00,00,00
+HKR,CustParams,SpdifModeDispType,       1,00,00,00,00
+HKR,CustParams,LoadSpdifIn,             1,01,00,00,00
+HKR,CustParams,DinSelect,               1,00,00,00,00
+HKR,CustParams,DolbyDigitalMode,        1,00,00,00,00
+HKR,CustParams,DolbyDigitalModeDefault, 1,00,00,00,00
+HKR,CustParams,Ac3Over4ch,              1,01,00,00,00
+
+; Docking CODEC (Secondary AC'97) settings
+HKR,CustParams,AC97bypass,              1,00,00,00,00
+HKR,CustParams,AC97Sbypass,             1,00,00,00,00
+HKR,CustParams,AC97ext,                 1,00,00,00,00
+HKR,CustParams,AC97Sext,                1,00,00,00,00
+HKR,CustParams,MicSrcAC97,              1,00,00,00,00
+HKR,CustParams,MIC2,                    1,00,00,00,00
+;;AC97SecGain                           not supported
+;-----------------------------------------01-----------------------------11-----------------------------21---------
+HKR,CustParams,LineEnUndock,            1,01,01,00,00,00,01,01,01,00,01, 01,01,01,01,01,00,01,00,00,00, 00,00,00,00
+HKR,CustParams,LineEnDock,              1,01,01,01,00,01,01,01,01,00,01, 01,01,01,01,01,00,01,01,00,00, 01,00,00,00
+HKR,CustParams,DockInfoDefault,         1,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,01,00,00,00
+;-----------------------------------------01----------02----------03----------04----------05---------
+HKR,CustParams,DockOut,                 1,00,00,00,00
+HKR,CustParams,DockerEnable,            1,01,00,00,00
+HKR,CustParams,NumOfOutCh,              1,00,00,00,00
+HKR,CustParams,QuadAll,                 1,00,00,00,00
+
+; GPIO pins settings
+HKR,CustParams,IoReset,                 1,00,00,00,00
+HKR,CustParams,IoMute,                  1,FF,00,00,00
+HKR,CustParams,IoPwrDown,               1,FE,00,00,00
+HKR,CustParams,IoBusSw,                 1,00,00,00,00
+HKR,CustParams,Io4chSw,                 1,00,00,00,00
+HKR,CustParams,IoSpdifOutSw,            1,00,00,00,00
+HKR,CustParams,IoPwrWait,               1,F4,01,00,00
+HKR,CustParams,IoMicLineExcl,           1,03,00,00,00
+HKR,CustParams,IoMuteWait,              1,F4,01,00,00
+
+; EAPD support
+HKR,CustParams,PowerEAPD,               1,00,00,00,00
+
+; Master Volume (H/W Volume) settings
+HKR,CustParams,HwVolWait,               1,64,00,00,00
+HKR,CustParams,VolumeLinkage,           1,01,00,00,00
+HKR,CustParams,HVEnable,                1,01,00,00,00
+HKR,CustParams,LinearVolume,            1,01,00,00,00
+
+; Power Management settings
+;  "PowerLevel" is power save levels.(0=FullOn,1-3=Level1-Level3)
+;  "PowerTime" is enter power save time.(Hex sec) 05=05sec
+HKR,CustParams,LoadPower,               1,01,00,00,00
+HKR,CustParams,PowerLevel,              1,02,00,00,00
+HKR,CustParams,PowerSaveTime,           1,05,00,00,00
+HKR,CustParams,PowerPage,               1,01,00,00,00
+HKR,CustParams,PowerLevel1PR,           1,01,00,00,00
+; --------------------------------------------------------------- ;
+
+[WDM_DS1Native.CopyList]
+Ds1.sys
+Dsxgwave.tbl
+
+[WDM_CPL.CopyList]
+ds1.cpl
+ds1Eng.hlp
+ds1Jpn.hlp
+ds1Fre.hlp
+ds1Ita.hlp
+ds1Ger.hlp
+ds1Spa.hlp
+ds1Swe.hlp
+ds1Bra.hlp
+ds1Sch.hlp
+ds1Tch.hlp
+ds1Kor.hlp
+ds1Nor.hlp
+ds1Dut.hlp
+
+;<YAMAHA DS-XG Mixer/Launcher>
+;[dsmixer.copy]
+;dslaunch.exe
+;dsxmixer.exe
+
+;[dsmixerdll.copy]
+;dsxaplib.dll
+
+;[DSMIXER_2K.COPY]
+;dsxmixer.exe
+
+;[DSLAUNCH_2K.COPY]
+;dsxaplib.dll
+;dslaunch.exe
+
+[WDM_YAC3REN.COPY]
+yac3ren.ax
+
+[YmhAud.Interface.Wav1]
+AddReg=YmhAud.Interface.Wav1.AddReg
+[YmhAud.Interface.Wav1.AddReg]
+HKR,,FriendlyName,,%YmhAud.Wav1.szPname%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[YmhAud.Interface.AC97]
+AddReg=YmhAud.Interface.AC97.AddReg
+[YmhAud.Interface.AC97.AddReg]
+HKR,,FriendlyName,,%YmhAud.AC97.szPname%
+
+[WDM.Interface.FMSyn1]
+AddReg=WDM.Interface.FMSyn1.AddReg
+[WDM.Interface.FMSyn1.AddReg]
+HKR,,FriendlyName,,%WDM.FMSyn1.szPname%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[WDM_DS1Native.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,Ds1.sys
+HKR,,NTMPDriver,,"Ds1.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%*WDM_DS1Native.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv,Description,,%WDM_MIDI%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%*WDM_DS1Native.DeviceDesc%
+
+[WDM_DS1GUID.AddReg]
+;;DS-XG Friendly Names
+HKLM,%MediaCategories%\%DS1GUID.MIXERNAME%,Name,,%YmhAud.Wav1.szPname%
+HKLM,%MediaCategories%\%DS1GUID.MIXERNAME%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.XGNAME%,Name,,%WDM.FMSyn1.szPname%
+HKLM,%MediaCategories%\%DS1GUID.XGNAME%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.FMNAME%,Name,,%WDM.FMSyn2.szPname%
+HKLM,%MediaCategories%\%DS1GUID.FMNAME%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.MPUNAME%,Name,,%WDM.Uart.szPname%
+HKLM,%MediaCategories%\%DS1GUID.MPUNAME%,Display,1,00,00,00,00
+
+HKLM,%MediaCategories%\%DS1GUID.Mic1%,Name,,%DS1Pin.Mic1%
+HKLM,%MediaCategories%\%DS1GUID.Mic1%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.LineIn%,Name,,%DS1Pin.LineIn%
+HKLM,%MediaCategories%\%DS1GUID.LineIn%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.CD%,Name,,%DS1Pin.CD%
+HKLM,%MediaCategories%\%DS1GUID.CD%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.Video%,Name,,%DS1Pin.Video%
+HKLM,%MediaCategories%\%DS1GUID.Video%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.Aux%,Name,,%DS1Pin.Aux%
+HKLM,%MediaCategories%\%DS1GUID.Aux%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.Phone%,Name,,%DS1Pin.Phone%
+HKLM,%MediaCategories%\%DS1GUID.Phone%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.PCBeep%,Name,,%DS1Pin.PCBeep%
+HKLM,%MediaCategories%\%DS1GUID.PCBeep%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.Master%,Name,,%DS1Pin.Master%
+HKLM,%MediaCategories%\%DS1GUID.Master%,Display,1,00,00,00,00
+;HKLM,%MediaCategories%\%DS1GUID.WAVEOUT%,Name,,%DS1Pin.WAVEOUT%
+;HKLM,%MediaCategories%\%DS1GUID.WAVEOUT%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.Mono%,Name,,%DS1Pin.Mono%
+HKLM,%MediaCategories%\%DS1GUID.Mono%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.XGSynth%,Name,,%DS1Pin.XGSynth%
+HKLM,%MediaCategories%\%DS1GUID.XGSynth%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.AGC%,Name,,%DS1Pin.AGC%
+HKLM,%MediaCategories%\%DS1GUID.AGC%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.FM%,Name,,%DS1Pin.FM%
+HKLM,%MediaCategories%\%DS1GUID.FM%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.SPDIF%,Name,,%DS1Pin.SPDIF%
+HKLM,%MediaCategories%\%DS1GUID.SPDIF%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.REVERB%,Name,,%DS1Pin.REVERB%
+HKLM,%MediaCategories%\%DS1GUID.REVERB%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.CHORUS%,Name,,%DS1Pin.CHORUS%
+HKLM,%MediaCategories%\%DS1GUID.CHORUS%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.Variation%,Name,,%DS1Pin.Variation%
+HKLM,%MediaCategories%\%DS1GUID.Variation%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.SMIX%,Name,,%DS1Pin.SMIX%
+HKLM,%MediaCategories%\%DS1GUID.SMIX%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.WideMode%,Name,,%DS1Pin.WideMode%
+HKLM,%MediaCategories%\%DS1GUID.WideMode%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.Wideness%,Name,,%DS1Pin.Wideness%
+HKLM,%MediaCategories%\%DS1GUID.Wideness%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.EchoEnable%,Name,,%DS1Pin.EchoEnable%
+HKLM,%MediaCategories%\%DS1GUID.EchoEnable%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.EchoDelay%,Name,,%DS1Pin.EchoDelay%
+HKLM,%MediaCategories%\%DS1GUID.EchoDelay%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.EchoFB%,Name,,%DS1Pin.EchoFB%
+HKLM,%MediaCategories%\%DS1GUID.EchoFB%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.VL_OnOff%,Name,,%DS1Pin.VL_OnOff%
+HKLM,%MediaCategories%\%DS1GUID.VL_OnOff%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.MicEcho%,Name,,%DS1Pin.MicEcho%
+HKLM,%MediaCategories%\%DS1GUID.MicEcho%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.ZVPort%,Name,,%DS1Pin.ZVPort%
+HKLM,%MediaCategories%\%DS1GUID.ZVPort%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.MicSel%,Name,,%DS1Pin.MicSel%
+HKLM,%MediaCategories%\%DS1GUID.MicSel%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.Headphone%,Name,,%DS1Pin.Headphone%
+HKLM,%MediaCategories%\%DS1GUID.Headphone%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.MMIX%,Name,,%DS1Pin.MMIX%
+HKLM,%MediaCategories%\%DS1GUID.MMIX%,Display,1,00,00,00,00
+
+HKLM,%MediaCategories%\%DS1GUID.PCBeep2%,Name,,%DS1Pin.PCBeep2%
+HKLM,%MediaCategories%\%DS1GUID.PCBeep2%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.Phone2%,Name,,%DS1Pin.Phone2%
+HKLM,%MediaCategories%\%DS1GUID.Phone2%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.Mic2%,Name,,%DS1Pin.Mic2%
+HKLM,%MediaCategories%\%DS1GUID.Mic2%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.LineIn2%,Name,,%DS1Pin.LineIn2%
+HKLM,%MediaCategories%\%DS1GUID.LineIn2%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.CD2%,Name,,%DS1Pin.CD2%
+HKLM,%MediaCategories%\%DS1GUID.CD2%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.Video2%,Name,,%DS1Pin.Video2%
+HKLM,%MediaCategories%\%DS1GUID.Video2%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.Aux2%,Name,,%DS1Pin.Aux2%
+HKLM,%MediaCategories%\%DS1GUID.Aux2%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.AGC2%,Name,,%DS1Pin.AGC2%
+HKLM,%MediaCategories%\%DS1GUID.AGC2%,Display,1,00,00,00,00
+
+HKLM,%MediaCategories%\%DS1GUID.AC97Mode%,Name,,%DS1Pin.AC97Mode%
+HKLM,%MediaCategories%\%DS1GUID.AC97Mode%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.AC97Dest%,Name,,%DS1Pin.AC97Dest%
+HKLM,%MediaCategories%\%DS1GUID.AC97Dest%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.AC3%,Name,,%DS1Pin.AC3%
+HKLM,%MediaCategories%\%DS1GUID.AC3%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.QUADALL%,Name,,%DS1Pin.QUADALL%
+HKLM,%MediaCategories%\%DS1GUID.QUADALL%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.DSXGID%,Name,,%DS1Pin.DSXGID%
+HKLM,%MediaCategories%\%DS1GUID.DSXGID%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.LineInfo%,Name,,%DS1Pin.LineInfo%
+HKLM,%MediaCategories%\%DS1GUID.LineInfo%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.PriInOut%,Name,,%DS1Pin.PriInOut%
+HKLM,%MediaCategories%\%DS1GUID.PriInOut%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.SecInOut%,Name,,%DS1Pin.SecInOut%
+HKLM,%MediaCategories%\%DS1GUID.SecInOut%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.OptInfo%,Name,,%DS1Pin.OptInfo%
+HKLM,%MediaCategories%\%DS1GUID.OptInfo%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.DockInfo%,Name,,%DS1Pin.DockInfo%
+HKLM,%MediaCategories%\%DS1GUID.DockInfo%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.DigSrc%,Name,,%DS1Pin.DigSrc%
+HKLM,%MediaCategories%\%DS1GUID.DigSrc%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.HWVOL%,Name,,%DS1Pin.HWVOL%
+HKLM,%MediaCategories%\%DS1GUID.HWVOL%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.HWMUTE%,Name,,%DS1Pin.HWMUTE%
+HKLM,%MediaCategories%\%DS1GUID.HWMUTE%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.CPLINFO2%,Name,,%DS1Pin.CPLINFO2%
+HKLM,%MediaCategories%\%DS1GUID.CPLINFO2%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.SPDIFIN%,Name,,%DS1Pin.SPDIFIN%
+HKLM,%MediaCategories%\%DS1GUID.SPDIFIN%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.SRC%,Name,,%DS1Pin.SRC%
+HKLM,%MediaCategories%\%DS1GUID.SRC%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.RecCon%,Name,,%DS1Pin.RecCon%
+HKLM,%MediaCategories%\%DS1GUID.RecCon%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.4CHFADER%,Name,,%DS1Pin.4CHFADER%
+HKLM,%MediaCategories%\%DS1GUID.4CHFADER%,Display,1,00,00,00,00
+
+HKLM,%MediaCategories%\%DS1GUID.PWR_MODE%,Name,,%DS1Pin.PWR_MODE%
+HKLM,%MediaCategories%\%DS1GUID.PWR_MODE%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.PWR_TIME%,Name,,%DS1Pin.PWR_TIME%
+HKLM,%MediaCategories%\%DS1GUID.PWR_TIME%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%DS1GUID.PWR_STATE%,Name,,%DS1Pin.PWR_STATE%
+HKLM,%MediaCategories%\%DS1GUID.PWR_STATE%,Display,1,00,00,00,00
+
+;;--------------------------------------------------------------------------
+;;            YAMAHA DS-XG Mixer Settings
+;;-------------------------------------------------------------------------- 
+;[dsmixer.AddReg]
+;HKLM,Software\Microsoft\Windows\CurrentVersion\Run,"YAMAHA DS-XG Launcher",,"%10%\dslaunch.exe"
+
+;; modified ike start ********
+;; launcher menu customize
+;HKLM,Software\YAMAHA\Mixer\DSx\Launch,"menu mixer",    1,00,00,00,00
+;HKLM,Software\YAMAHA\Mixer\DSx\Launch,"menu joy",      1,00,00,00,00
+;HKLM,Software\YAMAHA\Mixer\DSx\Launch,"menu sndrec",   1,01,00,00,00
+;HKLM,Software\YAMAHA\Mixer\DSx\Launch,"menu cdplayer", 1,01,00,00,00
+;HKLM,Software\YAMAHA\Mixer\DSx\Launch,"menu mplayer",  1,01,00,00,00
+;HKLM,Software\YAMAHA\Mixer\DSx\Launch,"menu mplayer2", 1,01,00,00,00
+;HKLM,Software\YAMAHA\Mixer\DSx\Launch,"menu mplayer7", 1,01,00,00,00
+;HKLM,Software\YAMAHA\Mixer\DSx\Launch,"stabout",       1,01,00,00,00
+;HKLM,Software\YAMAHA\Mixer\DSx\Launch,"hwvol",         1,00,00,00,00
+;HKLM,Software\YAMAHA\Mixer\DSx\Launch,"splash",        1,00,00,00,00
+;HKLM,Software\YAMAHA\Mixer\DSx\Launch,"menu power",    1,00,00,00,00
+
+;HKLM,Software\YAMAHA\Mixer\DSx,"specialtip",           1,01,00,00,00
+;HKLM,Software\YAMAHA\Mixer\DSx,"multiline",            1,01,00,00,00
+;HKLM,Software\YAMAHA\Mixer\DSx,"compact",              1,01,00,00,00
+
+
+;HKLM,Software\YAMAHA\Mixer\DSx\String,                 "About - SpecialBuild",,"DS-XG PCI Audio for Windows 98/Me/2000/Xp"
+;HKLM,Software\YAMAHA\Mixer\DSx\Launch\String,          "About - SpecialBuild",,"DS-XG PCI Audio for Windows 98/Me/2000/Xp"
+;HKLM,Software\YAMAHA\Mixer\DSx,"about lverstr",        1,00,00,00,00
+;HKLM,Software\YAMAHA\Mixer\DSx\Launch,"about lverstr", 1,00,00,00,00
+
+
+;; modified ike end **********
+
+;HKLM,%CustomizeMixer0%, "Master",,        %DS1Pin.Master%
+;HKLM,%CustomizeMixer0%, "Legacy",,        %DS1Pin.FM%
+;HKLM,%CustomizeMixer0%, "Digital",,       %DS1Pin.ZVPort%
+;HKLM,%CustomizeMixer0%, "xxx",,           "AC3"
+;HKLM,%CustomizeMixer0%, "PrimaryBEEP",,   %DS1Pin.PCBeep%
+;HKLM,%CustomizeMixer0%, "PrimaryPHONE",,  %DS1Pin.Phone%
+;HKLM,%CustomizeMixer0%, "PrimaryMIC",,    %DS1Pin.Mic1%
+;HKLM,%CustomizeMixer0%, "PrimaryLINE",,   %DS1Pin.LineIn%
+;HKLM,%CustomizeMixer0%, "PrimaryCD",,     %DS1Pin.CD%
+;HKLM,%CustomizeMixer0%, "PrimaryVIDEO",,  %DS1Pin.Video%
+;HKLM,%CustomizeMixer0%, "PrimaryAUX",,    %DS1Pin.Aux%
+;;HKLM,%CustomizeMixer0%, "Wave",,          %DS1Pin.WAVEOUT%
+;HKLM,%CustomizeMixer0%, "Wave",,          "Wave"
+;HKLM,%CustomizeMixer0%, "Midi",,          %DS1Pin.XGSynth%
+;HKLM,%CustomizeMixer0%, "Wide",,          %DS1Pin.Wideness%
+;HKLM,%CustomizeMixer0%, "Mono",,          %DS1Pin.Mono%
+;HKLM,%CustomizeMixer0%, "HeadPhone",,     %DS1Pin.Headphone%
+;HKLM,%CustomizeMixer0%, "SecondaryBEEP",, %DS1Pin.PCBeep2%
+;HKLM,%CustomizeMixer0%, "SecondaryPHONE",,%DS1Pin.Phone2%
+;HKLM,%CustomizeMixer0%, "SecondaryMIC",,  %DS1Pin.Mic2%
+;HKLM,%CustomizeMixer0%, "SecondaryLINE",, %DS1Pin.LineIn2%
+;HKLM,%CustomizeMixer0%, "SecondaryCD",,   %DS1Pin.CD2%
+;HKLM,%CustomizeMixer0%, "SecondaryVIDEO",,%DS1Pin.Video2%
+;HKLM,%CustomizeMixer0%, "SecondaryAUX",,  %DS1Pin.Aux2%
+
+;HKLM,%CustomizeMixer1%, "RecSelect",,     "Recording Control"
+;HKLM,%CustomizeMixer1%, "PrimaryPHONE",,  %DS1Pin.Phone%
+;HKLM,%CustomizeMixer1%, "PrimaryMIC",,    %DS1Pin.Mic1%
+;HKLM,%CustomizeMixer1%, "PrimaryLINE",,   %DS1Pin.LineIn%
+;HKLM,%CustomizeMixer1%, "PrimaryCD",,     %DS1Pin.CD%
+;HKLM,%CustomizeMixer1%, "PrimaryVIDEO",,  %DS1Pin.Video%
+;HKLM,%CustomizeMixer1%, "PrimaryAUX",,    %DS1Pin.Aux%
+;HKLM,%CustomizeMixer1%, "PrimaryStereo",, %DS1Pin.SMIX%
+;HKLM,%CustomizeMixer1%, "PrimaryMono",,   %DS1Pin.MMIX%
+;HKLM,%CustomizeMixer1%, "SecondaryPHONE",,%DS1Pin.Phone2%
+;HKLM,%CustomizeMixer1%, "SecondaryMIC",,  %DS1Pin.Mic2%
+;HKLM,%CustomizeMixer1%, "SecondaryLINE",, %DS1Pin.LineIn2%
+;HKLM,%CustomizeMixer1%, "SecondaryCD",,   %DS1Pin.CD2%
+;HKLM,%CustomizeMixer1%, "SecondaryVIDEO",,%DS1Pin.Video2%
+;HKLM,%CustomizeMixer1%, "SecondaryAUX",,  %DS1Pin.Aux2%
+;HKLM,%CustomizeMixer1%, "Digital",,       %DS1Pin.ZVPort%
+
+[WDM_YAC3REN.AddReg]
+HKCR,CLSID\{DC734E81-EF76-11D3-AF29-00C04F8864D9},,,"YAMAHA AC3 SPDIF Renderer"
+HKCR,CLSID\{DC734E81-EF76-11D3-AF29-00C04F8864D9}\InprocServer32,,,"%11%\YAC3REN.AX"
+HKCR,CLSID\{DC734E81-EF76-11D3-AF29-00C04F8864D9}\InprocServer32,ThreadingModel,,Both
+HKCR,CLSID\{083863F1-70DE-11D0-BD40-00A0C911CE86}\Instance\{DC734E81-EF76-11D3-AF29-00C04F8864D9},CLSID,,{DC734E81-EF76-11D3-AF29-00C04F8864D9}
+;;HKCR,CLSID\{083863F1-70DE-11D0-BD40-00A0C911CE86}\Instance\{DC734E81-EF76-11D3-AF29-00C04F8864D9},FilterData,1,02,00,00,00,00,00,60,00,01,00,00,00,00,00,00,00,30,70,69,33,00,00,00,00,00,00,00,00,02,00,00,00,00,00,00,00,00,00,00,00,30,74,79,33,00,00,00,00,48,00,00,00,58,00,00,00,31,74,79,33,00,00,00,00,48,00,00,00,68,00,00,00,61,75,64,73,00,00,10,00,80,00,00,aa,00,38,9b,71,01,00,00,00,00,00,10,00,80,00,00,aa,00,38,9b,71,2c,80,6d,e0,46,db,cf,11,b4,d1,00,80,5f,6c,bb,ea
+HKCR,CLSID\{083863F1-70DE-11D0-BD40-00A0C911CE86}\Instance\{DC734E81-EF76-11D3-AF29-00C04F8864D9},FriendlyName,,"YAMAHA AC3 SPDIF Renderer"
+
+
+;;--------------------------------------------------------------------------
+;;            String Section
+;;--------------------------------------------------------------------------      
+[Strings]
+;;-----------------------------------------
+;;      Non Localized ("must not" modify)
+;;-----------------------------------------
+YMH="Yamaha Corporation"
+YMHDISK="Yamaha Driver Disk"
+YamahaMfg="Yamaha Corporation"
+Microsoft="Microsoft"
+
+*WDM_DS1Native.DeviceDesc = "YAMAHA DS-XG PCI Audio CODEC (WDM)"
+*WDM_DS1Legacy.DeviceDesc = "YAMAHA DS-XG Legacy Sound System (WDM)"
+*PNPB02F.DeviceDesc       = "YAMAHA DS-XG GamePort"
+KSNAME_Wav1   = "Wave"
+KSNAME_FMSyn1 = "Midi"
+KSNAME_AC97   = "Topology"
+KSNAME_FMSyn2 = "FMSynth"
+KSNAME_Uart   = "Uart"
+YmhAud.AC97.szPname="AC97 Topo"
+
+WDM_MIDI="WDM-based Device"
+KSCATEGORY_AUDIO    = "{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER   = "{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE  = "{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_TOPOLOGY = "{DDA54A40-1E4C-11D1-A050-405705C10000}"
+Proxy.CLSID         = "{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+CustomizeMixer0    = "SOFTWARE\YAMAHA\Driver\YMF724\MixerString\Dest0"
+CustomizeMixer1    = "SOFTWARE\YAMAHA\Driver\YMF724\MixerString\Dest1"
+
+;;DS-XG PCI Audio CODEC
+YmhAud.Wav1.szPname   = "YAMAHA DS-XG Audio (WDM)"
+wdm_DS1Native.SvcDesc = "YAMAHA DS-XG Audio Driver (WDM)"
+
+;;DS-XG MIDI (FM/MPU/XG)
+WDM.FMSyn1.szPname = "YAMAHA DS-XG Synthesizer (WDM)"
+WDM.FMSyn2.szPname = "YAMAHA DS-XG FM-Synthesizer (WDM)"
+WDM.Uart.szPname   = "YAMAHA DS-XG MPU401 (WDM)"
+
+;;Friendly Name
+DS1GUID.MIXERNAME  ="{48F3FC02-BDB3-11d1-BDBA-00AA00374674}"
+DS1GUID.XGNAME     ="{02877821-9C9C-11d3-9545-006097970E8A}"
+DS1GUID.FMNAME     ="{02877822-9C9C-11d3-9545-006097970E8A}"
+DS1GUID.MPUNAME    ="{02877823-9C9C-11d3-9545-006097970E8A}"
+
+DS1GUID.Mic1       ="{48F3FC01-BDB3-11d1-BDBA-00AA00374674}"
+DS1GUID.LineIn     ="{48F3FC03-BDB3-11d1-BDBA-00AA00374674}"
+DS1GUID.CD         ="{48F3FC04-BDB3-11d1-BDBA-00AA00374674}"
+DS1GUID.Video      ="{48F3FC05-BDB3-11d1-BDBA-00AA00374674}"
+DS1GUID.Aux        ="{48F3FC06-BDB3-11d1-BDBA-00AA00374674}"
+DS1GUID.Phone      ="{48F3FC07-BDB3-11d1-BDBA-00AA00374674}"
+DS1GUID.PCBeep     ="{48F3FC08-BDB3-11d1-BDBA-00AA00374674}"
+DS1GUID.Master     ="{48F3FC09-BDB3-11d1-BDBA-00AA00374674}"
+;DS1GUID.WAVEOUT    ="{DCA2A282-0D89-11d3-82F8-006097970E8A}"
+DS1GUID.Mono       ="{48F3FC0A-BDB3-11d1-BDBA-00AA00374674}"
+DS1GUID.XGSynth    ="{48F3FC0B-BDB3-11d1-BDBA-00AA00374674}"
+DS1GUID.AGC        ="{AA6FBBA1-BE52-11d1-BDBA-00AA00374674}"
+DS1GUID.FM         ="{8F89D0C2-C495-11d1-981C-006008034FD1}"
+DS1GUID.SPDIF      ="{0308A541-D142-11d1-97F4-00A0C9772E1B}"
+DS1GUID.REVERB     ="{0308A542-D142-11d1-97F4-00A0C9772E1B}"
+DS1GUID.CHORUS     ="{0308A543-D142-11d1-97F4-00A0C9772E1B}"
+DS1GUID.Variation  ="{0308A544-D142-11d1-97F4-00A0C9772E1B}"
+DS1GUID.SMIX       ="{9FE6E641-E99A-11d1-8A41-00A0C9776188}"
+DS1GUID.WideMode   ="{9C745287-1D94-11d2-9A87-006097970E8A}"
+DS1GUID.Wideness   ="{12192C41-2E1B-11d2-9A87-006097970E8A}"
+DS1GUID.EchoEnable ="{952AF6E0-1A5C-11d2-9302-00A0C967C60A}"
+DS1GUID.EchoDelay  ="{952AF6E1-1A5C-11d2-9302-00A0C967C60A}"
+DS1GUID.EchoFB     ="{952AF6E2-1A5C-11d2-9302-00A0C967C60A}"
+DS1GUID.VL_OnOff   ="{7FFF6B61-2AF7-11d2-9A87-006097970E8A}"
+DS1GUID.MicEcho    ="{C37F58E0-549C-11d2-AF7E-00C04F88045C}"
+DS1GUID.ZVPort     ="{0F843D01-6285-11d2-8145-006097970E8A}"
+DS1GUID.MicSel     ="{9D2A0BA1-C54A-11d2-8273-006097970E8A}"
+DS1GUID.Headphone  ="{32141910-C621-11d2-8274-006097970E8A}"
+DS1GUID.MMIX       ="{5B9CF631-D5C8-11d2-8283-006097970E8A}"
+
+DS1GUID.PCBeep2    ="{F14C1670-F7A6-11d2-82DF-006097970E8A}"
+DS1GUID.Phone2     ="{F14C1671-F7A6-11d2-82DF-006097970E8A}"
+DS1GUID.Mic2       ="{F14C1672-F7A6-11d2-82DF-006097970E8A}"
+DS1GUID.LineIn2    ="{F14C1673-F7A6-11d2-82DF-006097970E8A}"
+DS1GUID.CD2        ="{F14C1674-F7A6-11d2-82DF-006097970E8A}"
+DS1GUID.Video2     ="{F14C1675-F7A6-11d2-82DF-006097970E8A}"
+DS1GUID.Aux2       ="{F14C1676-F7A6-11d2-82DF-006097970E8A}"
+DS1GUID.AGC2       ="{F14C1681-F7A6-11d2-82DF-006097970E8A}"
+
+DS1GUID.AC97Mode   ="{F14C1677-F7A6-11d2-82DF-006097970E8A}"
+DS1GUID.AC97Dest   ="{F14C1678-F7A6-11d2-82DF-006097970E8A}"
+DS1GUID.AC3        ="{F14C1679-F7A6-11d2-82DF-006097970E8A}"
+DS1GUID.QUADALL    ="{DCA2A28A-0D89-11d3-82F8-006097970E8A}"
+DS1GUID.DSXGID     ="{F14C167A-F7A6-11d2-82DF-006097970E8A}"
+DS1GUID.LineInfo   ="{F14C167B-F7A6-11d2-82DF-006097970E8A}"
+DS1GUID.PriInOut   ="{F14C167C-F7A6-11d2-82DF-006097970E8A}"
+DS1GUID.SecInOut   ="{F14C167D-F7A6-11d2-82DF-006097970E8A}"
+DS1GUID.OptInfo    ="{F14C167E-F7A6-11d2-82DF-006097970E8A}"
+DS1GUID.DockInfo   ="{F14C167F-F7A6-11d2-82DF-006097970E8A}"
+DS1GUID.DigSrc     ="{F14C1680-F7A6-11d2-82DF-006097970E8A}"
+DS1GUID.HWVOL      ="{F14C1682-F7A6-11d2-82DF-006097970E8A}"
+DS1GUID.HWMUTE     ="{DCA2A281-0D89-11d3-82F8-006097970E8A}"
+DS1GUID.CPLINFO2   ="{DCA2A283-0D89-11d3-82F8-006097970E8A}"
+DS1GUID.SPDIFIN    ="{DCA2A284-0D89-11d3-82F8-006097970E8A}"
+DS1GUID.SRC        ="{DCA2A285-0D89-11d3-82F8-006097970E8A}"
+DS1GUID.RecCon     ="{DCA2A286-0D89-11d3-82F8-006097970E8A}"
+DS1GUID.4CHFADER   ="{69FCA3F0-B20C-11d3-9558-006097970E8A}"
+DS1GUID.PWR_MODE   ="{DCA2A287-0D89-11d3-82F8-006097970E8A}"
+DS1GUID.PWR_TIME   ="{DCA2A288-0D89-11d3-82F8-006097970E8A}"
+DS1GUID.PWR_STATE  ="{DCA2A289-0D89-11d3-82F8-006097970E8A}"
+
+;;Friendly Name
+DS1Pin.SPDIF      = "Yamaha DS-XG SPDIF Out Mode"
+DS1Pin.REVERB     = "Reverb"
+DS1Pin.CHORUS     = "Chorus"
+DS1Pin.Variation  = "Variation"
+DS1Pin.WideMode   = "Wide Enable"
+DS1Pin.EchoEnable = "Echo Enable"
+DS1Pin.EchoDelay  = "Delay"
+DS1Pin.EchoFB     = "FeedBack"
+DS1Pin.VL_OnOff   = "VL"
+DS1Pin.MicEcho    = "MicEcho"
+DS1Pin.MicSel     = "Mic Select"
+
+DS1Pin.AC97Mode   = "Yamaha DS-XG AC97 Out Mode"
+DS1Pin.AC97Dest   = "Yamaha DS-XG AC97 Out Dest"
+DS1Pin.AC3        = "Dolby Digital Priority"
+DS1Pin.QUADALL    = "Quad All"
+DS1Pin.DSXGID     = "Yamaha DS-XG ID"
+DS1Pin.LineInfo   = "Yamaha DS-XG Primary Out"
+DS1Pin.PriInOut   = "Yamaha DS-XG Primary In"
+DS1Pin.SecInOut   = "Yamaha DS-XG Secondary In"
+DS1Pin.OptInfo    = "Yamaha DS-XG Option Info"
+DS1Pin.DockInfo   = "YDSXG CPL Info"
+DS1Pin.DigSrc     = "ZV Port"
+DS1Pin.HWVOL      = "Yamaha DS-XG H/W Volume"
+DS1Pin.HWMUTE     = "Yamaha DS-XG H/W Mute"
+DS1Pin.CPLINFO2   = "YDSXG CPL Info2"
+DS1Pin.SPDIFIN    = "DigitalIn"
+DS1Pin.SRC        = "SRC"
+
+DS1Pin.PWR_MODE   = "Power Mode"
+DS1Pin.PWR_TIME   = "Power SaveTime"
+DS1Pin.PWR_STATE  = "Power State"
+
+;;-----------------------------------------
+;;      Localized (may modify)
+;;-----------------------------------------
+;;Friendly Name
+DS1Pin.Mic1       = "Microphone"
+DS1Pin.LineIn     = "Line"
+DS1Pin.CD         = "CD Audio"
+DS1Pin.Video      = "Video"
+DS1Pin.Aux        = "Stereo Mic"           ; Customize "Aux" to "Stereo Mic"
+DS1Pin.Phone      = "Telephony"
+DS1Pin.PCBeep     = "PC Beep"
+DS1Pin.Master     = "Volume Control"
+;DS1Pin.WAVEOUT    = "Wave Out"
+DS1Pin.Mono       = "Mono Out"
+
+; IF SameSynthVol=0, the following string should use "XG Synth".
+DS1Pin.XGSynth    = "Midi Out"
+;DS1Pin.XGSynth    = "XG Synth"
+
+DS1Pin.AGC        = "Mic 20dB"
+DS1Pin.FM         = "FM Synth"
+DS1Pin.SMIX       = "Stereo Out"
+DS1Pin.Wideness   = "3D Wide"
+
+; IF LoadSpdifIn=1, the following string should use "ZV port".
+;DS1Pin.ZVPort     = "ZV port"
+DS1Pin.ZVPort     = "Digital"
+
+DS1Pin.Headphone  = "Headphone"
+DS1Pin.MMIX       = "Mono Out"
+
+DS1Pin.PCBeep2    = "PC Beep(Ext)"
+DS1Pin.Phone2     = "Telephony(Ext)"
+DS1Pin.Mic2       = "Microphone(Ext)"
+DS1Pin.LineIn2    = "Line(Ext)"
+DS1Pin.CD2        = "CD Audio(Ext)"
+DS1Pin.Video2     = "Video(Ext)"
+DS1Pin.Aux2       = "Auxiliary(Ext)"
+DS1Pin.AGC2       = "Mic 20dB(Ext)"
+
+DS1Pin.RecCon     = "Recording Control"
+DS1Pin.4CHFADER   = "Fader"
+

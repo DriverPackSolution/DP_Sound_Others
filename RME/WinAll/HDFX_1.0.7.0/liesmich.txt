@@ -1,0 +1,96 @@
+RME  Intelligent Audio Solutions
+
+HDSPe MADI FX
+
+Treiber für Windows XP/Vista/7/8, 32 und 64 Bit
+
+Wichtige Informationen: Treiber Version 1.07
+
+Dies ist der Treiber der HDSPe MADI FX. Er unterstützt kein anderes RME Audiointerface.
+
+
+Hinweise zum Treiber
+-----------------
+
+- Die HDSPe MADI FX erfordert eine aktuelle Version von DIGICheck.
+
+
+Installation
+-------------
+
+Neuester Treiber:
+http://www.rme-audio.de/download/hdspe_fx_win_xxx.zip
+
+
+Neueste Firmware:
+http://www.rme-audio.de/download/fut_hdspe_fx_win.zip
+
+Die Firmware kann nur aktualisiert werden wenn der Treiber bereits installiert ist.
+
+
+Sowohl Treiberinstallation als auch Firmware-Update sind im Handbuch detailliert beschrieben!
+
+
+*** Erstmalige Installation von RME Audio Interfaces unter Windows 7 ***
+
+Die im Handbuch beschriebene Vorgehensweise ist korrekt und bleibt weiter gültig, bis auf den Start der Treiberinstallation. In Windows 7 hat Microsoft den automatischen Start des Treibersoftware-Aktualisieren-Dialogs entfernt. Daher muss nach der fehlgeschlagenen Installation der Dialog manuell gestartet werden.
+
+- Taste Win, Geräte-Manager eingeben, und diesen per Enter aus der Liste starten.
+
+- Das Gerät erscheint mit einem gelben Warndreieck. Normalerweise schon korrekt in der Rubrik Audio-, Video- und Gamecontroller (Plug & Play erkennt ein Multimedia-Gerät).
+
+- Mit rechter Maustaste auf das Gerät klicken, im Kontextmenü 'Treibersoftware aktualisieren' auswählen.
+
+- Es erscheint der Dialog 'Treibersoftware aktualisieren'. Die restliche Vorgehensweise entspricht der im Handbuch beschriebenen.
+
+
+----------------------
+
+1.07, 29.11.2012
+
+- TotalMix FX 0.988
+
+- Der Start einer Audioaufnahme führt nicht mehr zum Stop einer bereits laufenden MIDI-Aufnahme
+
+- AC-3 Playback steuert das Non Audio Bit am AES-Ausgang
+
+- Kanäle unter ASIO umsortiert, AES und Phones ganz hinten.
+
+- Hinweis: Die Option 'Optimize for multi-client mixing' arbeitet nicht bei einer Buffer Size von 4096
+
+
+----------------------
+
+1.06, 09.11.2012
+
+- TotalMix FX 0.986
+
+- Unterstützt internen Sync (erfordert Firmware 84-16 oder höher)
+
+----------------------
+
+1.05, 10.09.2012
+
+- ASIO Direct Monitoring war deaktiviert
+
+----------------------
+
+1.04, 05.09.2012
+
+- TotalMix FX 0.984
+
+----------------------
+
+1.03, 05.07.2012
+
+- TotalMix FX 0.983
+
+- Some smaller changes
+
+----------------------
+
+
+
+Copyright RME 11/2012
+Alle Rechte vorbehalten. Windows XP/Vista/7/8 sind Warenzeichen der Microsoft Corporation. ASIO ist ein Warenzeichen der Steinberg Media Technologies GmbH.
+

@@ -1,0 +1,165 @@
+;/*=============================================================================
+;   FILE:         phase26.inf
+;-------------------------------------------------------------------------------
+;   DESCRIPTION:  Device setup information file for 
+;		  - Phase26 (Second Midi after-ASIO-install)
+;
+;   PLATFORMS:
+;		  - Windows 2000
+;		  - Windows XP
+;         - Windows XP 64
+;		  - Windows Vista
+;
+;   History:
+;   11-Feb-2003 (C.L.) - Initial version
+;   07-Oct-2005 (C.L.) - Win64 Migration
+;   12-Apr-2007 (C.L.) - Windows Vista Migration
+;-------------------------------------------------------------------------------
+;   COPYRIGHT:    (c) 2003-2007 TerraTec Electronic GmbH. All Rights Reserved.
+;=============================================================================*/
+
+[Version]
+Signature=$CHICAGO$
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%Provider%
+;;LayoutFile=layout.inf, layout1.inf, layout2.inf
+DriverVer =04/12/2007,5.12.3.18
+CatalogFile = phase26.cat
+
+[DestinationDirs]
+Phase26.SystemCopyList=12
+Phase26_AMD64.SystemCopyList=12
+DefaultDestDir=12
+
+
+[Manufacturer]
+%Manufacturer%=TerraTec, NTAMD64
+
+[TerraTec]
+%DeviceName_Phase26%=Phase26.Device, USB\VID_0CCD&PID_0010&MI_02
+%DeviceName_Phase26%=Phase26.Device, USB\VID_0CCD&PID_0011&MI_02
+%DeviceName_Phase26%=Phase26.Device, USB\VID_0CCD&PID_0012&MI_03
+%DeviceName_Phase26%=Phase26.Device, USB\VID_0CCD&PID_0013&MI_03
+%DeviceName_Phase26%=Phase26.Device, USB\VID_0CCD&PID_0014&MI_02	;Werner Wirsum: MIDI for ASio
+%DeviceName_Phase26%=Phase26.Device, USB\VID_0CCD&PID_0014&MI_03	;Werner Wirsum: MIDI for ASio
+
+[TerraTec.NTAMD64]
+%DeviceName_Phase26%=Phase26.Device, USB\VID_0CCD&PID_0010&MI_02
+%DeviceName_Phase26%=Phase26.Device, USB\VID_0CCD&PID_0011&MI_02
+%DeviceName_Phase26%=Phase26.Device, USB\VID_0CCD&PID_0012&MI_03
+%DeviceName_Phase26%=Phase26.Device, USB\VID_0CCD&PID_0013&MI_03
+%DeviceName_Phase26%=Phase26.Device, USB\VID_0CCD&PID_0014&MI_02	;Werner Wirsum: MIDI for ASio
+%DeviceName_Phase26%=Phase26.Device, USB\VID_0CCD&PID_0014&MI_03	;Werner Wirsum: MIDI for ASio
+
+
+
+[Phase26.Device.NT]
+AlsoInstall=ks.registration(ks.inf),wdmaudio.registration(wdmaudio.inf)
+CopyFiles=Phase26.SystemCopyList
+AddReg=Phase26.AddReg
+
+
+[Phase26.Device.NTAMD64]
+AlsoInstall=ks.registration(ks.inf),wdmaudio.registration(wdmaudio.inf)
+CopyFiles=Phase26_AMD64.SystemCopyList
+AddReg=Phase26.AddReg
+
+[Phase26.Device.NT.Services]
+AddService = Phase26, 0x00000002, Phase26_Service_Inst
+
+
+[Phase26.Device.NTAMD64.Services]
+AddService = Phase26, 0x00000002, Phase26_Service_Inst
+
+;-------------------------------------------------------------------------------
+
+
+[Phase26_Service_Inst]
+DisplayName    = %Phase26.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_SYSTEM_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\Phase26m.sys
+
+
+;-------------------------------------------------------------------------------
+
+[Phase26.Device.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi%,Phase26.Interface.Midi
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi%,Phase26.Interface.Midi
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi%,Phase26.Interface.Midi
+
+
+[Phase26.Device.NTAMD64.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi%,Phase26.Interface.Midi
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi%,Phase26.Interface.Midi
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi%,Phase26.Interface.Midi
+
+
+
+;=============================================================================
+;	Phase26 Interfaces 
+;=============================================================================
+
+
+[Phase26.Interface.Midi]
+AddReg=Phase26.Interface.Midi.AddReg
+
+
+[Phase26.Interface.Midi.AddReg]
+HKR,,FriendlyName,,%FriendlyName%
+HKR,,CLSID,,%Proxy.CLSID%
+
+
+;=============================================================================
+; AddReg
+;=============================================================================
+
+[Phase26.AddReg]
+HKR,Drivers,SubClasses,,"midi"
+
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Description,,%FriendlyName%
+
+
+;=============================================================================
+; Copy/DelFiles
+;=============================================================================
+
+
+[Phase26.SystemCopyList]
+Phase26m.sys
+
+[Phase26_AMD64.SystemCopyList]
+Phase26m.sys,Phase26m64.sys,
+
+[SourceDisksNames]
+;1="STREAM.cab",STREAM.cab,0
+1=%DiskName%,,
+
+[SourceDisksFiles]
+Phase26m.sys=1
+Phase26m64.sys=1
+
+;=============================================================================
+;	STRINGS
+;=============================================================================
+[Strings]
+ClassName="Sound, video and game controllers"
+Manufacturer="TerraTec Electronic GmbH"
+Provider="TerraTec Electronic GmbH"
+DiskName="TerraTec Driver CD"
+
+DeviceName_Phase26 = "TerraTec PHASE 26 USB (MIDI)"
+
+FriendlyName              = "TerraTec PHASE 26 MIDI"
+
+Phase26.SvcDesc= "PHASE26 WDM Audio"
+
+Proxy.CLSID        ="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO   ="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER  ="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE ="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+
+KSNAME_Midi		="Usbm"

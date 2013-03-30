@@ -1,0 +1,124 @@
+;/*=============================================================================
+;   FILE:         ttfausif.inf
+;-------------------------------------------------------------------------------
+;   DESCRIPTION:  Device setup information file for 
+;         - GSIF driver
+;
+;   PLATFORMS:
+;		  - Windows XP SP1
+;
+;   History:
+;   12-July-2004 (C.L.) - Initial version
+;
+;-------------------------------------------------------------------------------
+;   COPYRIGHT:    (c) 2004  TerraTec Electronic GmbH. All Rights Reserved.
+;                 (c) 2004  Thesycon GmbH / BridgeCo AG
+;=============================================================================*/
+
+
+;=============================================================================
+; Version Section
+;=============================================================================-
+[Version]
+signature="$Windows NT$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%S_Provider%
+DriverVer=05/18/2004,1.20.0.0
+CatalogFile=bco_gsif.cat
+
+
+;=============================================================================
+;	Manufacturer
+;=============================================================================
+[Manufacturer]
+%S_Provider%=_Devices
+
+
+;=============================================================================
+;	Device section
+;=============================================================================
+[_Devices]
+%S_DeviceDesc%=_gsifdev,Root\BridgeCo_1394_GSIF
+
+;=============================================================================
+;	Install Sections
+;=============================================================================
+
+[_gsifdev.NTx86]
+CopyFiles=_CopyFiles_sys
+
+[_gsifdev.NTx86.Services]
+AddService = %S_DriverName%, 0x00000002 , _gsifdev_Service_Inst, _gsifdev_EventLog_Inst
+
+[_gsifdev_Service_Inst]
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\%S_DriverName%.sys
+AddReg=_AddReg_DevInterfaces
+
+[_gsifdev_EventLog_Inst]
+AddReg = _gsifdev_EventLog_AddReg
+
+[_gsifdev_EventLog_AddReg]
+HKR,,EventMessageFile,0x00020000,"%%SystemRoot%%\System32\IoLogMsg.dll;%%SystemRoot%%\System32\drivers\%S_DriverName%.sys"
+HKR,,TypesSupported,  %REG_DWORD%, 7
+
+
+;=============================================================================
+; device interface identifiers
+;=============================================================================
+[_AddReg_DevInterfaces]
+HKR, , VendorSpecificInterfaceGuid,%REG_SZ%,"{B0A71EDF-ADE1-4149-A0CB-154FBC5BE26E}"
+		
+
+;=============================================================================
+; Copy file sections
+;=============================================================================
+[_CopyFiles_sys]
+TTAUgsif.sys
+
+;=============================================================================
+; Destination Directories
+;=============================================================================
+[DestinationDirs]
+DefaultDestDir = 11    ; SYSTEM directory
+_CopyFiles_sys = 10,System32\Drivers
+
+;=============================================================================
+; Disk Layout
+;=============================================================================
+[SourceDisksNames]
+1=%S_DiskName%,,
+
+[SourceDisksFiles]
+TTAUgsif.sys = 1
+
+
+;=============================================================================
+; Text Strings
+;=============================================================================
+[Strings]
+;
+; Non-Localizable Strings, DO NOT MODIFY!
+;
+REG_SZ         = 0x00000000
+REG_MULTI_SZ   = 0x00010000
+REG_EXPAND_SZ  = 0x00020000
+REG_BINARY     = 0x00000001
+REG_DWORD      = 0x00010001
+
+
+;
+; Localizable Strings, modify as required
+;
+S_Provider="TerraTec"
+S_DeviceDesc="Aureon 7.1 FW GSIF Driver"
+S_DiskName="TerraTec 1394 Audio Driver Disk"
+
+; File name of driver executable (without extension).
+; If the name is modified, the [_CopyFiles_sys] and [SourceDisksFiles]
+; sections has to be modified as well!
+S_DriverName="TTAUgsif"
+

@@ -1,0 +1,361 @@
+;/*=============================================================================
+;   FILE:         aureonSx.inf
+;-------------------------------------------------------------------------------
+;   DESCRIPTION:  Device setup information file for 
+;		  - Aureon 5.1 Sky 
+;		  - Aureon 7.1 Space
+;         - Aureon 7.1 Universe
+;
+;   PLATFORMS:
+;		  - Windows 98SE 
+;		  - Windows ME
+;		  - Windows 2000
+;		  - Windows XP
+;
+;   History:
+;   30-Aug-2002 (C.L.) - Initial version
+;   28-Oct-2002 (M.B.) - Cosmetic
+;   30-Oct-2002 (M.B.) - Added 3D-Audio Registry settings
+;   01-Sep-2003 (C.L.) - Added Aureon Universe
+;
+;-------------------------------------------------------------------------------
+;   COPYRIGHT:    (c) 2002 - 2004 TerraTec Electronic GmbH. All Rights Reserved.
+;=============================================================================*/
+
+[Version]
+Signature=$CHICAGO$
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%Provider%
+;;LayoutFile=layout.inf, layout1.inf, layout2.inf
+
+DriverVer =05/05/2004,5.20.3.28
+
+
+[DestinationDirs]
+TTP9.SystemCopyList=10,system32\drivers
+TTP9.ASIO.CopyList=11
+sensaura.CopyList=10,system
+Audio3D.CopyList=11
+DefaultDestDir=12
+
+DefaultDestDir=12
+
+[Manufacturer]
+%Manufacturer%=TerraTec
+
+[TerraTec]
+%DeviceName_SPACE%=TTP9.Device,PCI\VEN_1412&DEV_1724&SUBSYS_1145153B
+%DeviceName_SKY%=TTP9.Device,PCI\VEN_1412&DEV_1724&SUBSYS_1147153B
+%DeviceName_UNIVERSE%=TTP9.Device,PCI\VEN_1412&DEV_1724&SUBSYS_1153153B
+
+;=============================================================================
+;	Windows 9x & ME Install
+;=============================================================================
+
+[TTP9.Device]
+AlsoInstall=ks.registration(ks.inf),wdmaudio.registration(wdmaudio.inf)
+CopyFiles=TTP9.SystemCopyList,Audio3D.CopyList,sensaura.CopyList,TTP9.ASIO.CopyList
+DelFiles=Audio3D.DelList
+AddReg=TTP9.AddReg, SensauraConfiguration.AddReg, Audio3D.AddReg, guids.AddReg, TTP9.ASIO.AddReg
+
+[TTP9.Device.HW]
+AddReg=Sensaura.AddReg
+
+;-------------------------------------------------------------------------------
+
+
+[TTP9.Device.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,TTP9.Interface.WaveAnalog
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,TTP9.Interface.WaveAnalog
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,TTP9.Interface.WaveAnalog
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi%,TTP9.Interface.Midi
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi%,TTP9.Interface.Midi
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi%,TTP9.Interface.Midi
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,TTP9.Interface.Topology
+
+;=============================================================================
+;	Windows XP Install
+;=============================================================================
+
+[TTP9.Device.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration.NT
+CopyFiles=TTP9.SystemCopyList,Audio3D.CopyList,sensaura.CopyList,TTP9.ASIO.CopyList
+DelFiles=Audio3D.DelList
+AddReg=TTP9.AddReg, SensauraConfiguration.AddReg, Audio3D.AddReg, guids.AddReg, TTP9.ASIO.AddReg
+
+[TTP9.Device.NT.HW]
+AddReg=Sensaura.AddReg.NT
+
+[TTP9.Device.NT.Services]
+AddService = TT1724ht, 0x00000002, ttp9_Service_Inst
+AddService = TT1724sa, 0x00000000, Sensaura_Service_Inst
+
+;-------------------------------------------------------------------------------
+
+
+[ttp9_Service_Inst]
+DisplayName    = %ttp9.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_SYSTEM_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\TT1724ht.sys
+
+[Sensaura_Service_Inst]
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_SYSTEM_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\TT1724sa.sys
+
+;-------------------------------------------------------------------------------
+
+[TTP9.Device.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,TTP9.Interface.WaveAnalog
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,TTP9.Interface.WaveAnalog
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,TTP9.Interface.WaveAnalog
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi%,TTP9.Interface.Midi
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi%,TTP9.Interface.Midi
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi%,TTP9.Interface.Midi
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,TTP9.Interface.Topology
+
+;=============================================================================
+;	TTP9 Interfaces 
+;=============================================================================
+
+[TTP9.Interface.WaveAnalog]
+AddReg=TTP9.Interface.Wave.AddReg
+
+[TTP9.Interface.Midi]
+AddReg=TTP9.Interface.Midi.AddReg
+
+[TTP9.Interface.Topology]
+AddReg=TTP9.Interface.Topo.AddReg
+
+
+;---------------------------------------------------------
+; Friendly Names for TTP9 devices
+; Nasty, AddReg Section Name must not exceed xx Characters 
+;---------------------------------------------------------
+[TTP9.Interface.Wave.AddReg]
+HKR,,FriendlyName,,"Aureon Wave"
+HKR,,CLSID,,%Proxy.CLSID%
+
+[TTP9.Interface.Midi.AddReg]
+HKR,,FriendlyName,,"Aureon MIDI"
+HKR,,CLSID,,%Proxy.CLSID%
+
+[TTP9.Interface.Topo.AddReg]
+HKR,,FriendlyName,,"Aureon Virt. Mix"
+HKR,,CLSID,,%Proxy.CLSID%
+
+;=============================================================================
+; AddReg
+;=============================================================================
+
+[TTP9.AddReg]
+HKR,,AssociatedFilters,,"wdmaud"
+HKR,,Driver,,TT1724ht.sys
+HKR,,NTMPDriver,,"TT1724ht.sys"
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\wave\wdmaud.drv,Description,,"Aureon Wave"
+
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Description,,"Aureon Mixer"
+
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Description,,"Aureon MIDI"
+
+[Sensaura.AddReg]
+HKR,,UpperFilters,0x00010000,TT1724sa.sys
+
+[Sensaura.AddReg.NT]
+HKR,,UpperFilters,0x00010000,"TT1724sa"
+
+[SensauraConfiguration.AddReg]
+HKR,Sensaura\Configuration,RenderFactory,0,%KSNAME_Wave%
+HKR,Sensaura\Configuration,TopologyFactory,0,%KSNAME_Topology%
+HKR,Sensaura\Configuration,ForwardSpeakerConfiguration,0x00010001,0
+HKR,Sensaura\Configuration,IgnoreDSSpeakerConfiguration,0x00010001,1
+
+[Audio3D.AddReg]
+HKCR,Audio3D,,0,Audio3DObject
+HKCR,Audio3D\CLSID,,0,%Audio3D_CLSID%
+HKCR,CLSID\%Audio3D_CLSID%,,0,Audio3DObject
+HKCR,CLSID\%Audio3D_CLSID%\InProcServer32,,0,Audio3D.dll
+HKCR,CLSID\%Audio3D_CLSID%\InProcServer32,ThreadingModel,0,Apartment
+
+;=============================================================================
+;	ASIO Install
+;=============================================================================
+[TTP9.ASIO.AddReg]
+HKLM,SOFTWARE\ASIO\%ASIO_TTP9NAME%,"CLSID",,%ASIO_TTP9IID%
+HKLM,SOFTWARE\ASIO\%ASIO_TTP9NAME%,"Description",,%ASIO_TTP9NAME%
+HKCR,CLSID\%ASIO_TTP9IID%,,,%ASIO_TTP9NAME%
+HKCR,CLSID\%ASIO_TTP9IID%\InProcServer32,,,"%11%\TTAsioht.dll"
+HKCR,CLSID\%ASIO_TTP9IID%\InProcServer32,ThreadingModel,,"Apartment"
+
+
+;=============================================================================
+; Copy/DelFiles
+;=============================================================================
+
+[TTP9.ASIO.CopyList]
+TTAsioht.dll
+
+[TTP9.SystemCopyList]
+TT1724ht.sys
+TT1724sa.sys
+
+[sensaura.CopyList]
+crlds3d.dll
+
+[Audio3D.CopyList]
+a3d.dll,Audio3D.dll,,4
+Audio3D.dll
+
+[Audio3D.DelList]
+a3d.dll
+Audio3D.dll
+
+[SourceDisksNames]
+1=%DiskName%,,
+
+[SourceDisksFiles]
+TT1724ht.sys=1
+TT1724sa.sys=1
+crlds3d.dll=1
+audio3d.dll=1
+
+
+;=============================================================================
+; Guids for Mixernodes
+;=============================================================================
+
+[guids.AddReg]
+HKLM,%MediaCategories%\%TTGuid.Front%,Name,,%TTNode.Front%
+HKLM,%MediaCategories%\%TTGuid.Front%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%TTGuid.Master%,Name,,%TTNode.Master%
+HKLM,%MediaCategories%\%TTGuid.Master%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%TTGuid.FrontVolume%,Name,,%TTNode.FrontVolume%
+HKLM,%MediaCategories%\%TTGuid.FrontVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%TTGuid.FrontMute%,Name,,%TTNode.FrontMute%
+HKLM,%MediaCategories%\%TTGuid.FrontMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%TTGuid.Rear%,Name,,%TTNode.Rear%
+HKLM,%MediaCategories%\%TTGuid.Rear%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%TTGuid.RearVolume%,Name,,%TTNode.RearVolume%
+HKLM,%MediaCategories%\%TTGuid.RearVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%TTGuid.RearMute%,Name,,%TTNode.RearMute%
+HKLM,%MediaCategories%\%TTGuid.RearMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%TTGuid.Center%,Name,,%TTNode.Center%
+HKLM,%MediaCategories%\%TTGuid.Center%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%TTGuid.CenterVolume%,Name,,%TTNode.CenterVolume%
+HKLM,%MediaCategories%\%TTGuid.CenterVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%TTGuid.CenterMute%,Name,,%TTNode.CenterMute%
+HKLM,%MediaCategories%\%TTGuid.CenterMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%TTGuid.LFE%,Name,,%TTNode.LFE%
+HKLM,%MediaCategories%\%TTGuid.LFE%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%TTGuid.LFEVolume%,Name,,%TTNode.LFEVolume%
+HKLM,%MediaCategories%\%TTGuid.LFEVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%TTGuid.LFEMute%,Name,,%TTNode.LFEMute%
+HKLM,%MediaCategories%\%TTGuid.LFEMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%TTGuid.BackSurround%,Name,,%TTNode.BackSurround%
+HKLM,%MediaCategories%\%TTGuid.BackSurround%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%TTGuid.BSVolume%,Name,,%TTNode.BSVolume%
+HKLM,%MediaCategories%\%TTGuid.BSVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%TTGuid.BSMute%,Name,,%TTNode.BSMute%
+HKLM,%MediaCategories%\%TTGuid.BSMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%TTGuid.WT%,Name,,%TTNode.WT%
+HKLM,%MediaCategories%\%TTGuid.WT%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%TTGuid.LineRear%,Name,,%TTNode.LineRear%
+HKLM,%MediaCategories%\%TTGuid.LineRear%,Display,1,00,00,00,00
+
+;=============================================================================
+;	STRINGS
+;=============================================================================
+[Strings]
+ClassName="Sound, video and game controllers"
+Manufacturer="TerraTec Electronic GmbH"
+Provider="TerraTec Electronic GmbH"
+DiskName="TerraTec Driver CD"
+
+DeviceName_SKY           = "Aureon 5.1 Sky"
+DeviceName_SPACE         = "Aureon 7.1 Space"	
+DeviceName_UNIVERSE      = "Aureon 7.1 Universe"												 
+
+ttp9.SvcDesc= "AureonWDM"
+
+Proxy.CLSID        ="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO   ="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER  ="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE ="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+Audio3D_CLSID	   ="{D8F1EEE0-F634-11CF-8700-00A0245D918B}"
+
+KSNAME_Wave		="Wave"
+KSNAME_Midi		="Uart"
+KSNAME_Topology ="Topology"
+
+;----------------------------------------------------------
+; Guids for Custom Names
+;----------------------------------------------------------
+TTGuid.Master          ="{3C566B60-D997-11d3-943D-0040339FD9C2}"
+TTGuid.Front           ="{FEFB4813-D820-11d3-943D-0040339FD9C2}"
+TTGuid.FrontVolume     ="{38BFD810-A288-11d3-9426-0040339FD9C2}"
+TTGuid.FrontMute       ="{4534F060-A288-11d3-9426-0040339FD9C2}"
+TTGuid.Rear            ="{5CC77870-D821-11d3-943D-0040339FD9C2}"
+TTGuid.RearVolume      ="{4D7644B0-A288-11d3-9426-0040339FD9C2}"
+TTGuid.RearMute        ="{4D7644B1-A288-11d3-9426-0040339FD9C2}"
+TTGuid.SPDIF           ="{307E100f-9035-11d2-99D6-00600893863B}"
+TTGuid.SPDIFVolume     ="{32DA4E70-D997-11d3-943D-0040339FD9C2}"
+TTGuid.SPDIFMute       ="{32DA4E71-D997-11d3-943D-0040339FD9C2}"
+TTGuid.Center          ="{5E7C8DE3-8858-47c2-A01B-7F6B677AFB02}"
+TTGuid.CenterVolume    ="{3A513344-F8E9-449c-A648-B5F2C949870B}"
+TTGuid.CenterMute      ="{5CE856F8-ECA1-43af-815F-FA8F2FA99EBD}"
+TTGuid.LFE             ="{74A01E0D-61F7-4378-8BB7-C26D6CF14327}"
+TTGuid.LFEVolume       ="{9BB84574-E6C7-42a0-ABF6-F48819EAA190}"
+TTGuid.LFEMute         ="{FCDEFACB-5B85-40f7-9B23-9FA84D595326}"
+TTGuid.BackSurround    ="{C28B0DB5-672A-49a2-A4F7-57A9619AA7C2}"
+TTGuid.BSVolume        ="{9BB84574-E6C7-42a0-ABF6-F48819EAA190}"
+TTGuid.BSMute          ="{04147B29-4892-4c38-AF29-C94575A1993C}"
+TTGuid.WT              ="{9D76007D-C75E-4c7b-9401-A586906538EC}"
+TTGuid.LineRear        ="{9D76007E-C75E-4c7b-9401-A586906538EC}"
+
+
+;----------------------------------------------------------
+; Custom Names in Windows Mixer
+;----------------------------------------------------------
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+TTNode.Master          ="Master"
+TTNode.Front           ="Front"
+TTNode.FrontVolume     ="Front Volume"
+TTNode.FrontMute       ="Front Mute"
+TTNode.Rear            ="Surround"
+TTNode.RearVolume      ="Surround Volume"
+TTNode.RearMute        ="Surround Mute"
+TTNode.Center          ="Center"
+TTNode.CenterVolume    ="Center Volume"
+TTNode.CenterMute      ="Center Mute"
+TTNode.LFE             ="LFE"
+TTNode.LFEVolume       ="LFE Volume"
+TTNode.LFEMute         ="LFE Mute"
+TTNode.BackSurround    ="Back Surround"
+TTNode.BSVolume        ="BS Volume"
+TTNode.BSMute          ="BS Mute"
+TTNode.WT              ="WaveTable"
+TTNode.LineRear        ="Line Rear"
+
+;----------------------------------------------------------
+; ASIO
+;----------------------------------------------------------
+
+ASIO_TTP9IID       ="{42996DF8-0680-4837-AAC3-4724BEA2F159}"
+ASIO_TTP9NAME      ="ASIO for Aureon series"
+

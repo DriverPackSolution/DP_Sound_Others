@@ -1,0 +1,68 @@
+;
+; (c) Copyright 2002 Tom
+;
+
+[Version]
+Signature="$CHICAGO$"
+Class=USB
+provider=%TOM%
+DriverVer=04/12/2007
+CatalogFile=ttp7up.cat
+
+[SourceDisksNames]
+1="TTP7 Flash Update Installation Disk",,,
+
+[SourceDisksFiles]
+ttp7up.sys = 1
+ttp7up64.sys = 1
+
+[Manufacturer]
+%MfgName%=TerraTec, NTAMD64
+
+[TerraTec]
+%USB\VID_0CCD&PID_0015.DeviceDesc%=TTP7.Dev, USB\VID_0CCD&PID_0015
+
+[TerraTec.NTAMD64]
+%USB\VID_0CCD&PID_0015.DeviceDesc%=TTP7.Dev, USB\VID_0CCD&PID_0015
+
+[DestinationDirs]
+TTP7.Files.Ext = 12
+TTP7_AMD64.Files.Ext = 12
+
+[TTP7.Dev.NT]
+CopyFiles=TTP7.Files.Ext
+
+[TTP7.Dev.NT.Services]
+Addservice = TTP7, 0x00000002, TTP7.AddService
+
+[TTP7.Dev.NTAMD64]
+CopyFiles=TTP7_AMD64.Files.Ext
+
+[TTP7.Dev.NTAMD64.Services]
+Addservice = TTP7, 0x00000002, TTP7.AddService
+
+
+[TTP7.AddService]
+DisplayName    = %TTP7.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\ttp7up.sys
+LoadOrderGroup = Base
+
+[TTP7.Files.Ext]
+ttp7up.sys
+
+[TTP7_AMD64.Files.Ext]
+ttp7up.sys,ttp7up64.sys,
+
+
+
+;---------------------------------------------------------------;
+
+[Strings]
+TOM="TOM"
+MfgName="TerraTec"
+USB\VID_0CCD&PID_0015.DeviceDesc="Flash Update for TerraTec PHASE 26 USB"
+TTP7.SvcDesc="Flash Update for TerraTec PHASE 26 USB"
+

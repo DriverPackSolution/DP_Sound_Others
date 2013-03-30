@@ -1,0 +1,170 @@
+;----------------------------------------------------------------------
+; USBMM4X4.INF
+; M-Audio USB MidiSport 4x4 Midi Interface Hardware Installation File
+; Written by: Doug Fetter Software Wizardry
+; Copyright (c) 1999-2003 Midiman,  All Rights Reserved.
+;----------------------------------------------------------------------
+
+[Version]
+Signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%MfgName%
+LayoutFile=layout.inf
+
+[ClassInstall]
+; Win9x ClassInstall section
+AddReg=Class.AddReg
+
+[Class.AddReg]
+HKR,,,0,%MediaClassName%
+HKR,,Icon,0,-1
+HKR,,Installer,0,mmci.dll
+
+[ClassInstall32]
+; NT ClassInstall section
+AddReg=Class32.AddReg
+
+[Class32.AddReg]
+HKR,,,,%MediaClassName%
+HKR,,Installer32,,"MmSys.Cpl,MediaClassInstaller"
+HKR,,EnumPropPages32,,"MmSys.Cpl,MediaPropPageProvider"
+HKR,,TroubleShooter-0,,"tshoot.chm,hdw_multi.htm"
+HKR,,Icon,,"3004"
+
+[Manufacturer]
+%MfgName%=ManufacturerName_Midiman
+
+[ManufacturerName_Midiman]
+%USB\VID_0763&PID_1020.DeviceDesc%=USBMidi_Loader, USB\VID_0763&PID_1020
+%USB\VID_0763&PID_1021.DeviceDesc%=USBMidiK_Device, USB\VID_0763&PID_1021
+%USBMIDI\MM4X4.DeviceDesc%=USBMidi_Device,USBMIDI\MM4X4
+
+
+[USBMidi_Loader.CopyList]
+usb44ldr.sys,,
+
+[MidiSport.CopyList.DRV]
+usbmm4x4.drv
+usbmm4x4.dll
+usbmm4x4.vxd
+
+[MidiSport.CopyList.NTDrv]
+usbmn4x4.dll
+
+[MidiSport.CopyList.WDM]
+usbmm4x4.sys
+
+[MidiSport.CopyList.NTWDM]
+usbmn4x4.sys
+
+[DestinationDirs]
+USBMidi_Loader.CopyList = 10,system32\drivers ; %SystemRoot%\system32\drivers
+MidiSport.CopyList.DRV  = 11                  ; %SystemRoot%\system
+MidiSport.CopyList.WDM  = 10,system32\drivers ; %SystemRoot%\system32\drivers
+MidiSport.CopyList.NTWDM= 10,system32\drivers ; %SystemRoot%\system32\drivers
+
+[SourceDisksNames]
+1="M-Audio USB Midisport Driver Disk",,0000-0000
+
+[SourceDisksFiles]
+usbmm4x4.drv=1
+usbmm4x4.dll=1
+usbmm4x4.vxd=1
+usbmm4x4.sys=1
+usbmn4x4.dll=1
+usbmn4x4.sys=1
+
+
+;---------------------------------------------------------------;
+; Windows 98+ Install Sections
+;
+[USBMidi_Loader]
+CopyFiles=USBMidi_Loader.CopyList
+AddReg=USBMidi_Loader.AddReg
+
+[USBMidiK_Device]
+CopyFiles=MidiSport.CopyList.WDM
+AddReg=MidiSportK.AddReg
+
+[USBMidi_Device]
+CopyFiles=MidiSport.CopyList.DRV
+AddReg=MidiSport.AddReg
+
+
+;---------------------------------------------------------------;
+; Windows 98+ Registry Section
+;
+[USBMidi_Loader.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,usb44ldr.sys
+
+[MidiSportK.AddReg]
+HKR,,DevLoader,,"*ntkern"
+HKR,,NTMPDriver,,usbmm4x4.sys
+
+[MidiSport.AddReg]
+HKR,,DevLoader,,"mmdevldr.vxd"
+HKR,,Driver,,usbmm4x4.vxd
+HKR,Drivers,MIGRATED,0,0
+HKR,Drivers\midi,,0,
+HKR,Drivers\midi\usbmm4x4.drv,Description,0,%USBMIDI\MM4X4.DeviceDesc%
+HKR,Drivers\midi\usbmm4x4.drv,Driver,0,usbmm4x4.drv
+HKR,Drivers\midi\usbmm4x4.drv,External,1,01,00,00,00
+HKR,Drivers,SubClasses,,"midi"
+
+
+;---------------------------------------------------------------;
+; Windows 2000 Install Sections
+;
+[USBMidi_Loader.NT]
+CopyFiles=USBMidi_Loader.CopyList
+
+[USBMidi_Loader.NT.Services]
+AddService = USB44LDR, 0x00000002, USBMidi_Loader_Services
+
+[USBMidi_Loader_Services]
+DisplayName    = %USBLoader.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\usb44ldr.sys
+
+[USBMidiK_Device.NT]
+CopyFiles=MidiSport.CopyList.NTDrv,MidiSport.CopyList.NTWDM
+AddReg=MidiSport.NTAddReg
+
+[USBMidiK_Device.NT.Services]
+AddService = USBMN4X4, 0x00000002, USBMidiK_Device_Services
+
+[USBMidiK_Device_Services]
+DisplayName    = %MidiSport.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\usbmn4x4.sys
+
+
+;---------------------------------------------------------------;
+; Windows 2000 Registry Section
+;
+[MidiSport.NTAddReg]
+HKR,Drivers\midi,,0,
+HKR,Drivers\midi\usbmn4x4.dll,Description,0,%MidiSport.SvcDesc%
+HKR,Drivers\midi\usbmn4x4.dll,Driver,0,usbmn4x4.dll
+HKR,Drivers\midi\usbmn4x4.dll,External,1,01,00,00,00
+HKR,Drivers,SubClasses,,"midi"
+
+
+;---------------------------------------------------------------;
+
+[Strings]
+MfgName="M-Audio"
+USB\VID_0763&PID_1020.DeviceDesc="M-Audio USB MidiSport 4x4 Loader"
+USB\VID_0763&PID_1021.DeviceDesc="M-Audio USB MidiSport 4x4"
+USBMIDI\MM4X4.DeviceDesc="M-Audio USB MidiSport 4x4 (VxD)"
+MidiSport.SvcDesc = "M-Audio USB MidiSport 4x4"
+USBLoader.SvcDesc = "M-Audio USB MidiSport 4x4 Loader"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+MediaClassName="Sound, video and game controllers"

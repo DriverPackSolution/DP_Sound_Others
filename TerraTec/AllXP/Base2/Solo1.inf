@@ -1,0 +1,1260 @@
+; Copyright (c) 1998-2000 ESS Technology, Inc.
+
+"ESS Solo-1 5.12.3045"
+[Version]
+Signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+LayoutFile=layout.inf, layout1.inf, layout2.inf
+provider=%ESSMfgName%
+CatalogFile=essolo.cat
+DriverVer=08/01/2000,5.12.01.3045
+
+[SourceDisksNames]
+222=,,
+
+[SourceDisksFiles]
+solo.sys=222
+;essolo.cat=222
+
+[SourceDisksNames.x86]
+222=,,
+
+[SourceDisksFiles.x86]
+solo.sys=222
+;essolo.cat=222
+
+[Manufacturer]
+%ESSMfgName%=ESS
+
+;; Mechanism for excluding drivers from the "Add New Hardware" list.
+[ControlFlags]
+ExcludeFromSelect = PCI\VEN_125D&DEV_1969
+ExcludeFromSelect = SOLO1_HWSBNODE
+
+;; *EXCLUDE is a made up ID to prevent rank 1 drivers from showing in list.
+;ExcludeFromSelect = *EXCLUDE
+
+[ESS]
+%SoloSB.DeviceDesc%=STUB_DEVICE, SOLO1_HWSBNODE
+
+%Solo1.DeviceDesc%=SOLOA_Device, PCI\VEN_125D&DEV_1969&SUBSYS_05D40E11
+%Solo1.DeviceDesc%=SOLOA_Device, PCI\VEN_125D&DEV_1969&SUBSYS_B1000E11
+%Solo1.DeviceDesc%=SOLOA_Device, PCI\VEN_125D&DEV_1969&SUBSYS_B1320E11
+%Solo1.DeviceDesc%=SOLOA_Device, PCI\VEN_125D&DEV_1969&SUBSYS_B15C0E11
+%Solo1.DeviceDesc%=SOLOA_Device, PCI\VEN_125D&DEV_1969&SUBSYS_B15D0E11
+%Solo1.DeviceDesc%=SOLOA_Device, PCI\VEN_125D&DEV_1969&SUBSYS_B18F0E11
+%Solo1.DeviceDesc%=SOLOC_Device, PCI\VEN_125D&DEV_1969&SUBSYS_01361014
+%Solo1.DeviceDesc%=SOLOE_Device, PCI\VEN_125D&DEV_1969&SUBSYS_01631014
+%Solo1.DeviceDesc%=SOLOC_Device, PCI\VEN_125D&DEV_1969&SUBSYS_10011025
+%Solo1.DeviceDesc%=SOLOC_Device, PCI\VEN_125D&DEV_1969&SUBSYS_10021025
+%Solo1.DeviceDesc%=SOLOC_Device, PCI\VEN_125D&DEV_1969&SUBSYS_10041025
+%Solo1.DeviceDesc%=SOLOC_Device, PCI\VEN_125D&DEV_1969&SUBSYS_10061025
+%Solo1.DeviceDesc%=SOLOC_Device, PCI\VEN_125D&DEV_1969&SUBSYS_10071025
+%Solo1.DeviceDesc%=SOLOC_Device, PCI\VEN_125D&DEV_1969&SUBSYS_10091025
+%Solo1.DeviceDesc%=SOLOC_Device, PCI\VEN_125D&DEV_1969&SUBSYS_100A1025
+%Solo1.DeviceDesc%=SOLOA_Device, PCI\VEN_125D&DEV_1969&SUBSYS_806B1033
+%Solo1.DeviceDesc%=SOLOA_Device, PCI\VEN_125D&DEV_1969&SUBSYS_807E1033
+%Solo1.DeviceDesc%=SOLOA_Device, PCI\VEN_125D&DEV_1969&SUBSYS_80811033
+%Solo1.DeviceDesc%=SOLOA_Device, PCI\VEN_125D&DEV_1969&SUBSYS_000D103C
+%Solo1.DeviceDesc%=SOLOG_Device, PCI\VEN_125D&DEV_1969&SUBSYS_00041054
+%Solo1.DeviceDesc%=SOLOA_Device, PCI\VEN_125D&DEV_1969&SUBSYS_3123109F
+%Solo1.DeviceDesc%=SOLOA_Device, PCI\VEN_125D&DEV_1969&SUBSYS_108210CF
+%Solo1.DeviceDesc%=SOLOA_Device, PCI\VEN_125D&DEV_1969&SUBSYS_831C10F7
+%Solo1.DeviceDesc%=SOLOA_Device, PCI\VEN_125D&DEV_1969&SUBSYS_832410F7
+%Solo1.DeviceDesc%=SOLOA_Device, PCI\VEN_125D&DEV_1969&SUBSYS_003B110A
+%Solo1.DeviceDesc%=SOLOC_Device, PCI\VEN_125D&DEV_1969&SUBSYS_003E110A
+%Solo1.DeviceDesc%=SOLOA_Device, PCI\VEN_125D&DEV_1969&SUBSYS_100413BD
+%Solo1.DeviceDesc%=SOLOA_Device, PCI\VEN_125D&DEV_1969&SUBSYS_100513BD
+%Solo1.DeviceDesc%=SOLOA_Device, PCI\VEN_125D&DEV_1969&SUBSYS_11401509
+%Solo1.DeviceDesc%=SOLOE_Device, PCI\VEN_125D&DEV_1969&SUBSYS_42401509
+%Solo1.DeviceDesc%=SOLOE_Device, PCI\VEN_125D&DEV_1969&SUBSYS_43401509
+%Solo1.DeviceDesc%=SOLOA_Device, PCI\VEN_125D&DEV_1969&SUBSYS_31011558
+%Solo1.DeviceDesc%=SOLOA_Device, PCI\VEN_125D&DEV_1969&SUBSYS_31031558
+%Solo1.DeviceDesc%=SOLOA_Device, PCI\VEN_125D&DEV_1969&SUBSYS_51021558
+%Solo1.DeviceDesc%=SOLOA_Device, PCI\VEN_125D&DEV_1969&SUBSYS_51031558
+%Solo1.DeviceDesc%=SOLOA_Device, PCI\VEN_125D&DEV_1969&SUBSYS_8898125D
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_00010E11
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_88880E11
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_B1000E11
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_B15C0E11
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_B15D0E11
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_010C1014
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_01621014
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_01651014
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_01661014
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_01681014
+%Solo1.DeviceDesc%=SOLOF_Device, PCI\VEN_125D&DEV_1969&SUBSYS_00091025
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_000A1025
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_000B1025
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_000C1025
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_000D1025
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_000F1025
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_00101025
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_00111025
+%Solo1.DeviceDesc%=SOLOF_Device, PCI\VEN_125D&DEV_1969&SUBSYS_10B110CF
+%Solo1.DeviceDesc%=SOLOH_Device, PCI\VEN_125D&DEV_1969&SUBSYS_180113BD
+%Solo1.DeviceDesc%=SOLOH_Device, PCI\VEN_125D&DEV_1969&SUBSYS_18011071
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_22001458
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_A004147A
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_44651483
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_44661483
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_888814A4
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_109114CD
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_109214CD
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_109314CD
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_111B153B
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_111C153B
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_111350B2
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_111450B2
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_00011565
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_00021565
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_00031565
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_00041565
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_00051565
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_00061565
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_00071565
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_00081565
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_00091565
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_000A1565
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_000B1565
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_00041DE1
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_00051DE1
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_000B1DE1
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_000C1DE1
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_0006A0A0
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_010E270F
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_030E270F
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_100E270F
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_180E270F
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_700E270F
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_702E270F
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_A00E270F
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_B02E270F
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_E00E270F
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_FFFD125D
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_833610F7
+%Solo1.DeviceDesc%=SOLOB_Device, PCI\VEN_125D&DEV_1969&SUBSYS_8888125D
+%Solo1.DeviceDesc%=SOLO_Device, PCI\VEN_125D&DEV_1969
+
+[ESSAud.Interface.Wave]
+AddReg=ESSAud.Interface.Wave.AddReg
+
+[ESSAud.Interface.Wave.AddReg]
+HKR,,FriendlyName,,%ESSAud.Wave.szPname%
+
+[ESSAud.Interface.Topology]
+AddReg=ESSAud.Interface.Topo.AddReg
+;; warning!! must be "Topo" because "Topology" is too long
+
+[ESSAud.Interface.Topo.AddReg]
+HKR,,FriendlyName,,%ESSAud.Topology.szPname%
+
+[WDM.Interface.FMSynth]
+AddReg=WDM.Interface.FMSynth.AddReg
+
+[WDM.Interface.FMSynth.AddReg]
+HKR,,FriendlyName,,%WDM.FMSynth.szPname%
+
+[WDM.Interface.UART]
+AddReg=WDM.Interface.UART.AddReg
+
+[WDM.Interface.UART.AddReg]
+HKR,,FriendlyName,,%WDM.UART.szPname%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[SOLO_Device]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=SOLO.CopyList
+AddReg=SOLO1.AddReg,SOLO2.AddReg,Game1.AddReg,MixerInit1.AddReg,VolumeMap.AddReg
+
+[SOLOA_Device]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=SOLO.CopyList
+AddReg=SOLO1.AddReg,SOLO2.AddReg,Game1.AddReg,MixerInit2.AddReg,VolumeMap.AddReg
+
+[SOLOB_Device]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=SOLO.CopyList
+AddReg=SOLO1.AddReg,SOLO3.AddReg,Game1.AddReg,MixerInit1.AddReg,VolumeMap.AddReg
+
+[SOLOC_Device]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=SOLO.CopyList
+AddReg=SOLO1.AddReg,SOLO2.AddReg,Game1.AddReg,MixerInit2.AddReg,VolumeMap.AddReg
+
+[SOLOE_Device]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=SOLO.CopyList
+AddReg=SOLO1.AddReg,SOLO2.AddReg,Game2.AddReg,MixerInit2.AddReg,VolumeMap.AddReg
+
+[SOLOF_Device]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=SOLO.CopyList
+AddReg=SOLO1.AddReg,SOLO3.AddReg,Game1.AddReg,MixerInit1.AddReg,VolumeMap.AddReg
+
+[SOLOG_Device]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=SOLO.CopyList
+AddReg=SOLO1.AddReg,SOLO2.AddReg,Game2.AddReg,MixerInit2.AddReg,VolumeMap.AddReg
+
+[SOLOH_Device]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=SOLO.CopyList
+AddReg=SOLO1.AddReg,SOLO3.AddReg,Game2.AddReg,MixerInit1.AddReg,VolumeMap.AddReg
+
+
+[SOLO_Device.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+
+[SOLOA_Device.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+
+[SOLOB_Device.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+
+[SOLOC_Device.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+
+[SOLOE_Device.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+
+[SOLOF_Device.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+
+[SOLOG_Device.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+
+[SOLOH_Device.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+
+
+[Dummy.AddReg]
+
+[STUB_DEVICE]
+AddReg=Dummy.AddReg
+
+[DestinationDirs]
+DefaultDestDir   = 10,system32\drivers
+SOLO.CopyList    = 10,system32\drivers ; %SystemRoot%\system32\drivers
+
+[SOLO.CopyList]
+solo.sys,,
+
+[SOLO1.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,solo.sys
+HKR,,NTMPDriver,,"solo.sys,sbemul.sys"
+
+;HKR,Drivers,SubClasses,,"wave,midi,mixer,aux"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+;HKR,Drivers\aux\wdmaud.drv, Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+;HKR,Drivers\aux\wdmaud.drv, Description,,%*ESS.DeviceDesc%
+
+HKR,Drivers\wave\wdmaud.drv, Description,,%*ESS.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv, Description,,%WDM_MIDI%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%*ESS.DeviceDesc%
+
+HKLM,%MediaCategories%\%ESSGUID.3DEffect%,Name,,%ESSNode.3DEffect%
+HKLM,%MediaCategories%\%ESSGUID.3DEffect%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ESSGUID.WaveOut%,Name,,%ESSPin.WaveOut%
+HKLM,%MediaCategories%\%ESSGUID.WaveOut%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ESSGUID.Synth%,Name,,%ESSPin.Synth%
+HKLM,%MediaCategories%\%ESSGUID.Synth%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ESSGUID.Cd%,Name,,%ESSPin.Cd%
+HKLM,%MediaCategories%\%ESSGUID.Cd%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ESSGUID.LineIn%,Name,,%ESSPin.LineIn%
+HKLM,%MediaCategories%\%ESSGUID.LineIn%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ESSGUID.Mic%,Name,,%ESSPin.Mic%
+HKLM,%MediaCategories%\%ESSGUID.Mic%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ESSGUID.AuxB%,Name,,%ESSPin.AuxB%
+HKLM,%MediaCategories%\%ESSGUID.AuxB%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ESSGUID.PCSpeaker%,Name,,%ESSPin.PCSpeaker%
+HKLM,%MediaCategories%\%ESSGUID.PCSpeaker%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ESSGUID.ExcludeSWMix%,Name,,%ESSNode.ExcludeSWMix%
+HKLM,%MediaCategories%\%ESSGUID.ExcludeSWMix%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ESSGUID.IISVolume%,Name,,%ESSNode.IISVolume%
+HKLM,%MediaCategories%\%ESSGUID.IISVolume%,Display,1,01,00,00,00
+HKLM,%MediaCategories%\%ESSGUID.IISMute%,Name,,%ESSNode.IISMute%
+HKLM,%MediaCategories%\%ESSGUID.IISMute%,Display,1,01,00,00,00
+HKLM,%MediaCategories%\%ESSGUID.IISPin%,Name,,%ESSPin.IISPin%
+HKLM,%MediaCategories%\%ESSGUID.IISPin%,Display,1,01,00,00,00
+HKLM,%MediaCategories%\%ESSGUID.PhoneVolume%,Name,,%ESSNode.PhoneVolume%
+HKLM,%MediaCategories%\%ESSGUID.PhoneVolume%,Display,1,01,00,00,00
+HKLM,%MediaCategories%\%ESSGUID.PhoneMute%,Name,,%ESSNode.PhoneMute%
+HKLM,%MediaCategories%\%ESSGUID.PhoneMute%,Display,1,01,00,00,00
+HKLM,%MediaCategories%\%ESSGUID.PhonePin%,Name,,%ESSPin.PhonePin%
+HKLM,%MediaCategories%\%ESSGUID.PhonePin%,Display,1,01,00,00,00
+
+HKLM,%MediaCategories%\%ESSGUID.RecMon%,Name,,%ESSNode.RecMon%
+HKLM,%MediaCategories%\%ESSGUID.RecMon%,Display,1,00,00,00,00
+
+HKLM,%MediaCategories%\%ESSGUID.MixerVolume%,Name,,%ESSNode.MixerVolumeIn%
+HKLM,%MediaCategories%\%ESSGUID.MixerVolume%,Display,1,01,00,00,00
+HKLM,%MediaCategories%\%ESSGUID.MixerPin%,Name,,%ESSPin.MixerPin%
+HKLM,%MediaCategories%\%ESSGUID.MixerPin%,Display,1,01,00,00,00
+
+;; RunTime and BugFix support, see runtime.h
+HKR,,"BugFix",01,03,00,00,00
+HKR,,"RunTime",01,01,00,00,00
+
+[SOLO2.AddReg]
+;Uncomment one of the following lines to set the legacy DMA mode for
+;Intel LX/EX chipset
+HKR,,"LDMAMode",01,00,00,00,00         ; DDMA (default)
+;HKR,,"LDMAMode",01,01,00,00,00         ; TDMA
+;HKR,,"LDMAMode",01,02,00,00,00         ; PCPCI
+
+
+;; Uncomment the following line to update SIDSVID parameter in CONFIG.SYS
+;HKR,,"SidSvidUpdate",01,01,00,00,00
+
+HKR,,"MicPreampOn",01,01,00,00,00
+HKR,,"IISOn",01,01,00,00,00
+HKR,,"HwVolumeOn",01,01,00,00,00
+HKR,,"TwoButtonVolumeMode",01,01,00,00,00
+HKR,,"CountBy3",01,00,00,00,00
+
+[SOLO3.AddReg]
+;Uncomment one of the following lines to set the legacy DMA mode for
+;Intel LX/EX chipset
+HKR,,"LDMAMode",01,00,00,00,00         ; DDMA (default)
+;HKR,,"LDMAMode",01,01,00,00,00         ; TDMA
+;HKR,,"LDMAMode",01,02,00,00,00         ; PCPCI
+
+
+;; Uncomment the following line to update SIDSVID parameter in CONFIG.SYS
+;HKR,,"SidSvidUpdate",01,01,00,00,00
+
+HKR,,"MicPreampOn",01,00,00,00,00
+HKR,,"IISOn",01,00,00,00,00
+HKR,,"HwVolumeOn",01,01,00,00,00
+HKR,,"TwoButtonVolumeMode",01,01,00,00,00
+HKR,,"CountBy3",01,00,00,00,00
+
+[Game1.AddReg]
+;Uncomment the following line remove the joystick child device
+HKR,,"NoGamePort",01,00,00,00,00
+
+[Game2.AddReg]
+;Uncomment the following line remove the joystick child device
+HKR,,"NoGamePort",01,01,00,00,00
+
+;; Set DAC2 Volume Setting
+
+[MixerInit1.AddReg]
+; No IIS
+HKR,Config,"3-D Enable",01,01,00,00,00
+HKR,Config,"Master Volume",01,ff,7f,ff,7f
+HKR,Config,"Master Mute",01,00,00,00,00
+HKR,Config,"Wave Out Volume",01,ff,7f,ff,7f
+HKR,Config,"Wave Out Mute",01,00,00,00,00
+HKR,Config,"Aux Volume",01,ff,7f,ff,7f
+HKR,Config,"Aux Mute",01,00,00,00,00
+HKR,Config,"Mic Volume",01,ff,7f,ff,7f
+HKR,Config,"Mic Mute",01,01,00,00,00
+HKR,Config,"Line In Volume",01,ff,7f,ff,7f
+HKR,Config,"Line In Mute",01,00,00,00,00
+HKR,Config,"CD Volume",01,ff,7f,ff,7f
+HKR,Config,"CD Mute",01,00,00,00,00
+HKR,Config,"MIDI Volume",01,ff,7f,ff,7f
+HKR,Config,"MIDI Mute",01,00,00,00,00
+HKR,Config,"IIS Volume",01,ff,7f,ff,7f
+HKR,Config,"IIS Mute",01,01,00,00,00
+HKR,Config,"PC Speaker Volume",01,ff,7f,ff,7f
+HKR,Config,"PC Speaker Mute",01,00,00,00,00
+HKR,Config,"Phone Mute",01,01,00,00,00
+HKR,Config,"Phone Volume",01,ff,7f,ff,7f
+
+HKR,Config,"Record Monitor",01,01,00,00,00
+HKR,Config,"CD Record Volume",01,ff,7f,ff,7f
+HKR,Config,"MIDI Record Volume",01,ff,7f,ff,7f
+HKR,Config,"Line In Record Volume",01,ff,7f,ff,7f
+HKR,Config,"Aux Record Volume",01,ff,7f,ff,7f
+HKR,Config,"Mic Record Volume",01,ff,7f,ff,7f
+HKR,Config,"IIS Record Volume",01,ff,7f,ff,7f
+HKR,Config,"Record Mixer Volume",01,ff,7f,ff,7f
+
+HKR,Config,"First Time",01,01,00,00,00
+
+HKR,,"LeftWaveOutVolume",01,0f,00,00,00
+HKR,,"RightWaveOutVolume",01,0f,00,00,00
+HKR,,"HideWaveOutVolume",01,00,00,00,00
+HKR,,"WaveOutMute",01,00,00,00,00
+HKR,,"HideWaveOutMute",01,00,00,00,00
+
+HKR,,"LeftSynthVolume",01,09,00,00,00
+HKR,,"RightSynthVolume",01,09,00,00,00
+HKR,,"HideSynthVolume",01,00,00,00,00
+HKR,,"SynthMute",01,00,00,00,00
+HKR,,"HideSynthMute",01,00,00,00,00
+
+HKR,,"LeftCDVolume",01,09,00,00,00
+HKR,,"RightCDVolume",01,09,00,00,00
+HKR,,"HideCDVolume",01,00,00,00,00
+HKR,,"CDMute",01,00,00,00,00
+HKR,,"HideCDMute",01,00,00,00,00
+
+HKR,,"LeftLineInVolume",01,09,00,00,00
+HKR,,"RightLineInVolume",01,09,00,00,00
+HKR,,"HideLineInVolume",01,00,00,00,00
+HKR,,"LineInMute",01,00,00,00,00
+HKR,,"HideLineInMute",01,00,00,00,00
+
+HKR,,"LeftMicVolume",01,09,00,00,00
+HKR,,"RightMicVolume",01,09,00,00,00
+HKR,,"HideMicVolume",01,00,00,00,00
+HKR,,"MicMute",01,01,00,00,00
+HKR,,"HideMicMute",01,00,00,00,00
+
+HKR,,"LeftAuxBVolume",01,09,00,00,00
+HKR,,"RightAuxBVolume",01,09,00,00,00
+HKR,,"HideAuxBVolume",01,01,00,00,00
+HKR,,"AuxBMute",01,01,00,00,00
+HKR,,"HideAuxBMute",01,01,00,00,00
+
+HKR,,"LeftIISVolume",01,09,00,00,00
+HKR,,"RightIISVolume",01,09,00,00,00
+HKR,,"HideIISVolume",01,01,00,00,00
+HKR,,"IISMute",01,01,00,00,00
+HKR,,"HideIISMute",01,01,00,00,00
+
+HKR,,"LeftPCSpeakerVolume",01,09,00,00,00
+HKR,,"RightPCSpeakerVolume",01,09,00,00,00
+HKR,,"HidePCSpeakerVolume",01,01,00,00,00
+HKR,,"PCSpeakerMute",01,01,00,00,00
+HKR,,"HidePCSpeakerMute",01,01,00,00,00
+
+HKR,,"LeftPhoneVolume",01,09,00,00,00
+HKR,,"RightPhoneVolume",01,09,00,00,00
+HKR,,"HidePhoneVolume",01,00,00,00,00
+HKR,,"PhoneMute",01,00,00,00,00
+HKR,,"HidePhoneMute",01,00,00,00,00
+
+
+;;;
+;;;;  Recording Panel Settings
+;;;
+
+HKR,,"LeftSynthInVolume",01,09,00,00,00
+HKR,,"RightSynthInVolume",01,09,00,00,00
+HKR,,"HideSynthInVolume",01,00,00,00,00
+
+HKR,,"LeftCDInVolume",01,09,00,00,00
+HKR,,"RightCDInVolume",01,09,00,00,00
+HKR,,"HideCDInVolume",01,00,00,00,00
+
+HKR,,"LeftLineInInVolume",01,09,00,00,00
+HKR,,"RightLineInInVolume",01,09,00,00,00
+HKR,,"HideLineInInVolume",01,00,00,00,00
+
+HKR,,"LeftMicInVolume",01,09,00,00,00
+HKR,,"RightMicInVolume",01,09,00,00,00
+HKR,,"HideMicInVolume",01,00,00,00,00
+
+HKR,,"LeftAuxBInVolume",01,09,00,00,00
+HKR,,"RightAuxBInVolume",01,09,00,00,00
+HKR,,"HideAuxBInVolume",01,01,00,00,00
+
+HKR,,"LeftIISInVolume",01,09,00,00,00
+HKR,,"RightIISInVolume",01,09,00,00,00
+HKR,,"HideIISInVolume",01,01,00,00,00
+
+HKR,,"LeftMixerInVolume",01,09,00,00,00
+HKR,,"RightMixerInVolume",01,09,00,00,00
+HKR,,"HideMixerInVolume",01,00,00,00,00
+
+HKR,,"LeftLineoutVol",01,1f,00,00,00
+HKR,,"RightLineoutVol",01,1f,00,00,00
+HKR,,"LineoutMute",01,00,00,00,00
+
+HKR,,"SpatializerLevel",01,30,00,00,00
+HKR,,"Lineout3dEffect",01,00,00,00,00
+HKR,,"HideLineout3dEffect",01,00,00,00,00
+
+HKR,,"WaveInRecmon",01,00,00,00,00
+HKR,,"HideWaveInRecmon",01,01,00,00,00
+
+[MixerInit2.AddReg]
+;; With IIS
+HKR,Config,"3-D Enable",01,01,00,00,00
+HKR,Config,"Master Volume",01,ff,7f,ff,7f
+HKR,Config,"Master Mute",01,00,00,00,00
+HKR,Config,"Wave Out Volume",01,ff,7f,ff,7f
+HKR,Config,"Wave Out Mute",01,00,00,00,00
+HKR,Config,"Aux Volume",01,ff,7f,ff,7f
+HKR,Config,"Aux Mute",01,00,00,00,00
+HKR,Config,"Mic Volume",01,ff,7f,ff,7f
+HKR,Config,"Mic Mute",01,01,00,00,00
+HKR,Config,"Line In Volume",01,ff,7f,ff,7f
+HKR,Config,"Line In Mute",01,00,00,00,00
+HKR,Config,"CD Volume",01,ff,7f,ff,7f
+HKR,Config,"CD Mute",01,00,00,00,00
+HKR,Config,"MIDI Volume",01,ff,7f,ff,7f
+HKR,Config,"MIDI Mute",01,00,00,00,00
+HKR,Config,"IIS Volume",01,ff,7f,ff,7f
+HKR,Config,"IIS Mute",01,00,00,00,00
+HKR,Config,"PC Speaker Volume",01,ff,7f,ff,7f
+HKR,Config,"PC Speaker Mute",01,00,00,00,00
+HKR,Config,"Phone Mute",01,01,00,00,00
+HKR,Config,"Phone Volume",01,ff,7f,ff,7f
+
+HKR,Config,"Record Monitor",01,01,00,00,00
+HKR,Config,"CD Record Volume",01,ff,7f,ff,7f
+HKR,Config,"MIDI Record Volume",01,ff,7f,ff,7f
+HKR,Config,"Line In Record Volume",01,ff,7f,ff,7f
+HKR,Config,"Aux Record Volume",01,ff,7f,ff,7f
+HKR,Config,"Mic Record Volume",01,ff,7f,ff,7f
+HKR,Config,"IIS Record Volume",01,ff,7f,ff,7f
+HKR,Config,"Record Mixer Volume",01,ff,7f,ff,7f
+
+HKR,Config,"First Time",01,01,00,00,00
+
+HKR,,"LeftWaveOutVolume",01,0f,00,00,00
+HKR,,"RightWaveOutVolume",01,0f,00,00,00
+HKR,,"HideWaveOutVolume",01,00,00,00,00
+HKR,,"WaveOutMute",01,00,00,00,00
+HKR,,"HideWaveOutMute",01,00,00,00,00
+
+HKR,,"LeftSynthVolume",01,09,00,00,00
+HKR,,"RightSynthVolume",01,09,00,00,00
+HKR,,"HideSynthVolume",01,00,00,00,00
+HKR,,"SynthMute",01,00,00,00,00
+HKR,,"HideSynthMute",01,00,00,00,00
+
+HKR,,"LeftCDVolume",01,09,00,00,00
+HKR,,"RightCDVolume",01,09,00,00,00
+HKR,,"HideCDVolume",01,00,00,00,00
+HKR,,"CDMute",01,00,00,00,00
+HKR,,"HideCDMute",01,00,00,00,00
+
+HKR,,"LeftLineInVolume",01,09,00,00,00
+HKR,,"RightLineInVolume",01,09,00,00,00
+HKR,,"HideLineInVolume",01,00,00,00,00
+HKR,,"LineInMute",01,00,00,00,00
+HKR,,"HideLineInMute",01,00,00,00,00
+
+HKR,,"LeftMicVolume",01,09,00,00,00
+HKR,,"RightMicVolume",01,09,00,00,00
+HKR,,"HideMicVolume",01,00,00,00,00
+HKR,,"MicMute",01,01,00,00,00
+HKR,,"HideMicMute",01,00,00,00,00
+
+HKR,,"LeftAuxBVolume",01,09,00,00,00
+HKR,,"RightAuxBVolume",01,09,00,00,00
+HKR,,"HideAuxBVolume",01,01,00,00,00
+HKR,,"AuxBMute",01,01,00,00,00
+HKR,,"HideAuxBMute",01,01,00,00,00
+
+HKR,,"LeftIISVolume",01,09,00,00,00
+HKR,,"RightIISVolume",01,09,00,00,00
+HKR,,"HideIISVolume",01,00,00,00,00
+HKR,,"IISMute",01,00,00,00,00
+HKR,,"HideIISMute",01,00,00,00,00
+
+HKR,,"LeftPCSpeakerVolume",01,09,00,00,00
+HKR,,"RightPCSpeakerVolume",01,09,00,00,00
+HKR,,"HidePCSpeakerVolume",01,01,00,00,00
+HKR,,"PCSpeakerMute",01,01,00,00,00
+HKR,,"HidePCSpeakerMute",01,01,00,00,00
+
+HKR,,"LeftPhoneVolume",01,09,00,00,00
+HKR,,"RightPhoneVolume",01,09,00,00,00
+HKR,,"HidePhoneVolume",01,00,00,00,00
+HKR,,"PhoneMute",01,00,00,00,00
+HKR,,"HidePhoneMute",01,00,00,00,00
+
+
+;;;
+;;;;  Recording Panel Settings
+;;;
+
+HKR,,"LeftSynthInVolume",01,09,00,00,00
+HKR,,"RightSynthInVolume",01,09,00,00,00
+HKR,,"HideSynthInVolume",01,00,00,00,00
+
+HKR,,"LeftCDInVolume",01,09,00,00,00
+HKR,,"RightCDInVolume",01,09,00,00,00
+HKR,,"HideCDInVolume",01,00,00,00,00
+
+HKR,,"LeftLineInInVolume",01,09,00,00,00
+HKR,,"RightLineInInVolume",01,09,00,00,00
+HKR,,"HideLineInInVolume",01,00,00,00,00
+
+HKR,,"LeftMicInVolume",01,09,00,00,00
+HKR,,"RightMicInVolume",01,09,00,00,00
+HKR,,"HideMicInVolume",01,00,00,00,00
+
+HKR,,"LeftAuxBInVolume",01,09,00,00,00
+HKR,,"RightAuxBInVolume",01,09,00,00,00
+HKR,,"HideAuxBInVolume",01,01,00,00,00
+
+HKR,,"LeftIISInVolume",01,09,00,00,00
+HKR,,"RightIISInVolume",01,09,00,00,00
+HKR,,"HideIISInVolume",01,00,00,00,00
+
+HKR,,"LeftMixerInVolume",01,09,00,00,00
+HKR,,"RightMixerInVolume",01,09,00,00,00
+HKR,,"HideMixerInVolume",01,00,00,00,00
+
+HKR,,"LeftLineoutVol",01,1f,00,00,00
+HKR,,"RightLineoutVol",01,1f,00,00,00
+HKR,,"LineoutMute",01,00,00,00,00
+
+HKR,,"SpatializerLevel",01,30,00,00,00
+HKR,,"Lineout3dEffect",01,00,00,00,00
+HKR,,"HideLineout3dEffect",01,00,00,00,00
+
+HKR,,"WaveInRecmon",01,00,00,00,00
+HKR,,"HideWaveInRecmon",01,01,00,00,00
+
+[VolumeMap.AddReg]
+
+HKR,,"MasterVolumeMap",01,  \
+ 00, 00, 01, 01, 02, 02, 03, 03, 04, 04, 05, 05, 06, 06, 07, 07,    \
+ 08, 08, 09, 09, 0a, 0a, 0b, 0b, 0c, 0c, 0d, 0d, 0e, 0e, 0f, 0f,    \
+ 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17,    \
+ 18, 18, 19, 19, 1a, 1a, 1b, 1b, 1c, 1c, 1d, 1d, 1e, 1e, 1f, 1f,    \
+ 20, 20, 21, 21, 22, 23, 24, 25, 26, 27, 28, 29, 2a, 2b, 2c, 2d,    \
+ 2e, 2f, 30, 30, 31, 31, 32, 32, 33, 33, 34, 34, 35, 35, 36, 36,    \
+ 37, 37, 37, 37, 38, 38, 38, 38, 39, 39, 39, 39, 3a, 3a, 3a, 3a,    \
+ 3b, 3b, 3b, 3b, 3b, 3b, 3b, 3b, 3b, 3b, 3b, 3b, 3b, 3b, 3b, 3b,    \
+ 3c, 3c, 3c, 3c, 3c, 3c, 3c, 3c, 3c, 3c, 3c, 3c, 3c, 3c, 3c, 3c,    \
+ 3c, 3c, 3c, 3c, 3c, 3c, 3c, 3c, 3c, 3c, 3c, 3c, 3c, 3c, 3c, 3c,    \
+ 3d, 3d, 3d, 3d, 3d, 3d, 3d, 3d, 3d, 3d, 3d, 3d, 3d, 3d, 3d, 3d,    \
+ 3d, 3d, 3d, 3d, 3d, 3d, 3d, 3d, 3d, 3d, 3d, 3d, 3d, 3d, 3d, 3d,    \
+ 3e, 3e, 3e, 3e, 3e, 3e, 3e, 3e, 3e, 3e, 3e, 3e, 3e, 3e, 3e, 3e,    \
+ 3e, 3e, 3e, 3e, 3e, 3e, 3e, 3e, 3e, 3e, 3e, 3e, 3e, 3e, 3e, 3e,    \
+ 3f, 3f, 3f, 3f, 3f, 3f, 3f, 3f, 3f, 3f, 3f, 3f, 3f, 3f, 3f, 3f,    \
+ 3f, 3f, 3f, 3f, 3f, 3f, 3f, 3f, 3f, 3f, 3f, 3f, 3f, 3f, 3f, 3f
+
+HKR,,"MainRecordVolumeMap",01,  \
+ 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,    \
+ 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01,    \
+ 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02,    \
+ 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03,    \
+ 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04,    \
+ 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05,    \
+ 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06,    \
+ 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07,    \
+ 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08,    \
+ 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09,    \
+ 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a,    \
+ 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b,    \
+ 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c,    \
+ 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d,    \
+ 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e,    \
+ 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f
+
+HKR,,"WaveVolumeInMap",01,  \
+ 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,    \
+ 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01,    \
+ 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02,    \
+ 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03,    \
+ 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04,    \
+ 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05,    \
+ 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06,    \
+ 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07,    \
+ 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08,    \
+ 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09,    \
+ 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a,    \
+ 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b,    \
+ 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c,    \
+ 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d,    \
+ 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e,    \
+ 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f
+
+HKR,,"LineInVolumeInMap",01,    \
+ 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,    \
+ 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01,    \
+ 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02,    \
+ 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03,    \
+ 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04,    \
+ 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05,    \
+ 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06,    \
+ 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07,    \
+ 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08,    \
+ 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09,    \
+ 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a,    \
+ 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b,    \
+ 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c,    \
+ 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d,    \
+ 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e,    \
+ 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f
+
+HKR,,"MicVolumeInMap",01,   \
+ 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,    \
+ 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01,    \
+ 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02,    \
+ 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03,    \
+ 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04,    \
+ 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05,    \
+ 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06,    \
+ 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07,    \
+ 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08,    \
+ 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09,    \
+ 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a,    \
+ 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b,    \
+ 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c,    \
+ 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d,    \
+ 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e,    \
+ 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f
+
+HKR,,"CDAudioVolumeInMap",01,\
+ 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,    \
+ 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01,    \
+ 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02,    \
+ 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03,    \
+ 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04,    \
+ 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05,    \
+ 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06,    \
+ 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07,    \
+ 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08,    \
+ 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09,    \
+ 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a,    \
+ 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b,    \
+ 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c,    \
+ 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d,    \
+ 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e,    \
+ 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f
+
+HKR,,"SynthVolumeInMap",01, \
+ 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,    \
+ 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01,    \
+ 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02,    \
+ 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03,    \
+ 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04,    \
+ 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05,    \
+ 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06,    \
+ 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07,    \
+ 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08,    \
+ 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09,    \
+ 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a,    \
+ 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b,    \
+ 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c,    \
+ 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d,    \
+ 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e,    \
+ 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f
+
+HKR,,"AuxBVolumeInMap",01, \
+ 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,    \
+ 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01,    \
+ 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02,    \
+ 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03,    \
+ 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04,    \
+ 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05,    \
+ 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06,    \
+ 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07,    \
+ 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08,    \
+ 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09,    \
+ 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a,    \
+ 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b,    \
+ 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c,    \
+ 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d,    \
+ 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e,    \
+ 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f
+
+HKR,,"IISVolumeInMap",01,   \
+ 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,    \
+ 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01,    \
+ 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02,    \
+ 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03,    \
+ 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04,    \
+ 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05,    \
+ 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06,    \
+ 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07,    \
+ 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08,    \
+ 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09,    \
+ 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a,    \
+ 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b,    \
+ 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c,    \
+ 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d,    \
+ 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e,    \
+ 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f
+
+HKR,,"LineInVolumeOutMap",01,   \
+ 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,    \
+ 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01,    \
+ 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02,    \
+ 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03,    \
+ 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04,    \
+ 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05,    \
+ 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06,    \
+ 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07,    \
+ 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08,    \
+ 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09,    \
+ 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a,    \
+ 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b,    \
+ 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c,    \
+ 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d,    \
+ 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e,    \
+ 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f
+
+HKR,,"WaveVolumeOutMap",01, \
+ 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,    \
+ 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01,    \
+ 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02,    \
+ 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03,    \
+ 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04,    \
+ 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05,    \
+ 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06,    \
+ 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07,    \
+ 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08,    \
+ 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09,    \
+ 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a,    \
+ 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b,    \
+ 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c,    \
+ 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d,    \
+ 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e,    \
+ 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f
+
+HKR,,"MicVolumeOutMap",01,  \
+ 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,    \
+ 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01,    \
+ 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02,    \
+ 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03,    \
+ 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04,    \
+ 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05,    \
+ 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06,    \
+ 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07,    \
+ 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08,    \
+ 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09,    \
+ 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a,    \
+ 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b,    \
+ 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c,    \
+ 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d,    \
+ 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e,    \
+ 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f
+
+HKR,,"CDAudioVolumeOutMap",01,  \
+ 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,    \
+ 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01,    \
+ 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02,    \
+ 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03,    \
+ 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04,    \
+ 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05,    \
+ 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06,    \
+ 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07,    \
+ 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08,    \
+ 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09,    \
+ 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a,    \
+ 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b,    \
+ 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c,    \
+ 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d,    \
+ 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e,    \
+ 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f
+
+HKR,,"SynthVolumeOutMap",01,    \
+ 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,    \
+ 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01,    \
+ 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02,    \
+ 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03,    \
+ 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04,    \
+ 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05,    \
+ 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06,    \
+ 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07,    \
+ 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08,    \
+ 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09,    \
+ 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a,    \
+ 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b,    \
+ 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c,    \
+ 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d,    \
+ 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e,    \
+ 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f
+
+HKR,,"AuxBVolumeOutMap",01, \
+ 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,    \
+ 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01,    \
+ 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02,    \
+ 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03,    \
+ 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04,    \
+ 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05,    \
+ 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06,    \
+ 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07,    \
+ 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08,    \
+ 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09,    \
+ 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a,    \
+ 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b,    \
+ 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c,    \
+ 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d,    \
+ 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e,    \
+ 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f
+
+HKR,,"IISVolumeOutMap",01,  \
+ 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,    \
+ 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01,    \
+ 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02,    \
+ 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03,    \
+ 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04,    \
+ 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05,    \
+ 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06,    \
+ 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07,    \
+ 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08,    \
+ 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09,    \
+ 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a,    \
+ 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b,    \
+ 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c,    \
+ 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d,    \
+ 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e,    \
+ 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f
+
+HKR,,"PhoneVolumeOutMap",01,    \
+ 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,    \
+ 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01,    \
+ 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02, 02,    \
+ 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03, 03,    \
+ 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04, 04,    \
+ 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05, 05,    \
+ 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06, 06,    \
+ 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07, 07,    \
+ 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08, 08,    \
+ 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09, 09,    \
+ 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a, 0a,    \
+ 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b, 0b,    \
+ 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c, 0c,    \
+ 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d,    \
+ 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e, 0e,    \
+ 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f
+
+
+;;**************** NT Install ****************
+
+[STUB_DEVICE.NT]
+AddReg=Dummy.AddReg
+
+[STUB_DEVICE.NT.SERVICES]
+AddService=,0x2
+
+[SOLO_Device.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=SOLO.CopyList
+AddReg=SOLO1.AddReg,Solo2.AddReg,Game1.AddReg,MixerInit1.AddReg,VolumeMap.AddReg
+
+[SOLOA_Device.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=SOLO.CopyList
+AddReg=SOLO1.AddReg,Solo2.AddReg,Game1.AddReg,MixerInit2.AddReg,VolumeMap.AddReg
+
+[SOLOB_Device.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=SOLO.CopyList
+AddReg=SOLO1.AddReg,Solo3.AddReg,Game1.AddReg,MixerInit1.AddReg,VolumeMap.AddReg
+
+[SOLOC_Device.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=SOLO.CopyList
+AddReg=SOLO1.AddReg,Solo2.AddReg,Game1.AddReg,MixerInit2.AddReg,VolumeMap.AddReg
+
+[SOLOE_Device.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=SOLO.CopyList
+AddReg=SOLO1.AddReg,Solo2.AddReg,Game2.AddReg,MixerInit2.AddReg,VolumeMap.AddReg
+
+[SOLOF_Device.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=SOLO.CopyList
+AddReg=SOLO1.AddReg,Solo3.AddReg,Game1.AddReg,MixerInit1.AddReg,VolumeMap.AddReg
+
+[SOLOG_Device.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=SOLO.CopyList
+AddReg=SOLO1.AddReg,Solo2.AddReg,Game2.AddReg,MixerInit2.AddReg,VolumeMap.AddReg
+
+[SOLOH_Device.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=SOLO.CopyList
+AddReg=SOLO1.AddReg,Solo3.AddReg,Game2.AddReg,MixerInit1.AddReg,VolumeMap.AddReg
+
+
+[SOLO_Device.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+
+[SOLOA_Device.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+
+[SOLOB_Device.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+
+[SOLOC_Device.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+
+[SOLOE_Device.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+
+[SOLOF_Device.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+
+[SOLOG_Device.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+
+[SOLOH_Device.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,ESSAud.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,ESSAud.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+
+[SOLO_Device.NT.Services]
+AddService = solo,  0x00000002, solo_Service_Inst
+
+[SOLOA_Device.NT.Services]
+AddService = solo,  0x00000002, solo_Service_Inst
+
+[SOLOB_Device.NT.Services]
+AddService = solo,  0x00000002, solo_Service_Inst
+
+[SOLOC_Device.NT.Services]
+AddService = solo,  0x00000002, solo_Service_Inst
+
+[SOLOE_Device.NT.Services]
+AddService = solo,  0x00000002, solo_Service_Inst
+
+[SOLOF_Device.NT.Services]
+AddService = solo,  0x00000002, solo_Service_Inst
+
+[SOLOG_Device.NT.Services]
+AddService = solo,  0x00000002, solo_Service_Inst
+
+[SOLOH_Device.NT.Services]
+AddService = solo,  0x00000002, solo_Service_Inst
+
+[solo_Service_Inst]
+DisplayName    = %solo.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\solo.sys
+
+[Strings]
+ESSMfgName="TerraTec Electronic GmbH"
+*ESS.DeviceDesc="TerraTec Base2PCI (WDM)"
+
+ESSAud.Wave.szPname="TerraTec Base2PCI"
+ESSAud.Topology.szPname="TerraTec Base2PCI"
+
+Solo1.DeviceDesc="TerraTec Base2PCI (WDM)"
+SoloSB.DeviceDesc="TerraTec Base2PCI SB Emu.(WDM)"
+
+;; ESS friendly names (non-localizeable)
+ESSGUID.WaveOut   ="{D6C86C60-51D8-11d1-A482-006097C79D21}"
+ESSGUID.Synth     ="{D6C86C61-51D8-11d1-A482-006097C79D21}"
+ESSGUID.Cd        ="{D6C86C62-51D8-11d1-A482-006097C79D21}"
+ESSGUID.LineIn    ="{D6C86C63-51D8-11d1-A482-006097C79D21}"
+ESSGUID.Mic       ="{D6C86C64-51D8-11d1-A482-006097C79D21}"
+ESSGUID.AuxB      ="{D6C86C65-51D8-11d1-A482-006097C79D21}"
+ESSGUID.PCSpeaker ="{D6C86C66-51D8-11d1-A482-006097C79D21}"
+ESSGUID.3DEffect  ="{D6C86C67-51D8-11d1-A482-006097C79D21}"
+ESSGUID.RecMon    ="{D6C86C68-51D8-11d1-A482-006097C79D21}"
+ESSGUID.MixerPin   = "{D6C86C69-51D8-11d1-A482-006097C79D21}"
+ESSGUID.MixerVolume= "{D6C86C70-51D8-11d1-A482-006097C79D21}"
+ESSGUID.ExcludeSWMix ="{1EB8B800-7563-11d2-905C-00A0C99CFEB4}"
+ESSGUID.IISVolume ="{4AABCD47-FB00-11d1-9B43-006097C79D21}"
+ESSGUID.IISMute   ="{4AABCD48-FB00-11d1-9B43-006097C79D21}"
+ESSGUID.IISPin    ="{4AABCD41-FB00-11d1-9B43-006097C79D21}"
+ESSGUID.PhoneVolume = "{7DCEDC62-0F43-11D2-905C-A4841B262922}"
+ESSGUID.PhoneMute   = "{7DCEDC61-0F43-11D2-905C-A4841B262922}"
+ESSGUID.PhonePin    = "{7DCEDC60-0F43-11D2-905C-A4841B262922}"
+
+;; ESS friendly names (localizeable)
+ESSPin.WaveOut           ="Wave"
+ESSPin.Synth             ="Synth"
+ESSPin.Cd                ="CD"
+ESSPin.LineIn            ="Line In"
+ESSPin.Mic               ="Mic In"
+ESSPin.AuxB              ="Aux"
+ESSPin.PCSpeaker         ="PC Speaker"
+ESSNode.3DEffect         ="3D Effect Enable"
+ESSNode.ExcludeSWMix     ="Exclude SW Mix"
+ESSPin.IISPin            ="IIS"
+ESSNode.IISVolume        ="IIS Volume"
+ESSNode.IISMute          ="IIS Mute"
+ESSPin.PhonePin          ="Phone"
+ESSNode.PhoneVolume      ="Phone Volume"
+ESSNode.PhoneMute        ="Phone Mute"
+
+ESSNode.RecMon           ="Record Monitor"
+ESSPin.MixerPin          ="Record Mixer"
+ESSNode.MixerVolumeIn    ="Record Mixer Volume"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+WDM_MIDI="WDM-based Device"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+KSNAME_Wave="Wave"
+KSNAME_UART="UART"
+KSNAME_FMSynth="FMSynth"
+KSNAME_Topology="Topology"
+
+WDM.UART.szPname="Base2PCI MPU-401"
+WDM.FMSynth.szPname="Base2PCI FM Synth"
+
+solo.SvcDesc = "TerraTec Base2PCI (WDM)"
+

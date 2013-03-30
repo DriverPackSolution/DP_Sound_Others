@@ -1,0 +1,176 @@
+;
+; File:    MA763003.INF   (If the name is changed, make the proper changes in the uninstaller)
+; Authors:  Zinovy Darkhovsky & David Simpao, Nemesis
+; Copyright 2002,2003 Midiman, Inc.
+;
+; Midiman/M-Audio Audiophile USB Driver .INF File
+;
+
+
+[Version]
+signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%Maudio%
+DriverVer=05/12/2003,1.5.4.13
+LayoutFile=layout.inf,layout1.inf
+
+[ControlFlags]
+ExcludeFromSelect=*
+
+[DestinationDirs]
+ConfigCopyFiles=11
+CoinstCopyFilesSection=11
+DriverCopyFiles=10,system32\drivers
+
+[Manufacturer]
+%Maudio%=M_AUDIO
+
+[M_AUDIO]
+%maavsusb.DeviceDesc%=maavsusb,USB\VID_0763&PID_2003&MI_01
+
+[maavsusb]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+; to make ME installation silent
+;CopyFiles=DriverCopyFiles,ConfigCopyFiles
+AddReg=maavsusb.AddReg
+Reboot
+
+[maavsusb.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_Filter%,maavsusb.InterfaceWave
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_Filter%,maavsusb.InterfaceWave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_Filter%,maavsusb.InterfaceWave
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_Filter_SPDIF%,maavsusb.IWSPDIF
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_Filter_SPDIF%,maavsusb.IWSPDIF
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_Filter_SPDIF%,maavsusb.IWSPDIF
+
+
+[maavsusb.InterfaceWave]
+AddReg=maavsusb.InterfaceWave.AddReg
+
+[maavsusb.InterfaceWave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%maavsusb.Wave.szPname%
+HKR,,CurveType,1,01,00,00,00
+
+
+[maavsusb.IWSPDIF]
+AddReg=maavsusb.IWSPDIF.AddReg
+
+[maavsusb.IWSPDIF.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%maavsusb.WaveSPDIF.szPname%
+HKR,,CurveType,1,01,00,00,00
+
+
+[maavsusb.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=DriverCopyFiles,ConfigCopyFiles
+AddReg=maavsusb.AddReg,maavsusb.Category.AddReg
+
+[maavsusb.NT.CoInstallers]
+CopyFiles=CoinstCopyFilesSection
+AddReg=maavsusb.NT.CoInstallers_AddReg
+
+[CoinstCopyFilesSection]
+APInstfix.dll
+
+[maavsusb.NT.CoInstallers_AddReg]
+HKR,,CoInstallers32,0x00010000,"APInstfix.dll,APCoInstProc"
+
+[maavsusb.Category.AddReg]
+HKLM,%CATEGORYKEYNAME%,%10%\System32\ma003cpl.cpl,,4
+
+
+[maavsusb.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_Filter%,maavsusb.InterfaceWave
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_Filter%,maavsusb.InterfaceWave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_Filter%,maavsusb.InterfaceWave
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_Filter_SPDIF%,maavsusb.IWSPDIF
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_Filter_SPDIF%,maavsusb.IWSPDIF
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_Filter_SPDIF%,maavsusb.IWSPDIF
+
+
+[maavsusb.AddReg]
+HKR,,DevLoader,,*NTKERN
+HKR,,NTMPDriver,,MA763003.sys
+
+;the system audio drivers require the following information
+;to establish support by the Windows multimedia system for a port-class audio adapter.
+HKR,,SetupPreferredAudioDevices,3,01,00,00,00
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,MA763003.sys
+HKR,,NTMPDriver,,"MA763003.sys,sbemul.sys"
+HKR,,CLSID,,{17CCA71B-ECD7-11D0-B908-00A0C9223196}
+HKR,Drivers,SubClasses,,"wave,midi,mixer,aux"
+
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv  ; to disable volume control button
+HKR,Drivers\aux\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%maavsusb.GenericDesc%
+HKR,Drivers\midi\wdmaud.drv,Description,,%maavsusb.GenericDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%maavsusb.GenericDesc%
+HKR,Drivers\aux\wdmaud.drv,Description,,%maavsusb.GenericDesc%
+
+; Media categories
+HKLM,%MEDIACATEGORY%\%ManufacturerGuid%,Name,,%Maudio%
+HKLM,%MEDIACATEGORY%\%ProductGuid%,Name,,%maavsusb.DeviceDesc%
+HKLM,%MEDIACATEGORY%\%ComponentGuid%,Name,,%maavsusb.DeviceDesc%
+HKLM,%MEDIACATEGORY%\%SPDIFComponentGuid%,Name,,%maavsusb.WaveSPDIF.szPname%
+
+[DriverCopyFiles]
+MA763003.sys
+
+[ConfigCopyFiles]
+ma003cpl.cpl
+
+[maavsusb.NT.Services]
+AddService=ma763003, 0x00000002, maavsusb.ServiceInstall
+
+[maavsusb.ServiceInstall]
+DisplayName=%maavsusb.DeviceDesc%
+ServiceType=%SERVICE_KERNEL_DRIVER%
+StartType=%SERVICE_DEMAND_START%
+ErrorControl=%SERVICE_ERROR_NORMAL%
+ServiceBinary=%10%\system32\drivers\MA763003.sys
+
+
+[Strings]
+; non-localizeable
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSSTRING_Filter="{9B365890-165F-11D0-A195-0020AFD156E4}"
+KSSTRING_Filter_SPDIF="{D6F5AF07-BA0B-4ea9-A50B-E54AB494E675}"
+
+; Media categories
+ManufacturerGuid="{D5A48096-6D98-11D1-A21A-00A0C9223196}"
+ProductGuid="{A7DB6B95-BAF8-497d-8745-1D45422D32EE}"
+ComponentGuid="{83C9E86B-AFB0-42f8-9F2A-AB7CD244E221}"
+SPDIFComponentGuid="{23AA5FBA-BB95-47d7-A3FE-E0C76E2C5D91}"
+MEDIACATEGORY="System\CurrentControlSet\Control\MediaCategories"
+MEDIACATEGORYNAME="Name"
+RUNONCEKEYNAME="Software\Microsoft\Windows\CurrentVersion\RunOnce"
+CATEGORYKEYNAME="Software\Microsoft\Windows\CurrentVersion\ControlPanel\ExtendedProperties\{305CA226-D286-468e-B848-2B2E8E697B74} 2"
+
+SERVICE_KERNEL_DRIVER=1
+SERVICE_DEMAND_START=3
+SERVICE_ERROR_NORMAL=1
+REG_EXPAND_SZ=0x00020000
+REG_DWORD=0x00010001
+
+;localizeable
+Maudio="M-Audio"
+maavsusb.DeviceDesc="M-Audio Audiophile"   ; the DeviceDesc is used to replace USB Audio Device
+maavsusb.Wave.szPname="M-Audio Audiophile USB Line"
+maavsusb.WaveSPDIF.szPname="M-Audio Audiophile USB SPDIF"
+maavsusb.GenericDesc="M-Audio Audiophile USB"
+AudiophileDisk1="Audiophile Setup Disk"
+

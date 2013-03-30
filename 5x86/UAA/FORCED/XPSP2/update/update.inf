@@ -1,0 +1,201 @@
+[Version]
+
+    Signature                  = "$Windows NT$"
+    LanguageType               = %LangTypeValue%
+    NtBuildToUpdate            = 2600
+    NtMajorVersionToUpdate     = 5
+    NtMinorVersionToUpdate     = 1
+    MaxNtBuildToUpdate         = 2600
+    MaxNtMajorVersionToUpdate  = 5
+    MaxNtMinorVersionToUpdate  = 1
+    MinNtServicePackVersion    = 512                   ; minimum is SP2 (no XP RTM or XP SP1)
+    MaxNtServicePackVersion    = 512                   ; maximum is XP SP2
+    ThisServicePackVersion     = 768                   ; inband for WinXP SP3
+    CatalogFile                = %SP_SHORT_TITLE%.cat
+
+[ProductCatalogsToInstall]
+    %SP_SHORT_TITLE%.cat, update\%SP_SHORT_TITLE%.cat
+
+;
+; Copies only if the files exists and has higher or equal version.
+; If file is in use moves the file to a tmp file and overwrites the new files
+;
+[ProductInstall.DontDelayUntilReboot]
+    CopyFiles=CopyAlways.Drivers.files
+
+[ProductInstall.CopyFilesAlways]
+    CopyFiles=CopyAlways.System32.files
+    CopyFiles=CopyAlways.Drivers.files
+    CopyFiles=CopyAlways.DriverCab.files
+    CopyFiles=CopyAlways.Inf.files
+
+[ProductInstall.GlobalRegistryChanges.Install]
+    AddReg=Product.Add.Reg
+
+[ProductInstall.GlobalRegistryChanges.ReInstall]
+    AddReg=Product.Add.Reg
+
+[Save.Reg.For.Uninstall]
+    HKLM,SOFTWARE\Microsoft\Windows NT\CurrentVersion\Hotfix\%SP_SHORT_TITLE%
+    HKLM,SOFTWARE\Microsoft\Updates\Windows XP OOB\SP%SERVICE_PACK_NUMBER%\%SP_SHORT_TITLE%
+    HKLM,SOFTWARE\Microsoft\updates\KB888111
+
+
+; This section represent actions taken against the registry
+; these are entries that are put into the registry for WinSE QFE tracking purposes
+; basicly version information about the package
+
+[Product.Add.Reg]
+    HKLM,SOFTWARE\Microsoft\Windows NT\CurrentVersion\Hotfix\%SP_SHORT_TITLE%,"Installed",0x10001,1
+    HKLM,SOFTWARE\Microsoft\Windows NT\CurrentVersion\Hotfix\%SP_SHORT_TITLE%,"Comments",0,%COMMENT%
+    HKLM,SOFTWARE\Microsoft\Windows NT\CurrentVersion\Hotfix\%SP_SHORT_TITLE%,"Backup Dir",0,""
+    HKLM,SOFTWARE\Microsoft\Windows NT\CurrentVersion\Hotfix\%SP_SHORT_TITLE%,"Fix Description",0,%COMMENT%
+    HKLM,SOFTWARE\Microsoft\Windows NT\CurrentVersion\Hotfix\%SP_SHORT_TITLE%,"Installed By",0,""
+    HKLM,SOFTWARE\Microsoft\Windows NT\CurrentVersion\Hotfix\%SP_SHORT_TITLE%,"Installed On",0,""
+    HKLM,SOFTWARE\Microsoft\Windows NT\CurrentVersion\Hotfix\%SP_SHORT_TITLE%,"Service Pack",0x10001,%SERVICE_PACK_NUMBER%
+    HKLM,SOFTWARE\Microsoft\Windows NT\CurrentVersion\Hotfix\%SP_SHORT_TITLE%,"Valid",0x10001,1
+    HKLM,SOFTWARE\Microsoft\Windows NT\CurrentVersion\Hotfix\%SP_SHORT_TITLE%\File 1\,"Flags",0,""
+    HKLM,SOFTWARE\Microsoft\Windows NT\CurrentVersion\Hotfix\%SP_SHORT_TITLE%\File 1\,"New File",0,""
+    HKLM,SOFTWARE\Microsoft\Windows NT\CurrentVersion\Hotfix\%SP_SHORT_TITLE%\File 1\,"New Link Date",0,""
+    HKLM,SOFTWARE\Microsoft\Windows NT\CurrentVersion\Hotfix\%SP_SHORT_TITLE%\File 1\,"Old Link Date",0,""
+
+
+; This section will define where the sections will copy to
+; anything above 65000 is defined inside the update.exe installer
+; anything else can be looked up as well known locations made available via
+; SetupAPI; the comma is used to point to another directory referencing off of a known location
+
+
+[DestinationDirs]
+    CopyAlways.System32.files=11      ; %windir%\system32 (copy even if don't exist)
+    CopyAlways.DriverCab.files=65623  ; Destination determined at runtime
+    Drivers.files=12                  ; %windir%\system32\drivers (don't delay until reboot)
+    CopyAlways.Drivers.files=12       ; %windir%\system32\drivers (copy even if don't exist)
+    CopyAlways.Inf.files=17           ; %windir%\system32\inf (copy even if don't exist)
+    CopyAlways.System32.DllCache.files=65619 ; %windir%\system32 (copy even if don't exist)
+
+; list of files that are subject to the rules of this section
+; see the DestinationDirs and the logic section above
+
+[CopyAlways.System32.files]
+    HdAProp.dll, CommonFiles\HdAProp.dll
+    HdAShCut.exe, CommonFiles\HdAShCut.exe
+    HdAudRes.dll, CommonFiles\HdAudRes.dll
+
+[CopyAlways.Drivers.files]
+    portcls.sys, WinXPSP2\portcls.sys
+    Hdaudbus.sys, CommonFiles\Hdaudbus.sys
+    Hdaudio.sys, CommonFiles\Hdaudio.sys
+
+[CopyAlways.DriverCab.files]
+    portcls.sys, WinXPSP2\portcls.sys
+
+[CopyAlways.Inf.files]
+    hdaudbus.inf, CommonFiles\Hdaudbus.inf
+    hdaudio.inf, CommonFiles\hdaudio.inf
+
+
+;
+;
+
+[ArchiveCatalogFilesOnly]
+    %SP_SHORT_TITLE%.cat
+
+
+[SourceDisksNames]
+    1=%ServicePackSourceFiles%
+
+
+; this is used in 2 ways
+; one if the file is not present it will attempt to request the media defined
+; generation of the update.ver is based on this section
+
+[SourceDisksFiles]
+    WinXPSP2\portcls.sys=1
+    CommonFiles\Hdaudbus.sys=1
+    CommonFiles\Hdaudio.sys=1
+    CommonFiles\HdAProp.dll=1
+    CommonFiles\HdAShCut.exe=1
+    CommonFiles\HdAudRes.dll=1
+    CommonFiles\Hdaudbus.inf=1
+    CommonFiles\hdaudio.inf=1
+
+
+[UninstallSections]
+;
+; Nothing to uninstall
+;
+[DeleteFilesInUninstallSections]
+SystemRoot\system32\drivers.delete.files,"portcls.sys"
+
+
+;
+; The following two sections are added to support PnP installation
+;
+[DeviceClassList]
+
+System  = {4D36E97D-E325-11CE-BFC1-08002BE10318}
+Unknown = {4D36E97E-E325-11CE-BFC1-08002BE10318}
+Media   = {4D36E96C-E325-11CE-BFC1-08002BE10318}
+
+
+[DevicesToUpgrade]
+
+HDAUDIO\FUNC_01&VEN_10EC&DEV_0880 = hdaudio.inf,{4D36E96C-E325-11CE-BFC1-08002BE10318}
+HDAUDIO\FUNC_01&VEN_434D&DEV_4980 = hdaudio.inf,{4D36E96C-E325-11CE-BFC1-08002BE10318}
+HDAUDIO\FUNC_01&VEN_13F6&DEV_9880 = hdaudio.inf,{4D36E96C-E325-11CE-BFC1-08002BE10318}
+HDAUDIO\FUNC_01&VEN_10EC&DEV_0280 = hdaudio.inf,{4D36E96C-E325-11CE-BFC1-08002BE10318}
+HDAUDIO\FUNC_01&VEN_10EC&DEV_0260 = hdaudio.inf,{4D36E96C-E325-11CE-BFC1-08002BE10318}
+HDAUDIO\FUNC_01&VEN_10EC&DEV_0261 = hdaudio.inf,{4D36E96C-E325-11CE-BFC1-08002BE10318}
+HDAUDIO\FUNC_01&VEN_8384&DEV_7672 = hdaudio.inf,{4D36E96C-E325-11CE-BFC1-08002BE10318}
+HDAUDIO\FUNC_01&VEN_8384&DEV_7670 = hdaudio.inf,{4D36E96C-E325-11CE-BFC1-08002BE10318}
+HDAUDIO\FUNC_01&VEN_14F1&DEV_5047 = hdaudio.inf,{4D36E96C-E325-11CE-BFC1-08002BE10318}
+HDAUDIO\FUNC_01&VEN_11D4&DEV_0078 = hdaudio.inf,{4D36E96C-E325-11CE-BFC1-08002BE10318}
+HDAUDIO\FUNC_01&VEN_11D4&DEV_1986 = hdaudio.inf,{4D36E96C-E325-11CE-BFC1-08002BE10318}
+HDAUDIO\FUNC_01&VEN_11D4&DEV_1983 = hdaudio.inf,{4D36E96C-E325-11CE-BFC1-08002BE10318}
+PCI\CC_0403                       = hdaudbus.inf,{4D36E97D-E325-11CE-BFC1-08002BE10318}
+
+
+; these are the strings that can be localized and are used throughout the rest of the installer INF
+; and used in dialogs that need information (like when media is requrested, or when it is installing the title on the dialog)
+
+
+[Strings]
+
+SP_TITLE                = "High Definition Audio - KB888111"
+BUILDTIMESTAMP          = 20040219.000000
+HELPLINK                = http://support.microsoft.com?kbid=KB888111
+URLInfoAbout            = http://support.microsoft.com
+LangTypeValue           = 0x19
+SP_SHORT_TITLE          = "KB888111WXPSP2"
+SERVICE_PACK_NUMBER     = 3
+COMMENT                 = "Драйвер для High Definition Audio - KB888111"
+ServicePackSourceFiles  = "Исходные файлы исправлений для Windows XP"
+
+; define custom actions actions here and determine the nature of the install
+
+[Configuration]
+
+; required for this to act in hotfix mode as opposed to service pack mode
+
+    InstallationType        = Hotfix
+    InstallLogFileName      = KB888111.log
+
+; define the name of the log file for this installation
+
+    UnInstallLogFileName    = KB888111Uninst.log
+
+; define the backup file location for the uninstall case
+
+    UnInstallDirName        = $NtUninstall%SP_SHORT_TITLE%$
+    EventLogKeyName         = NtServicePack_HDA
+
+; registers a dll that will interact with the eventvwr for any messages put into the event log (success, fail, etc)
+
+    EventLogDllName         = spmsg.dll
+    RestartDevice           = 1
+
+;To avoid this OOB package from disappearing from Add/Remove Programs
+;after upgrade to newer service pack. The following line is needed.
+;
+;    UpdateRegKey="SOFTWARE\Microsoft\Updates\Windows XP OOB"

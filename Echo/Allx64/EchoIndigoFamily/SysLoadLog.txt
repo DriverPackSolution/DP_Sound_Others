@@ -1,0 +1,11 @@
+
+**********************************************************
+SysLoad install log (x64)
+Log started: 11 Jan 2010 12:02:20 am
+
+inf length is 5786
+SetupCopyOEMInf result 0; new INF path 
+UpdateDriverForPlugAndPlayDevices for device ID PCI\VEN_1057&DEV_3410&SUBSYS_0090ECC0 with result 0
+UpdateDriverForPlugAndPlayDevices for device ID PCI\VEN_1057&DEV_3410&SUBSYS_00A0ECC0 with result 0
+UpdateDriverForPlugAndPlayDevices for device ID PCI\VEN_1057&DEV_3410&SUBSYS_00B0ECC0 with result 0
+SysLoad exit

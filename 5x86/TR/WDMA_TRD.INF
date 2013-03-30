@@ -1,0 +1,157 @@
+[Version]
+;;CatalogFile=wdma_oti.cat
+Signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+provider=%MSFT%
+LayoutFile=layout.inf, layout1.inf, layout2.inf
+DriverVer=04/22/1999,5.00.2028.1
+
+[Manufacturer]
+%TridentMfgName%=TridentMicrosystems
+
+[TridentMicrosystems]
+%*WDM_4DWAVE.DeviceDesc%=WDM_4DWAVE, pci\ven_1023&dev_2000
+%*WDM_4DWAVENX.DeviceDesc%=WDM_4DWAVE, pci\ven_1023&dev_2001
+
+[WDM_4DWAVE]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=WDM_4DWAVE.CopyList
+AddReg=WDM_4DWAVE.AddReg, WDM_4DWAVE_GUID.AddReg
+
+[WDM_4DWAVE.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,WDM_TRD.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,WDM_TRD.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,WDM_TRD.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,WDM_TRD.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,WDM_TRD.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,WDM_TRD.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,WDM_TRD.Interface.UART
+
+[WDM_TRD.Interface.Wave]
+AddReg=WDM_TRD.Interface.Wave.AddReg
+[WDM_TRD.Interface.Wave.AddReg]
+HKR,,FriendlyName,,%WDM_TRD.Wave.szPname%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[WDM_TRD.Interface.Topology]
+AddReg=WDM_TRD.Interface.Topo.AddReg
+[WDM_TRD.Interface.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM_TRD.Topology.szPname%
+
+[WDM_TRD.Interface.UART]
+AddReg=WDM_TRD.Interface.UART.AddReg
+[WDM_TRD.Interface.UART.AddReg]
+HKR,,FriendlyName,,%WDM_TRD.UART.szPname%
+HKR,,CLSID,,%Proxy.CLSID%
+
+;[WDM.Interface.FMSynth]
+;AddReg=WDM.Interface.FMSynth.AddReg
+;[WDM.Interface.FMSynth.AddReg]
+;HKR,,FriendlyName,,%WDM.FMSynth.szPname%
+;HKR,,CLSID,,%Proxy.CLSID%
+
+[DestinationDirs]
+WDM_4DWAVE.CopyList  = 10,system32\drivers ; %SystemRoot%\system32\drivers
+
+[WDM_4DWAVE.CopyList]
+tridwave.sys
+
+[WDM_4DWAVE.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,tridwave.sys
+HKR,,NTMPDriver,,tridwave.sys,sbemul.sys
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv, Description,,%*WDM_4DWAVE.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv, Description,,%WDM_MIDI%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%*WDM_4DWAVE.DeviceDesc%
+
+;; GUIDs for Mixer Pin and Node names
+[WDM_4DWAVE_GUID.AddReg]
+HKLM,%MediaCategories%\%4DWAVEGUID.LineOut%,Name,,%4DWAVEPin.LineOut%
+HKLM,%MediaCategories%\%4DWAVEGUID.LineOut%,Display,1,00,00,00,00
+;HKLM,%MediaCategories%\%4DWAVEGUID.Wave%,Name,,%4DWAVEPin.Wave%
+;HKLM,%MediaCategories%\%4DWAVEGUID.Wave%,Display,1,00,00,00,00
+
+;HKLM,%MediaCategories%\%4DWAVEGUID.Playback%,Name,,%4DWAVEPin.Playback%
+;HKLM,%MediaCategories%\%4DWAVEGUID.Playback%,Display,1,00,00,00,00
+;HKLM,%MediaCategories%\%4DWAVEGUID.MasterOut%,Name,,%4DWAVEPin.MasterOut%
+;HKLM,%MediaCategories%\%4DWAVEGUID.MasterOut%,Display,1,00,00,00,00
+
+
+;;**************** NT Install ****************
+
+[WDM_4DWAVE.Services]
+AddService = wdm_tridwave, 0x00000002, wdm_tridwave_Service_Inst
+
+[swmidi_Service_Inst]
+DisplayName    = %swmidi.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_SYSTEM_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\swmidi.sys
+
+[wdm_tridwave_Service_Inst]
+DisplayName    = %wdm_tridwave.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_SYSTEM_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\tridwave.sys
+
+
+[Strings]
+MSFT="Microsoft"
+TridentMfgName="Trident Microsystems, Inc. APG"
+*WDM_4DWAVENX.DeviceDesc="Trident Microsystems 4DWave NX PCI (WDM)"
+WDM_TRD.Wave.szPname="Trident 4DWave PCI Audio (WDM)"
+WDM_TRD.Topology.szPname="Trident 4DWave WDM Topo"
+WDM_TRD.UART.szPname="Trident 4DWave MPU-401"
+;; Trident friendly names (non-localizeable)
+4DWAVEGUID.LineOut     ="{37710340-6AC2_11D2-A088-0000C008F295}"
+;4DWAVEGUID.Playback    ="{37710341-6AC2_11D2-A088-0000C008F295}"
+;4DWAVEGUID.Wave        ="{37710342-6AC2_11D2-A088-0000C008F295}"
+;4DWAVEGUID.MasterOut   ="{37710343-6AC2_11D2-A088-0000C008F295}"
+;; Trident friendly names (localizeable)
+4DWAVEPin.PcBeep       ="PC Speaker"
+4DWAVEPin.Phone        ="Phone"
+4DWAVEPin.Mic1         ="Microphone 1"
+4DWAVEPin.Mic2         ="Microphone 2"
+4DWAVEPin.LineIn       ="Line In"
+4DWAVEPin.CDPlayer     ="CD Player"
+4DWAVEPin.Video        ="Video"
+4DWAVEPin.Aux          ="Aux"
+4DWAVEPin.LineOut      ="Speaker"
+4DWAVEPin.HPOut        ="Headphones"
+4DWAVEPin.MonoOut      ="Mono Out"
+4DWAVEPin.Wave         ="Wave Out"
+4DWAVEPin.Playback     ="Trident WDM PCI"
+4DWAVEPin.MasterOut    ="Master Out"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+WDM_MIDI="WDM-based Device"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+
+KSNAME_Wave="Wave"
+KSNAME_UART="UART"
+KSNAME_FMSynth="FMSynth"
+KSNAME_Topology="Topology"
+KSNAME_Wavetable="Wavetable"
+
+WDM.FMSynth.szPname="FM Synthesizer"
+
+wdmaud.SvcDesc = "Microsoft WDM Virtual Wave Driver (WDM)"
+swmidi.SvcDesc = "Microsoft Software Synthesizer (WDM)"
+wdm_tridwave.SvcDesc = "Trident 4DWave PCI Audio Driver (WDM)"
+

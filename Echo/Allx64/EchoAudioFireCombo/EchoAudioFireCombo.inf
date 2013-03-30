@@ -1,0 +1,161 @@
+; EchoAudioFireCombo.inf
+;
+; Copyright (c) 2009 Echo Digital Audio Corporation
+;
+
+;--------- Version Section ---------------------------------------------------
+
+[Version]
+Signature="$Windows 95$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%ProviderName%
+CatalogFile=EchoAudioFireCombo.cat
+DriverVer=12/14/2009,5.5
+
+
+;--------- SourceDiskNames and SourceDiskFiles Section -----------------------
+
+[SourceDisksNames]
+1 = %InstallDiskName%,Disk1,,
+
+[SourceDisksFiles]
+echo1394.sys = 1,,
+
+
+;--------- DestinationDirs Section -------------------------------------------
+
+[DestinationDirs]
+echo1394_Files_Driver = 10,System32\Drivers
+
+;--------- Manufacturer and Models Sections ----------------------------------
+
+[Manufacturer]
+%MfgName%=Mfg0,NTamd64
+
+[Mfg0.NTamd64]
+%AudioFire2_Desc%=echo1394_DDI, avc\echo_digital_audio&audiofire2&typ_1&id_0
+%AudioFire4_Desc%=echo1394_DDI, avc\echo_digital_audio&audiofire4&typ_1&id_0
+%AudioFire8_Desc%=echo1394_DDI, avc\echo_digital_audio&audiofire8&typ_1&id_0
+%AudioFire8a_Desc%=echo1394_DDI, avc\echo_digital_audio&audiofire8a&typ_1&id_0
+%AudioFirePre8_Desc%=echo1394_DDI, avc\echo_digital_audio&audiofirepre8&typ_1&id_0
+%AudioFire12_Desc%=echo1394_DDI, avc\echo_digital_audio&audiofire12&typ_1&id_0
+%Fireworks8_Desc%=echo1394_DDI, avc\echo_digital_audio&fireworks8&typ_1&id_0
+%FireworksHDMI_Desc%=echo1394_DDI, avc\echo_digital_audio&fireworks_hdmi&typ_1&id_0
+%GibsonRIP_Desc%=echo1394_DDI, avc\gibson&rip&typ_1&id_0
+%GibsonRIP_Desc%=echo1394_DDI, avc\echo_digital_audio&rip&typ_1&id_0
+%GibsonGoldtop_Desc%=echo1394_DDI, avc\gibson&audiopunk&typ_1&id_0
+%GibsonGoldtop_Desc%=echo1394_DDI, avc\gibson&goldtop&typ_1&id_0
+
+
+
+; --------- Windows NT -----------------
+
+[echo1394_DDI.NTamd64]
+Include= ks.inf, ksfilter.inf, wdmaudio.inf
+Needs=KS.Registration
+Needs=WDMAUDIO.Registration
+CopyFiles=echo1394_Files_Driver
+AddReg=echo1394_NT_AddReg
+
+
+; --------- Services -------------
+
+[echo1394_DDI.NTamd64.Services]
+AddService = echo1394, 0x00000002, echo1394_AddService
+
+
+[echo1394_AddService]
+DisplayName    = %SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\echo1394.sys
+
+
+; --------- AddReg -------------
+
+[echo1394_NT_AddReg]
+HKLM,%MediaCategories%\%GUID.PCMRender%,Name,,%Friendly.PCMRender%
+HKLM,%MediaCategories%\%GUID.AnalogOut%,Name,,%Friendly.AnalogOut%
+HKLM,%MediaCategories%\%GUID.PCMCapture%,Name,,%Friendly.PCMCapture%
+HKLM,%MediaCategories%\%GUID.AnalogIn%,Name,,%Friendly.AnalogIn%
+
+HKLM,%MediaCategories%\%GUID.MidiOutPinName%,Name,,%Friendly.MidiOutPinName%
+HKLM,%MediaCategories%\%GUID.DmusOutPinName%,Name,,%Friendly.DmusOutPinName%
+HKLM,%MediaCategories%\%GUID.MidiOutBridgeName%,Name,,%Friendly.MidiOutBridgeName%
+HKLM,%MediaCategories%\%GUID.MidiInPinName%,Name,,%Friendly.MidiInPinName%
+HKLM,%MediaCategories%\%GUID.MidiInBridgeName%,Name,,%Friendly.MidiInBridgeName%
+
+HKR,,Driver,,echo1394.sys
+HKR,,AssociatedFilters,,"wdmaud,swmidi"
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\wave\wdmaud.drv,Description,,%ECHOAVS_WAVE.DeviceDesc%
+
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Description,,%ECHOAVS_MIDI.DeviceDesc%
+
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Description,,%ECHOAVS_MIXER.DeviceDesc%
+
+
+; --------- Files (common) -------------
+
+[echo1394_Files_Driver]
+echo1394.sys
+
+
+;--------- Strings Section ---------------------------------------------------
+
+[Strings]
+
+; Echo GUIDs
+GUID.AnalogOut="{82602EF5-ECE0-467e-A713-CF42C70EB0A4}"
+Friendly.AnalogOut="Analog output"
+GUID.AnalogIn="{04FFC3C6-C358-4973-80B2-07976DF2E4D2}"
+Friendly.AnalogIn="Analog input"
+
+GUID.PCMRender = "{86BCB047-385E-4f56-AF2F-789C14263ECE}"
+Friendly.PCMRender = "PCM render"
+GUID.PCMCapture = "{8CE36F1C-8764-4b68-AA33-1D1545BC53D3}"
+Friendly.PCMCapture = "PCM capture"
+
+GUID.MidiOutPinName = "{47349F2A-91A5-4c31-8235-D4B74166D64F}"
+Friendly.MidiOutPinName = "MIDI out"
+
+GUID.DmusOutPinName = "{CD116385-CC8C-475f-B5F6-F09D365E76EA}"
+Friendly.DmusOutPinName = "DMusic out"
+
+GUID.MidiOutBridgeName = "{96256168-44F0-4995-896E-3185C6CF2EF8}"
+Friendly.MidiOutBridgeName = "MIDI output bridge"
+
+GUID.MidiInPinName = "{520E0677-FB16-4300-98F7-69DDDE11461C}"
+Friendly.MidiInPinName = "MIDI+DMus input"
+
+GUID.MidiInBridgeName = "{DD64878F-1E50-4c9b-93D7-2066E3AEED31}"
+Friendly.MidiInBridgeName = "MIDI input bridge"
+
+
+; Miscellaneous strings
+ProviderName="Echo Digital Audio"
+MfgName="Echo Digital Audio"
+InstallDiskName="Install Disk"
+AudioFire2_Desc="AudioFire 2"
+AudioFire4_Desc="AudioFire 4"
+AudioFire8_Desc="AudioFire 8"
+AudioFire8a_Desc="AudioFire 8a"
+AudioFirePre8_Desc="AudioFire Pre8"
+AudioFire12_Desc="AudioFire 12"
+Fireworks8_Desc="Fireworks 8"
+FireworksHDMI_Desc="Fireworks HDMI"
+GibsonGoldtop_Desc="Gibson Goldtop"
+GibsonRIP_Desc="Gibson RIP"
+SvcDesc="AudioFire service"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+ECHOAVS_WAVE.DeviceDesc="Echo 1394 AVS wave driver"
+ECHOAVS_MIDI.DeviceDesc="Echo 1394 AVS MIDI driver"
+ECHOAVS_MIXER.DeviceDesc="Echo 1394 AVS mixer driver"

@@ -1,0 +1,245 @@
+;Copyright (c) 1990-2002 ESI Corporation All rights Reserved
+;
+; ESI MAYA44
+;==============================================================
+
+;==============================================================
+[Version]
+Signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+provider="ESI"
+
+;==============================================================
+[WIN98.KnownRegEntries]
+IsWin98Gold=keep
+
+[IsWin98Gold]
+1=HKLM,Software\Microsoft\Windows\CurrentVersion,VersionNumber,0,4.10.1998
+
+;[ControlFlags]
+;ExcludeFromSelect = *
+
+;==============================================================
+[SourceDisksNames]
+1=%DiskDescription%,,,
+
+[SourceDisksFiles]
+Mam3.sys=1
+Mam3Wdm.sys=1
+Mam3Pan.exe=1
+Mam3Asio.dll=1
+Mam3Blk.exe=1
+block.blk=1
+
+[DestinationDirs]
+WDM.CopyList=10,system32\drivers
+WDM.App.CopyList=11
+
+[WDM.CopyList]
+Mam3.sys
+Mam3Wdm.sys
+
+[WDM.App.CopyList]
+Mam3Pan.exe
+Mam3Asio.dll
+Mam3Blk.exe
+block.blk
+
+[DriverDel]
+DelFiles=WDM.CopyList,WDM.App.CopyList
+[DriverUp]
+CopyFiles=WDM.CopyList,WDM.App.CopyList
+
+;==============================================================
+[Manufacturer]
+"ESI"=ESI
+
+[ESI]
+%MAM3_A0.DeviceDesc%=MAM3_AA, PCI\VEN_1412&DEV_1724&SUBSYS_41543134
+%MAM3_01.DeviceDesc%=MAM3_01, ESI\MA44MK3_01
+
+;==============================================================
+; MAM3_AA 
+;==============================================================
+[MAM3_AA]
+CopyFiles=WDM.CopyList,WDM.App.CopyList
+AddReg=MAM3_AA.AddReg,MAM3_AA.ASIO.AddReg
+
+[MAM3_AA.NTX86]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=WDM.CopyList,WDM.App.CopyList
+AddReg=MAM3_AA.ASIO.AddReg
+
+[MAM3_AA.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,Mam3.sys
+
+[MAM3_AA.ASIO.AddReg]
+HKLM,SOFTWARE\ASIO\%ASIO_Mam3NAME%,CLSID,,%ASIO_Mam3IID%
+HKCR,CLSID\%ASIO_Mam3IID%,,,%ASIO_Mam3NAME%
+HKCR,CLSID\%ASIO_Mam3IID%\InProcServer32,,,"%11%\Mam3Asio.dll"
+HKCR,CLSID\%ASIO_Mam3IID%\InProcServer32,ThreadingModel,,"Apartment"
+HKLM,Software\Microsoft\Windows\CurrentVersion\Run,Mam3Pan,,"Mam3Pan.Exe"
+[StartPanel]
+HKLM,Software\Microsoft\Windows\CurrentVersion\RunOnce,Mam3Pan,,"Mam3Pan.Exe"
+
+[MAM3_AA.NTX86.Services]
+include=wdmaudio.inf
+needs=wdmaudio.registration.services
+AddService = MAM3_AA, 0x00000002, MAM3_AA_Service_Inst
+
+[MAM3_AA_Service_Inst]
+DisplayName   = %MAM3_AA.SvcDesc%
+ServiceType   = 1                  
+StartType     = 3                  
+ErrorControl  = 1                  
+ServiceBinary = %10%\system32\drivers\Mam3.sys
+
+;=======================================================================================;
+[WDM.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,redbook"
+HKR,,Driver,,Mam3Wdm.sys
+HKR,,NTMPDriver,,"Mam3Wdm.sys"
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\wave\wdmaud.drv,Description,,%MME.DriverDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%MME.DriverDesc%
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Description,,%MME.DriverDesc%
+
+;=======================================================================================;
+; MAM3_01
+;=======================================================================================;
+[MAM3_01]
+AlsoInstall=KS.Registration(ks.inf), WDMAUDIO.Registration(wdmaudio.inf)
+AddReg=WDM.AddReg
+
+[MAM3_01.NTX86]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+AddReg=WDM.AddReg
+
+[MAM3_01.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topo1%,WDM.Interface.Topo1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,WDM.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,WDM.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,WDM.Interface.Wave1
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topo2%,WDM.Interface.Topo2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,WDM.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,WDM.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,WDM.Interface.Wave2
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topo3%,WDM.Interface.Topo3
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave3%,WDM.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave3%,WDM.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave3%,WDM.Interface.Wave3
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi1%,WDM.Interface.Midi1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi1%,WDM.Interface.Midi1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi1%,WDM.Interface.Midi1
+
+[MAM3_01.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topo1%,WDM.Interface.Topo1
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave1%,WDM.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave1%,WDM.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave1%,WDM.Interface.Wave1
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topo2%,WDM.Interface.Topo2
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave2%,WDM.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave2%,WDM.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave2%,WDM.Interface.Wave2
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topo3%,WDM.Interface.Topo3
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave3%,WDM.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave3%,WDM.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave3%,WDM.Interface.Wave3
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi1%,WDM.Interface.Midi1
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi1%,WDM.Interface.Midi1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi1%,WDM.Interface.Midi1
+
+[WDM.Interface.Topo1]
+AddReg=WDM.Interface.Topo1.AddReg
+[WDM.Interface.Topo1.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM.Topo1.szPname%
+
+[WDM.Interface.Wave1]
+AddReg=WDM.Interface.Wave1.AddReg
+[WDM.Interface.Wave1.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM.Wave1.szPname%
+
+[WDM.Interface.Topo2]
+AddReg=WDM.Interface.Topo2.AddReg
+[WDM.Interface.Topo2.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM.Topo2.szPname%
+
+[WDM.Interface.Wave2]
+AddReg=WDM.Interface.Wave2.AddReg
+[WDM.Interface.Wave2.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM.Wave2.szPname%
+
+[WDM.Interface.Topo3]
+AddReg=WDM.Interface.Topo3.AddReg
+[WDM.Interface.Topo3.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM.Topo3.szPname%
+
+[WDM.Interface.Wave3]
+AddReg=WDM.Interface.Wave3.AddReg
+[WDM.Interface.Wave3.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM.Wave3.szPname%
+
+[WDM.Interface.Midi1]
+AddReg=WDM.Interface.Midi1.AddReg
+[WDM.Interface.Midi1.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM.Midi1.szPname%
+
+[MAM3_01.NTX86.Services]
+include=wdmaudio.inf
+needs=wdmaudio.registration.services
+AddService = MAM3_01, 0x00000002, MAM3_01_Service_Inst
+[MAM3_01_Service_Inst]
+DisplayName   = %MAM3_01.SvcDesc%
+ServiceType   = 1                  ; SERVICE_KERNEL_DRIVER
+StartType     = 3                  ; SERVICE_DEMAND_START
+ErrorControl  = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary = %10%\system32\drivers\Mam3Wdm.sys
+
+;====================== Strings ===============================
+[Strings]
+DiskDescription         ="ESI MAYA44 Driver for WIn98 SE,ME,2000,XP"
+MAM3_A0.DeviceDesc      ="ESI MAYA44 Controller"
+MAM3_01.DeviceDesc      ="ESI MAYA44 Audio"
+MME.DriverDesc          ="ESI MAYA44 MME Driver"
+KSNAME_Topo1            ="ESI_Mixe1"
+KSNAME_Topo2            ="ESI_Mixe2"
+KSNAME_Topo3            ="ESI_Mixe3"
+KSNAME_Wave1            ="ESI_Wave1"
+KSNAME_Wave2            ="ESI_Wave2"
+KSNAME_Wave3            ="ESI_Wave3"
+KSNAME_Midi1            ="ESI_Midi1"
+WDM.Topo1.szPname       ="1-ESI MAYA44 Ch12 Mixer"
+WDM.Topo2.szPname       ="2-ESI MAYA44 Ch34 Mixer"
+WDM.Topo3.szPname       ="3-ESI MAYA44 Ch1234 Mixer"
+WDM.Wave1.szPname       ="1-ESI MAYA44 Ch12"
+WDM.Wave2.szPname       ="2-ESI MAYA44 Ch34"
+WDM.Wave3.szPname       ="3-ESI MAYA44 Ch1234"
+WDM.Midi1.szPname       ="1-ESI MAYA44 MIDI"
+Proxy.CLSID             ="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO        ="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER       ="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE      ="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+MAM3_AA.SvcDesc         ="Service for ESI MAYA44 Audio Driver (EWDM)"
+MAM3_01.SvcDesc         ="Service for ESI MAYA44 1"
+ASIO_Mam3IID            ="{C271BD58-56AC-4c0b-837F-D8FC939D682E}"
+ASIO_Mam3NAME           ="ASIO 2.0 - ESI MAYA44"

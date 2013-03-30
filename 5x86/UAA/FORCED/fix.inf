@@ -1,0 +1,25 @@
+;This file corrects a problem when the database does not get the device index 
+;"VEN_8086 & DEV_27D8" (HDAUDIO) as it is recorded in the general form: "PCI\CC_0403"
+;
+;   www.drp.su  -  DriverPack Solution
+;
+;-----------------------------------------------------------------------
+;Этот файл исправляет проблему, когда в базу не попадает индекс устройства 
+;"VEN_8086&DEV_27D8" (HDAUDIO) так как оно фиксируется в общем виде: PCI\CC_0403
+
+
+[Version]
+Signature="$Windows NT$"
+Class=MEDIA
+ClassGuid={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=Microsoft
+DriverVer=03/05/2004,5.10.00.5010
+
+[Manufacturer]
+Microsoft=Microsoft
+
+[Microsoft]
+%HDAudio.DeviceDesc% = HDAudio_Device, PCI\VEN_8086&DEV_27D8
+
+[Strings]
+HDAudio.DeviceDesc = "Драйвер шины Microsoft UAA для High Definition Audio" ; {PlaceHolder="UAA","High Definition Audio"}

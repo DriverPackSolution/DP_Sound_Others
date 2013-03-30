@@ -1,0 +1,250 @@
+/*=============================================================================
+   FILE:         History.txt
+-------------------------------------------------------------------------------
+   DESCRIPTION:  PHASE 88, EWS88 MT/D, EWX 24/96 and DMX6fire Driver History (WDM)
+   DATE:         31-Aug-2007
+-------------------------------------------------------------------------------
+   COPYRIGHT:    (c) 2000-2007, TerraTec Electronic GmbH. All Rights Reserved.
+=============================================================================*/
+
+5.53.3.144
+------------------------------
+    Bugfix: Sometimes crashes when going into Sleep/Hibernate-Mode
+
+5.52.3.143
+------------------------------
+    Bugfix: Couldn't shutdown system when DMX6Fire & PHASE 88 are installed parallel
+    Bugfix: DMX6Fire: MWPC couldn't be initialized anymore
+
+5.51.3.142
+------------------------------
+    Bugfix: DMX6Fire did make ugly noise when booting under Windows Vista
+    Bugfix: AC3 Support for Windows Vista didn't work
+    Bugfix: Midi capturing did stop after a few  minutes
+    
+5.50.3.141
+------------------------------
+    New: Windows Vista Support
+    
+5.49.3.140
+------------------------------
+    New: PHASE 88 Support for new PCI card V2.0
+
+5.48.3.139
+------------------------------
+    New: 64Bit ASIO
+ 
+5.47.3.138
+------------------------------
+    Bugfix: Some static controls too small in Phase 88 CPL
+
+5.46.3.137
+------------------------------
+    New: Win64 Support; Support for Windows 98 & Windows ME discontinued
+    Bugfix: Tascam Gigastudio 3.0 did crash when capturing for all channels was activated
+    
+5.45.3.136
+------------------------------
+    Bugfix: Improved ASIO-Record Latency
+    
+5.44.3.135
+------------------------------
+    Bugfix: Mute handling in Digital Mixer for Digital in was faulty 
+    Bugfix: ASIO - Interface for Reason & Recycle were disabled after restart
+    
+5.43.3.134  -> Productversion 5.43
+------------------------------
+    Bugfix: Direct Monitoring for PHASE 88
+    Bugfix: +4dBU/-10dBU Switch without function for PHASE 88
+
+
+5.42.3.133  -> Productversion 5.42
+------------------------------
+    Bugfix: Codecs of PHASE 88 Rack where not initialized in cascaded mode
+    Update: Some cosmetic changes for PHASE 88 Rack in ControlPanel
+
+
+5.40.3.130  -> Productversion 5.40
+------------------------------
+    New:    Minor PHASE 88 adaptions
+    New:    New convention for Software-versionsnumbers
+
+5.0.2000  Build 129
+------------------------------
+    New:    First PHASE 88 adaption
+    Bugfix: On some systems ASIO couldn't be opened in Master/Slave mode
+    Bugfix: Latency adjustment for ASIO wasn't correct
+    Bugfix: Digital-In was muted after startup
+    Bugfix: GSIF-Buffersize wasn't stored persistent
+    Bugfix: DMX6fire: SampleRate-locked wasn't stored persistent
+    Bugfix: DMX6fire: Voice over IP didn't work
+    Bugfix: DMX6fire: Updated Mixer-Topology since some Apps couldn't open Mixer-API
+    Update: DMX6fire: New Sensaura Library (fixes some game issues)
+
+
+5.0.2000  Build 128
+------------------------------
+    New:    VST - Systemlink Support
+    New:    Lowest possible ASIO - Buffersize (64 Samples)
+    Bugfix: ASIO driver release when ASIO application lose focus.
+
+
+5.0.2000  Build 127
+------------------------------
+    New:    Final Mic2/8 adjustments
+    Bugfix: Master/Slave detection didn'q work properly when Master was
+	        not the first or second card
+
+5.0.2000  Build 126
+------------------------------
+    New:    Further Mic2/8 adjustments
+    New:    "Samplerate locked" option for DMX6fire and EWX
+    Bugfix: last Sample on DigitalOut was remaining
+    Bugfix: DMX6fire: Digital In for DXR didn't work correctly
+    Bugfix: DMX6fire: Improved firmware upload for MWPC
+    Bugfix: DMX6fire: Controlpanel crahses under Win98SE
+    Bugfix: EWS88MT/D only 4 MME Wave devices could be opened simultaneous
+     
+
+5.0.2000  Build 125
+------------------------------
+    Bugfix: DMX6fire: Digital In for DXF didn't work correctly
+    Bugfix: DMX6fire: Initialization on P4, > 2.2Ghz failed
+    Bugfix: Improved ASIO Record performance
+
+5.0.2000  Build 124
+------------------------------
+    New:    DMX6fire <-> EWS88MT or EWX2496 can be used parallel
+    New:    ASIO Direct-Monitoring can be enabled/disabled in Context menu
+    Bugfix: EWS88MT/D Calibration for Mastercard pops up Errormessage 
+    Bugfix: Syncronisation of 4 EWS Connect cards failed
+    Bugfix: DMX6fire: No Digital-Out for MWPC
+
+
+
+5.0.2000  Build 123
+------------------------------
+    New:    DMX6fire: Source - Positioning
+    Bugfix: Pitch Problem with several Mediaplayers 
+    Bugfix: Some minor Bugfixes
+
+
+5.0.2000  Build 121
+------------------------------
+    New:    GSIF Multiclient Interface
+
+
+5.0.2000  Build 120
+------------------------------
+    Bugfix: Improved external Samplerate detection
+    Bugfix: DMX6fire: Gamevoice was playing too slow
+    Bugfix: DMX6fire: Samplerate for Sensauramode was not fix 
+                    (e.g. Startsound was playing too fast/slow)
+
+    New:    DMX6fire: Extension MXR included
+
+
+5.0.2000  Build 119
+------------------------------
+    Bugfix: DMX6fire: Wrong Saplerate when Sensaura was activated and Media-Player restarted
+    Bugfix: DMX6fire: ASIO Samplerate each time was set to 22Khz when Cubase 
+            releases ASIO and reopens it
+    Bugfix: DMX6fire: Speakermode always was set to 5.1 after reboot
+    Bugfix: Multiple Card Crash (EWS88 MT/D, EWX 24/96)
+
+    New:    DMX6fire: Stereo-Link as default
+    New:    DMX6fire: MWPC & DX - Extensions included
+
+
+5.0.2000  Build 118
+------------------------------
+    New:    Mic 2/8 Extensions
+
+5.0.2000  Build 117
+------------------------------
+    Bugfix: DMX6fire: Loop-Play when Media-Player was set to Pause
+    New:    DMX6fire: MWPC Interface 
+
+5.0.2000  Build 116
+------------------------------
+    Bugfix: Dropouts in Sonar (Record) on Pentium 4 Systems (EWS88 MT/D, EWX 24/96)
+    Bugfix: Crash on some DUAL-Processor Systems (EWS88 MT/D, EWX 24/96)
+    Bugfix: External Samplerate-Detection on some DUAL-Processor Systems
+    Bugfix: Master/Slave Detection on some DUAL-Processor Systems (EWS88 MT/D, EWX 24/96)
+    Bugfix: Reset Default-Samplerate
+    Bugfix: Mono - Record (EWS88 MT/D, EWX 24/96)
+
+5.0.2000  Build 114 - 115
+------------------------------
+    New:    DMX6fire Implementation
+
+5.0.2000  Build 113
+------------------------------
+    Optimized: Improved Direct Monitoring in Sonar (lower Latency possible)
+    Bugfix: INF file now completely removes VxD and NT driver files
+            when updating to WDM.
+    Bugfix: No ASIO Install for EWS 88 D
+    Bugfix: Again: not all Mixersettings were stored in registry (e.g. 
+
+5.0.2000  Build 112
+------------------------------
+    Note:   We increased the build no. to 112 to get aligned to the 
+            VXD-Driver Build Version
+    New:    Codec - Reset for 88MT System-Out
+
+    Bugfix: Multitrack Mode didn't work correctly
+    Bugfix: Source-Selection for Digital-Out wasn't restored from registry
+    Bugfix: Independent-Mode selection had to be clicked several times before 
+            it has been activated
+
+5.0.2000  Build 23
+------------------------------
+    New:    Support for EWS 88 D
+    New:    Improved WDM Kernel streaming (4ms in Sonar & 24Bit)
+    New:    DMA buffer size selection for EWX
+
+    Bugfix: Not all Mixersettings were stored in registry
+    Bugfix: Sometimes loud noises when playing system sounds
+    Bugfix: Sometimes a bugcheck apears in W2K when opening a device
+
+5.0.2000  Build 22
+------------------------------
+    Bugfix: Dropouts in Startsound
+    Bugfix: Order of devices for EWX (first device gets DSound Interface -> AnalogOut)
+    Bugfix: Sometimes driver hang in an endless loop
+    Bugfix: Disable/Enable device in W2K did crash
+    Bugfix: Missing SPIDF - Record device for EWX
+
+5.0.2000  Build 21
+------------------------------
+    New:    Support for non PCM (e.g. AC3) streams in S/PDIF device
+
+    Bugfix: System Out didn't work on some systems
+    Bugfix: ASIO Record was not in sync with ASIO play (two buffers delay)
+
+
+5.0.2000  Build 20
+------------------------------
+    New:    Card reservation for ASIO 
+    New:    INF file: added deletion of old NT40 driver files
+
+    Bugfix: Starting Playback/record always reset the clock source to internal
+    Bugfix: Changing volume in ControlPanel in idle state
+            caused WavePlay Mixer channels to be muted
+    
+    Bugfix: ASIO files were not correctly installed under Win2K
+            due to an error in the INF file
+    
+    Bugfix: ASIO changed panning of EWX 24/96
+    Bugfix: Mixed Setup (EWS88 & EWX24/96) doesn't crash anymore
+    Bugfix: Several changes to INF file for different card types
+
+5.0.2000  Build 19
+------------------------------
+
+    New: EWX 24/96 Support
+    New: ASIO 2.0 Direct Monitoring 
+    New: Multiple card for ASIO
+
+    Bugfix: EWX 24/96 DigMixer Record now working
+    Bugfix: EWX 24/96 Midi device

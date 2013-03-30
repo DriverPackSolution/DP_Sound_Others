@@ -1,0 +1,97 @@
+;*---------------------------------------------------------------------------
+;*
+;* $Workfile: AdmMult20.inf $
+;*
+;*---------------------------------------------------------------------------
+;*
+;* $Revision: 1 $  $Date: 3/07/00 5:06p $  
+;*				
+;*---------------------------------------------------------------------------
+;*
+;* XLerate inf file for multifunction device support
+;*
+;*---------------------------------------------------------------------------
+;* 
+;* Copyright (c) 2000 TerraTec Electronic GmbH - All rights reserved. 
+;*
+;* This is UNPUBLISHED PROPRIETARY SOURCE CODE of TerraTec Electronic;
+;* the contents of this file may not be disclosed to third parties, copied or
+;* duplicated in any form, in whole or in part, without the prior written
+;* permission of TerraTec Electronic.
+;*
+;*---------------------------------------------------------------------------
+;*$NoKeywords: $
+
+[Version]
+;LayoutFile=layout.inf
+Signature="$CHICAGO$"
+Class=MultiFunction
+Provider=%Mfg%
+ClassGUID={4d36e971-e325-11ce-bfc1-08002be10318} ;GUID for MF dev
+catalogfile=AdmMult20.cat
+DriverVer=02/28/2000,5.10.1500.0
+           
+[ClassInstall32]
+Addreg=ClassAddReg
+
+[ClassAddReg]
+HKR,,,,%MFClassName%
+
+[Manufacturer]
+%Mfg%=AurealSemiconductor
+
+[AurealSemiconductor]
+%PCI\VEN_12EB&DEV_0001.DeviceDesc%=ASPEN_PARENT_DEVICE_8820.mf, PCI\VEN_12EB&DEV_0001
+
+[ASPEN_PARENT_DEVICE_8820.mf]
+CopyFiles=ASPEN_PARENT_DEVICE_8820.mf.CopyList
+
+[ASPEN_PARENT_DEVICE_8820.mf.Services]
+AddService=mf, 2, AuMf_Service_Inst
+AddService = FilterService,,Filter_Service_Inst8820
+
+[AuMf_Service_Inst]
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%12%\mf.sys
+LoadOrderGroup = System Bus Extender
+
+[ASPEN_PARENT_DEVICE_8820.mf.HW]
+AddReg=AspenParent_8820.mf.RegHW
+
+[AspenParent_8820.mf.RegHW]
+HKR,Child0000,HardwareID,,MF\PCI_VEN_12EB_GAMEPORT
+HKR,Child0000,ResourceMap,1
+HKR,Child0001,HardwareID,,MF\PCI_VEN_12EB&DEV_0001_AUDIO
+HKR,Child0001,ResourceMap,1,00,02,04,06
+HKR,,"LowerFilters",0x00010000,"FilterService"
+
+[ASPEN_PARENT_DEVICE_8820.mf.CopyList]
+admfilter8820.sys
+
+[Filter_Service_Inst8820]
+DisplayName    = "Filter Service"
+ServiceType    = 1 ;%SERVICE_KERNEL_DRIVER%
+StartType      = 3 ;%SERVICE_DEMAND_START%
+ErrorControl   = 0 ;%SERVICE_ERROR_IGNORE%
+ServiceBinary  = %12%\admfilter8820.sys
+; would cause system to reboot after install-removal-rescan without manual reboot
+LoadOrderGroup = extended base
+
+[SourceDisksNames]
+1="XLerate Software & Driver CD",""
+
+[SourceDisksFiles]
+admfilter8820.sys=1
+
+[DestinationDirs]
+ASPEN_PARENT_DEVICE_8820.mf.CopyList  = 10,system32\drivers ; %SystemRoot%\system32\drivers
+
+[Strings]
+;Localized strings - standard Microsoft value
+MFClassName="Multifunction PCI Device Driver"
+
+;Localized strings - device-specific
+Mfg="TerraTec Electronic GmbH"
+PCI\VEN_12EB&DEV_0001.DeviceDesc="XLerate PCI Audio Accelerator"

@@ -1,0 +1,144 @@
+; Description : RME Hammerfall DSP series PnP driver
+; InfVersion  : 2.3
+; Comment     : Complete MME/ASIO package
+; Language    : German/English
+; OS          : Windows 2000/XP
+; Copyright   : 2001-2005 by RME, Germany
+;----------------------------------------------------------------------
+
+
+[Version]
+Signature = "$Windows NT$"
+Provider = RME
+ClassGUID = {4d36e96c-e325-11ce-bfc1-08002be10318}
+Class = Media
+DriverVer = 12/15/2005,2.9.4.6
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+[Manufacturer]
+RME = Devices
+
+[Devices]
+%DeviceDescHdsp1% = hdsp, PCI\VEN_10EE&DEV_3FC5&REV_00
+%DeviceDescHdsp1% = hdsp, PCI\VEN_10EE&DEV_3FC5&REV_0A
+%DeviceDescHdsp1% = hdsp, PCI\VEN_10EE&DEV_3FC5&REV_0B
+%DeviceDescHdsp1% = hdsp, PCI\VEN_10EE&DEV_3FC5&REV_0C
+%DeviceDescHdsp1% = hdsp, PCI\VEN_10EE&DEV_3FC5&REV_0D
+%DeviceDescHdsp1% = hdsp, PCI\VEN_10EE&DEV_3FC5&REV_0E
+%DeviceDescHdsp1% = hdsp, PCI\VEN_10EE&DEV_3FC5&REV_0F
+%DeviceDescHdsp1% = hdsp, PCI\VEN_10EE&DEV_3FC5&REV_10
+%DeviceDescHdsp1% = hdsp, PCI\VEN_10EE&DEV_3FC5&REV_11
+
+%DeviceDescHdsp1% = hdsp, PCI\VEN_10EE&DEV_3FC5&REV_32
+%DeviceDescHdsp1% = hdsp, PCI\VEN_10EE&DEV_3FC5&REV_33
+%DeviceDescHdsp1% = hdsp, PCI\VEN_10EE&DEV_3FC5&REV_34
+%DeviceDescHdsp1% = hdsp, PCI\VEN_10EE&DEV_3FC5&REV_35
+%DeviceDescHdsp1% = hdsp, PCI\VEN_10EE&DEV_3FC5&REV_36
+%DeviceDescHdsp1% = hdsp, PCI\VEN_10EE&DEV_3FC5&REV_37
+%DeviceDescHdsp1% = hdsp, PCI\VEN_10EE&DEV_3FC5&REV_3C
+
+%DeviceDescHdsp2% = hdsp, PCI\VEN_10EE&DEV_3FC5&REV_64
+%DeviceDescHdsp2% = hdsp, PCI\VEN_10EE&DEV_3FC5&REV_65
+%DeviceDescHdsp2% = hdsp, PCI\VEN_10EE&DEV_3FC5&REV_68
+%DeviceDescHdsp2% = hdsp, PCI\VEN_10EE&DEV_3FC5&REV_69
+%DeviceDescHdsp2% = hdsp, PCI\VEN_10EE&DEV_3FC5&REV_6A
+%DeviceDescHdsp2% = hdsp, PCI\VEN_10EE&DEV_3FC5&REV_6B
+%DeviceDescHdsp2% = hdsp, PCI\VEN_10EE&DEV_3FC5&REV_6C
+
+%DeviceDescHdsp3% = hdsp, PCI\VEN_10EE&DEV_3FC5&REV_96
+%DeviceDescHdsp3% = hdsp, PCI\VEN_10EE&DEV_3FC5&REV_97
+%DeviceDescHdsp3% = hdsp, PCI\VEN_10EE&DEV_3FC5&REV_98
+%DeviceDescHdsp3% = hdsp, PCI\VEN_10EE&DEV_3FC5&REV_99
+%DeviceDescHdsp3% = hdsp, PCI\VEN_10EE&DEV_3FC5&REV_9A
+
+
+[hdsp]
+CopyFiles = hdsp.CopyFiles.User, hdsp.CopyFiles.Kern,hdsp.Del
+AddReg = hdsp.AddReg, ASIO.reg
+Reboot = 1
+
+[hdsp.CopyFiles.User]
+hdspmme.dll
+hdsp32.exe
+hdspmix.exe
+hdspasio.dll
+
+[hdsp.CopyFiles.Kern]
+hdsp.sys
+
+[hdsp.Del]
+hdsp32.inf
+
+[DestinationDirs]
+hdsp.CopyFiles.User = 11
+hdsp.CopyFiles.Kern = 12
+hdsp.Del = 17
+
+[hdsp.AddReg]
+HKR,Drivers,SubClasses,,"wave,midi"
+HKR,"Drivers\wave\hdspmme.dll", Driver,,hdspmme.dll
+HKR,"Drivers\wave\hdspmme.dll", Description,,%desc%
+HKR,"Drivers\midi\hdspmme.dll", Driver,,hdspmme.dll
+HKR,"Drivers\midi\hdspmme.dll", Description,,%desc%
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Run,HDSPTray1,,"hdsp32.exe"
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Run,HDSPTray2,,"hdspmix.exe"
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\HDSP,DisplayName,,"RME Hammerfall DSP"
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\HDSP,DisplayVersion,,"2.9.4.3"
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\HDSP,UninstallString,,"rundll32.exe setupapi.dll,InstallHinfSection DefaultUninstall 132 %17%\hdsp32.inf"
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\HDSP,Publisher,,"RME Intelligent Audio Solutions"
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\HDSP,UrlInfoAbout,,"http://www.rme-audio.de"
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\HDSP,UrlUpdateInfo,,"http://www.rme-audio.de"
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\HDSP,HelpLink,,"http://www.rme-audio.de"
+
+[ASIO.reg]
+HKLM,SOFTWARE\ASIO\%String3%,CLSID,0,%String4%
+HKLM,SOFTWARE\ASIO\%String3%,Description,0,%String3%
+HKCR,CLSID\%String4%,,0,%String3%
+HKCR,CLSID\%String4%\InProcServer32,,0,%11%\hdspasio.dll
+HKCR,CLSID\%String4%\InProcServer32,ThreadingModel,0,Apartment
+
+[DefaultUninstall]
+DelReg = Remove
+DelFiles = hdsp.Del, hdsp.CopyFiles.User, hdsp.CopyFiles.Kern
+Reboot = 1
+
+[Remove]
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\HDSP
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Run,HDSPTray1,,"hdsp32.exe"
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Run,HDSPTray2,,"hdspmix.exe"
+HKLM,SOFTWARE\ASIO\%String3%
+HKCR,CLSID\%String4%
+
+[hdsp.Services]
+AddService = hdsp, 0x00000002 , hdsp_Service_Inst
+
+[hdsp_Service_Inst]
+DisplayName    = %RME_ServiceName%
+ServiceType    = 1
+StartType      = 3
+ErrorControl   = 1
+ServiceBinary  = %12%\hdsp.sys
+
+[SourceDisksNames.NTx86]
+222 = "RME Driver Installation Disk",,,
+
+[SourceDisksFiles.NTx86]
+hdspmme.dll = 222
+hdsp32.exe = 222
+hdspmix.exe = 222
+hdspasio.dll = 222
+hdsp.sys = 222
+hdsp32.inf = 222
+
+[Strings]
+String3 = "ASIO Hammerfall DSP"
+String4 = "{3EAAC920-2DDD-11d5-A3DB-00E07D740F3E}"
+DeviceDescHdsp1 = "RME Hammerfall DSP"
+DeviceDescHdsp2 = "RME HDSP 9652"
+DeviceDescHdsp3 = "RME HDSP 9632"
+desc = "RME Hammerfall DSP series PnP driver"
+RME_ServiceName = "RME Hammerfall Audio Device"
+;--------------------------------------------
+

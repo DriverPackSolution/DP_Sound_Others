@@ -1,0 +1,439 @@
+;;Copyright (c) 1998-2002 ALi Corporation. All rights reserved.
+[Version]
+Signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+provider=%ProviderName%
+;LayoutFile=layout.inf, layout1.inf, layout2.inf
+CatalogFile=ALi51WDM.cat
+DriverVer=04/03/2003,5.12.01.5260
+
+[Manufacturer]
+%MfgName%=ALiLabs
+
+[ALiLabs]
+
+%ALiAud.DeviceDesc%=ALiAudio_Toshiba,PCI\VEN_10B9&DEV_5451&SUBSYS_00011179	;Libretto/Satellite
+%ALiAud.DeviceDesc%=ALiAudio_Toshiba1,PCI\VEN_10B9&DEV_5451&SUBSYS_03011179	; (2002/10)
+%ALiAud.DeviceDesc%=ALiAudio_Toshib4,PCI\VEN_10B9&DEV_5451&SUBSYS_00041179	; (2001/10)
+
+[ControlFlags]
+ExcludeFromSelect=*
+
+[SourceDisksNames]
+1=%ALiAud_DiskDesc%,,,
+
+[SourceDisksFiles]
+ALi51wdm.sys=1
+ALi51Cpl.cpl=1
+ALi51Snd.exe=1
+
+[DestinationDirs]
+ALiLabs.CopyList		= 10,system32\drivers ; %SystemRoot%\system32\drivers
+CPL.CopyList			= 11                  ; %SystemRoot%\system
+
+[ALiAudio_Toshiba]
+AlsoInstall=KS.Registration(ks.inf), WDMAUDIO.Registration(wdmaudio.inf)
+CopyFiles=ALiLabs.CopyList,CPL.CopyList
+AddReg=ALiLabs.AddReg, Toshiba.AddReg, AcPm.AddReg, AcPm1.AddReg
+
+[ALiAudio_Toshiba1]
+AlsoInstall=KS.Registration(ks.inf), WDMAUDIO.Registration(wdmaudio.inf)
+CopyFiles=ALiLabs.CopyList,CPL.CopyList
+AddReg=ALiLabs.AddReg, Toshiba1.AddReg, AcPm.AddReg, AcPm1.AddReg
+
+[ALiAudio_Toshib4]
+AlsoInstall=KS.Registration(ks.inf), WDMAUDIO.Registration(wdmaudio.inf)
+CopyFiles=ALiLabs.CopyList,CPL.CopyList
+AddReg=ALiLabs.AddReg, Toshib4.AddReg, AcPm.AddReg, AcPm1.AddReg
+
+;------------------------------------------------------------------
+[ALiAudio_Toshiba.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,ALiWDM.I.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,ALiWDM.I.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,ALiWDM.I.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,ALiWDM.I.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,ALiWDM.I.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,ALiWDM.I.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,ALiWDM.I.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,ALiWDM.I.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wavetable%,ALiWDM.I.Wavetable
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wavetable%,ALiWDM.I.Wavetable
+
+[ALiAudio_Toshiba1.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,ALiWDM.I.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,ALiWDM.I.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,ALiWDM.I.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,ALiWDM.I.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,ALiWDM.I.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,ALiWDM.I.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,ALiWDM.I.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,ALiWDM.I.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wavetable%,ALiWDM.I.Wavetable
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wavetable%,ALiWDM.I.Wavetable
+
+[ALiWDM.I.Wave]
+AddReg=ALiWDM.I.Wave.AddReg
+
+[ALiWDM.I.Wave.AddReg]
+HKR,,FriendlyName,,%ALiAud.Wave.szPname%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[ALiWDM.I.Topology]
+AddReg=ALiWDM.I.Topo.AddReg
+
+;; warning!! must be "Topo" because "Topology" is too long
+[ALiWDM.I.Topo.AddReg]
+HKR,,FriendlyName,,%ALiAud.Topology.szPname%
+
+[ALiWDM.I.UART]
+AddReg=ALiWDM.I.UART.AddReg
+
+[ALiWDM.I.UART.AddReg]
+HKR,,FriendlyName,,%ALiAud.UART.szPname%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[ALiWDM.I.Wavetable]
+AddReg=ALiWDM.I.WTBL.AddReg
+
+[ALiWDM.I.WTBL.AddReg]
+HKR,,FriendlyName,,%ALiAud.Wavetable.szPname%
+HKR,,CLSID,,%Proxy.CLSID%
+
+
+
+;------------------------------------------------------------------
+[ALiLabs.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,ali51wdm.sys
+HKR,,NTMPDriver,,"ali51wdm.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv, Description,,%ALiAud.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv, Description,,%WDM_MIDI%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%ALiAud.DeviceDesc%
+
+;; GUIDs for Mixer Pin and Node names
+HKLM,%MediaCategories%\%ALiAudGUID.WaveTable%,Name,,%ALiAudPin.WaveTable%
+HKLM,%MediaCategories%\%ALiAudGUID.WaveTable%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ALiAudGUID.LineOut%,Name,,%ALiAudPin.LineOut%
+HKLM,%MediaCategories%\%ALiAudGUID.LineOut%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ALiAudGUID.Microphone%,Name,,%ALiAudPin.Microphone%
+HKLM,%MediaCategories%\%ALiAudGUID.Microphone%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ALiAudGUID.PcBeep%,Name,,%ALiAudPin.PcBeep%
+HKLM,%MediaCategories%\%ALiAudGUID.PcBeep%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ALiAudGUID.Video%,Name,,%ALiAudPin.Video%
+HKLM,%MediaCategories%\%ALiAudGUID.Video%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ALiAudGUID.Phone%,Name,,%ALiAudPin.Phone%
+HKLM,%MediaCategories%\%ALiAudGUID.Phone%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ALiAudGUID.PCMOut%,Name,,%ALiAudPin.PCMOut%
+HKLM,%MediaCategories%\%ALiAudGUID.PCMOut%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ALiAudGUID.LineIn%,Name,,%ALiAudPin.LineIn%
+HKLM,%MediaCategories%\%ALiAudGUID.LineIn%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ALiAudGUID.SteroMix%,Name,,%ALiAudPin.SteroMix%
+HKLM,%MediaCategories%\%ALiAudGUID.SteroMix%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ALiAudGUID.MonoMix%,Name,,%ALiAudPin.MonoMix%
+HKLM,%MediaCategories%\%ALiAudGUID.MonoMix%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ALiAudGUID.3DControl%,Name,,%ALiAudPin.3DControl%
+HKLM,%MediaCategories%\%ALiAudGUID.3DControl%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ALiAudGUID.3DDeepth%,Name,,%ALiAudPin.3DDeepth%
+HKLM,%MediaCategories%\%ALiAudGUID.3DDeepth%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ALiAudGUID.I2S%,Name,,%ALiAudPin.I2S%
+HKLM,%MediaCategories%\%ALiAudGUID.I2S%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ALiAudGUID.SPDIF%,Name,,%ALiAudPin.SPDIF%
+HKLM,%MediaCategories%\%ALiAudGUID.SPDIF%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ALiAudGUID.AGC%,Name,,%ALiAudPin.AGC%
+HKLM,%MediaCategories%\%ALiAudGUID.AGC%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ALiAudGUID.SURROUND%,Name,,%ALiAudPin.SURROUND%
+HKLM,%MediaCategories%\%ALiAudGUID.SURROUND%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ALiAudGUID.MicSelect%,Name,,%ALiAudPin.MicSelect%
+HKLM,%MediaCategories%\%ALiAudGUID.MicSelect%,Display,1,00,00,00,00
+
+[Toshiba.AddReg]
+HKR,%PARS%,SoftModem,1,01
+HKR,%SETS%,Master,1,05,05
+;HKR,%SETS%,HeadPhone,1,00,00
+;HKR,%SETS%,MasterMono,1,00,00
+;HKR,%SETS%,MasterTone,1,00,00
+HKR,%SETS%,PCBeep,1,04,00
+HKR,%SETS%,PCPhone,1,01,00
+HKR,%SETS%,Mic,1,09,80
+HKR,%SETS%,LineIn,1,05,05
+HKR,%SETS%,CDIn,1,09,09
+HKR,%SETS%,Video,1,04,84
+HKR,%SETS%,AUX,1,04,84
+HKR,%SETS%,PCMOut,1,08,08
+;HKR,%SETS%,RecordSelect,1,00,00
+HKR,%SETS%,RecordGain,1,0b,0b
+;HKR,%SETS%,RecordGainMic,1,00,00
+;HKR,%SETS%,3DControl,1,00,00
+HKR,%SETS%,Surround,1,02,02
+HKR,%SETS%,MicAGC,1,ff,ff
+HKR,%SETS%,INRecord,1,00,50,fa,ff
+HKR,%SETS%,INMic,1,00,50,fa,ff
+HKR,%SETS%,INCD,1,00,50,fa,ff
+HKR,%SETS%,INVideo,1,00,50,fa,ff
+HKR,%SETS%,INAUX,1,00,50,fa,ff
+HKR,%SETS%,INLine,1,00,50,fa,ff
+HKR,%SETS%,INSMix,1,00,50,fa,ff
+HKR,%SETS%,INMMix,1,00,50,fa,ff
+HKR,%SETS%,INPhone,1,00,50,fa,ff
+HKR,%SETS%,INI2S,1,00,50,fa,ff
+HKR,%SETS%,OUTWave,1,ff,ff
+HKR,%SETS%,OUTMusic,1,ff,ff
+HKR,%SETS%,MaxLineIn,1,03,00
+HKR,%SETS%,MaxCDIn,1,05,00
+HKR,%SETS%,MaxPCMOut,1,00,80
+;HKR,%SETS%,MaxPCBeep,1,00,80
+HKR,%SETS%,MaxVideo,1,00,80
+HKR,%SETS%,Max3DDepth,1,00,80
+HKR,%SETS%,MaxRecI2S,1,00,80
+HKR,%SETS%,MaxRecVideo,1,00,80
+;HKR,%SETS%,MaxRecPCBeep,1,00,80
+HKR,%SETS%,MaxRecPhone,1,00,80
+
+[Toshiba1.AddReg]
+HKR,%PARS%,SoftModem,1,01
+HKR,%SETS%,Master,1,05,05
+;HKR,%SETS%,HeadPhone,1,00,00
+;HKR,%SETS%,MasterMono,1,00,00
+;HKR,%SETS%,MasterTone,1,00,00
+HKR,%SETS%,PCBeep,1,04,00
+HKR,%SETS%,PCPhone,1,01,00
+HKR,%SETS%,Mic,1,09,80
+HKR,%SETS%,LineIn,1,05,05
+HKR,%SETS%,CDIn,1,09,09
+HKR,%SETS%,Video,1,04,84
+HKR,%SETS%,AUX,1,04,84
+HKR,%SETS%,PCMOut,1,08,08
+;HKR,%SETS%,RecordSelect,1,00,00
+HKR,%SETS%,RecordGain,1,0b,0b
+;HKR,%SETS%,RecordGainMic,1,00,00
+;HKR,%SETS%,3DControl,1,00,00
+HKR,%SETS%,Surround,1,02,02
+HKR,%SETS%,MicAGC,1,ff,ff
+HKR,%SETS%,INRecord,1,00,50,fa,ff
+HKR,%SETS%,INMic,1,00,50,fa,ff
+HKR,%SETS%,INCD,1,00,50,fa,ff
+HKR,%SETS%,INVideo,1,00,50,fa,ff
+HKR,%SETS%,INAUX,1,00,50,fa,ff
+HKR,%SETS%,INLine,1,00,50,fa,ff
+HKR,%SETS%,INSMix,1,00,50,fa,ff
+HKR,%SETS%,INMMix,1,00,50,fa,ff
+HKR,%SETS%,INPhone,1,00,50,fa,ff
+HKR,%SETS%,INI2S,1,00,50,fa,ff
+HKR,%SETS%,OUTWave,1,ff,ff
+HKR,%SETS%,OUTMusic,1,ff,ff
+HKR,%SETS%,MaxLineIn,1,03,00
+HKR,%SETS%,MaxCDIn,1,05,00
+HKR,%SETS%,MaxPCMOut,1,00,80
+;HKR,%SETS%,MaxPCBeep,1,00,80
+HKR,%SETS%,MaxVideo,1,00,80
+HKR,%SETS%,Max3DDepth,1,00,80
+HKR,%SETS%,MaxRecI2S,1,00,80
+HKR,%SETS%,MaxRecVideo,1,00,80
+;HKR,%SETS%,MaxRecPCBeep,1,00,80
+HKR,%SETS%,MaxRecPhone,1,00,80
+HKLM,SYSTEM\CurrentControlSet\Services\ALiADWDM\TOSHIBA\ALiModem,PCIID,0x00010001,79,11,01,00
+
+[Toshib4.AddReg]
+HKR,%PARS%,SoftModem,1,01
+HKR,%SETS%,Master,1,05,05
+HKR,%SETS%,PCBeep,1,06,00
+HKR,%SETS%,PCPhone,1,08,00
+HKR,%SETS%,Mic,1,09,80
+HKR,%SETS%,LineIn,1,05,05
+HKR,%SETS%,CDIn,1,09,09
+HKR,%SETS%,Video,1,04,84
+HKR,%SETS%,AUX,1,08,08
+HKR,%SETS%,PCMOut,1,08,08
+HKR,%SETS%,RecordSelect,1,00,00
+HKR,%SETS%,RecordGain,1,0b,0b
+HKR,%SETS%,RecordGainMic,1,00,00
+HKR,%SETS%,Surround,1,02,02
+HKR,%SETS%,MicAGC,1,ff,ff
+HKR,%SETS%,INRecord,1,00,50,fa,ff
+HKR,%SETS%,INMic,1,00,50,fa,ff
+HKR,%SETS%,INCD,1,00,50,fa,ff
+HKR,%SETS%,INVideo,1,00,50,fa,ff
+HKR,%SETS%,INAUX,1,00,50,fa,ff
+HKR,%SETS%,INLine,1,00,50,fa,ff
+HKR,%SETS%,INSMix,1,00,50,fa,ff
+HKR,%SETS%,INMMix,1,00,50,fa,ff
+HKR,%SETS%,INPhone,1,00,50,fa,ff
+HKR,%SETS%,INI2S,1,00,50,fa,ff
+HKR,%SETS%,OUTWave,1,ff,ff
+HKR,%SETS%,OUTMusic,1,ff,ff
+HKR,%SETS%,MaxLineIn,1,03,00
+HKR,%SETS%,MaxCDIn,1,05,00
+HKR,%SETS%,MaxPCMOut,1,08,80
+HKR,%SETS%,MaxVideo,1,00,80
+HKR,%SETS%,Max3DDepth,1,00,80
+HKR,%SETS%,MaxRecI2S,1,00,80
+HKR,%SETS%,MaxRecVideo,1,00,80
+HKLM,SYSTEM\CurrentControlSet\Services\ALiADWDM\TOSHIBA\ALiModem,PCIID,0x00010001,79,11,01,00
+
+[AcPm.AddReg]
+HKLM,%SERV%,PmEnable,1,01
+HKLM,%SERV%,PmTimer,1,02
+HKLM,%SERV%,PmDynamic,1,01
+[AcPm1.AddReg]
+HKLM,"SOFTWARE\Microsoft\Windows\CurrentVersion\Run",ALi51Snd,,"ALi51Snd.exe"
+;HKLM,"SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce",ALi51Snd,,"ALi51Snd.exe"
+
+[ALiLabs.CopyList]
+ali51wdm.sys
+
+[CPL.CopyList]
+ALi51Cpl.cpl
+ALi51Snd.exe
+
+
+;;**************** NT Install ****************
+;;--------------------------------------------------------
+;;                  Native
+;;--------------------------------------------------------
+[ALiAudio_Toshiba.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=ALiLabs.CopyList,CPL.CopyList
+AddReg=ALiLabs.AddReg, Toshiba.AddReg, AcPm.AddReg
+
+[ALiAudio_Toshiba1.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=ALiLabs.CopyList,CPL.CopyList
+AddReg=ALiLabs.AddReg, Toshiba1.AddReg, AcPm.AddReg
+
+[ALiAudio_Toshib4.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=ALiLabs.CopyList,CPL.CopyList
+AddReg=ALiLabs.AddReg, Toshib4.AddReg, AcPm.AddReg
+
+;------------------------------------------------------------------
+[ALiAudio_Toshiba.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,ALiWDM.I.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,ALiWDM.I.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,ALiWDM.I.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,ALiWDM.I.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,ALiWDM.I.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,ALiWDM.I.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,ALiWDM.I.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,ALiWDM.I.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wavetable%,ALiWDM.I.Wavetable
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wavetable%,ALiWDM.I.Wavetable
+
+[ALiAudio_Toshiba1.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,ALiWDM.I.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,ALiWDM.I.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,ALiWDM.I.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,ALiWDM.I.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,ALiWDM.I.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,ALiWDM.I.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,ALiWDM.I.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,ALiWDM.I.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wavetable%,ALiWDM.I.Wavetable
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wavetable%,ALiWDM.I.Wavetable
+
+[ALiAudio_Toshiba.NT.Services]
+AddService = aliadwdm,   0x00000002,     ALiAudio_Service_Inst
+
+[ALiAudio_Toshiba1.NT.Services]
+AddService = aliadwdm,   0x00000002,     ALiAudio_Service_Inst
+
+[ALiAudio_Toshib4.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,ALiWDM.I.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,ALiWDM.I.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,ALiWDM.I.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,ALiWDM.I.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,ALiWDM.I.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,ALiWDM.I.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,ALiWDM.I.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,ALiWDM.I.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wavetable%,ALiWDM.I.Wavetable
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wavetable%,ALiWDM.I.Wavetable
+
+[ALiAudio_Toshib4.NT.Services]
+AddService = aliadwdm,   0x00000002,     ALiAudio_Service_Inst
+
+[ALiAudio_Service_Inst]
+DisplayName    = %ALiAud.DeviceDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\ali51wdm.sys
+
+[Strings]
+ProviderName="ALi Corporation."
+MfgName="ALi Corporation."
+ALiAud.DeviceDesc="ALi Audio Accelerator WDM Driver"
+ALiAud_DiskDesc="ALi Audio Accelerator WDM Driver Disk"
+
+ALiAud.Wave.szPname="ALi Audio Wave"
+ALiAud.Topology.szPname="ALi Audio Mixer"
+ALiAud.UART.szPname="MPU-401"
+ALiAud.Wavetable.szPname="ALi Wavetable"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+KSNAME_Wave="Wave"
+KSNAME_UART="UART"
+KSNAME_FMSynth="FMSynth"
+KSNAME_Topology="Topology"
+KSNAME_Wavetable="Wavetable"
+
+PARS="Parameters"
+SETS="Settings"
+SERV="SYSTEM\CurrentControlSet\Services\ALiADWDM\Parameters"
+WDM_MIDI="WDM-based Device"
+
+; Nodes
+ALiAudGUID.WaveTable	="{BC09A5E0-35B4-11d2-BE7A-0000210155AD}"
+ALiAudGUID.LineOut	="{BC09A5E1-35B4-11d2-BE7A-0000210155AD}"
+ALiAudGUID.Microphone	="{BC09A5E2-35B4-11d2-BE7A-0000210155AD}"
+ALiAudGUID.PcBeep	="{BC09A5E3-35B4-11d2-BE7A-0000210155AD}"
+ALiAudGUID.Video	="{BC09A5E4-35B4-11d2-BE7A-0000210155AD}"
+ALiAudGUID.Phone	="{BC09A5E5-35B4-11d2-BE7A-0000210155AD}"
+ALiAudGUID.PCMOut	="{BC09A5E6-35B4-11d2-BE7A-0000210155AD}"
+ALiAudGUID.LineIn	="{BC09A5E7-35B4-11d2-BE7A-0000210155AD}"
+ALiAudGUID.SteroMix	="{BC09A5E8-35B4-11d2-BE7A-0000210155AD}"
+ALiAudGUID.MonoMix	="{BC09A5E9-35B4-11d2-BE7A-0000210155AD}"
+ALiAudGUID.3DControl	="{BC09A5EA-35B4-11d2-BE7A-0000210155AD}"
+ALiAudGUID.3DDeepth	="{BC09A5EB-35B4-11d2-BE7A-0000210155AD}"
+ALiAudGUID.I2S		="{BC09A5EC-35B4-11d2-BE7A-0000210155AD}"
+ALiAudGUID.SPDIF	="{BC09A5ED-35B4-11d2-BE7A-0000210155AD}"
+ALiAudGUID.AGC		="{BC09A5EE-35B4-11d2-BE7A-0000210155AD}"
+ALiAudGUID.SURROUND	="{BC09A5EF-35B4-11d2-BE7A-0000210155AD}"
+ALiAudGUID.RECORDING	="{BC09A5F0-35B4-11d2-BE7A-0000210155AD}"
+ALiAudGUID.MicSelect	="{E1A24905-B451-4f9c-8BE6-4F10252C80AF}"
+
+;; Nodes (localizeable)
+ALiAudPin.WaveTable	="MIDI"
+ALiAudPin.LineOut	="Line"
+ALiAudPin.Microphone	="Microphone"
+ALiAudPin.PcBeep	="PC Beep"
+ALiAudPin.Video		="Video"
+ALiAudPin.Phone		="Phone"
+ALiAudPin.PCMOut	="PCM Out"
+ALiAudPin.LineIn	="Line In"
+ALiAudPin.SteroMix	="StereoMix"
+ALiAudPin.MonoMix	="MonoMix"
+ALiAudPin.3DControl	="3D Control"
+ALiAudPin.3DDeepth	="3D Depth"
+ALiAudPin.I2S		="I2S"
+ALiAudPin.SPDIF		="S/PDIF"
+ALiAudPin.AGC		="Microphone Boost"
+ALiAudPin.SURROUND	="Surround"
+ALiAudPin.RECORDING	="Recording"
+ALiAudPin.MicSelect	="Alternate Microphone"

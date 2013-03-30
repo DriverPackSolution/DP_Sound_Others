@@ -1,0 +1,194 @@
+;===============================================================
+; TerraTec Aureon 5.1 USB
+; Driver Install Script for WDM 
+;---------------------------------------------------------------
+; Copyright: (c) 2003, TerraTec Electronic GmbH
+;
+; History:
+;   11-Jul-2003 (CL) - Initial version
+;===============================================================
+
+[Version]
+;CatalogFile=wdma_usb.cat
+Signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+provider=%MSFT%
+LayoutFile=layout.inf, layout1.inf, layout2.inf
+DriverVer=07/11/2003, 5.11.3.3508
+
+[Manufacturer]
+%MfgName%=Terratec
+
+
+;============================================================================
+
+[Terratec]
+%Aureon_USB_Device5_1.DeviceDesc%=USBAudio,USB\VID_0CCD&PID_0028&MI_00
+
+
+[DestinationDirs]
+USBAudio.CopyList     = 10,system32\drivers ; %SystemRoot%\system32\drivers
+sensaura.CopyList=10,system ; Not!! system32
+Audio3D.CopyList=11
+DefaultDestDir=12
+
+;============================================================================
+
+[USBAudio]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=USBAudio.CopyList
+AddReg=USBAudio.AddReg,SensauraConfiguration.AddReg
+KnownFiles = USBAudio.KnownFiles
+DriverVer=07/11/2003
+
+[USBAudio.HW]
+AddReg=Sensaura.AddReg
+
+[USBAudio.NoCurve]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=USBAudio.CopyList,Audio3D.CopyList,sensaura.CopyList
+AddReg=USBAudio.AddReg
+KnownFiles = USBAudio.KnownFiles
+
+;============================================================================
+
+[USBAudio.Interfaces]
+AddInterface={6994ad04-93ef-11d0-a3cc-00a0c9223196},"GLOBAL",USBAudio.Interface.Curve,
+
+[USBAudio.Interface.Curve]
+AddReg=USBAudio.Interface.Addreg.Curve
+
+;[USBAudio.Interface.AddReg.Curve]
+;HKR,,CurveType,1,01,00,00,00
+
+
+[USBAudio.Interface.AddReg.Curve]
+HKR,,FriendlyName,,%USBGenericDesc%
+HKR,,CurveType,1,01,00,00,00
+HKR,,CLSID,,%Proxy.CLSID%
+
+;============================================================================
+
+[USBAudio.AddReg]
+;; Usb audio specific regestry update sutff
+HKR,,SetupPreferredAudioDevices,3,01,00,00,00
+HKR,,AssociatedFilters,,"wdmaud,redbook"
+HKR,,Driver,,USBAUDIO.sys
+HKR,,NTMPDriver,,"USBAUDIO.sys,sbemul.sys"
+
+HKR,,CLSID,,{17CCA71B-ECD7-11D0-B908-00A0C9223196}
+
+HKR,Drivers,SubClasses,,"wave,mixer,aux,midi"
+
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\aux\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\wave\wdmaud.drv,Description,,%USBGenericDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%USBGenericDesc%
+HKR,Drivers\aux\wdmaud.drv,Description,,%USBGenericDesc%
+HKR,Drivers\midi\wdmaud.drv,Description,,%USBGenericDesc%
+
+;-------------------------------------------------------------------------------
+;	Sensaura Filter
+;-------------------------------------------------------------------------------
+
+[Sensaura.AddReg]
+HKR,,UpperFilters,0x00010000,ausens.sys
+
+[Sensaura.AddReg.NT]
+HKR,,UpperFilters,0x00010000,"ausens"
+
+[SensauraConfiguration.AddReg]
+HKR,Sensaura\Configuration,ForwardSpeakerConfiguration,0x00010001,1
+HKR,Sensaura\Configuration,IgnoreDSSpeakerConfiguration,0x00010001,0
+
+
+[Audio3D.AddReg]
+HKCR,Audio3D,,0,Audio3DObject
+HKCR,Audio3D\CLSID,,0,%Audio3D_CLSID%
+HKCR,CLSID\%Audio3D_CLSID%,,0,Audio3DObject
+HKCR,CLSID\%Audio3D_CLSID%\InProcServer32,,0,Audio3D.dll
+HKCR,CLSID\%Audio3D_CLSID%\InProcServer32,ThreadingModel,0,Apartment
+
+
+;============================================================================
+
+[USBAudio.CopyList]
+USBAUDIO.sys
+ausens.sys
+
+[sensaura.CopyList]
+crlds3d.dll
+
+[Audio3D.CopyList]
+a3d.dll,Audio3D.dll,,4
+Audio3D.dll
+
+[USBAudio.KnownFiles]
+usbaudio.sys.4.10.0 = safe
+
+;;**************** NT Install ****************
+
+[USBAudio.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration.NT
+CopyFiles=USBAudio.CopyList,Audio3D.CopyList,sensaura.CopyList
+AddReg=USBAudio.AddReg,SensauraConfiguration.AddReg
+
+[USBAudio.NT.HW]
+AddReg=Sensaura.AddReg.NT
+
+;; No interfaces???
+
+[USBAudio.NT.Services]
+AddService = wdmaud,  0x00000000, wdmaud_Service_Inst
+AddService = usbaudio,0x00000002, usbaudio_Service_Inst
+AddService = ausens, 0x00000000, Sensaura_Service_Inst
+
+[wdmaud_Service_Inst]
+DisplayName    = %wdmaud.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 1                  ; SERVICE_SYSTEM_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\wdmaud.sys
+
+[usbaudio_Service_Inst]
+DisplayName    = %USBAudio.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 1                  ; SERVICE_SYSTEM_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\usbaudio.sys
+
+[Sensaura_Service_Inst]
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_SYSTEM_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\ausens.sys
+
+;============================================================================
+
+[Strings]
+MSFT="Terratec"
+MfgName="Terratec"
+
+Aureon_USB_Device5_1.DeviceDesc="Aureon 5.1 USB"
+USBGenericDesc="Aureon 5.1 USB" 
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+
+wdmaud.SvcDesc = "Microsoft WDM Virtual Wave Driver (WDM)"
+USBAudio.SvcDesc="USB Audio Driver (WDM)"
+
+Proxy.CLSID = "{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+
+;----------------------------------------------------------
+; Sensaura
+;----------------------------------------------------------
+Sensaura="Sensaura Ltd"
+Audio3D_CLSID="{D8F1EEE0-F634-11CF-8700-00A0245D918B}"
+DevName="Sensaura Audio3D(tm) API"

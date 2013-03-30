@@ -1,0 +1,345 @@
+;
+;C-Media USB Audio Class 1.0/2.0 UAC Driver
+;
+
+[Version]
+signature="$WINDOWS NT$"
+Class=Media
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%CMEDIA%
+Catalogfile=asusstu.cat
+DriverVer=07/03/2012,7.0.11.5
+
+[SourceDisksNames]
+1000=%cdname%,,,
+
+[SourceDisksFiles]
+ASUSSTU.SYS=1000
+
+[SourceDisksFiles.x86]
+ASUSSTU.SYS=1000,\x86
+
+[SourceDisksFiles.amd64]
+ASUSSTU.SYS=1000,\x64
+
+[DestinationDirs]
+DefaultDestDir=12
+ASUSSTU.CopyFiles=12
+
+[ASUSSTU.CopyFiles]
+ASUSSTU.SYS
+
+[Manufacturer]
+%ASUSTEK%=ASUS,NTamd64
+
+[ASUS]
+%ASUSSTU.DeviceDesc%=ASUSSTU, USB\VID_0B05&PID_17A8&MI_00
+
+[ASUS.NTamd64]
+%ASUSSTU.DeviceDesc%=ASUSSTU, USB\VID_0B05&PID_17A8&MI_00
+
+
+;---------------------------------------------------------------
+;                x 86  D D I n s t a l l
+;---------------------------------------------------------------
+[ASUSSTU]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+AddReg=ASUSSTU.AddReg, ASUS_NAMES.AddReg
+AddProperty=OEMCustomBranding.AddProperty
+CopyFiles=ASUSSTU.CopyFiles
+
+
+;---------------------------------------------------------------
+;                A M D 64  D D I n s t a l l
+;---------------------------------------------------------------
+[ASUSSTU.NTamd64]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+AddReg=ASUSSTU.AddReg, ASUS_NAMES.AddReg
+AddProperty=OEMCustomBranding.AddProperty
+CopyFiles=ASUSSTU.CopyFiles
+
+[OEMCustomBranding.AddProperty]
+DeviceVendorWebSite,,,,"http://www.asus.com/" ; Place your URL here
+
+;---------------------------------------------------------------
+;                I n t e r f a c e s
+;---------------------------------------------------------------
+
+[ASUSSTU.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_SPEAKER.WAVE%,Audio.I.SPEAKER.WAVE
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_SPEAKER.WAVE%,Audio.I.SPEAKER.WAVE
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_SPEAKER.TOPO%,Audio.I.SPEAKER.TOPO
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_SPEAKER.TOPO%,Audio.I.SPEAKER.TOPO
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_SPDIFOUT.WAVE%,Audio.I.SPDIFOUT.WAVE
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_SPDIFOUT.WAVE%,Audio.I.SPDIFOUT.WAVE
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_SPDIFOUT.TOPO%,Audio.I.SPDIFOUT.TOPO
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_SPDIFOUT.TOPO%,Audio.I.SPDIFOUT.TOPO
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_HPOUT.WAVE%,Audio.I.HPOUT.WAVE
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_HPOUT.WAVE%,Audio.I.HPOUT.WAVE
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_HPOUT.TOPO%,Audio.I.HPOUT.TOPO
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_HPOUT.TOPO%,Audio.I.HPOUT.TOPO
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_RECIN.WAVE%,Audio.I.RECIN.WAVE
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_RECIN.WAVE%,Audio.I.RECIN.WAVE
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_RECIN.TOPO%,Audio.I.RECIN.TOPO
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_RECIN.TOPO%,Audio.I.RECIN.TOPO
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_MICIN.WAVE%,Audio.I.MICIN.WAVE
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_MICIN.WAVE%,Audio.I.MICIN.WAVE
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_MICIN.TOPO%,Audio.I.MICIN.TOPO
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_MICIN.TOPO%,Audio.I.MICIN.TOPO
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_LINEIN.WAVE%,Audio.I.LINEIN.WAVE
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_LINEIN.WAVE%,Audio.I.LINEIN.WAVE
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_LINEIN.TOPO%,Audio.I.LINEIN.TOPO
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_LINEIN.TOPO%,Audio.I.LINEIN.TOPO
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_SPDIFIN.WAVE%,Audio.I.SPDIFIN.WAVE
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_SPDIFIN.WAVE%,Audio.I.SPDIFIN.WAVE
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_SPDIFIN.TOPO%,Audio.I.SPDIFIN.TOPO
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_SPDIFIN.TOPO%,Audio.I.SPDIFIN.TOPO
+
+[ASUSSTU.NTamd64.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_SPEAKER.WAVE%,Audio.I.SPEAKER.WAVE
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_SPEAKER.WAVE%,Audio.I.SPEAKER.WAVE
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_SPEAKER.TOPO%,Audio.I.SPEAKER.TOPO
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_SPEAKER.TOPO%,Audio.I.SPEAKER.TOPO
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_SPDIFOUT.WAVE%,Audio.I.SPDIFOUT.WAVE
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_SPDIFOUT.WAVE%,Audio.I.SPDIFOUT.WAVE
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_SPDIFOUT.TOPO%,Audio.I.SPDIFOUT.TOPO
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_SPDIFOUT.TOPO%,Audio.I.SPDIFOUT.TOPO
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_HPOUT.WAVE%,Audio.I.HPOUT.WAVE
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_HPOUT.WAVE%,Audio.I.HPOUT.WAVE
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_HPOUT.TOPO%,Audio.I.HPOUT.TOPO
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_HPOUT.TOPO%,Audio.I.HPOUT.TOPO
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_RECIN.WAVE%,Audio.I.RECIN.WAVE
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_RECIN.WAVE%,Audio.I.RECIN.WAVE
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_RECIN.TOPO%,Audio.I.RECIN.TOPO
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_RECIN.TOPO%,Audio.I.RECIN.TOPO
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_MICIN.WAVE%,Audio.I.MICIN.WAVE
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_MICIN.WAVE%,Audio.I.MICIN.WAVE
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_MICIN.TOPO%,Audio.I.MICIN.TOPO
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_MICIN.TOPO%,Audio.I.MICIN.TOPO
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_LINEIN.WAVE%,Audio.I.LINEIN.WAVE
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_LINEIN.WAVE%,Audio.I.LINEIN.WAVE
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_LINEIN.TOPO%,Audio.I.LINEIN.TOPO
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_LINEIN.TOPO%,Audio.I.LINEIN.TOPO
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_SPDIFIN.WAVE%,Audio.I.SPDIFIN.WAVE
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_SPDIFIN.WAVE%,Audio.I.SPDIFIN.WAVE
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_SPDIFIN.TOPO%,Audio.I.SPDIFIN.TOPO
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_SPDIFIN.TOPO%,Audio.I.SPDIFIN.TOPO
+
+
+[Audio.I.SPEAKER.WAVE]
+AddReg=ASUSSTU.I.SPEAKER.WAVE.AddReg
+
+[Audio.I.SPDIFOUT.WAVE]
+AddReg=ASUSSTU.I.SPDIFOUT.WAVE.AddReg
+
+[Audio.I.HPOUT.WAVE]
+AddReg=ASUSSTU.I.HPOUT.WAVE.AddReg
+
+[Audio.I.RECIN.WAVE]
+AddReg=ASUSSTU.I.RECIN.WAVE.AddReg
+
+[Audio.I.MICIN.WAVE]
+AddReg=ASUSSTU.I.MICIN.WAVE.AddReg
+
+[Audio.I.LINEIN.WAVE]
+AddReg=ASUSSTU.I.LINEIN.WAVE.AddReg
+
+[Audio.I.SPDIFIN.WAVE]
+AddReg=ASUSSTU.I.SPDIFIN.WAVE.AddReg
+
+[Audio.I.SPEAKER.TOPO]
+AddReg=ASUSSTU.I.SPEAKER.TOPO.AddReg
+
+[Audio.I.SPDIFOUT.TOPO]
+AddReg=ASUSSTU.I.SPDIFOUT.TOPO.AddReg
+
+[Audio.I.HPOUT.TOPO]
+AddReg=ASUSSTU.I.HPOUT.TOPO.AddReg
+
+[Audio.I.RECIN.TOPO]
+AddReg=ASUSSTU.I.RECIN.TOPO.AddReg
+
+[Audio.I.MICIN.TOPO]
+AddReg=ASUSSTU.I.MICIN.TOPO.AddReg
+
+[Audio.I.LINEIN.TOPO]
+AddReg=ASUSSTU.I.LINEIN.TOPO.AddReg
+
+[Audio.I.SPDIFIN.TOPO]
+AddReg=ASUSSTU.I.SPDIFIN.TOPO.AddReg
+
+;---------------------------------------------------------------
+;                A d d R e g
+;---------------------------------------------------------------
+[ASUSSTU.AddReg]
+HKR,,Driver,,ASUSSTU.sys
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,NTMPDriver,,"ASUSSTU.sys,sbemul.sys"
+HKR,Drivers,SubClasses,,"wave,midi,mixer,aux"
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\aux\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\wave\wdmaud.drv,Description,,%ASUSSTU.Audio.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%ASUSSTU.Audio.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv,Description,,%ASUSSTU.Audio.DeviceDesc%
+HKR,Drivers\aux\wdmaud.drv,Description,,%ASUSSTU.Audio.DeviceDesc%
+
+[ASUS_NAMES.AddReg]
+HKLM,%MediaCategories%\%ASUSGUID.SpdifOut%,Name,,%ASUSNode.SpdifOut%
+HKLM,%MediaCategories%\%ASUSGUID.SpdifOut%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ASUSGUID.SpdifIn%,Name,,%ASUSNode.SpdifIn%
+HKLM,%MediaCategories%\%ASUSGUID.SpdifIn%,Display,1,00,00,00,00
+
+[ASUSSTU.I.SPEAKER.WAVE.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%ASUSSTU.SPEAKER.WAVE.szPname%
+
+[ASUSSTU.I.SPDIFOUT.WAVE.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%ASUSSTU.SPDIFOUT.WAVE.szPname%
+
+[ASUSSTU.I.HPOUT.WAVE.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%ASUSSTU.HPOUT.WAVE.szPname%
+
+[ASUSSTU.I.RECIN.WAVE.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%ASUSSTU.RECIN.WAVE.szPname%
+
+[ASUSSTU.I.MICIN.WAVE.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%ASUSSTU.MICIN.WAVE.szPname%
+
+[ASUSSTU.I.LINEIN.WAVE.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%ASUSSTU.LINEIN.WAVE.szPname%
+
+[ASUSSTU.I.SPDIFIN.WAVE.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%ASUSSTU.SPDIFIN.WAVE.szPname%
+
+[ASUSSTU.I.SPEAKER.TOPO.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%ASUSSTU.SPEAKER.TOPO.szPname%
+
+[ASUSSTU.I.SPDIFOUT.TOPO.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%ASUSSTU.SPDIFOUT.TOPO.szPname%
+
+[ASUSSTU.I.HPOUT.TOPO.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%ASUSSTU.HPOUT.TOPO.szPname%
+
+[ASUSSTU.I.RECIN.TOPO.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%ASUSSTU.RECIN.TOPO.szPname%
+
+[ASUSSTU.I.MICIN.TOPO.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%ASUSSTU.MICIN.TOPO.szPname%
+
+[ASUSSTU.I.LINEIN.TOPO.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%ASUSSTU.LINEIN.TOPO.szPname%
+
+[ASUSSTU.I.SPDIFIN.TOPO.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%ASUSSTU.SPDIFIN.TOPO.szPname%
+
+;---------------------------------------------------------------
+;                S e r v i c e s  
+;---------------------------------------------------------------
+
+[ASUSSTU.Services]
+AddService=ASUSSTU, 0x00000002, ASUSSTU.ServiceInstall
+
+[ASUSSTU.NTamd64.Services]
+AddService=ASUSSTU, 0x00000002, ASUSSTU.ServiceInstall
+
+[ASUSSTU.ServiceInstall]
+DisplayName=%ASUSSTU.DeviceDesc%
+ServiceType=%SERVICE_KERNEL_DRIVER%
+StartType=%SERVICE_DEMAND_START%
+ErrorControl=%SERVICE_ERROR_NORMAL%
+ServiceBinary=%12%\ASUSSTU.SYS
+
+
+
+;---------------------------------------------------------------
+;                S t r i n g s
+;---------------------------------------------------------------
+
+[Strings]
+; non-localizeable
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_TOPOLOGY = "{DDA54A40-1E4C-11D1-A050-405705C10000}" ; non-localizable
+
+KSNAME_SPEAKER.WAVE="SPKOut00Wave"
+KSNAME_SPEAKER.TOPO="SPKOut00Topo"
+KSNAME_SPDIFOUT.WAVE="SPDIFOut00Wave"
+KSNAME_SPDIFOUT.TOPO="SPDIFOut00Topo"
+KSNAME_HPOUT.WAVE="HPOut00Wave"
+KSNAME_HPOUT.TOPO="HPOut00Topo"
+KSNAME_RECIN.WAVE="RecIn00Wave"
+KSNAME_RECIN.TOPO="RecIn00Topo"
+KSNAME_MICIN.WAVE="MicIn00Wave"
+KSNAME_MICIN.TOPO="MicIn00Topo"
+KSNAME_LINEIN.WAVE="LineIn00Wave"
+KSNAME_LINEIN.TOPO="LineIn00Topo"
+KSNAME_SPDIFIN.WAVE="SPDIFIn00Wave"
+KSNAME_SPDIFIN.TOPO="SPDIFIn00Topo"
+
+SERVICE_KERNEL_DRIVER=1
+SERVICE_DEMAND_START=3
+SERVICE_ERROR_NORMAL=1
+REG_DWORD=0x00010001
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+;localizeable
+ASUSGUID.SpdifOut	="{12C15946-BA58-42c1-9F11-8341E2198622}"
+ASUSGUID.SpdifIn	="{017D895C-7AE7-4f4d-B78C-CD1FFC0CE776}"
+
+CMEDIA="C-MEDIA Inc."
+ASUSTEK="ASUSTeK Computer Inc."
+
+ASUSSTU.DeviceDesc="ASUS STU USB2.0 Audio Device"
+ASUSSTU.SPEAKER.WAVE.szPname="ASUS Xonar Essence One"
+ASUSSTU.SPDIFOUT.WAVE.szPname="ASUS Xonar Essence One"
+ASUSSTU.HPOUT.WAVE.szPname="Headphone"
+ASUSSTU.RECIN.WAVE.szPname="Capture"
+ASUSSTU.MICIN.WAVE.szPname="MicIn"
+ASUSSTU.LINEIN.WAVE.szPname="ASUS STU USB2.0 Line In Audio Device"
+ASUSSTU.SPDIFIN.WAVE.szPname="ASUS Xonar Essence One"
+ASUSSTU.SPEAKER.TOPO.szPname="ASUS STU USB2.0 Audio Mixer Device"
+ASUSSTU.SPDIFOUT.TOPO.szPname="ASUS Xonar Essence One Mixer"
+ASUSSTU.HPOUT.TOPO.szPname="Headphone Mixer"
+ASUSSTU.RECIN.TOPO.szPname="Capture Mixer"
+ASUSSTU.MICIN.TOPO.szPname="MicIn Mixer"
+ASUSSTU.LINEIN.TOPO.szPname="ASUS STU USB2.0 Line In Audio Mixer Device"
+ASUSSTU.SPDIFIN.TOPO.szPname="ASUS Xonar Essence One Mixer"
+ASUSSTU.Audio.DeviceDesc="ASUS Xonar Essence One Audio Device"
+cdname="ASUS STU USB2.0 Audio Driver"
+ASUSNode.SpdifOut="SPDIF Out"
+ASUSNode.SpdifIn="SPDIF In"
+REG_BINARY          = 0x00000001
+
+

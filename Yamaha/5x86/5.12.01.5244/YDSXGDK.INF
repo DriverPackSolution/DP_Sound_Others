@@ -1,0 +1,92 @@
+;---------------------------------------------------------------------------;
+;                                                                           ;
+; Copyright (C) 1999-2001  YAMAHA Corporation  All rights reserved.         ;
+;                                                                           ;
+;---------------------------------------------------------------------------;
+
+; Feature   : YAMAHA DS-XG WDM Audio Miniport driver for Windows 98/ME/2000/Xp.
+; Version   : 5.12.01.52xx for Generic Docking/4-ch Audio Support
+; Copyright : Copyright 1999-2001, YAMAHA Corporation.
+
+[Version]
+;<This needs to change for each WHQL submission.>
+CatalogFile= ydsxgdk.cat
+Signature  = "$CHICAGO$"
+Class      = System
+ClassGUID  = {4d36e97d-e325-11ce-bfc1-08002be10318}
+provider   = %YMH%
+;LayoutFile = layout.inf
+DriverVer = 08/20/2001, 5.12.01.5244
+
+[SourceDisksNames]
+77 = %YMHDISK%,,,""
+
+[SourceDisksFiles]
+Ydsxgdk.sys = 77
+ds1.sys = 77
+
+[Manufacturer]
+%YamahaMfg% = Yamaha
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+[Yamaha]
+%*DevName%=WDM_DOCKER,*YMH0110
+%*DevName%=WDM_DOCKER,*SNY5011
+
+
+
+
+
+
+[DestinationDirs]
+DefaultDestDir         = 10,system32\drivers ; %SystemRoot%\system32\drivers
+WDM_DOCKER.CopyList    = 10,system32\drivers ; %SystemRoot%\system32\drivers
+WDM_DOCKER_2K.CopyList = 10,system32\drivers ; %SystemRoot%\system32\drivers
+
+
+; Windows98/Me
+[WDM_DOCKER]
+AlsoInstall = KS.Registration(ks.inf), WDMAUDIO.Registration(wdmaudio.inf)
+CopyFiles   = WDM_DOCKER.CopyList
+AddReg      = WDM_DOCKER.AddReg
+
+[WDM_DOCKER.CopyList]
+ds1.sys
+
+[WDM_DOCKER.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,ds1.sys
+
+
+; Windows2000/Xp
+[WDM_DOCKER.NT]
+CopyFiles   = WDM_DOCKER_2K.CopyList
+AddReg      = WDM_DOCKER_2K.AddReg
+
+[WDM_DOCKER.NT.Services]
+AddService = ydsxgdk, 0x00000002, Docker_Service_Inst
+
+[Docker_Service_Inst]
+DisplayName    = %docker.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\Ydsxgdk.sys
+
+[WDM_DOCKER_2K.CopyList]
+Ydsxgdk.sys
+
+[WDM_DOCKER_2K.AddReg]
+
+
+[Strings]
+*DevName       = "YAMAHA DS-XG Audio Docking Device (WDM)"
+docker.SvcDesc = "YAMAHA DS-XG Audio Docking Device (WDM)"
+YMHDISK        = "YAMAHA Docker Driver Disk"
+YMH            = "Yamaha Corporation"
+YamahaMfg      = "Yamaha Corporation"
+
+CustomizeYamaha    = "SOFTWARE\YAMAHA\Driver\DSXGWDM"
+CustomizeYamaha_2k = "System\CurrentControlSet\Services\YAMAHA\Driver\DSXGWDM"

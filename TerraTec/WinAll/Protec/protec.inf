@@ -1,0 +1,437 @@
+;/*=============================================================================
+;   FILE:         protec.inf
+;-------------------------------------------------------------------------------
+;   DESCRIPTION:  Device setup information file for 
+;		  - Phase 28, Phase 22
+;
+;   PLATFORMS:
+;		  - Windows 2000
+;         - Windows 2003
+;		  - Windows XP
+;         - Windows XP 64
+;         - Windows Vista
+;
+;   History:
+;   25-Nov-2002 (C.L.) - Initial version
+;   20-May-2003 (C.L.) - Include PHASE22
+;   05-Oct-2005 (C.L.) - Win64 Migration
+;   20-Apr-2006 (C.L)  - 64Bit ASIO
+;   04-Sep-2006 (C.L.) - Supporting new Hardware-Revision 2.0 (CS8416 Digital-Receiver)
+;-------------------------------------------------------------------------------
+;   COPYRIGHT:    (c) 2003-2007 TerraTec Electronic GmbH. All Rights Reserved.
+;=============================================================================*/
+
+[Version]
+Signature=$CHICAGO$
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%Provider%
+CatalogFile=protec.cat
+;;LayoutFile=layout.inf, layout1.inf, layout2.inf
+
+DriverVer =03/14/2007,5.28.3.24
+
+
+[DestinationDirs]
+Protec.SystemCopyList=12
+Protec_AMD64.SystemCopyList=12
+Protec.ASIO.CopyList=11
+Protec_AMD64.ASIO.CopyList=11
+Protec_WOW64.ASIO.CopyList=10,SysWOW64
+DefaultDestDir=12
+
+[Manufacturer]
+%Manufacturer%=TerraTec, NTX86, NTAMD64
+
+[TerraTec]
+%DeviceName_PHASE28%=Phase28.Device,PCI\VEN_1412&DEV_1724&SUBSYS_1149153B
+%DeviceName_PHASE22%=Phase22.Device,PCI\VEN_1412&DEV_1724&SUBSYS_1150153B
+
+[TerraTec.NTX86]
+%DeviceName_PHASE28%=Phase28.Device,PCI\VEN_1412&DEV_1724&SUBSYS_1149153B
+%DeviceName_PHASE22%=Phase22.Device,PCI\VEN_1412&DEV_1724&SUBSYS_1150153B
+
+[TerraTec.NTAMD64]
+%DeviceName_PHASE28%=Phase28.Device,PCI\VEN_1412&DEV_1724&SUBSYS_1149153B
+%DeviceName_PHASE22%=Phase22.Device,PCI\VEN_1412&DEV_1724&SUBSYS_1150153B
+
+
+;=============================================================================
+;	Windows 2000 Install
+;=============================================================================
+
+[Phase28.Device.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=Protec.SystemCopyList, Protec.ASIO.CopyList
+AddReg=Phase28.AddReg,guids.AddReg, Phase2X.ASIO.AddReg
+DelReg=Phase2X.ASIO.DelReg
+
+
+[Phase28.Device.NT.Services]
+AddService = Protec, 0x00000002, Protec_Service_Inst
+
+;-------------------------------------------------------------------------------
+
+[Phase22.Device.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=Protec.SystemCopyList, Protec.ASIO.CopyList
+AddReg=Phase22.AddReg,guids.AddReg, Phase2X.ASIO.AddReg
+DelReg=Phase2X.ASIO.DelReg
+
+
+[Phase22.Device.NT.Services]
+AddService = Protec, 0x00000002, Protec_Service_Inst
+
+
+;-------------------------------------------------------------------------------
+
+[Phase28.Device.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,Phase28.Interface.WaveAnalog
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,Phase28.Interface.WaveAnalog
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,Phase28.Interface.WaveAnalog
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi%,Phase28.Interface.Midi
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi%,Phase28.Interface.Midi
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi%,Phase28.Interface.Midi
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,Phase28.Interface.Topology
+
+;-------------------------------------------------------------------------------
+
+[Phase22.Device.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,Phase22.Interface.WaveAnalog
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,Phase22.Interface.WaveAnalog
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,Phase22.Interface.WaveAnalog
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi%,Phase22.Interface.Midi
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi%,Phase22.Interface.Midi
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi%,Phase22.Interface.Midi
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,Phase22.Interface.Topology
+
+;=============================================================================
+;	Windows XP Install
+;=============================================================================
+
+[Phase28.Device.NTX86]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=Protec.SystemCopyList, Protec.ASIO.CopyList
+AddReg=Phase28.AddReg,guids.AddReg, Phase2X.ASIO.AddReg
+DelReg=Phase2X.ASIO.DelReg
+
+
+[Phase28.Device.NTX86.Services]
+AddService = Protec, 0x00000002, Protec_Service_Inst
+
+;-------------------------------------------------------------------------------
+
+[Phase22.Device.NTX86]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=Protec.SystemCopyList, Protec.ASIO.CopyList
+AddReg=Phase22.AddReg,guids.AddReg, Phase2X.ASIO.AddReg
+DelReg=Phase2X.ASIO.DelReg
+
+
+[Phase22.Device.NTX86.Services]
+AddService = Protec, 0x00000002, Protec_Service_Inst
+
+
+;-------------------------------------------------------------------------------
+
+[Phase28.Device.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,Phase28.Interface.WaveAnalog
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,Phase28.Interface.WaveAnalog
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,Phase28.Interface.WaveAnalog
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi%,Phase28.Interface.Midi
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi%,Phase28.Interface.Midi
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi%,Phase28.Interface.Midi
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,Phase28.Interface.Topology
+
+;-------------------------------------------------------------------------------
+
+[Phase22.Device.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,Phase22.Interface.WaveAnalog
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,Phase22.Interface.WaveAnalog
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,Phase22.Interface.WaveAnalog
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi%,Phase22.Interface.Midi
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi%,Phase22.Interface.Midi
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi%,Phase22.Interface.Midi
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,Phase22.Interface.Topology
+
+
+;=============================================================================
+;	AMD64Bit (XP + 2003) Install
+;=============================================================================
+
+[Phase28.Device.NTAMD64]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=Protec_AMD64.SystemCopyList, Protec_AMD64.ASIO.CopyList, Protec_WOW64.ASIO.CopyList
+AddReg=Phase28.AddReg,guids.AddReg, Phase2X.ASIO.AddReg, Phase2X_WOW64.ASIO.AddReg
+DelReg=Phase2X.ASIO.DelReg
+
+
+[Phase28.Device.NTAMD64.Services]
+AddService = Protec, 0x00000002, Protec_Service_Inst_AMD64
+
+;-------------------------------------------------------------------------------
+
+[Phase22.Device.NTAMD64]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=Protec_AMD64.SystemCopyList, Protec_AMD64.ASIO.CopyList, Protec_WOW64.ASIO.CopyList
+AddReg=Phase22.AddReg,guids.AddReg, Phase2X.ASIO.AddReg, Phase2X_WOW64.ASIO.AddReg
+DelReg=Phase2X.ASIO.DelReg
+
+
+[Phase22.Device.NTAMD64.Services]
+AddService = Protec, 0x00000002, Protec_Service_Inst_AMD64
+
+
+;-------------------------------------------------------------------------------
+
+[Phase28.Device.NTAMD64.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,Phase28.Interface.WaveAnalog
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,Phase28.Interface.WaveAnalog
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,Phase28.Interface.WaveAnalog
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi%,Phase28.Interface.Midi
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi%,Phase28.Interface.Midi
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi%,Phase28.Interface.Midi
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,Phase28.Interface.Topology
+
+;-------------------------------------------------------------------------------
+
+[Phase22.Device.NTAMD64.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,Phase22.Interface.WaveAnalog
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,Phase22.Interface.WaveAnalog
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,Phase22.Interface.WaveAnalog
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Midi%,Phase22.Interface.Midi
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Midi%,Phase22.Interface.Midi
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Midi%,Phase22.Interface.Midi
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,Phase22.Interface.Topology
+
+
+
+;=============================================================================
+;	Protec Interfaces 
+;=============================================================================
+
+[Phase28.Interface.WaveAnalog]
+AddReg=Phase28.Interface.Wave.AddReg
+
+[Phase28.Interface.Midi]
+AddReg=Phase28.Interface.Midi.AddReg
+
+[Phase28.Interface.Topology]
+AddReg=Phase28.Interface.Topo.AddReg
+
+;---------------------------------------------------------
+
+[Phase22.Interface.WaveAnalog]
+AddReg=Phase22.Interface.Wave.AddReg
+
+[Phase22.Interface.Midi]
+AddReg=Phase22.Interface.Midi.AddReg
+
+[Phase22.Interface.Topology]
+AddReg=Phase22.Interface.Topo.AddReg
+
+
+;---------------------------------------------------------
+; Friendly Names for Protec devices
+; Nasty, AddReg Section Name must not exceed xx Characters 
+;---------------------------------------------------------
+[Phase28.Interface.Wave.AddReg]
+HKR,,FriendlyName,,"PHASE 28 Wave"
+HKR,,CLSID,,%Proxy.CLSID%
+
+[Phase28.Interface.Midi.AddReg]
+HKR,,FriendlyName,,"PHASE 28 MIDI"
+HKR,,CLSID,,%Proxy.CLSID%
+
+[Phase28.Interface.Topo.AddReg]
+HKR,,FriendlyName,,"PHASE 28 Virt. Mix"
+HKR,,CLSID,,%Proxy.CLSID%
+
+;---------------------------------------------------------
+
+[Phase22.Interface.Wave.AddReg]
+HKR,,FriendlyName,,"PHASE 22 Wave"
+HKR,,CLSID,,%Proxy.CLSID%
+
+[Phase22.Interface.Midi.AddReg]
+HKR,,FriendlyName,,"PHASE 22 MIDI"
+HKR,,CLSID,,%Proxy.CLSID%
+
+[Phase22.Interface.Topo.AddReg]
+HKR,,FriendlyName,,"PHASE 22 Virt. Mix"
+HKR,,CLSID,,%Proxy.CLSID%
+
+;=============================================================================
+; AddReg
+;=============================================================================
+
+[Phase28.AddReg]
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\wave\wdmaud.drv,Description,,"PHASE 28 Wave"
+
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Description,,"PHASE 28 Mixer"
+
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Description,,"PHASE 28 MIDI"
+
+;---------------------------------------------------------
+
+[Phase22.AddReg]
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\wave\wdmaud.drv,Description,,"PHASE 22 Wave"
+
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Description,,"PHASE 22 Mixer"
+
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Description,,"PHASE 22 MIDI"
+
+
+;-------------------------------------------------------------------------------
+
+[Protec_Service_Inst]
+DisplayName    = %Protec.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_SYSTEM_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\Protec.sys
+
+;-------------------------------------------------------------------------------
+
+[Protec_Service_Inst_AMD64]
+DisplayName    = %Protec.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_SYSTEM_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\Protec64.sys
+
+;=============================================================================
+;	ASIO Install
+;=============================================================================
+[Phase2X.ASIO.AddReg]
+HKLM,SOFTWARE\ASIO\%ASIO_Phase2XNAME%,"CLSID",,%ASIO_Phase2XIID%
+HKLM,SOFTWARE\ASIO\%ASIO_Phase2XNAME%,"Description",,%ASIO_Phase2XNAME%
+HKCR,CLSID\%ASIO_Phase2XIID%,,,%ASIO_Phase2XNAME%
+HKCR,CLSID\%ASIO_Phase2XIID%\InProcServer32,,,"%11%\AsioPTec.dll"
+HKCR,CLSID\%ASIO_Phase2XIID%\InProcServer32,ThreadingModel,,"Apartment"
+
+
+
+;=============================================================================
+;	ASIO 64Bit Install
+;=============================================================================
+[Phase2X_WOW64.ASIO.AddReg]
+HKLM,SOFTWARE\Wow6432Node\ASIO\%ASIO_Phase2XNAME%,"CLSID",,%ASIO_Phase2XIID%
+HKLM,SOFTWARE\Wow6432Node\ASIO\%ASIO_Phase2XNAME%,"Description",,%ASIO_Phase2XNAME%
+HKCR,Wow6432Node\CLSID\%ASIO_Phase2XIID%,,,%ASIO_Phase2XNAME%
+HKCR,Wow6432Node\CLSID\%ASIO_Phase2XIID%\InProcServer32,,0,%10%\SysWOW64\AsioPTec.dll
+HKCR,Wow6432Node\CLSID\%ASIO_Phase2XIID%\InProcServer32,ThreadingModel,,"Apartment"
+
+;---------------------------------------------------------
+
+[Phase2X.ASIO.DelReg]
+HKCR,CLSID\%ASIO_Phase2XIID%
+HKLM,SOFTWARE\ASIO\%ASIO_Phase2XNAME%
+HKCR,Wow6432Node\CLSID\%ASIO_Phase2XIID%
+HKLM,SOFTWARE\Wow6432Node\ASIO\%ASIO_Phase2XNAME%
+
+
+;=============================================================================
+; Copy/DelFiles
+;=============================================================================
+
+[Protec.ASIO.CopyList]
+AsioPTec.dll
+
+[Protec_AMD64.ASIO.CopyList]
+AsioPTec.dll,AsioPTec64.dll,
+
+[Protec_WOW64.ASIO.CopyList]
+AsioPTec.dll
+
+[Protec.SystemCopyList]
+Protec.sys
+
+[Protec_AMD64.SystemCopyList]
+Protec64.sys,
+
+[SourceDisksNames]
+1=%DiskName%,,
+
+[SourceDisksFiles]
+Protec.sys=1
+Protec64.sys=1
+AsioPTec.dll=1
+
+
+;=============================================================================
+; Guids for Mixernodes
+;=============================================================================
+
+[guids.AddReg]
+
+;=============================================================================
+;	STRINGS
+;=============================================================================
+[Strings]
+ClassName="Sound, video and game controllers"
+Manufacturer="TerraTec Electronic GmbH"
+Provider="TerraTec Electronic GmbH"
+DiskName="TerraTec Driver CD"
+
+DeviceName_PHASE28       = "PHASE 28"
+DeviceName_PHASE22		 = "PHASE 22"
+
+Protec.SvcDesc= "PHASE WDM Audio"
+
+Proxy.CLSID        ="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO   ="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER  ="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE ="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+KSNAME_Wave		="Wave"
+KSNAME_Midi		="Uart"
+KSNAME_Topology ="Topology"
+
+;----------------------------------------------------------
+; Guids for Custom Names
+;----------------------------------------------------------
+
+;----------------------------------------------------------
+; Custom Names in Windows Mixer
+;----------------------------------------------------------
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+;----------------------------------------------------------
+; ASIO
+;----------------------------------------------------------
+
+ASIO_Phase2XIID       ="{69D6882D-A930-4dcc-863E-E1622505056A}"
+ASIO_Phase2XNAME      ="ASIO for PHASE 22/28"
+
+

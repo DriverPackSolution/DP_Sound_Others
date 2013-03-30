@@ -1,0 +1,80 @@
+;
+; File:    M763001b.INF   (If the name is changed, make the proper changes in the uninstaller)
+; Authors:  Jeff Claar, Nemesis
+; Copyright 2003 Midiman/M-Audio
+;
+; Midiman/M-Audio Quattro Driver .INF File
+;
+
+
+[Version]
+signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%Maudio%
+DriverVer=08/19/2003,5.10.00.3510
+LayoutFile=ks.inf,wdmaudio.inf
+
+[SourceDisksNames]
+1=%MAudioDisk%,,,
+
+[SourceDisksFiles]
+m763001b.sys=1
+
+[DestinationDirs]
+DefaultDestDir=10,system32\drivers
+DriverCopyFiles=10,system32\drivers
+;ControlPanelCopyFiles=11
+
+
+[Manufacturer]
+%Maudio%=M_AUDIO
+
+[M_AUDIO]
+; Quattro VID and PID
+;%maavsusb.DeviceDesc%=maavsusb,USB\VID_0763&PID_2001&MI_03
+%maavsusb.DeviceDesc%=maavsusb,USB\VID_0763&PID_2001&MI_06
+
+[maavsusb]
+;Include=ks.inf, wdmaudio.inf
+;Needs=KS.Registration, WDMAUDIO.Registration
+; to make ME installation silent
+;CopyFiles=DriverCopyFiles
+AddReg=maavsusb.AddReg
+
+[maavsusb.NT]
+;Include=ks.inf, wdmaudio.inf
+;Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=DriverCopyFiles
+AddReg=maavsusb.AddReg
+
+[maavsusb.AddReg]
+HKR,,DevLoader,,*NTKERN
+HKR,,NTMPDriver,,m763001b.sys
+
+[DriverCopyFiles]
+m763001b.sys
+
+[maavsusb.NT.Services]
+AddService=m763001b, 0x00000002, maavsusb.ServiceInstall
+
+[maavsusb.ServiceInstall]
+DisplayName=%maavsusb.DeviceDesc%
+ServiceType=%SERVICE_KERNEL_DRIVER%
+StartType=%SERVICE_DEMAND_START%
+ErrorControl=%SERVICE_ERROR_NORMAL%
+ServiceBinary=%10%\system32\drivers\m763001b.sys
+
+
+[Strings]
+; non-localizeable
+
+SERVICE_KERNEL_DRIVER=1
+SERVICE_DEMAND_START=3
+SERVICE_ERROR_NORMAL=1
+
+;localizeable
+Maudio="M-Audio"
+MAudioDisk="M-Audio Quattro Driver Disk"
+maavsusb.DeviceDesc="M-Audio Quattro Base Driver"
+

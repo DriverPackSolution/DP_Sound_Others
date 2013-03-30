@@ -1,0 +1,205 @@
+;*---------------------------------------------------------------------------
+;*
+;* Avance inf file for ALS4000 PCI sound device support
+;*
+;* Copyright (c) 1998-2001 Avance Logic, Inc. - All rights reserved.
+;*
+;*---------------------------------------------------------------------------
+[Version]
+;;CatalogFile=als4000.cat
+Signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+provider=%AVANCE%
+;;LayoutFile=layout.inf, layout1.inf, layout2.inf
+DriverVer= 02/28/2001,5.10.4000.1
+
+[SourceDisksNames.x86]
+4000=%DiskName%,,,
+
+[SourceDisksFiles.x86]
+als4000.sys=4000,,
+
+[Manufacturer]
+%MfgName%=AvanceLogicInc
+
+;;---------------------------------------------------------------;
+;;
+;; D E V I C E  C A L L O U T  S E C T I O N
+;;
+
+[AvanceLogicInc]
+%ALS4000.DeviceDesc% =WDM_ALS4000, PCI\VEN_4005&DEV_4000
+%ALS4000.DeviceDesc% =WDM_ALS4000, PCI\VEN_4005&DEV_4000&SUBSYS_40004005
+%ALS4000.DeviceDesc% =WDM_ALS4000, PCI\VEN_4005&DEV_4000&CC_0401
+
+;;---------------------------------------------------------------;
+;;
+;; D I R E C T O R Y  S E C T I O N
+;;
+
+[DestinationDirs]
+;;DefaultDestDir = 11
+WDM_ALS4000.CopyList    = 10,system32\drivers ; %SystemRoot%\system32\drivers
+
+;;[PreCopySection]
+;;HKR,,NoSetupUI,,1
+
+;;---------------------------------------------------------------;
+;;
+;; D R I V E R  C A L L O U T  S E C T I O N
+;;
+
+[WDM_ALS4000]
+AlsoInstall=KS.Registration(ks.inf), WDMAUDIO.Registration(wdmaudio.inf)
+CopyFiles=WDM_ALS4000.CopyList
+AddReg=WDM_ALS4000.AddReg
+
+[WDM_ALS4000.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,WDM.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,WDM.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,WDM.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,WDM.Interface.Topology
+;;AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,WDM.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,WDM.Interface.UART
+
+[WDM.Interface.Wave]
+AddReg=WDM.Interface.Wave.AddReg
+
+[WDM.Interface.Wave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM.Wave.szPname%
+
+[WDM.Interface.Topology]
+AddReg=WDM.Interface.Topo.AddReg
+
+;; warning!! must be "Topo" because "Topology" is too long
+[WDM.Interface.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM.Topology.szPname%
+
+[WDM.Interface.FMSynth]
+AddReg=WDM.Interface.FMSynth.AddReg
+
+[WDM.Interface.FMSynth.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM.FMSynth.szPname%
+
+[WDM.Interface.UART]
+AddReg=WDM.Interface.UART.AddReg
+
+[WDM.Interface.UART.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM.UART.szPname%
+
+;;---------------------------------------------------------------;
+;;
+;; U P D A T E  R E G I S T R Y  S E C T I O N
+;;
+
+[WDM_ALS4000.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,als4000.sys
+HKR,,NTMPDriver,,"als4000.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+;;HKR,Drivers\aux\wdmaud.drv, Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%ALS4000.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv,Description,,%ALS4000.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%ALS4000.DeviceDesc%
+;;HKR,Drivers\aux\wdmaud.drv,Description,,%ALS4000.DeviceDesc%
+
+HKLM,%MediaCategories%\%ALSGUID.MonoOut%,Name,,%ALSPin.MonoOut%
+HKLM,%MediaCategories%\%ALSGUID.MonoOut%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%ALSGUID.MicBoost%,Name,,%ALSPin.MicBoost%
+HKLM,%MediaCategories%\%ALSGUID.MicBoost%,Display,1,00,00,00,00
+
+;; OEM Option
+;; set the last number to 00/01 to disable/enable MonoOut control.
+HKR,Config,MonoOutEnabled,1,01
+;; set the last value between 00~FF to the maximun volume for CDROM and Line
+HKR,Config,CdromMaxVol,1,FF
+HKR,Config,LineinMaxVol,1,FF
+
+;;---------------------------------------------------------------;
+;;
+;; F I L E  C O P Y  S E C T I O N
+;;
+
+[WDM_ALS4000.CopyList]
+als4000.sys
+
+
+;;================= Window2000====================
+[WDM_ALS4000.NTX86]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=WDM_ALS4000.CopyList
+AddReg=WDM_ALS4000.AddReg
+
+[WDM_ALS4000.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,WDM.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,WDM.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,WDM.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,WDM.Interface.Topology
+;;AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,WDM.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,WDM.Interface.UART
+
+[WDM_ALS4000.NTX86.Services]
+AddService = als4k,   0x00000002, als4k_Service_Inst
+
+[als4k_Service_Inst]
+DisplayName    = %als4000.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\als4000.sys
+
+[Strings]
+AVANCE="Avance Logic, Inc."
+MfgName="Avance"
+MS_MPU401="Microsoft Generic MPU401 (WDM)"
+DiskName="Avnace ALS4000 Installation Disk"
+
+ALS4000.DeviceDesc="ALS4000 Audio Device (WDM)"
+
+WDM.Wave.szPname="Avance Sound"
+WDM.Topology.szPname="Avance Mixer"
+WDM.UART.szPname="Avance MPU-401"
+WDM.FMSynth.szPname="Avance FM Synth"
+
+;; ALS friendly names
+ALSGUID.MonoOut = "{DC2BBC80-EDD0-11d2-98FA-0060975E8654}"
+ALSPin.MonoOut = "Mono Out"
+ALSGUID.MicBoost = "{635241A0-047B-11d3-98FA-0060975E8654}"
+ALSPin.MicBoost = "MIC 20dB Boost"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+;;KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+KSNAME_Wave="Wave"
+KSNAME_UART="UART"
+KSNAME_FMSynth="FMSynth"
+KSNAME_Topology="Topology"
+
+als4000.SvcDesc = "Avance Audio Miniport Driver (WDM)"
+
+Proxy.CLSID = "{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+

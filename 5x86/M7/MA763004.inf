@@ -1,0 +1,167 @@
+;
+; File:    MA763004.INF
+; Copyright 2003-2004 Midiman, Inc.  All rights reserved.
+;
+; Midiman/M-Audio MobilePre Driver .INF File
+;
+
+
+[Version]
+signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%Maudio%
+DriverVer=03/04/2004,5.10.00.3511
+LayoutFile=ks.inf,wdmaudio.inf
+
+[SourceDisksNames]
+1=%MAudioDisk%,,,
+
+[SourceDisksFiles]
+ma763004.sys=1
+;ma98_004.sys=1
+mobpre.cpl=1
+
+[ControlFlags]
+;ExcludeFromSelect=*
+
+[DestinationDirs]
+DefaultDestDir=10,system32\drivers
+DriverCopyFiles=10,system32\drivers
+DriverCopyFiles9x=10,system32\drivers
+ControlPanelCopyFiles=11
+CoinstCopyFilesSection=11
+
+
+[Manufacturer]
+%Maudio%=M_AUDIO
+
+[M_AUDIO]
+; MobilePre VID and PID
+%maavsusb.DeviceDesc%=maavsusb,USB\VID_0763&PID_2004&MI_00
+%maavsusb.DeviceDesc%=maavsusb,USB\VID_0763&PID_200F&MI_00
+
+[maavsusb]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+; to make ME installation silent
+;CopyFiles=DriverCopyFiles9x,ControlPanelCopyFiles
+AddReg=maavsusb.AddReg
+
+[maavsusb.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_Filter%,maavsusb.InterfaceWave
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_Filter%,maavsusb.InterfaceWave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_Filter%,maavsusb.InterfaceWave
+
+[maavsusb.InterfaceWave]
+AddReg=maavsusb.InterfaceWave.AddReg
+
+[maavsusb.InterfaceWave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%maavsusb.Wave.szPname%
+HKR,,CurveType,1,01,00,00,00
+
+[maavsusb.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=DriverCopyFiles,ControlPanelCopyFiles
+AddReg=maavsusb.AddReg,maavsusb.Branding.AddReg
+
+[maavsusb.NT.CoInstallers]
+CopyFiles=CoinstCopyFilesSection
+AddReg=maavsusb.NT.CoInstallers_AddReg
+
+[CoInstCopyFilesSection]
+MPInstFix.dll
+
+[maavsusb.NT.CoInstallers_AddReg]
+HKR,,CoInstallers32,0x00010000,"MPInstfix.dll,MPCoInstProc"
+
+[maavsusb.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_Filter%,maavsusb.InterfaceWave
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_Filter%,maavsusb.InterfaceWave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_Filter%,maavsusb.InterfaceWave
+
+; Branding
+[maavsusb.Branding.AddReg]
+; Branding a URL is no longer supported.
+;HKR,Branding,url,,"http://www.m-audio.com/"
+HKR,Branding,icon,,"ma763004.sys,101"
+HKR,Branding,bitmap,,"ma763004.sys,102"
+
+[maavsusb.AddReg]
+HKR,,DevLoader,,*NTKERN
+HKR,,NTMPDriver,,MA763004.sys
+
+;the system audio drivers require the following information
+;to establish support by the Windows multimedia system for a port-class audio adapter.
+HKR,,SetupPreferredAudioDevices,3,01,00,00,00
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,MA763004.sys
+HKR,,NTMPDriver,,"MA763004.sys,sbemul.sys"
+HKR,,CLSID,,{17CCA71B-ECD7-11D0-B908-00A0C9223196}
+HKR,Drivers,SubClasses,,"wave,midi,mixer,aux"
+
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\aux\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%maavsusb.GenericDesc%
+HKR,Drivers\midi\wdmaud.drv,Description,,%maavsusb.GenericDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%maavsusb.GenericDesc%
+HKR,Drivers\aux\wdmaud.drv,Description,,%maavsusb.GenericDesc%
+
+; Set up the specialized media categories.
+HKLM,%MediaCategories%\%MAudioGUID.LRMixer%,Name,,%Control.LRMixer%
+HKLM,%MediaCategories%\%MAudioGUID.LRMixer%,Display,1,00,00,00,00
+
+HKLM,%MediaCategories%\%MAudioGUID.DirectMonitor%,Name,,%Control.DirectMonitor%
+HKLM,%MediaCategories%\%MAudioGUID.DirectMonitor%,Display,1,00,00,00,00
+
+[DriverCopyFiles]
+MA763004.sys
+
+[DriverCopyFiles9x]
+MA763004.sys,MA98_004.sys
+
+[ControlPanelCopyFiles]
+mobpre.cpl
+
+[maavsusb.NT.Services]
+AddService=ma763004, 0x00000002, maavsusb.ServiceInstall
+
+[maavsusb.ServiceInstall]
+DisplayName=%maavsusb.DeviceDesc%
+ServiceType=%SERVICE_KERNEL_DRIVER%
+StartType=%SERVICE_DEMAND_START%
+ErrorControl=%SERVICE_ERROR_NORMAL%
+ServiceBinary=%10%\system32\drivers\MA763004.sys
+
+
+[Strings]
+; non-localizeable
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSSTRING_Filter="{9B365890-165F-11D0-A195-0020AFD156E4}"
+KSSTRING_Filter_SPDIF="{D6F5AF07-BA0B-4ea9-A50B-E54AB494E675}"
+
+; Media category for mixer.
+MAudioGUID.LRMixer="{77EC1F9D-4353-4225-BB48-D70188F5C932}"
+MAudioGUID.DirectMonitor="{E2F0F1B8-1404-4dd1-A074-1606A9CA6007}"
+
+SERVICE_KERNEL_DRIVER=1
+SERVICE_DEMAND_START=3
+SERVICE_ERROR_NORMAL=1
+
+;localizeable
+Maudio="M-Audio"
+MAudioDisk="M-Audio MobilePre Driver Disk"
+maavsusb.DeviceDesc="M-Audio MobilePre USB"
+maavsusb.Wave.szPname="M-Audio MobilePre"
+maavsusb.GenericDesc="M-Audio MobilePre"
+Control.LRMixer="Mono input (Left channel only)"
+Control.DirectMonitor="Direct Monitor"
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"

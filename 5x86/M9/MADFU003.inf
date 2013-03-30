@@ -1,0 +1,75 @@
+;
+; File:     MADFU003.INF   (If the name is changed, make the proper changes in the uninstaller)
+; Authors:  Zinovy Darkhovsky & David Simpao, Nemesis
+; Copyright 2002,2003 Midiman, Inc.
+;
+; Midiman/M-Audio DFU Driver .INF File
+;
+ 
+ 
+[Version] 
+Signature = "$CHICAGO$"
+Class=USB
+ClassGUID={36fc9e60-c465-11cf-8056-444553540000} 
+Provider=%ProviderName% 
+DriverVer= 02/25/2003,1.5.4.6
+
+[DestinationDirs] 
+DefaultDestDir=10,system32\drivers
+
+[SourceDisksNames]
+1 = %DfuDiskName%,,,
+
+; Win98SE has problem with long file names for the firmware
+; if the firmware file names change, then the Uninstaller has to be changed too to properly delete .bin files
+[SourceDisksFiles]
+MADFU003.sys=1
+
+
+[DriverCopyFiles]
+MADFU003.sys,,,1
+
+
+[Manufacturer] 
+%MFGNAME%=MAudio
+
+[MAudio]
+%MADFUUSBDesc%=MADFUUSB_Inst,USB\VID_0763&PID_2003&MI_00
+%MADFUUSBDesc%=MADFUUSB_Inst,USB\VID_0763&PID_2803  ; for the firmware loader
+
+[MADFUUSB_Inst] 
+; to make ME installation silent
+;CopyFiles=DriverCopyFiles
+AddReg = MADFUUSB.AddReg 
+
+
+[MADFUUSB_Inst.nt] 
+CopyFiles=DriverCopyFiles
+AddReg = MADFUUSB.AddReg 
+
+
+[MADFUUSB_Inst.nt.Services] 
+AddService = MADFU003,0x00000002,MADFUUSB.AddService
+
+[MADFUUSB.AddService] 
+ServiceType = 1
+StartType = 3
+ErrorControl = 1
+ServiceBinary = %10%\SYSTEM32\DRIVERS\MADFU003.sys 
+LoadOrderGroup = Base
+
+
+[MADFUUSB.AddReg] 
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,MADFU003.sys
+HKLM,"System\Currentcontrolset\Services\MADFUUSB\Parameters","MaximumTransferSize",0x10001,4096
+HKLM,"System\Currentcontrolset\Services\MADFUUSB\Parameters","DebugLevel",0x10001,2
+
+
+
+[Strings] 
+MFGNAME= "M-Audio" 
+DfuDiskName= "M-Audio Audiophile DFU Driver Disk"
+MADFUUSBDesc= "M-Audio Audiophile DFU" 
+PROVIDERNAME = "Nemesis"
+RUNONCEKEYNAME="Software\Microsoft\Windows\CurrentVersion\RunOnce"

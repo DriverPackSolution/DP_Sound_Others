@@ -1,0 +1,326 @@
+;/////////////////////////////////////////////////////////////////////////////////////
+; Hercules Muse Pocket USB - USB Audio Device
+;
+; Version 1.00
+; May 8 2003
+; 
+; © Guillemot Corporation, 2002.  All rights reserved.
+;/////////////////////////////////////////////////////////////////////////////////////
+
+[Version]
+Signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+provider=%HERCULES%
+LayoutFile=layout.inf, layout1.inf, layout2.inf
+DriverVer=02/24/2003
+
+[SourceDisksFiles]
+MPUSens.sys=1
+crlds3d.dll=1
+Audio3D.dll=1
+
+[SourceDisksNames]
+1=%INSTDISK%,,,.
+
+[Manufacturer]
+%Hercules.Mfg%=Hercules.Section
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+[Hercules.Section]
+%USB\VID_06F8&PID_C000&MI_00.DeviceDesc%	= USBAudio.Hercules06, USB\VID_06F8&PID_C000&MI_00
+
+[DestinationDirs]
+USBAudio.CopyList     = 10,system32\drivers 
+Crlds3DCopyFiles	 =10,system
+Sensaura.CopyList	= 10,system32\drivers
+Audio3D.CopyList	= 10,system
+
+
+[USBAudio]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=USBAudio.CopyList
+AddReg=USBAudio.AddReg
+KnownFiles = USBAudio.KnownFiles
+DriverVer=06/08/2000
+[USBAudio.NoCurve]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=USBAudio.CopyList
+AddReg=USBAudio.AddReg
+KnownFiles = USBAudio.KnownFiles
+[USBMic]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=USBAudio.CopyList
+AddReg=USBMic.AddReg
+KnownFiles = USBAudio.KnownFiles
+[USBMIDI]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=USBAudio.CopyList
+AddReg=USBMIDI.AddReg
+KnownFiles = USBAudio.KnownFiles
+
+[USBAudio.Hercules06]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+DelFiles=Audio3D.DelList
+CopyFiles=USBAudio.CopyList,Crlds3DCopyFiles,Sensaura.CopyList,Audio3D.CopyList
+AddReg=USBAudio.AddReg,Audio3D.AddReg
+KnownFiles = USBAudio.KnownFiles
+DriverVer=06/08/2000
+
+[USBAudio.Hercules06.HW]
+AddReg=USBAudio_HW.AddReg
+
+[USBAudio_HW.AddReg]
+HKR,,lowerfilters,0,"UAFilter.sys"
+HKR,,upperfilters,0,"MPUSens.sys"
+
+
+[USBAudio.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,"GLOBAL",USBAudio.Interface.Curve,
+AddInterface=%KSCATEGORY_RENDER%,"GLOBAL",USBAudio.Interface.Curve,
+AddInterface=%KSCATEGORY_CAPTURE%,"GLOBAL",USBAudio.Interface.Curve,
+[USBAudio.NoCurve.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,"GLOBAL",USBAudio.Interface.NoCurve,
+AddInterface=%KSCATEGORY_RENDER%,"GLOBAL",USBAudio.Interface.NoCurve,
+AddInterface=%KSCATEGORY_CAPTURE%,"GLOBAL",USBAudio.Interface.NoCurve,
+[USBMic.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,"GLOBAL",USBAudio.Interface.Mic,
+AddInterface=%KSCATEGORY_RENDER%,"GLOBAL",USBAudio.Interface.Mic,
+AddInterface=%KSCATEGORY_CAPTURE%,"GLOBAL",USBAudio.Interface.Mic,
+[USBMIDI.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,"GLOBAL",USBAudio.Interface.MIDI,
+AddInterface=%KSCATEGORY_RENDER%,"GLOBAL",USBAudio.Interface.MIDI,
+AddInterface=%KSCATEGORY_CAPTURE%,"GLOBAL",USBAudio.Interface.MIDI,
+
+[USBAudio.Hercules06.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,"GLOBAL",USBAudio.Interface.Hercules06,
+AddInterface=%KSCATEGORY_RENDER%,"GLOBAL",USBAudio.Interface.Hercules06,
+AddInterface=%KSCATEGORY_CAPTURE%,"GLOBAL",USBAudio.Interface.Hercules06,
+
+[USBAudio.Interface.Curve]
+AddReg=USBAudio.Interface.Addreg.Curve
+[USBAudio.Interface.AddReg.Curve]
+HKR,,FriendlyName,,%USBGenericDesc%
+HKR,,CurveType,1,01,00,00,00
+HKR,,CLSID,,%Proxy.CLSID%
+[USBAudio.Interface.NoCurve]
+AddReg=USBAudio.Interface.Addreg.NoCurve
+[USBAudio.Interface.AddReg.NoCurve]
+HKR,,FriendlyName,,%USBGenericDesc%
+HKR,,CLSID,,%Proxy.CLSID%
+[USBAudio.Interface.Mic]
+AddReg=USBAudio.Interface.Addreg.Mic
+[USBAudio.Interface.AddReg.Mic]
+HKR,,FriendlyName,,%USBGenericMicDesc%
+HKR,,CLSID,,%Proxy.CLSID%
+[USBAudio.Interface.MIDI]
+AddReg=USBAudio.Interface.Addreg.MIDI
+[USBAudio.Interface.AddReg.MIDI]
+HKR,,FriendlyName,,%USBGenericMIDIDesc%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[USBAudio.Interface.Hercules06]
+AddReg=USBAudio.Interface.Addreg.Hercules06
+[USBAudio.Interface.AddReg.Hercules06]
+HKR,,CurveType,1,01,00,00,00
+HKR,,FriendlyName,,%USB\VID_06F8&PID_C000&MI_00.DeviceDesc%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[USBAudio.AddReg]
+HKR,,SetupPreferredAudioDevices,3,01,00,00,00
+HKR,,AssociatedFilters,,"wdmaud,redbook"
+HKR,,Driver,,USBAUDIO.sys
+HKR,,NTMPDriver,,"USBAUDIO.sys,sbemul.sys"
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,Drivers,SubClasses,,"wave,midi,mixer,aux"
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\aux\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\wave\wdmaud.drv,Description,,%USBGenericDesc%
+HKR,Drivers\midi\wdmaud.drv,Description,,%WDM_MIDI%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%USBGenericDesc%
+HKR,Drivers\aux\wdmaud.drv,Description,,%USBGenericDesc%
+HKLM,%MediaCategories%\%USBGUID.BassBoost%,Name,,%USBNode.BassBoost%
+HKLM,%MediaCategories%\%USBGUID.BassBoost%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%USBGUID.StereoExtend%,Name,,%USBNode.StereoExtend%
+HKLM,%MediaCategories%\%USBGUID.StereoExtend%,Display,1,00,00,00,00
+HKR,Sensaura\Configuration,IgnoreDSSpeakerConfiguration,0x00010001,0
+HKLM,"Software\Hercules Technologies",HMSII_INSTALLATION,0x00010001,1
+
+[USBMic.AddReg]
+HKR,,SetupPreferredAudioDevices,3,01,00,00,00
+HKR,,AssociatedFilters,,"wdmaud"
+HKR,,Driver,,USBAUDIO.sys
+HKR,,NTMPDriver,,"USBAUDIO.sys"
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,Drivers,SubClasses,,"wave,mixer"
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\wave\wdmaud.drv,Description,,%USBGenericDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%USBGenericDesc%
+[USBMIDI.AddReg]
+HKR,,AssociatedFilters,,"wdmaud"
+HKR,,Driver,,USBAUDIO.sys
+HKR,,NTMPDriver,,"USBAUDIO.sys"
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,Drivers,SubClasses,,"midi,mixer"
+HKR,Drivers\midi\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Description,,%USBGenericDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%USBGenericDesc%
+
+
+[Audio3D.AddReg]
+HKCR,Audio3D,,0,Audio3DObject
+HKCR,Audio3D\CLSID,,0,%Audio3D_CLSID%
+HKCR,CLSID\%Audio3D_CLSID%,,0,Audio3DObject
+HKCR,CLSID\%Audio3D_CLSID%\InProcServer32,,0,Audio3D.dll
+HKCR,CLSID\%Audio3D_CLSID%\InProcServer32,ThreadingModel,0,Apartment
+
+[Crlds3DCopyFiles]
+;crlds3d.dll
+
+[USBAudio.CopyList]
+;USBAUDIO.sys
+
+[Sensaura.CopyList]
+;MPUSens.sys
+
+[Audio3D.DelList]
+;a3d.dll
+;Audio3D.dll
+
+[Audio3D.CopyList]
+;a3d.dll,Audio3D.dll,,4
+;Audio3D.dll
+
+[USBAudio.KnownFiles]
+usbaudio.sys.4.10.0 = safe
+[USBAudio.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=USBAudio.CopyList
+AddReg=USBAudio.AddReg
+KnownFiles = USBAudio.KnownFiles
+DriverVer=06/08/2000
+[USBAudio.NoCurve.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=USBAudio.CopyList
+AddReg=USBAudio.AddReg
+KnownFiles = USBAudio.KnownFiles
+[USBMic.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=USBAudio.CopyList
+AddReg=USBMic.AddReg
+KnownFiles = USBAudio.KnownFiles
+[USBMIDI.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=USBAudio.CopyList
+AddReg=USBMIDI.AddReg
+KnownFiles = USBAudio.KnownFiles
+
+[USBAudio.Hercules06.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+DelFiles=Audio3D.DelList
+CopyFiles=USBAudio.CopyList,Crlds3DCopyFiles,Sensaura.CopyList,Audio3D.CopyList
+AddReg=USBAudio.AddReg;Audio3D.AddReg
+KnownFiles = USBAudio.KnownFiles
+DriverVer=06/08/2000
+
+
+[USBAudio.Hercules06.NT.HW]
+AddReg=USBAudioNT_HW.AddReg
+
+
+[USBAudio.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,"GLOBAL",USBAudio.Interface.Curve,
+AddInterface=%KSCATEGORY_RENDER%,"GLOBAL",USBAudio.Interface.Curve,
+AddInterface=%KSCATEGORY_CAPTURE%,"GLOBAL",USBAudio.Interface.Curve,
+[USBAudio.NoCurve.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,"GLOBAL",USBAudio.Interface.NoCurve,
+AddInterface=%KSCATEGORY_RENDER%,"GLOBAL",USBAudio.Interface.NoCurve,
+AddInterface=%KSCATEGORY_CAPTURE%,"GLOBAL",USBAudio.Interface.NoCurve,
+[USBMic.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,"GLOBAL",USBAudio.Interface.Mic,
+AddInterface=%KSCATEGORY_RENDER%,"GLOBAL",USBAudio.Interface.Mic,
+AddInterface=%KSCATEGORY_CAPTURE%,"GLOBAL",USBAudio.Interface.Mic,
+[USBMIDI.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,"GLOBAL",USBAudio.Interface.MIDI,
+AddInterface=%KSCATEGORY_RENDER%,"GLOBAL",USBAudio.Interface.MIDI,
+AddInterface=%KSCATEGORY_CAPTURE%,"GLOBAL",USBAudio.Interface.MIDI,
+
+[USBAudio.Hercules06.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,"GLOBAL",USBAudio.Interface.Hercules06,
+AddInterface=%KSCATEGORY_RENDER%,"GLOBAL",USBAudio.Interface.Hercules06,
+AddInterface=%KSCATEGORY_CAPTURE%,"GLOBAL",USBAudio.Interface.Hercules06,
+
+[USBAudioNT_HW.AddReg]
+HKR,,"UpperFilters",0x00010000,"MPUSens"
+
+
+
+[USBAudio.NT.Services]
+AddService = usbaudio,0x00000002, usbaudio_Service_Inst
+[USBAudio.NoCurve.NT.Services]
+AddService = usbaudio,0x00000002, usbaudio_Service_Inst
+[USBMic.NT.Services]
+AddService = usbaudio,0x00000002, usbaudio_Service_Inst
+[USBMIDI.NT.Services]
+AddService = usbaudio,0x00000002, usbaudio_Service_Inst
+
+[USBAudio.Hercules06.NT.Services]
+AddService = usbaudio,0x00000002, usbaudio_Service_Inst
+AddService=MPUSens,,MPUSensService
+
+
+[MPUSensService]
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%10%\system32\drivers\MPUSens.sys
+
+
+[usbaudio_Service_Inst]
+DisplayName    = %USBAudio.SvcDesc%
+ServiceType    = 1                  
+StartType      = 3                  
+ErrorControl   = 1                  
+ServiceBinary  = %10%\system32\drivers\usbaudio.sys
+
+[Strings]
+USB\CLASS_01.DeviceDesc="USB Audio Device"
+USBGenericDesc="USB Audio Device"
+USBGenericMicDesc="USB Audio Microphone"
+USBGenericMIDIDesc="USB MIDI Device"
+WDM_MIDI="WDM MIDI Device"
+HERCULES= "Hercules Technologies"
+INSTDISK="Muse Pocket USB Installation Disk"
+
+Hercules.Mfg="Hercules"
+USB\VID_06F8&PID_C000&MI_00.DeviceDesc=	"Hercules Muse Pocket USB"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+USBGUID.BassBoost    = "{1A71EBE0-959E-11D1-B448-00A0C9255AC1}"
+USBGUID.StereoExtend = "{FD4F0300-9632-11D1-B448-00A0C9255AC1}"
+USBNode.BassBoost    = "Bass Boost"
+USBNode.StereoExtend = "Stereo Extender"
+USBAudio.SvcDesc="USB Audio Driver (WDM)"
+Proxy.CLSID = "{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994ad04-93ef-11d0-a3cc-00a0c9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+Audio3D_CLSID="{D8F1EEE0-F634-11CF-8700-00A0245D918B}"
+DevName="Sensaura Audio3D(tm) API"
+

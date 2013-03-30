@@ -1,0 +1,384 @@
+;
+; File:     MAUASASI.INF
+; Authors:  Zinovy Darkhovsky, David Simpao & Dan Hickey, Nemesis
+;           Doug Fetter, Software Wizardry
+; Copyright 2000-2001 M-Audio
+;
+; Device	M-Audio USB Duo
+;
+; M-Audio USB ASIO .INF File
+;
+
+[Version]
+Signature = "$CHICAGO$"
+Class     = MEDIA
+ClassGUID = {4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider  = %StrMfg%
+DriverVer = 09/09/2002,1.2.7.0
+
+[ClassInstall]
+; Win9x ClassInstall section
+AddReg=Class.AddReg
+
+[Class.AddReg]
+HKR,,,0,%MediaClassName%
+HKR,,Icon,0,-1
+HKR,,Installer,0,mmci.dll
+
+[ClassInstall32]
+; NT ClassInstall section
+AddReg=Class32.AddReg
+
+[Class32.AddReg]
+HKR,,,,%MediaClassName%
+HKR,,Installer32,,"MmSys.Cpl,MediaClassInstaller"
+HKR,,EnumPropPages32,,"MmSys.Cpl,MediaPropPageProvider"
+HKR,,TroubleShooter-0,,"tshoot.chm,hdw_multi.htm"
+HKR,,Icon,,"3004"
+
+
+[Manufacturer]
+%StrMfg% = MfgModelsMAudio
+
+[MfgModelsMAudio]
+; Quattro
+; %USB\VID_0763&PID_2001.ASIO34Desc% = InstallASIO1, USB\VID_0763&PID_2001&MI_06  ; without runonce
+; %USB\VID_0763&PID_2001.ASIO12Desc% = InstallASIO2, USB\VID_0763&PID_2001&MI_03  ; with runonce
+; %USB\VID_0763&PID_2001.MidiDeviceDesc%=USBMidi_Device, USB\VID_0763&PID_2001&MI_09
+; %USBMIDI\AS4X4.DeviceDesc%=USBMidiVxd_Device,USBMIDI\AS4X4
+; Duo
+%USB\VID_0763&PID_2002.ASIODesc% = InstallASIO2, USB\VID_0763&PID_2002&MI_03
+; AudioPhile
+; %USB\VID_0763&PID_2003.ASIO34Desc% = InstallASIO1, USB\VID_0763&PID_2003&MI_06  ; without runonce
+; %USB\VID_0763&PID_2003.ASIO12Desc% = InstallASIO2, USB\VID_0763&PID_2003&MI_03  ; with runonce
+; %USB\VID_0763&PID_2003.MidiDeviceDesc%=USBMidi_DeviceAP, USB\VID_0763&PID_2003&MI_09
+; %USBMIDI\AP4X4.DeviceDesc%=USBMidiVxd_DeviceAP,USBMIDI\AP4X4
+
+
+[AudioPhileMidi.CopyList.WDM]
+usbap4x4.sys
+
+
+;---------------------------------------------------------------;
+; Windows 98+ Install Sections
+;
+[USBMidi_DeviceAP]
+CopyFiles=AudioPhileMidi.CopyList.WDM
+AddReg=AudioPhileMidi.AddReg
+
+
+;---------------------------------------------------------------;
+; Windows 98+ Registry Section  AudioPhile
+;
+[AudioPhileMidi.AddReg]
+HKR,,DevLoader,,"*ntkern"
+HKR,,NTMPDriver,,usbap4x4.sys
+
+
+;---------------------------------------------------------------;
+; Windows 2000 Install Sections
+;
+[USBMidi_DeviceAP.NT]
+CopyFiles=AudioPhileMidi.CopyList.WDM
+
+[USBMidi_DeviceAP.NT.Services]
+AddService = USBAP4X4, 0x00000002, USBMidi_DeviceAP_Services
+
+[USBMidi_DeviceAP_Services]
+DisplayName    = %AudioPhileMidi.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\usbap4x4.sys
+
+
+
+;---------------------------------------------------------------;
+; Windows 98+ Install Sections  AudioPhile
+;
+[USBMidiVxd_DeviceAP]
+CopyFiles=MidiSportAP.CopyList.DRV
+AddReg=MidiSportAP.AddReg
+
+
+;---------------------------------------------------------------;
+; Windows 98+ Registry Section  AudioPhile
+;
+[MidiSportAP.AddReg]
+HKR,,DevLoader,,"mmdevldr.vxd"
+HKR,,Driver,,usbap4x4.vxd
+HKR,Drivers,MIGRATED,0,0
+HKR,Drivers\midi,,0,
+HKR,Drivers\midi\usbap4x4.drv,Description,0,%MidiSportAP.SvcDesc%
+HKR,Drivers\midi\usbap4x4.drv,Driver,0,usbap4x4.drv
+HKR,Drivers\midi\usbap4x4.drv,External,1,01,00,00,00
+HKR,Drivers,SubClasses,,"midi"
+
+
+;---------------------------------------------------------------;
+; Windows 2000 Install Sections   AudioPhile
+;
+[USBMidiVxd_DeviceAP.NT]
+CopyFiles=MidiSportAP.CopyList.NTDrv
+AddReg=MidiSportAP.NTAddReg
+
+[USBMidi_Device.NT.Services]
+AddService=,0x02,
+
+
+;---------------------------------------------------------------;
+; Windows 2000 Registry Section   AudioPhile
+;
+[MidiSport.NTAddReg]
+HKR,Drivers\midi,,0,
+HKR,Drivers\midi\usbnp4x4.dll,Description,0,%MidiSportAP.SvcDesc%
+HKR,Drivers\midi\usbnp4x4.dll,Driver,0,usbnp4x4.dll
+HKR,Drivers\midi\usbnp4x4.dll,External,1,01,00,00,00
+HKR,Drivers,SubClasses,,"midi"
+
+
+
+;---------------------------------------------------------------;
+; Windows 98+ Install Sections   Quattro
+;
+[USBMidiVxd_Device]
+CopyFiles=MidiSportVxd.CopyList.DRV
+AddReg=MidiSportVxd.AddReg
+
+
+;---------------------------------------------------------------;
+; Windows 2000 Install Sections
+;
+[USBMidiVxd_Device.NT]
+CopyFiles=MidiSportVxd.CopyList.NTDrv
+AddReg=MidiSportVxd.NTAddReg
+
+[USBMidiVxd_Device.NT.Services]
+AddService=,0x02,
+
+
+;---------------------------------------------------------------;
+; Windows 2000 Registry Section
+;
+[MidiSportVxd.NTAddReg]
+HKR,Drivers\midi,,0,
+HKR,Drivers\midi\usbns4x4.dll,Description,0,%MidiSportVxd.SvcDesc%
+HKR,Drivers\midi\usbns4x4.dll,Driver,0,usbns4x4.dll
+HKR,Drivers\midi\usbns4x4.dll,External,1,01,00,00,00
+HKR,Drivers,SubClasses,,"midi"
+
+
+[MidiSportVxd.CopyList.NTDrv]
+usbns4x4.dll
+
+
+;----------------------------------------------------------------;
+; AudioPhile
+[MidiSportAP.CopyList.DRV]
+usbap4x4.drv
+usbap4x4.dll
+usbap4x4.vxd
+
+[MidiSportAP.CopyList.NTDrv]
+usbnp4x4.dll
+
+
+
+;----------------------------------------------------------------;
+; Quattro
+[MidiSportVxd.CopyList.DRV]
+usbas4x4.drv
+usbas4x4.dll
+usbas4x4.vxd
+
+
+[MidiSportVxd.AddReg]
+HKR,,DevLoader,,"mmdevldr.vxd"
+HKR,,Driver,,usbas4x4.vxd
+HKR,Drivers,MIGRATED,0,0
+HKR,Drivers\midi,,0,
+HKR,Drivers\midi\usbas4x4.drv,Description,0,%MidiSportVxd.SvcDesc%  
+HKR,Drivers\midi\usbas4x4.drv,Driver,0,usbas4x4.drv
+HKR,Drivers\midi\usbas4x4.drv,External,1,01,00,00,00
+HKR,Drivers,SubClasses,,"midi"
+
+
+[AudioSportMidi.CopyList.WDM]
+usbas4x4.sys
+
+;---------------------------------------------------------------;
+; Windows 98+ Install Sections
+;
+[USBMidi_Device]
+CopyFiles=AudioSportMidi.CopyList.WDM
+AddReg=AudioSportMidi.AddReg
+
+;---------------------------------------------------------------;
+; Windows 98+ Registry Section
+;
+[AudioSportMidi.AddReg]
+HKR,,DevLoader,,"*ntkern"
+HKR,,NTMPDriver,,usbas4x4.sys
+
+;---------------------------------------------------------------;
+; Windows 2000 Install Sections
+;
+[USBMidi_Device.NT]
+CopyFiles=AudioSportMidi.CopyList.WDM
+
+[USBMidi_Device.NT.Services]
+AddService = USBAS4X4, 0x00000002, USBMidi_Device_Services
+
+[USBMidi_Device_Services]
+DisplayName    = %AudioSportMidi.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\usbas4x4.sys
+
+
+; Windows 9x
+[InstallASIO2]
+CopyFiles = AudioSportASIO.Files, DllExeFiles
+AddReg    = AudioSportASIO.AddReg
+
+[InstallASIO1]
+CopyFiles = AudioSportASIO.Files, DllExeFiles
+AddReg    = AudioSportASIO1.AddReg
+
+
+; Windows 2000
+[InstallASIO2.NT]
+CopyFiles = AudioSportASIO.Files, DllExeFiles
+AddReg    = AudioSportASIO.AddReg.nt
+
+[InstallASIO1.NT]
+CopyFiles = AudioSportASIO.Files, DllExeFiles
+AddReg    = AudioSportASIO1.AddReg
+
+[InstallASIO2.NT.Services]
+AddService = MMAUSB, 0x00000002, AudioSportASIO.AddService
+AddService=LMASFltr,,FilterService
+
+[InstallASIO1.NT.Services]
+AddService = MMAUSB, 0x00000002, AudioSportASIO.AddService
+AddService=LMASFltr,,FilterService
+
+
+[AudioSportASIO.Files]
+MMAUSB.SYS,,,1
+LMASFltr.sys,,,1
+
+[DllExeFiles]
+MMAUSBCM.exe,,,1
+MMAEUSB.dll,,,1
+MMAAUSB.DLL,,,1
+MMAUSBCP.DLL,,,1
+MMAUSBIN.DLL,,,1
+
+[AudioSportASIO.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,MMAUSB.SYS
+HKLM,"System\CurrentControlSet\Services\MMAUSB\Parameters","ResetDevice",0x10001,0
+HKLM,%RUNONCEKEYNAME%,RegisterAsioDll,,"regsvr32.exe /s MMAAUSB.dll"
+HKLM,%RUNONCEKEYNAME%,RegisterEasiDll,,"regsvr32.exe /s MMAEUSB.dll"
+HKLM,%RUNONCEKEYNAME%,InjectFilter,,"rundll32 mmausbin,RunConfMgr"
+
+
+[AudioSportASIO.AddReg.nt]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,MMAUSB.SYS
+HKLM,"System\CurrentControlSet\Services\MMAUSB\Parameters","ResetDevice",0x10001,0
+HKLM,%RUNONCEKEYNAME%,RegisterAsioDll,,"regsvr32.exe /s MMAAUSB.dll"
+HKLM,%RUNONCEKEYNAME%,RegisterEasiDll,,"regsvr32.exe /s MMAEUSB.dll"
+HKLM,%RUNONCEKEYNAME%,InjectFilter,,"rundll32 mmausbin,RunConfMgr"
+
+
+[AudioSportASIO1.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,MMAUSB.SYS
+HKLM,"System\CurrentControlSet\Services\MMAUSB\Parameters","ResetDevice",0x10001,0
+
+
+[AudioSportASIO1.AddReg.nt]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,MMAUSB.SYS
+HKLM,"System\CurrentControlSet\Services\MMAUSB\Parameters","ResetDevice",0x10001,0
+
+
+[AudioSportASIO.AddService]
+DisplayName    = %StrSvcNameASIO%
+ServiceType    = 1                                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\MMAUSB.SYS
+LoadOrderGroup = Base
+
+[FilterService]
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%10%\system32\drivers\LMASFltr.sys
+
+
+
+[SourceDisksNames]
+1 = %StrSrcDiskName%,,,
+
+[SourceDisksFiles]
+MAUASASI.INF = 1,,
+MMAUSB.SYS   = 1,,
+MMAAUSB.DLL  = 1,,
+MMAEUSB.dll  = 1,,
+MMAUSBCP.DLL = 1,,
+LMASFltr.sys = 1,,
+MMAUSBCM.exe = 1,,
+MMAUSBIN.DLL = 1,,
+usbas4x4.sys=1
+usbas4x4.drv=1
+usbas4x4.dll=1
+usbas4x4.vxd=1
+usbns4x4.dll=1
+usbap4x4.drv=1
+usbap4x4.dll=1
+usbap4x4.vxd=1
+usbnp4x4.dll=1
+usbap4x4.sys=1
+
+
+[DestinationDirs]
+AudioSportASIO.Files = 10,System32\Drivers   ; %WinDir%\System32\Drivers
+DllExeFiles=10,System    ; %WinDir%\System
+AudioSportMidi.CopyList.WDM  = 10,system32\drivers ; %SystemRoot%\system32\drivers
+MidiSportVxd.CopyList.DRV  = 11                  ; %SystemRoot%\system
+MidiSportAP.CopyList.DRV  = 11                  ; %SystemRoot%\system
+AudioPhileMidi.CopyList.WDM  = 10,system32\drivers ; %SystemRoot%\system32\drivers
+
+[Strings]
+StrMfg="M-Audio"
+
+USB\VID_0763&PID_2001.ASIO12Desc = "M-Audio USB Quattro ASIO 1/2"
+USB\VID_0763&PID_2001.ASIO34Desc = "M-Audio USB Quattro ASIO 3/4"
+
+USB\VID_0763&PID_2002.ASIODesc   = "M-Audio USB Duo ASIO"
+
+StrSrcDiskName   = "M-Audio USB Driver Disk"
+StrSvcNameASIO   = "M-Audio USB ASIO Driver"
+
+RUNONCEKEYNAME="Software\Microsoft\Windows\CurrentVersion\RunOnce"
+
+USB\VID_0763&PID_2001.MidiDeviceDesc="M-Audio USB Quattro Midi Driver (WDM)"
+AudioSportMidi.SvcDesc = "M-Audio USB Quattro Midi Driver"
+
+MediaClassName="Sound, video and game controllers"
+
+USBMIDI\AS4X4.DeviceDesc="M-Audio USB Quattro Midi Driver (VXD)"
+MidiSportVxd.SvcDesc = "M-Audio USB Quattro Midi Driver"
+
+; AudioPhile Strings
+USB\VID_0763&PID_2003.ASIO12Desc = "M-Audio USB AudioPhile ASIO 1/2"
+USB\VID_0763&PID_2003.ASIO34Desc = "M-Audio USB AudioPhile ASIO 3/4"
+USB\VID_0763&PID_2003.MidiDeviceDesc="M-Audio USB AudioPhile Midi Driver (WDM)"
+USBMIDI\AP4X4.DeviceDesc="M-Audio USB AudioPhile Midi Driver (VXD)"
+MidiSportAP.SvcDesc = "M-Audio USB AudioPhile Midi Driver"
+AudioPhileMidi.SvcDesc = "M-Audio USB AudioPhile Midi Driver"

@@ -1,0 +1,170 @@
+
+[Version]
+    Signature                  = "$Windows NT$"
+    LanguageType               = %LangTypeValue%
+    NtBuildToUpdate            = 3790
+    NtMajorVersionToUpdate     = 5
+    NtMinorVersionToUpdate     = 2
+    MaxNtBuildToUpdate         = 3790
+    MaxNtMajorVersionToUpdate  = 5
+    MaxNtMinorVersionToUpdate  = 2
+    MinNtServicePackVersion    = 0                 ; Minimum is Srv2k3 RTM
+    MaxNtServicePackVersion    = 0                 ; up to Srv2k3 RTM
+    ThisServicePackVersion     = 256               ; Means SP1
+    CatalogFile                = %SP_SHORT_TITLE%.cat
+
+
+
+[ProductCatalogsToInstall]
+    %SP_SHORT_TITLE%.cat, update\%SP_SHORT_TITLE%.cat
+
+;
+; Copies only if the files exists and has higher or equal version.
+; If file is in use moves the file to a tmp file and overwrites the new files
+;
+[ProductInstall.DontDelayUntilReboot]
+    CopyFiles=CopyAlways.Drivers.files
+
+[ProductInstall.CopyFilesAlways]
+    CopyFiles=CopyAlways.System32.files
+    CopyFiles=CopyAlways.Drivers.files
+    CopyFiles=CopyAlways.DriverCab.files
+    CopyFiles=CopyAlways.Inf.files
+    COPYFiles=CopyAlways.System32.DllCache.files
+
+[ProductInstall.GlobalRegistryChanges.Install]
+    AddReg=Product.Add.Reg
+
+[ProductInstall.GlobalRegistryChanges.ReInstall]
+    AddReg=Product.Add.Reg
+
+[Save.Reg.For.Uninstall]
+    HKLM,SOFTWARE\Microsoft\Windows NT\CurrentVersion\Hotfix\%SP_SHORT_TITLE%
+    HKLM,SOFTWARE\Microsoft\Updates\Windows Server 2003 OOB\SP%SERVICE_PACK_NUMBER%\%SP_SHORT_TITLE%
+    HKLM,SOFTWARE\Microsoft\updates\KB888111
+
+[Product.Add.Reg]
+    HKLM,SOFTWARE\Microsoft\Windows NT\CurrentVersion\Hotfix\%SP_SHORT_TITLE%,"Installed",0x10001,1
+    HKLM,SOFTWARE\Microsoft\Windows NT\CurrentVersion\Hotfix\%SP_SHORT_TITLE%,"Comments",0,%COMMENT%
+    HKLM,SOFTWARE\Microsoft\Windows NT\CurrentVersion\Hotfix\%SP_SHORT_TITLE%,"Backup Dir",0,""
+    HKLM,SOFTWARE\Microsoft\Windows NT\CurrentVersion\Hotfix\%SP_SHORT_TITLE%,"Fix Description",0,%COMMENT%
+    HKLM,SOFTWARE\Microsoft\Windows NT\CurrentVersion\Hotfix\%SP_SHORT_TITLE%,"Installed By",0,""
+    HKLM,SOFTWARE\Microsoft\Windows NT\CurrentVersion\Hotfix\%SP_SHORT_TITLE%,"Installed On",0,""
+    HKLM,SOFTWARE\Microsoft\Windows NT\CurrentVersion\Hotfix\%SP_SHORT_TITLE%,"Service Pack",0x10001,%SERVICE_PACK_NUMBER%
+    HKLM,SOFTWARE\Microsoft\Windows NT\CurrentVersion\Hotfix\%SP_SHORT_TITLE%,"Valid",0x10001,1
+    HKLM,SOFTWARE\Microsoft\Windows NT\CurrentVersion\Hotfix\%SP_SHORT_TITLE%\File 1\,"Flags",0,""
+    HKLM,SOFTWARE\Microsoft\Windows NT\CurrentVersion\Hotfix\%SP_SHORT_TITLE%\File 1\,"New File",0,""
+    HKLM,SOFTWARE\Microsoft\Windows NT\CurrentVersion\Hotfix\%SP_SHORT_TITLE%\File 1\,"New Link Date",0,""
+    HKLM,SOFTWARE\Microsoft\Windows NT\CurrentVersion\Hotfix\%SP_SHORT_TITLE%\File 1\,"Old Link Date",0,""
+    HKLM,SOFTWARE\Microsoft\updates\KB888111,"Installed",0x10001,1
+    HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\KB888111,"ParentKeyName",0,"OperatingSystem"
+
+[DestinationDirs]
+    CopyAlways.System32.files=11      ; %windir%\system32 (copy even if don't exist)
+    CopyAlways.DriverCab.files=65623  ; Destination determined at runtime
+    Drivers.files=12                  ; %windir%\system32\drivers (don't delay until reboot)
+    CopyAlways.Drivers.files=12       ; %windir%\system32\drivers (copy even if don't exist)
+    CopyAlways.Inf.files=17           ; %windir%\system32\inf (copy even if don't exist)
+    CopyAlways.System32.DllCache.files=65619   ; %windir%\system32\DllCache (replace if exist)
+
+
+[CopyAlways.System32.files]
+    Mssap.dll, Srv2k3\Mssap.dll
+    HdAProp.dll, CommonFiles\HdAProp.dll
+    HdAShCut.exe, CommonFiles\HdAShCut.exe
+    HdAudRes.dll, CommonFiles\HdAudRes.dll
+
+[CopyAlways.Drivers.files]
+    portcls.sys, Srv2k3\portcls.sys
+    Hdaudbus.sys, CommonFiles\Hdaudbus.sys
+    Hdaudio.sys, CommonFiles\Hdaudio.sys
+
+[CopyAlways.DriverCab.files]
+    portcls.sys, Srv2k3\portcls.sys
+
+
+[CopyAlways.Inf.files]
+    hdaudbus.inf, CommonFiles\Hdaudbus.inf
+    hdaudio.inf, CommonFiles\hdaudio.inf
+
+[CopyAlways.System32.DllCache.files]
+    Mssap.dll, Srv2k3\Mssap.dll
+
+
+[ArchiveCatalogFilesOnly]
+    %SP_SHORT_TITLE%.cat
+
+
+[SourceDisksNames]
+    1=%ServicePackSourceFiles%
+
+[SourceDisksFiles]
+    Srv2k3\Mssap.dll=1
+    Srv2k3\portcls.sys=1
+    CommonFiles\Hdaudbus.sys=1
+    CommonFiles\Hdaudio.sys=1
+    CommonFiles\HdAProp.dll=1
+    CommonFiles\HdAShCut.exe=1
+    CommonFiles\HdAudRes.dll=1
+    CommonFiles\Hdaudbus.inf=1
+    CommonFiles\hdaudio.inf=1
+
+
+[UninstallSections]
+;
+; Nothing to uninstall
+;
+;
+[DeleteFilesInUninstallSections]
+SystemRoot\system32\drivers.delete.files,"portcls.sys"
+
+; The following two sections are added to support PnP installation
+;
+[DeviceClassList]
+
+System  = {4D36E97D-E325-11CE-BFC1-08002BE10318}
+Unknown = {4D36E97E-E325-11CE-BFC1-08002BE10318}
+Media   = {4D36E96C-E325-11CE-BFC1-08002BE10318}
+
+[DevicesToUpgrade]
+
+HDAUDIO\FUNC_01&VEN_10EC&DEV_0880 = hdaudio.inf,{4D36E96C-E325-11CE-BFC1-08002BE10318}
+HDAUDIO\FUNC_01&VEN_434D&DEV_4980 = hdaudio.inf,{4D36E96C-E325-11CE-BFC1-08002BE10318}
+HDAUDIO\FUNC_01&VEN_13F6&DEV_9880 = hdaudio.inf,{4D36E96C-E325-11CE-BFC1-08002BE10318}
+HDAUDIO\FUNC_01&VEN_10EC&DEV_0280 = hdaudio.inf,{4D36E96C-E325-11CE-BFC1-08002BE10318}
+HDAUDIO\FUNC_01&VEN_10EC&DEV_0260 = hdaudio.inf,{4D36E96C-E325-11CE-BFC1-08002BE10318}
+HDAUDIO\FUNC_01&VEN_10EC&DEV_0261 = hdaudio.inf,{4D36E96C-E325-11CE-BFC1-08002BE10318}
+HDAUDIO\FUNC_01&VEN_8384&DEV_7672 = hdaudio.inf,{4D36E96C-E325-11CE-BFC1-08002BE10318}
+HDAUDIO\FUNC_01&VEN_8384&DEV_7670 = hdaudio.inf,{4D36E96C-E325-11CE-BFC1-08002BE10318}
+HDAUDIO\FUNC_01&VEN_14F1&DEV_5047 = hdaudio.inf,{4D36E96C-E325-11CE-BFC1-08002BE10318}
+HDAUDIO\FUNC_01&VEN_11D4&DEV_0078 = hdaudio.inf,{4D36E96C-E325-11CE-BFC1-08002BE10318}
+HDAUDIO\FUNC_01&VEN_11D4&DEV_1986 = hdaudio.inf,{4D36E96C-E325-11CE-BFC1-08002BE10318}
+HDAUDIO\FUNC_01&VEN_11D4&DEV_1983 = hdaudio.inf,{4D36E96C-E325-11CE-BFC1-08002BE10318}
+PCI\CC_0403                       = hdaudbus.inf,{4D36E97D-E325-11CE-BFC1-08002BE10318}
+
+[Strings]
+
+SP_TITLE                = "High Definition Audio Driver Package - KB888111"
+BUILDTIMESTAMP          = 20040219.000000
+HELPLINK                = http://support.microsoft.com?kbid=KB888111
+URLInfoAbout            = http://support.microsoft.com
+LangTypeValue           = 0x00
+SP_SHORT_TITLE          = "KB888111Srv2k3"
+SERVICE_PACK_NUMBER     = 1
+COMMENT                 = "High Definition Audio Driver - KB888111"
+ServicePackSourceFiles  = "Windows Server 2003 Hotfix Source Files"
+
+[Configuration]
+    InstallationType        = Hotfix
+    InstallLogFileName      = KB888111.log
+    UnInstallLogFileName    = KB888111Uninst.log
+    UnInstallDirName        = $NtUninstall%SP_SHORT_TITLE%$
+    EventLogKeyName         = NtServicePack_HDA
+    EventLogDllName         = spmsg.dll
+    RestartDevice           = 1
+
+;To avoid this OOB package from disappearing from Add/Remove Programs
+;after upgrade to newer service pack. The following line is needed.
+;
+;UpdateRegKey = "SOFTWARE\Microsoft\Updates\Windows Server 2003 OOB"
+

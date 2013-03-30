@@ -1,0 +1,65 @@
+;
+; File:     MADFU804.INF   (If the name is changed, make the proper changes in the uninstaller)
+; Copyright 2002-2004 Midiman, Inc.
+; Midiman/M-Audio DFU Driver .INF File
+;
+[Version] 
+Signature = "$CHICAGO$"
+Class=USB
+ClassGUID={36fc9e60-c465-11cf-8056-444553540000} 
+Provider=%ProviderName% 
+DriverVer= 02/12/2004,1.3.0.0
+
+[DestinationDirs] 
+DefaultDestDir=10,system32\drivers
+
+[SourceDisksNames]
+1 = %DfuDiskName%,,,
+
+; Win98SE has problem with long file names for the firmware
+; if the firmware file names change, then the Uninstaller has to be changed too to properly delete .bin files
+[SourceDisksFiles]
+MADFU804.sys=1
+MA004103.BIN=1    ; MobilePre V1.03
+
+[DriverCopyFiles]
+MADFU804.sys,,,1
+MA004103.BIN,,,1
+
+[Manufacturer] 
+%MFGNAME%=M-Audio
+
+[M-Audio]
+%MADFUUSBDesc%=MADFUUSB_Inst,USB\VID_0763&PID_2804
+
+[MADFUUSB_Inst] 
+; to make ME installation silent
+;CopyFiles=DriverCopyFiles,ConfigCopyFiles
+AddReg = MADFUUSB.AddReg 
+
+[MADFUUSB_Inst.nt] 
+CopyFiles=DriverCopyFiles								   ; To run Postinstaller automatically
+AddReg = MADFUUSB.AddReg 
+
+[MADFUUSB_Inst.nt.Services] 
+AddService = MADFU804,0x00000002,MADFUUSB.AddService
+
+[MADFUUSB.AddService] 
+ServiceType = 1
+StartType = 3
+ErrorControl = 1
+ServiceBinary = %10%\SYSTEM32\DRIVERS\MADFU804.sys 
+LoadOrderGroup = Base
+
+[MADFUUSB.AddReg] 
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,MADFU804.sys
+HKLM,"System\Currentcontrolset\Services\MADFUUSB\Parameters","MaximumTransferSize",0x10001,4096
+HKLM,"System\Currentcontrolset\Services\MADFUUSB\Parameters","DebugLevel",0x10001,2
+HKLM,"System\Currentcontrolset\Services\MADFUUSB\Parameters","FIRMWARE_VID_0763_PID_2804_REV_0100",,"MA004103.BIN"
+
+[Strings] 
+MFGNAME= "M-Audio" 
+DfuDiskName= "M-Audio MobilePre DFU Driver Disk"
+MADFUUSBDesc= "M-Audio MobilePre DFU" 
+PROVIDERNAME = "M-Audio"

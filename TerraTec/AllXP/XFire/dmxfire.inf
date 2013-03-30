@@ -1,0 +1,918 @@
+;/*=============================================================================
+;   FILE:         cwcwdm.inf
+;-------------------------------------------------------------------------------
+;   DESCRIPTION:  Device description file for Windows 98 & Windows 2000
+;                 installation of the CS461x driver files.
+;   DATE:         28-Jun-2001
+;-------------------------------------------------------------------------------
+;   COPYRIGHT:    (c) 2001, TerraTec Electronic GmbH. All Rights Reserved.
+;=============================================================================*/
+
+[Version]
+;
+; This needs to change for each WHQL submission.
+;
+;CatalogFile=PW3050.cat
+Signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+provider=%CSMfgName%
+DriverVer=07/01/2001,5.12.01.3056
+
+[ControlFlags]
+;
+; Exclude all devices from Select Device list
+;
+; This make inf checker happy :)
+;
+ExcludeFromSelect = *
+
+[Manufacturer]
+%CSMfgName%=Terratec
+
+[Terratec]
+; ------------------------------------------------------------------------
+; DMX Xfire 1024
+; ------------------------------------------------------------------------
+%cwcspud.DeviceDesc%   = cwcspud,  PCI\VEN_1013&DEV_6003&SUBSYS_112E153B
+%cwcwdm.DeviceDesc%    = cwcwdm,   CRYSTAL\SOUNDFUSION_WDM_INTERFACE
+%cwcgame.DeviceDesc%   = cwcgame,  CRYSTAL\*PNPB02F
+
+[DestinationDirs]
+cwcspud.CopyList    = 10,system32\drivers
+CS4610DSP.CopyList  = 10,cwcdata
+cwcwtsmp.CopyList   = 10,cwcdata
+cwcwdm.CopyList     = 10,system32\drivers
+sensaura.CopyList   = 10,system
+cwcprops.CopyList   = 11
+Audio3D.CopyList    = 11
+DefaultDestDir      = 12
+
+;
+;********************************** Win98 Install *****************************
+;
+[cwcspud]
+CopyFiles=cwcspud.CopyList, CS4610DSP.CopyList
+AddReg=CSCAud.cwcspud.AddReg, cwcspud.AddReg
+DriverVer=07/01/2001,5.12.01.3056
+;KnownRegEntries=cwcspud.KnownRegEntries
+
+;[cwcspud.KnownRegEntries]
+;IsWin98Gold=keep
+
+;[IsWin98Gold]
+;1=HKLM,Software\Microsoft\Windows\CurentVersion,VersionNumber,0,4.10.1998
+
+[cwcspud.Interfaces]
+AddInterface=%CRYSTAL_SPUD_GUID%,%CRYSTAL_SPUD%,CSCAud.Interface.SPuD
+AddInterface=%CRYSTAL_SPUD3_GUID%,%CRYSTAL_SPUD3%,CSCAud.Interface.SPuD3
+
+[cwcspud.AddReg]
+HKLM,System\CurrentControlSet\Services\cwcspud,Start,1,03,00,00,00
+HKLM,System\CurrentControlSet\Services\cwcspud,Type,1,01,00,00,00
+HKLM,System\CurrentControlSet\Services\cwcspud,ErrorControl,1,01,00,00,00
+HKLM,%KEY_BASE%\Inst,WinDir,,%10%
+HKLM,%KEY_BASE%\Inst,File0,,%10%\cwcdata\cwcspud.dat
+HKLM,%KEY_BASE%\Trans,WinDir,,%10%
+HKLM,%KEY_BASE%\Algorithms\Basics,IsW9x,1,01,00,00,00
+
+[cwcwdm]
+AlsoInstall=KS.Registration(ks.inf), WDMAUDIO.Registration(wdmaudio.inf)
+CopyFiles=cwcwdm.CopyList, cwcprops.CopyList, cwcwtsmp.CopyList, sensaura.CopyList, Audio3D.CopyList
+AddReg=CSCAud.cwcwdm.AddReg, guids.AddReg, Audio3D.AddReg
+DriverVer=07/01/2001,5.12.01.3056
+
+[cwcwdm.Interfaces]
+AddInterface=%MSKSCATEGORY_AUDIO%,%KSNAME_Wave%,CSCAud.Interface.Wave
+AddInterface=%MSKSCATEGORY_RENDER%,%KSNAME_Wave%,CSCAud.Interface.Wave
+AddInterface=%MSKSCATEGORY_CAPTURE%,%KSNAME_Wave%,CSCAud.Interface.Wave
+AddInterface=%MSKSCATEGORY_AUDIO%,%KSNAME_Topology%,CSCAud.Interface.Topology
+AddInterface=%MSKSCATEGORY_AUDIO%,%KSNAME_UART%,CSCAud.Interface.UART
+AddInterface=%MSKSCATEGORY_RENDER%,%KSNAME_UART%,CSCAud.Interface.UART
+AddInterface=%MSKSCATEGORY_CAPTURE%,%KSNAME_UART%,CSCAud.Interface.UART
+AddInterface=%MSKSCATEGORY_AUDIO%,%KSNAME_DMusic%,CSCAud.Interface.DLS
+AddInterface=%MSKSCATEGORY_RENDER%,%KSNAME_DMusic%,CSCAud.Interface.DLS
+
+[cwcgame]
+Include=joystick.inf
+Needs=MSJSTICK
+;;AlsoInstall=MSJSTICK(joystick.inf)
+AddReg=cwcgame.AddReg
+DriverVer=07/01/2001,5.12.01.3056
+
+[cwcgame.AddReg]
+
+[Audio3D.AddReg]
+HKCR,Audio3D,,0,Audio3DObject
+HKCR,Audio3D\CLSID,,0,%Audio3D_CLSID%
+HKCR,CLSID\%Audio3D_CLSID%,,0,Audio3DObject
+HKCR,CLSID\%Audio3D_CLSID%\InProcServer32,,0,Audio3D.dll
+HKCR,CLSID\%Audio3D_CLSID%\InProcServer32,ThreadingModel,0,Apartment
+
+;
+;**************************** Windows 2000 Install ****************************
+;
+[cwcspud.NT]
+CopyFiles=cwcspud.CopyList, CS4610DSP.CopyList
+AddReg=CSCAud.cwcspud.AddReg, cwcspud.NT.AddReg
+DriverVer=07/01/2001,5.12.01.3056
+
+[cwcspud.NT.Interfaces]
+AddInterface=%CRYSTAL_SPUD_GUID%,%CRYSTAL_SPUD%,CSCAud.Interface.SPuD
+AddInterface=%CRYSTAL_SPUD3_GUID%,%CRYSTAL_SPUD3%,CSCAud.Interface.SPuD3
+
+[cwcspud.NT.Services]
+AddService = cwcspud, 0x00000002, cwcspud_Service_Inst
+
+[cwcspud_Service_Inst]
+DisplayName   = %cwcspud.SvcDesc%
+ServiceType   = 1                  ; SERVICE_KERNEL_DRIVER
+StartType     = 3                  ; SERVICE_DEMAND_START
+ErrorControl  = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary = %10%\system32\drivers\cwcspud.sys
+
+[cwcspud.NT.AddReg]
+HKLM,%KEY_BASE%\Inst,WinDir,,\SystemRoot
+HKLM,%KEY_BASE%\Inst,File0,,\SystemRoot\cwcdata\cwcspud.dat
+HKLM,%KEY_BASE%\Trans,WinDir,,\SystemRoot
+
+[cwcwdm.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration, WDMAUDIO.FDMA
+CopyFiles=cwcwdm.CopyList, cwcprops.CopyList, cwcwtsmp.CopyList, sensaura.CopyList, Audio3D.CopyList
+AddReg=CSCAud.cwcwdm.AddReg, guids.AddReg, cwcwdm.NT.AddReg, Audio3D.AddReg
+DriverVer=07/01/2001,5.12.01.3056
+
+[cwcwdm.NT.AddReg]
+HKLM, %KEY_RUN%, Xfire,, "Xfire.exe /minimize"
+
+
+[cwcwdm.NT.Interfaces]
+AddInterface=%MSKSCATEGORY_AUDIO%,%KSNAME_Wave%,CSCAud.Interface.Wave
+AddInterface=%MSKSCATEGORY_RENDER%,%KSNAME_Wave%,CSCAud.Interface.Wave
+AddInterface=%MSKSCATEGORY_CAPTURE%,%KSNAME_Wave%,CSCAud.Interface.Wave
+AddInterface=%MSKSCATEGORY_AUDIO%,%KSNAME_Topology%,CSCAud.Interface.Topology
+AddInterface=%MSKSCATEGORY_AUDIO%,%KSNAME_UART%,CSCAud.Interface.UART
+AddInterface=%MSKSCATEGORY_RENDER%,%KSNAME_UART%,CSCAud.Interface.UART
+AddInterface=%MSKSCATEGORY_CAPTURE%,%KSNAME_UART%,CSCAud.Interface.UART
+AddInterface=%MSKSCATEGORY_AUDIO%,%KSNAME_DMusic%,CSCAud.Interface.DLS
+AddInterface=%MSKSCATEGORY_RENDER%,%KSNAME_DMusic%,CSCAud.Interface.DLS
+
+
+[cwcwdm.NT.Services]
+AddService = cwcwdm, 0x00000002, cwcwdm_Service_Inst
+
+[cwcwdm_Service_Inst]
+DisplayName   = %cwcwdm.SvcDesc%
+ServiceType   = 1                  ; SERVICE_KERNEL_DRIVER
+StartType     = 3                  ; SERVICE_DEMAND_START
+ErrorControl  = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary = %10%\system32\drivers\cwcwdm.sys
+
+[cwcgame.NT]
+Include=gameport.inf
+Needs=Standard_Port.NT
+AddReg=cwcgame.NT.AddReg
+DriverVer=07/01/2001,5.12.01.3056
+
+[cwcgame.NT.AddReg]
+
+[cwcgame.NT.Services]
+AddService = gameenum, 0x00000002, cwcgame_Service_Inst
+
+[cwcgame_Service_Inst]
+DisplayName    = %cwcgame.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 0                  ; SERVICE_ERROR_IGNORE
+ServiceBinary  = %12%\gameenum.sys
+LoadOrderGroup = Extended Base
+                                                                                                        
+;
+;********************************** Common Install ****************************
+;
+[CSCAud.Interface.SPuD]
+AddReg=CSCAud.Interface.SPuD.AddReg
+
+[CSCAud.Interface.SPuD.AddReg]
+HKR,,FriendlyName,,%CSCAud.SPuD.szPname%
+
+[CSCAud.Interface.SPuD3]
+AddReg=CSCAud.Interface.SPuD3.AddReg
+
+[CSCAud.Interface.SPuD3.AddReg]
+HKR,,FriendlyName,,%cwcspud3.DeviceDesc%
+
+[CSCAud.Interface.Wave]
+AddReg=CSCAud.Interface.Wave.AddReg
+
+[CSCAud.Interface.Wave.AddReg]
+HKR,,CLSID,,%MSProxy.CLSID%
+HKR,,FriendlyName,,%CSCAud.Wave.szPname%
+
+[CSCAud.Interface.Topology]
+AddReg=CSCAud.Interface.Topo.AddReg
+
+[CSCAud.Interface.Topo.AddReg]
+HKR,,CLSID,,%MSProxy.CLSID%
+HKR,,FriendlyName,,%CSCAud.Topology.szPname%
+
+[CSCAud.Interface.UART]
+AddReg=CSCAud.Interface.UART.AddReg
+
+[CSCAud.Interface.UART.AddReg]
+HKR,,CLSID,,%MSProxy.CLSID%
+HKR,,FriendlyName,,%CSCAud.UART.szPname%
+
+[CSCAud.Interface.DLS]
+AddReg=CSCAud.Interface.DLS.AddReg
+
+[CSCAud.Interface.DLS.AddReg]
+HKR,,CLSID,,%MSProxy.CLSID%
+HKR,,FriendlyName,,%CSCAud.DLS.szPname%
+
+[CSCAud.cwcspud.AddReg]
+HKR,,Driver,,cwcspud.sys
+HKR,,NTMPDriver,,"cwcspud.sys"
+HKR,,DevLoader,,"*ntkern"
+HKLM,%KEY_BASE%\Algorithms\Power,ClkRunMode,1,01,00,00,00
+HKLM,%KEY_BASE%\Algorithms\WaveTable,Enable,1,01,00,00,00 
+HKLM,%KEY_BASE%\Algorithms\WaveTable,CurrentHWVoicesLimit,1,20,00,00,00
+HKLM,%KEY_BASE%\Algorithms\WaveTable,CurrentSWVoicesLimit,1,20,00,00,00
+HKLM,%KEY_BASE%\Algorithms\WaveTable,VoiceAllocationMethod,1,00,00,00,00
+HKLM,%KEY_BASE%\Algorithms\WaveTable,StaticImage,1,01,00,00,00
+HKLM,%KEY_BASE%\Algorithms\WaveTable,OverrideDefaultSet,1,00,00,00,00
+HKLM,%KEY_BASE%\Algorithms\WaveTable,OverrideSetFilename,,""
+HKLM,%KEY_BASE%\Algorithms\Joystick,Enable,1,01,00,00,00   
+HKLM,%KEY_BASE%\Algorithms\HWVolume,Enable,1,00,00,00,00   
+HKLM,%KEY_BASE%\Algorithms\3D,Enable,1,01,00,00,00   
+
+;
+; This section is for the limits for 3D positional audio and Wave Table.
+;
+HKLM,%KEY_BASE%\Limits\3D_44K,Maximum,1,08,00,00,00
+HKLM,%KEY_BASE%\Limits\3D_44K,Minimum,1,01,00,00,00
+HKLM,%KEY_BASE%\Limits\3D_44K,TaskType,1,00,03,00,00
+HKLM,%KEY_BASE%\Limits\3D_44K,Version,1,00,00,00,00
+HKLM,%KEY_BASE%\Limits\3D_32K,Maximum,1,08,00,00,00
+HKLM,%KEY_BASE%\Limits\3D_32K,Minimum,1,01,00,00,00
+HKLM,%KEY_BASE%\Limits\3D_32K,TaskType,1,10,03,00,00
+HKLM,%KEY_BASE%\Limits\3D_32K,Version,1,00,00,00,00
+HKLM,%KEY_BASE%\Limits\3D_22K,Maximum,1,08,00,00,00
+HKLM,%KEY_BASE%\Limits\3D_22K,Minimum,1,01,00,00,00
+HKLM,%KEY_BASE%\Limits\3D_22K,TaskType,1,20,03,00,00
+HKLM,%KEY_BASE%\Limits\3D_22K,Version,1,00,00,00,00
+HKLM,%KEY_BASE%\Limits\DLS Voices,Maximum,1,40,00,00,00
+HKLM,%KEY_BASE%\Limits\DLS Voices,Minimum,1,10,00,00,00
+HKLM,%KEY_BASE%\Limits\DLS Voices,TaskType,1,22,01,00,00
+HKLM,%KEY_BASE%\Limits\DLS Voices,Version,1,00,00,00,00
+HKLM,%KEY_BASE%\Limits\PCM,Maximum,1,20,00,00,00
+HKLM,%KEY_BASE%\Limits\PCM,Minimum,1,01,00,00,00
+HKLM,%KEY_BASE%\Limits\PCM,TaskType,1,07,00,00,00
+HKLM,%KEY_BASE%\Limits\PCM,Version,1,00,00,00,00
+
+[CSCAud.cwcwdm.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,cwcwdm.sys
+HKR,,NTMPDriver,,"cwcwdm.sys,sbemul.sys"
+HKR,Drivers,SubClasses,,"wave,mixer,midi"
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Description,,%cwcwdm.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%cwcwdm.DeviceDesc%
+HKR,Drivers\wave\wdmaud.drv,Description,,%cwcwdm.DeviceDesc%
+;
+;Registering the MP3 filter
+;
+HKLM,%KEY_RUNONCE%,cwcmp3.ax,,"%11%\regsvr32 /s %11%\cwcmp3.ax"
+
+;*****************************************************************************
+;
+; Equalization Settings
+;
+;*****************************************************************************
+HKLM,%KEY_EQ%,ArmEQ,1,01,00,00,00
+HKLM,%KEY_EQ%,EnableEQ,1,00,00,00,00
+HKLM,%KEY_EQ%,EnableEQPeakMeters,1,01,00,00,00
+HKLM,%KEY_EQ%,ShowEQPeakMetersControl,1,01,00,00,00
+HKLM,%KEY_EQ%\48000,CurrentNoOfBands,1,0a,00,00,00
+HKLM,%KEY_EQ%\48000,NumberOfBands,1,0a,00,00,00
+
+;*****************************************************************************
+; Equalizer Presets
+;*****************************************************************************
+; Default preset
+HKLM,%KEY_EQ%\48000\10-Bands\CurrentSet,Name,,"Synthesizer"
+HKLM,%KEY_EQ%\48000\10-Bands\CurrentSet,GainTable,1,01,01,01,00,ff,ff,00,00,02,03
+HKLM,%KEY_EQ%\48000\10-Bands\CurrentSet,FrequencyTable,1,14,00,4b,00,87,00,fa,00,f4,01,\
+  e8,03,d0,07,a0,0f,40,1f,98,3a
+HKLM,%KEY_EQ%\48000\10-Bands\CurrentSet,BandwidthTable,1,38,00,46,00,84,00,2c,01,58,02,\
+  b0,04,60,09,68,10,90,1f,10,27
+HKLM,%KEY_EQ%\48000\10-Bands\CurrentSet,Flags,1,01,00,00,00
+
+; Built-in preset (Classical)
+HKLM,%KEY_EQ%\48000\10-Bands\Classical,GainTable,1,02,01,00,00,ff,ff,fe,fd,fc,fb
+HKLM,%KEY_EQ%\48000\10-Bands\Classical,FrequencyTable,1,14,00,4b,00,87,00,fa,00,f4,01,\
+  e8,03,d0,07,a0,0f,40,1f,98,3a
+HKLM,%KEY_EQ%\48000\10-Bands\Classical,BandwidthTable,1,38,00,46,00,84,00,2c,01,58,02,\
+  b0,04,60,09,68,10,90,1f,10,27
+HKLM,%KEY_EQ%\48000\10-Bands\Classical,Flags,1,01,00,00,00
+
+; Built-in preset (Flat)
+HKLM,%KEY_EQ%\48000\10-Bands\Flat,GainTable,1,00,00,00,00,00,00,00,00,00,00
+HKLM,%KEY_EQ%\48000\10-Bands\Flat,FrequencyTable,1,14,00,4b,00,87,00,fa,00,f4,01,\
+  e8,03,d0,07,a0,0f,40,1f,98,3a
+HKLM,%KEY_EQ%\48000\10-Bands\Flat,BandwidthTable,1,38,00,46,00,84,00,2c,01,58,02,\
+  b0,04,60,09,68,10,90,1f,10,27
+HKLM,%KEY_EQ%\48000\10-Bands\Flat,Flags,1,01,00,00,00
+
+; Built-in preset (Jazz)
+HKLM,%KEY_EQ%\48000\10-Bands\Jazz,GainTable,1,03,02,ff,00,fd,fd,fe,ff,01,03
+HKLM,%KEY_EQ%\48000\10-Bands\Jazz,FrequencyTable,1,14,00,4b,00,87,00,fa,00,f4,01,\
+  e8,03,d0,07,a0,0f,40,1f,98,3a
+HKLM,%KEY_EQ%\48000\10-Bands\Jazz,BandwidthTable,1,38,00,46,00,84,00,2c,01,58,02,\
+  b0,04,60,09,68,10,90,1f,10,27
+HKLM,%KEY_EQ%\48000\10-Bands\Jazz,Flags,1,01,00,00,00
+
+; Built-in preset (Pop)
+HKLM,%KEY_EQ%\48000\10-Bands\Pop,GainTable,1,fc,fe,01,03,03,02,00,00,fe,fc
+HKLM,%KEY_EQ%\48000\10-Bands\Pop,FrequencyTable,1,14,00,4b,00,87,00,fa,00,f4,01,\
+  e8,03,d0,07,a0,0f,40,1f,98,3a
+HKLM,%KEY_EQ%\48000\10-Bands\Pop,BandwidthTable,1,38,00,46,00,84,00,2c,01,58,02,\
+  b0,04,60,09,68,10,90,1f,10,27
+HKLM,%KEY_EQ%\48000\10-Bands\Pop,Flags,1,01,00,00,00
+
+; Built-in preset (Rock)
+HKLM,%KEY_EQ%\48000\10-Bands\Rock,GainTable,1,03,01,ff,fe,fd,fc,fe,00,01,02
+HKLM,%KEY_EQ%\48000\10-Bands\Rock,FrequencyTable,1,14,00,4b,00,87,00,fa,00,f4,01,\
+  e8,03,d0,07,a0,0f,40,1f,98,3a
+HKLM,%KEY_EQ%\48000\10-Bands\Rock,BandwidthTable,1,38,00,46,00,84,00,2c,01,58,02,\
+  b0,04,60,09,68,10,90,1f,10,27
+HKLM,%KEY_EQ%\48000\10-Bands\Rock,Flags,1,01,00,00,00
+
+; Built-in preset (Synthesizer)
+HKLM,%KEY_EQ%\48000\10-Bands\Synthesizer,GainTable,1,01,01,01,00,ff,ff,00,00,02,03
+HKLM,%KEY_EQ%\48000\10-Bands\Synthesizer,FrequencyTable,1,14,00,4b,00,87,00,fa,00,f4,01,\
+  e8,03,d0,07,a0,0f,40,1f,98,3a
+HKLM,%KEY_EQ%\48000\10-Bands\Synthesizer,BandwidthTable,1,38,00,46,00,84,00,2c,01,58,02,\
+  b0,04,60,09,68,10,90,1f,10,27
+HKLM,%KEY_EQ%\48000\10-Bands\Synthesizer,Flags,1,01,00,00,00
+
+; Built-in preset (Vocal)
+HKLM,%KEY_EQ%\48000\10-Bands\Vocal,GainTable,1,ff,fd,fd,01,03,03,02,01,00,ff
+HKLM,%KEY_EQ%\48000\10-Bands\Vocal,FrequencyTable,1,14,00,4b,00,87,00,fa,00,f4,01,\
+  e8,03,d0,07,a0,0f,40,1f,98,3a
+HKLM,%KEY_EQ%\48000\10-Bands\Vocal,BandwidthTable,1,38,00,46,00,84,00,2c,01,58,02,\
+  b0,04,60,09,68,10,90,1f,10,27
+HKLM,%KEY_EQ%\48000\10-Bands\Vocal,Flags,1,01,00,00,00
+
+;*****************************************************************************
+; Source Positioning Presets
+;*****************************************************************************
+; Default preset
+HKLM,%KEY_SPOS%\CurrentScheme,ShowAllSources,1,01,00,00,00
+HKLM,%KEY_SPOS%\CurrentScheme,Name,,"Default"
+HKLM,%KEY_SPOS%\CurrentScheme,Flags,1,00,00,00,A0
+HKLM,%KEY_SPOS%\CurrentScheme,BalanceTable,1,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40
+HKLM,%KEY_SPOS%\CurrentScheme,FaderTable,1,07,07,07,07,07,07,07,07,07,07,07,07,07,07,07,07,07,07,07
+HKLM,%KEY_SPOS%\Default,Flags,1,00,00,00,A0
+HKLM,%KEY_SPOS%\Default,BalanceTable,1,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40
+HKLM,%KEY_SPOS%\Default,FaderTable,1,07,07,07,07,07,07,07,07,07,07,07,07,07,07,07,07,07,07,07
+HKLM,%KEY_RUN%,Xfire,,"Xfire.exe /minimize"
+
+HKLM,%KEY_BASE%\ControlPanel,ShowPageSpkrConfig,1,01,00,00,00
+HKLM,%KEY_BASE%\ControlPanel,ShowPageEQ,1,01,00,00,00
+HKLM,%KEY_BASE%\ControlPanel,ShowPageSPDIF,1,01,00,00,00
+HKLM,%KEY_BASE%\ControlPanel,ShowPageSynth,1,01,00,00,00
+HKLM,%KEY_BASE%\ControlPanel,ShowPageHelp,1,01,00,00,00
+HKLM,%KEY_BASE%\ControlPanel,ShowPageSourcePositioning,1,01,00,00,00
+HKLM,%KEY_BASE%\ControlPanel,ShowStereoExpansionControl,1,01,00,00,00
+HKLM,%KEY_BASE%\ControlPanel,ShowTaskbarIcon,1,01,00,00,00
+HKLM,%KEY_BASE%\ControlPanel,EnablePopupHelp,1,01,00,00,00
+HKLM,%KEY_BASE%\ControlPanel,MakePreferredDevice,1,01,00,00,00
+HKLM,%KEY_BASE%\ControlPanel,CirrusURL,,"http://www.terratec.net"
+HKLM,%KEY_BASE%\Algorithms\Basics,EnableSensaura3D,1,03,00,00,00
+HKLM,%KEY_BASE%\Algorithms\Basics,EnableEAX,1,01,00,00,00
+; default TestToneCycleTimeMS 2000 miliseconds if following entry not present
+HKLM,%KEY_BASE%\Algorithms\Basics,TestToneCycleTimeMS,1,d0,07,00,00
+HKLM,Software\Sensaura\crlds3d,MacroFX,1,01,00,00,00
+HKLM,%KEY_BASE%\Algorithms\Basics,EnableMultiDrive,1,01,00,00,00
+; HKLM,%KEY_BASE%\Algorithms\Basics,ChannelConfig,1,03,00,00,00
+HKLM,%KEY_BASE%\Algorithms\Basics,"Speaker Configuration",1,02,00,00,00
+HKLM,%KEY_BASE%\Algorithms\Basics,SpeakerGeometry,1,14,00,00,00
+HKLM,%KEY_BASE%\Algorithms\Basics,Enable3DAcceleration,1,01,00,00,00
+HKLM,%KEY_BASE%\Algorithms\Basics,Enable2DAcceleration,1,01,00,00,00
+HKLM,%KEY_BASE%\Algorithms\Basics,EnableStereoExpansion,1,00,00,00,00
+HKLM,%KEY_BASE%\Algorithms\Basics,EnableMP3Acceleration,1,00,00,00,00
+HKLM,%KEY_BASE%\Algorithms\Basics,EnableExternalMidi,1,01,00,00,00
+HKLM,%KEY_BASE%\Algorithms\Basics,ShowMP3AccelerationControl,1,00,00,00,00
+HKLM,%KEY_BASE%\Algorithms\Basics,ExposeAC3Pin,1,01,00,00,00
+HKLM,%KEY_BASE%\Algorithms\SPDIF,LEDColorSPDIF,1,ff,00,00,00
+HKLM,%KEY_BASE%\Algorithms\SPDIF,SPDIFEnableInput,1,00,00,00,00
+HKLM,%KEY_BASE%\Algorithms\SPDIF,SPDIFOutputSource,1,01,00,00,00
+
+;
+; Currently this needs to be a one to allow the speaker configuration
+; to be read from the registry. 
+;
+HKLM,%KEY_BASE%\Algorithms\Basics,EnableSpeakerConfig,1,01,00,00,00
+
+;*****************************************************************************
+;
+; This will disable the line on the mixer.  Disabling both Master
+; and Headphones will invalidate the topology.
+; 00 = Enabled; 01 = Disabled
+;
+HKLM,%KEY_BASE%\MixerSources,DisableMaster,1,00
+HKLM,%KEY_BASE%\MixerSources,DisableRecord,1,00
+HKLM,%KEY_BASE%\MixerSources,DisableHPhone,1,01
+HKLM,%KEY_BASE%\MixerSources,DisableFront,1,00
+HKLM,%KEY_BASE%\MixerSources,DisableRear,1,00
+HKLM,%KEY_BASE%\MixerSources,DisableCenter,1,01
+HKLM,%KEY_BASE%\MixerSources,DisableLFE,1,01
+HKLM,%KEY_BASE%\MixerSources,DisableMonoOut,1,01
+
+HKLM,%KEY_BASE%\MixerSources,DisableStereoMix,1,00
+
+HKLM,%KEY_BASE%\MixerSources,DisableCd,1,00
+HKLM,%KEY_BASE%\MixerSources,DisableMic,1,00
+HKLM,%KEY_BASE%\MixerSources,DisableLine,1,00
+HKLM,%KEY_BASE%\MixerSources,DisableAux,1,00
+HKLM,%KEY_BASE%\MixerSources,DisableZV,1,01
+HKLM,%KEY_BASE%\MixerSources,DisableSPDIF,1,00
+
+HKLM,%KEY_BASE%\MixerSources,DisableEffectsPanel,1,00
+
+;Video isn't available on CS4294
+HKLM,%KEY_BASE%\MixerSources,DisableVideo,1,01
+
+;Phone and Beep aren't available on CS4294 or CS4298
+HKLM,%KEY_BASE%\MixerSources,DisablePhone,1,01
+HKLM,%KEY_BASE%\MixerSources,DisableBeep,1,01
+
+HKLM,%KEY_BASE%\MixerSources,DisableDockMaster,1,01
+HKLM,%KEY_BASE%\MixerSources,DisableDockHPhone,1,01
+HKLM,%KEY_BASE%\MixerSources,DisableDockCd,1,00
+HKLM,%KEY_BASE%\MixerSources,DisableDockMic,1,00
+HKLM,%KEY_BASE%\MixerSources,DisableDockLine,1,00
+HKLM,%KEY_BASE%\MixerSources,DisableDockAux,1,01
+
+;Video isn't available on CS4294
+HKLM,%KEY_BASE%\MixerSources,DisableDockVideo,1,01
+
+;
+; This will tell us whether the lines will be on the notebook or the
+; docking station when we are docked (must be enabled to do that) 
+; Set to 00=use the notebook;
+; Set to 01=use the docking station.
+;
+HKLM,%KEY_BASE%\MixerSources,UseDockMaster,1,00
+HKLM,%KEY_BASE%\MixerSources,UseDockHPhone,1,00
+HKLM,%KEY_BASE%\MixerSources,UseDockCd,1,00
+HKLM,%KEY_BASE%\MixerSources,UseDockMic,1,00
+HKLM,%KEY_BASE%\MixerSources,UseDockLine,1,00
+HKLM,%KEY_BASE%\MixerSources,UseDockAux,1,00
+HKLM,%KEY_BASE%\MixerSources,UseDockVideo,1,00
+;**********************************************************************
+
+
+;
+; Hardware Defaults - These are default settings to be used in the hardware.
+; The register value XXYY translates to ...,1,yy,xx.  These are the default
+; values of the driver.
+;
+HKR,Ac9x,MasterVolume,1,02,02
+HKR,Ac9x,HPhoneVolume,1,02,02
+HKR,Ac9x,MonoOutVolume,1,08,80
+HKR,Ac9x,BeepVolume,1,00,00
+HKR,Ac9x,PhoneVolume,1,08,80
+HKR,Ac9x,MicVolume,1,08,80
+HKR,Ac9x,LineInVolume,1,08,08
+HKR,Ac9x,CdVolume,1,08,08
+HKR,Ac9x,VideoVolume,1,08,08
+HKR,Ac9x,AuxVolume,1,08,08
+HKR,Ac9x,PcmOutVolume,1,08,08
+HKR,Ac9x,RecordSelect,1,00,00
+HKR,Ac9x,RecordGain,1,08,08
+HKR,Ac9x,GeneralPurpose,1,00,00
+HKR,Ac9x,3dControl,1,00,00
+HKR,Ac9x,CLFEVolume,1,02,02
+HKR,Ac9x,SurroundVolume,1,02,02
+
+HKR,HwCtrl,MidiVolume,1,00,00,a6,ff
+HKR,HwCtrl,MidiMute,1,00,00,00,00
+HKR,HwCtrl,MultiMasterVolume,1,00,00,f7,ff
+HKR,HwCtrl,SPDIFRecordVolume,1,00,00,00,00
+HKR,HwCtrl,DSPStereoMixVolume,1,00,00,00,00
+HKR,HwCtrl,2DMixReverbSendVolume,1,00,80,e9,ff
+HKR,HwCtrl,2DMixReverbSendMute,1,01,00,00,00
+HKR,HwCtrl,MidiReverbSendVolume,1,00,80,e9,ff
+HKR,HwCtrl,MidiReverbSendMute,1,00,00,00,00
+
+;
+; Volume Ranges - These take the place of tables.  Use these to adjust the dB 
+; range of the slider (dB*65536).  By default, they are set to the hardware's 
+; minimum and maximum values.  The formula for determining the value of the 
+; range is: hex(dB*65536) = 0xWWXXYYZZ.
+; WWXXYYZZ translates to ...,1,ZZ,YY,XX,WW
+;
+HKR,Mixer,MasterMin,1,00,80,a1,ff
+HKR,Mixer,MasterMax,1,00,00,00,00
+HKR,Mixer,MasterStep,1,00,80,01,00
+
+HKR,Mixer,MultiMasterMin,1,00,80,a1,ff
+HKR,Mixer,MultiMasterMax,1,00,00,00,00
+HKR,Mixer,MultiMasterStep,1,00,80,01,00
+
+HKR,Mixer,MidiMin,1,00,80,a1,ff
+HKR,Mixer,MidiMax,1,00,00,00,00
+HKR,Mixer,MidiStep,1,00,80,01,00
+
+HKR,Mixer,HPhoneMin,1,00,80,a1,ff
+HKR,Mixer,HPhoneMax,1,00,00,00,00
+HKR,Mixer,HPhoneStep,1,00,80,01,00
+
+HKR,Mixer,FrontMin,1,00,80,a1,ff
+HKR,Mixer,FrontMax,1,00,00,00,00
+HKR,Mixer,FrontStep,1,00,80,01,00
+
+HKR,Mixer,RearMin,1,00,80,a1,ff
+HKR,Mixer,RearMax,1,00,00,00,00
+HKR,Mixer,RearStep,1,00,80,01,00
+
+HKR,Mixer,CenterMin,1,00,80,a1,ff
+HKR,Mixer,CenterMax,1,00,00,00,00
+HKR,Mixer,CenterStep,1,00,80,01,00
+
+HKR,Mixer,LFEMin,1,00,80,a1,ff
+HKR,Mixer,LFEMax,1,00,00,00,00
+HKR,Mixer,LFEStep,1,00,80,01,00
+
+HKR,Mixer,CdMin,1,00,80,dd,ff
+HKR,Mixer,CdMax,1,00,00,0c,00
+HKR,Mixer,CdStep,1,00,80,01,00
+
+HKR,Mixer,MicMin,1,00,80,dd,ff
+HKR,Mixer,MicMax,1,00,00,0c,00
+HKR,Mixer,MicStep,1,00,80,01,00
+
+HKR,Mixer,LineMin,1,00,80,dd,ff
+HKR,Mixer,LineMax,1,00,00,0c,00
+HKR,Mixer,LineStep,1,00,80,01,00
+
+HKR,Mixer,AuxMin,1,00,80,dd,ff
+HKR,Mixer,AuxMax,1,00,00,0c,00
+HKR,Mixer,AuxStep,1,00,80,01,00
+
+HKR,Mixer,VideoMin,1,00,80,dd,ff
+HKR,Mixer,VideoMax,1,00,00,0c,00
+HKR,Mixer,VideoStep,1,00,80,01,00
+
+HKR,Mixer,PhoneMin,1,00,80,dd,ff
+HKR,Mixer,PhoneMax,1,00,00,0c,00
+HKR,Mixer,PhoneStep,1,00,80,01,00
+
+HKR,Mixer,BeepMin,1,00,00,d3,ff
+HKR,Mixer,BeepMax,1,00,00,00,00
+HKR,Mixer,BeepStep,1,00,00,03,00
+
+HKR,Mixer,ZVMin,1,00,00,a6,ff
+HKR,Mixer,ZVMax,1,00,00,00,00 
+HKR,Mixer,ZVStep,1,00,80,01,00
+
+HKR,Mixer,SPDIFMin,1,00,00,a6,ff
+HKR,Mixer,SPDIFMax,1,00,00,00,00 
+HKR,Mixer,SPDIFStep,1,00,80,01,00
+
+HKR,Mixer,2DReverbSendMin,1,00,00,a6,ff
+HKR,Mixer,2DReverbSendMax,1,00,00,fa,ff
+HKR,Mixer,2DReverbSendStep,1,00,80,01,00
+
+HKR,Mixer,MidiReverbSendMin,1,00,00,a6,ff
+HKR,Mixer,MidiReverbSendMax,1,00,00,fa,ff
+HKR,Mixer,MidiReverbSendStep,1,00,80,01,00
+
+
+;
+; Volume controls attached to muxes all use a uniform volume setup.
+;
+HKR,Mixer,RecordMin,1,00,00,00,00
+HKR,Mixer,RecordMax,1,00,80,16,00
+HKR,Mixer,RecordStep,1,00,80,01,00
+    
+HKR,Mixer,MonoOutMin,1,00,80,a1,ff
+HKR,Mixer,MonoOutMax,1,00,00,00,00
+HKR,Mixer,MonoOutStep,1,00,80,01,00
+
+[cwcspud.CopyList]
+cwcspud.sys
+
+[CS4610DSP.CopyList]
+cwclang.dat
+cwcspud.dat
+cwc4630.osp
+cwc4612.osp
+cwcasync.osp
+cwcsfgtx.osp
+cwcdatac.osp
+cwceq.osp
+cwcmp3.osp
+cwcsndct.osp
+cwcsnoop.osp
+cwcspat.osp
+cwcdls.osp
+cwcdlsrs.osp
+cwcdlscs.osp
+cwcdlsqs.osp
+cwcptadj.osp
+cwcpm.osp
+cwc51ch.osp
+
+;; Sensaura files
+cwcs3ddd.osp
+cwcs3dmx.osp
+cwcs3dps.osp
+cwcs3dmc.osp
+cwcs3dsn.osp
+
+
+[cwcwdm.CopyList]
+cwcwdm.sys
+
+[sensaura.CopyList]
+crlds3d.dll
+
+[Audio3D.CopyList]
+a3d.dll,Audio3D.dll,,4
+Audio3D.dll
+
+[cwcprops.CopyList]
+; CL: Will be done by Installer
+;xfire.exe
+;sixpacktest.wav
+;cwcprops.cpl
+;cwclang.dll 
+cwcmp3.ax
+
+[cwcwtsmp.CopyList]
+cwcdls8.cls
+;cwcprops.wav
+
+
+[guids.AddReg]
+;
+; Crystal Nodes
+;
+HKLM,%MediaCategories%\%CSCGuid.PhoneVolume%,Name,,%CSCNode.PhoneVolume%
+HKLM,%MediaCategories%\%CSCGuid.PhoneVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.PhoneMute%,Name,,%CSCNode.PhoneMute%
+HKLM,%MediaCategories%\%CSCGuid.PhoneMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.BeepVolume%,Name,,%CSCNode.BeepVolume%
+HKLM,%MediaCategories%\%CSCGuid.BeepVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.BeepMute%,Name,,%CSCNode.BeepMute%
+HKLM,%MediaCategories%\%CSCGuid.BeepMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.HPhoneVolume%,Name,,%CSCNode.HPhoneVolume%
+HKLM,%MediaCategories%\%CSCGuid.HPhoneVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.HPhoneMute%,Name,,%CSCNode.HPhoneMute%
+HKLM,%MediaCategories%\%CSCGuid.HPhoneMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.ZVPORT%,Name,,%CSCPin.ZVPORT%
+HKLM,%MediaCategories%\%CSCGuid.ZVPORT%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.ZVVolume%,Name,,%CSCNode.ZVVolume%
+HKLM,%MediaCategories%\%CSCGuid.ZVVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.ZVMute%,Name,,%CSCNode.ZVMute%
+HKLM,%MediaCategories%\%CSCGuid.ZVMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.Front%,Name,,%CSCNode.Front%
+HKLM,%MediaCategories%\%CSCGuid.Front%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.Master%,Name,,%CSCNode.Master%
+HKLM,%MediaCategories%\%CSCGuid.Master%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.FrontVolume%,Name,,%CSCNode.FrontVolume%
+HKLM,%MediaCategories%\%CSCGuid.FrontVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.FrontMute%,Name,,%CSCNode.FrontMute%
+HKLM,%MediaCategories%\%CSCGuid.FrontMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.Rear%,Name,,%CSCNode.Rear%
+HKLM,%MediaCategories%\%CSCGuid.Rear%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.RearVolume%,Name,,%CSCNode.RearVolume%
+HKLM,%MediaCategories%\%CSCGuid.RearVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.RearMute%,Name,,%CSCNode.RearMute%
+HKLM,%MediaCategories%\%CSCGuid.RearMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.SPDIF%,Name,,%CSCPin.SPDIF%
+HKLM,%MediaCategories%\%CSCGuid.SPDIF%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.SPDIFVolume%,Name,,%CSCNode.SPDIFVolume%
+HKLM,%MediaCategories%\%CSCGuid.SPDIFVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.SPDIFMute%,Name,,%CSCNode.SPDIFMute%
+HKLM,%MediaCategories%\%CSCGuid.SPDIFMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.Center%,Name,,%CSCNode.Center%
+HKLM,%MediaCategories%\%CSCGuid.Center%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.CenterVolume%,Name,,%CSCNode.CenterVolume%
+HKLM,%MediaCategories%\%CSCGuid.CenterVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.CenterMute%,Name,,%CSCNode.CenterMute%
+HKLM,%MediaCategories%\%CSCGuid.CenterMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.LFE%,Name,,%CSCNode.LFE%
+HKLM,%MediaCategories%\%CSCGuid.LFE%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.LFEVolume%,Name,,%CSCNode.LFEVolume%
+HKLM,%MediaCategories%\%CSCGuid.LFEVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.LFEMute%,Name,,%CSCNode.LFEMute%
+HKLM,%MediaCategories%\%CSCGuid.LFEMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.SixChFront%,Name,,%CSCNode.SixChFront%
+HKLM,%MediaCategories%\%CSCGuid.SixChFront%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.SixChFrontVolume%,Name,,%CSCNode.SixChFrontVolume%
+HKLM,%MediaCategories%\%CSCGuid.SixChFrontVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.SixChFrontMute%,Name,,%CSCNode.SixChFrontMute%
+HKLM,%MediaCategories%\%CSCGuid.SixChFrontMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.SixChRear%,Name,,%CSCNode.SixChRear%
+HKLM,%MediaCategories%\%CSCGuid.SixChRear%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.SixChRearVolume%,Name,,%CSCNode.SixChRearVolume%
+HKLM,%MediaCategories%\%CSCGuid.SixChRearVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.SixChRearMute%,Name,,%CSCNode.SixChRearMute%
+HKLM,%MediaCategories%\%CSCGuid.SixChRearMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.ReverbSend2d%,Name,,%CSCNode.ReverbSend2d%
+HKLM,%MediaCategories%\%CSCGuid.ReverbSend2d%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.ReverbSend2dVol%,Name,,%CSCNode.ReverbSend2dVol%
+HKLM,%MediaCategories%\%CSCGuid.ReverbSend2dVol%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.ReverbSend2dMute%,Name,,%CSCNode.ReverbSend2dMute%
+HKLM,%MediaCategories%\%CSCGuid.ReverbSend2dMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.ReverbSendMidi%,Name,,%CSCNode.ReverbSendMidi%
+HKLM,%MediaCategories%\%CSCGuid.ReverbSendMidi%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.ReverbSendMidiVol%,Name,,%CSCNode.ReverbSendMidiVol%
+HKLM,%MediaCategories%\%CSCGuid.ReverbSendMidiVol%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%CSCGuid.ReverbSendMidiMute%,Name,,%CSCNode.ReverbSendMidiMute%
+HKLM,%MediaCategories%\%CSCGuid.ReverbSendMidiMute%,Display,1,00,00,00,00
+
+
+[SourceDisksNames]
+100=%Disk1Name%,,
+
+[SourceDisksFiles]
+cwc4612.osp=100
+cwc4630.osp=100
+cwcasync.osp=100
+cwcsfgtx.osp=100
+cwcdatac.osp=100
+cwcdls.osp=100
+cwcdlsrs.osp=100
+cwcdlscs.osp=100
+cwcdlsqs.osp=100
+cwceq.osp=100
+cwclang.dat=100
+cwcmp3.osp=100
+cwcsndct.osp=100
+cwcsnoop.osp=100
+cwcspat.osp=100
+cwcspud.dat=100
+cwcspud.sys=100
+cwcwdm.sys=100
+cwcdls8.cls=100
+crlds3d.dll=100
+;cwclang.dll=100
+cwcpm.osp=100
+cwcptadj.osp=100
+cwcsnoop.osp=100
+;xfire.exe=100
+;sixpacktest.wav=100
+;cwcprops.cpl=100
+;cwcprops.wav=100
+cwcmp3.ax=100
+cwc51ch.osp=100
+;;
+;; Sensaura files
+;;
+cwcs3ddd.osp=100
+cwcs3dmx.osp=100
+cwcs3dps.osp=100
+cwcs3dmc.osp=100
+cwcs3dsn.osp=100
+Audio3D.dll=100
+242937usa8.exe=100
+
+[Strings]
+Disk1Name="Terratec DMX Xfire 1024 WDM Driver Disk 1"
+CSMfgName="Terratec Electronic GmbH"
+cwcspud.DeviceDesc="DMX Xfire 1024"
+cwcwdm.DeviceDesc="DMX Xfire 1024 WDM Interface"
+cwcgame.DeviceDesc="DMX Xfire 1024 Game Port"
+CSCAud.SPuD.szPname="DMX Xfire 1024 SPuD"
+
+;
+; Guids
+; 
+MSKSCATEGORY_AUDIO      ="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+MSKSCATEGORY_RENDER     ="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+MSKSCATEGORY_CAPTURE    ="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+MSProxy.CLSID           ="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+
+CSCGuid.PhoneVolume     ="{307E1008-9035-11d2-99D6-00600893863B}"
+CSCGuid.PhoneMute       ="{307E1009-9035-11d2-99D6-00600893863B}"
+CSCGuid.BeepVolume      ="{307E100a-9035-11d2-99D6-00600893863B}"
+CSCGuid.BeepMute        ="{307E100b-9035-11d2-99D6-00600893863B}"
+CSCGuid.HPhoneVolume    ="{307E100c-9035-11d2-99D6-00600893863B}"
+CSCGuid.HPhoneMute      ="{307E100d-9035-11d2-99D6-00600893863B}"
+CSCGuid.ZVPORT          ="{098F7443-75BC-11d2-AA2E-3078302C2030}"
+CSCGuid.ZVVolume        ="{1C4410F3-D997-11d3-943D-0040339FD9C2}"
+CSCGuid.ZVMute          ="{26345020-D997-11d3-943D-0040339FD9C2}"
+
+CSCGuid.Master          ="{3C566B60-D997-11d3-943D-0040339FD9C2}"
+CSCGuid.Front           ="{FEFB4813-D820-11d3-943D-0040339FD9C2}"
+CSCGuid.FrontVolume     ="{38BFD810-A288-11d3-9426-0040339FD9C2}"
+CSCGuid.FrontMute       ="{4534F060-A288-11d3-9426-0040339FD9C2}"
+CSCGuid.Rear            ="{5CC77870-D821-11d3-943D-0040339FD9C2}"
+CSCGuid.RearVolume      ="{4D7644B0-A288-11d3-9426-0040339FD9C2}"
+CSCGuid.RearMute        ="{4D7644B1-A288-11d3-9426-0040339FD9C2}"
+CSCGuid.SPDIF           ="{307E100f-9035-11d2-99D6-00600893863B}"
+CSCGuid.SPDIFVolume     ="{32DA4E70-D997-11d3-943D-0040339FD9C2}"
+CSCGuid.SPDIFMute       ="{32DA4E71-D997-11d3-943D-0040339FD9C2}"
+CSCGuid.Center          ="{5E7C8DE3-8858-47c2-A01B-7F6B677AFB02}"
+CSCGuid.CenterVolume    ="{3A513344-F8E9-449c-A648-B5F2C949870B}"
+CSCGuid.CenterMute      ="{5CE856F8-ECA1-43af-815F-FA8F2FA99EBD}"
+CSCGuid.LFE             ="{74A01E0D-61F7-4378-8BB7-C26D6CF14327}"
+CSCGuid.LFEVolume       ="{9BB84574-E6C7-42a0-ABF6-F48819EAA190}"
+CSCGuid.LFEMute         ="{FCDEFACB-5B85-40f7-9B23-9FA84D595326}"
+CSCGuid.SixChFront      ="{EF3345DC-D342-4017-9AF9-C0E051D5C05A}"
+CSCGuid.SixChFrontVolume="{1F928FE7-91BB-444c-B1FE-6ADABC2758F1}"
+CSCGuid.SixChFrontMute  ="{CB09ADC9-1E83-41b7-9A0D-048CA59C051B}"
+CSCGuid.SixChRear       ="{AE762FBB-6A01-4d1f-ADB7-941906F6FED9}"
+CSCGuid.SixChRearVolume ="{05D48BCF-CA75-4842-AA45-386B445B0426}"
+CSCGuid.SixChRearMute   ="{69B1E803-5573-475b-BDE0-9DF5DAE7CCCC}"
+CSCGuid.ReverbSend2d    ="{F45AF2E5-B9E2-4ad5-ADFB-21128D978284}"
+CSCGuid.ReverbSend2dVol ="{2B61DFED-17C8-41a5-927C-184C4ECAFF6D}"
+CSCGuid.ReverbSend2dMute="{103C3458-04EA-498b-BA12-03966FE6C6D9}"
+CSCGuid.ReverbSendMidi    ="{F79D0D7D-01AF-4328-AE1F-654DB8F682E4}"
+CSCGuid.ReverbSendMidiVol ="{EC2D53E4-C96F-471d-95BC-5F198313B1C6}"
+CSCGuid.ReverbSendMidiMute="{9BC8212F-C824-43c5-BA2C-A735B6C52021}"
+
+
+;
+; The strings cannot be longer than 31 characters.
+;
+CSCAud.Wave.szPname="DMX Xfire 1024"
+CSCAud.Topology.szPname="DMX Xfire 1024 Mixer"
+CSCAud.UART.szPname="DMX Xfire 1024 External MIDI"
+CSCAud.DLS.szPname="DMX Xfire 1024 DLS Synth"
+
+CSCPin.ZVPORT           ="ZV"
+CSCNode.ZVVolume        ="ZV Volume"
+CSCNode.ZVMute          ="ZV Mute"
+
+CSCPin.SPDIF            ="S/PDIF"
+CSCNode.SPDIFVolume     ="S/PDIF Volume"
+CSCNode.SPDIFMute       ="S/PDIF Mute"
+
+CSCNode.PhoneVolume     ="Phone Volume"
+CSCNode.PhoneMute       ="Phone Mute"
+CSCNode.BeepVolume      ="Beep Volume"
+CSCNode.BeepMute        ="Beep Mute"
+CSCNode.HPhoneVolume    ="Headphones Volume"
+CSCNode.HPhoneMute      ="Headphones Mute"
+
+CSCNode.Master          ="Master"
+CSCNode.Front           ="Front"
+CSCNode.FrontVolume     ="Front Volume"
+CSCNode.FrontMute       ="Front Mute"
+CSCNode.Rear            ="Surround"
+CSCNode.RearVolume      ="Surround Volume"
+CSCNode.RearMute        ="Surround Mute"
+CSCNode.Center          ="Center"
+CSCNode.CenterVolume    ="Center Volume"
+CSCNode.CenterMute      ="Center Mute"
+CSCNode.LFE             ="LFE"
+CSCNode.LFEVolume       ="LFE Volume"
+CSCNode.LFEMute         ="LFE Mute"
+CSCNode.SixChFront      ="Front"
+CSCNode.SixChFrontVolume="Front Volume"
+CSCNode.SixChFrontMute  ="Front Mute"
+CSCNode.SixChRear       ="Surround"
+CSCNode.SixChRearVolume ="Surround Volume"
+CSCNode.SixChRearMute   ="Surround Mute"
+CSCNode.ReverbSend2d    ="2D Reverb"
+CSCNode.ReverbSend2dVol ="2D Reverb"
+CSCNode.ReverbSend2dMute="Mute"
+CSCNode.ReverbSendMidi    ="MIDI Reverb"
+CSCNode.ReverbSendMidiVol ="MIDI Reverb"
+CSCNode.ReverbSendMidiMute="Mute"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+KSNAME_Wave="Wave"
+KSNAME_UART="UART"
+KSNAME_Topology="Topology"
+KSNAME_DMusic="DMusic"
+
+KEY_BASE="SYSTEM\CurrentControlSet\Services\cwcspud\CS461x"
+KEY_EQ="SYSTEM\CurrentControlSet\Services\cwcspud\CS461x\Algorithms\Equalization"
+KEY_SPOS="SYSTEM\CurrentControlSet\Services\cwcspud\CS461x\Algorithms\Source Positioning"
+KEY_RUN="SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
+KEY_RUNONCE="SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce"
+CRYSTAL_SPUD_GUID = "{C84710EC-F725-11d1-94BA-00C04FBF8E70}"
+CRYSTAL_SPuD="SPuD"
+CRYSTAL_SPUD3_GUID = "{C84710ED-F725-11D1-94BA-00C04FBF8E70}"
+CRYSTAL_SPUD3="SPuD3"
+
+Audio3D_CLSID="{D8F1EEE0-F634-11CF-8700-00A0245D918B}"
+
+; CRYSTAL_CWCDLS_GUID = "{22060BC5-49C6-11d3-B75A-00105A9D79B9}" 
+;
+; These strings are not displayed anywhere.  They are only used in the registry
+; for a service description.
+;
+cwcspud.SvcDesc = "Terratec DMX Xfire 1024 Driver"
+cwcwdm.SvcDesc  = "Terratec DMX Xfire 1024 WDM Driver"
+cwcgame.SvcDesc = "Terratec DMX Xfire 1024 Game Port"

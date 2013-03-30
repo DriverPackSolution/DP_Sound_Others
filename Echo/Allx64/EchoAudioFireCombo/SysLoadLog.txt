@@ -1,0 +1,22 @@
+
+**********************************************************
+SysLoad install log (x64)
+Log started: 10 Jan 2010 11:55:54 pm
+
+inf length is 5418
+C:\Windows\inf\oem78.inf contains device ID avc\echo_digital_audio&audiofire2&typ_1&id_0
+Removed INF C:\Windows\inf\oem78.inf with result 1
+SetupCopyOEMInf result 0; new INF path 
+UpdateDriverForPlugAndPlayDevices for device ID avc\echo_digital_audio&audiofire2&typ_1&id_0 with result 0
+UpdateDriverForPlugAndPlayDevices for device ID avc\echo_digital_audio&audiofire4&typ_1&id_0 with result 0
+UpdateDriverForPlugAndPlayDevices for device ID avc\echo_digital_audio&audiofire8&typ_1&id_0 with result 0
+UpdateDriverForPlugAndPlayDevices for device ID avc\echo_digital_audio&audiofire8a&typ_1&id_0 with result 0
+UpdateDriverForPlugAndPlayDevices for device ID avc\echo_digital_audio&audiofirepre8&typ_1&id_0 with result 0
+UpdateDriverForPlugAndPlayDevices for device ID avc\echo_digital_audio&audiofire12&typ_1&id_0 with result 0
+UpdateDriverForPlugAndPlayDevices for device ID avc\echo_digital_audio&fireworks8&typ_1&id_0 with result 0
+UpdateDriverForPlugAndPlayDevices for device ID avc\echo_digital_audio&fireworks_hdmi&typ_1&id_0 with result 0
+UpdateDriverForPlugAndPlayDevices for device ID avc\gibson&rip&typ_1&id_0 with result 0
+UpdateDriverForPlugAndPlayDevices for device ID avc\echo_digital_audio&rip&typ_1&id_0 with result 0
+UpdateDriverForPlugAndPlayDevices for device ID avc\gibson&audiopunk&typ_1&id_0 with result 0
+UpdateDriverForPlugAndPlayDevices for device ID avc\gibson&goldtop&typ_1&id_0 with result 0
+SysLoad exit

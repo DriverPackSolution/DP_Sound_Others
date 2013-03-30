@@ -1,0 +1,1046 @@
+;----------------------------------------------------------------------
+;M-Audio FW series Setup File
+;Written by Stephan Kappertz 
+;Copyright (c) 1999-2004 MIDIMAN/M-Audio
+;----------------------------------------------------------------------
+[Version]
+Signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+provider=%MMfg%
+DriverVer =12/20/2004,5.10.00.5032
+
+[SourceDisksNames]
+1="M-Audio FW Driver Disk",,,
+
+[SourceDisksFiles]
+deltafw.sys=1
+mafwboot.sys=1
+deltafw64.sys=1
+mafwboot64.sys=1
+defwasio.dll=1
+mafwpnl.dll=1
+mafw.cpl=1
+mafw64.cpl=1
+mafwcpl.exe=1
+mafwTray.exe=1
+mafwCoIn.dll=1
+fw410.bcd=1
+fwap.bcd=1
+fw1814.bcd=1
+fwsolo.bcd=1
+ozonic.bcd=1
+
+[Manufacturer]
+%MMfg%=M-Audio, NTX86, NTAMD64
+
+;;================= 32 bit ====================
+
+[M-Audio.NTX86]
+%FW410.DeviceDesc%		= FW410,1394\M-AUDIO&FW_410
+%FWAP.DeviceDesc%		= FWAP,1394\M-AUDIO&FW_Audiophile
+%FW1814.DeviceDesc%		= FW1814,1394\M-AUDIO&FW_Delta_1814
+%FW1814.DeviceDesc%		= FW1814,1394\M-AUDIO&FW_1814
+%FWBOOTLOADER.DeviceDesc%	= FWBOOTLOADER,1394\M-AUDIO&FW_Bootloader
+%FWBOOTLOADER.DeviceDesc%	= FWBOOTLOADER,1394\M-AUDIO&FW_Delta_1814_Bootloader
+%FWBOOTLOADER.DeviceDesc%	= FWBOOTLOADER,1394\M-AUDIO&FW_1814_Bootloader
+%FWBOOTLOADER.DeviceDesc%	= FWBOOTLOADER,1394\M-AUDIO&FW_Audiophile_Bootloader
+%FWBOOTLOADER.DeviceDesc%	= FWBOOTLOADER,1394\M-Audio&FWSolo_Bootloader
+%FWBOOTLOADER.DeviceDesc%	= FWBOOTLOADER,1394\M-Audio&FW_Solo_Bootloader
+
+%OZONIC.DeviceDesc%		= OZONIC,1394\M-Audio&Ozonic
+%OZONIC.DeviceDesc%		= OZONIC,AVC\M-Audio&Ozonic&TYP_C&ID_0
+
+%FWSOLO.DeviceDesc%		= FWSOLO,1394\M-Audio&FWSolo
+%FWSOLO.DeviceDesc%		= FWSOLO,1394\M-Audio&FW_Solo
+%FWSOLO.DeviceDesc%		= FWSOLO,AVC\M-Audio&FWSolo&TYP_C&ID_0
+%FWSOLO.DeviceDesc%		= FWSOLO,AVC\M-Audio&FW_Solo&TYP_C&ID_0
+%FW410.DeviceDesc%		= FW410,AVC\M-Audio&FW410&TYP_C&ID_0
+
+;;================= 64 bit ====================
+
+[M-Audio.NTAMD64]
+%FW410.DeviceDesc%		= FW410,1394\M-AUDIO&FW_410
+%FWAP.DeviceDesc%		= FWAP,1394\M-AUDIO&FW_Audiophile
+%FW1814.DeviceDesc%		= FW1814,1394\M-AUDIO&FW_Delta_1814
+%FW1814.DeviceDesc%		= FW1814,1394\M-AUDIO&FW_1814
+%FWBOOTLOADER.DeviceDesc%	= FWBOOTLOADER,1394\M-AUDIO&FW_Bootloader
+%FWBOOTLOADER.DeviceDesc%	= FWBOOTLOADER,1394\M-AUDIO&FW_Delta_1814_Bootloader
+%FWBOOTLOADER.DeviceDesc%	= FWBOOTLOADER,1394\M-AUDIO&FW_1814_Bootloader
+%FWBOOTLOADER.DeviceDesc%	= FWBOOTLOADER,1394\M-AUDIO&FW_Audiophile_Bootloader
+%FWBOOTLOADER.DeviceDesc%	= FWBOOTLOADER,1394\M-Audio&FWSolo_Bootloader
+%FWBOOTLOADER.DeviceDesc%	= FWBOOTLOADER,1394\M-Audio&FW_Solo_Bootloader
+
+%OZONIC.DeviceDesc%		= OZONIC,1394\M-Audio&Ozonic
+%OZONIC.DeviceDesc%		= OZONIC,AVC\M-Audio&Ozonic&TYP_C&ID_0
+
+%FWSOLO.DeviceDesc%		= FWSOLO,1394\M-Audio&FWSolo
+%FWSOLO.DeviceDesc%		= FWSOLO,1394\M-Audio&FW_Solo
+%FWSOLO.DeviceDesc%		= FWSOLO,AVC\M-Audio&FWSolo&TYP_C&ID_0
+%FWSOLO.DeviceDesc%		= FWSOLO,AVC\M-Audio&FW_Solo&TYP_C&ID_0
+%FW410.DeviceDesc%		= FW410,AVC\M-Audio&FW410&TYP_C&ID_0
+
+;;================= Common ====================
+
+[DestinationDirs]
+FW.CopyList=12
+FW.CopyList.PANEL=11
+FW.CopyList.ASIO=11
+FW.CopyList.CoInst=11
+FW.CopyList.BEBOB=12
+FWBOOTLOADER.CopyList=12
+
+FW64.CopyList=12
+FW64.CopyList.PANEL=11
+FW64.CopyList.PANEL.WOW64=10,SysWOW64
+FW64.CopyList.ASIO=10,SysWOW64
+FW64.CopyList.CoInst=10,SysWOW64
+FWBOOTLOADER64.CopyList=12
+
+[FW.CopyList]
+deltafw.sys
+
+[FWBOOTLOADER.CopyList]
+mafwboot.sys
+;;fw1814.bcd
+
+[FW.CopyList.BEBOB]
+ozonic.bcd
+fwsolo.bcd
+
+[FW.CopyList.PANEL]
+mafw.cpl,,
+mafwpnl.dll,,
+mafwTray.exe,,
+mafwcpl.exe,,
+
+[FW.CopyList.ASIO]
+defwasio.dll,,
+
+[FW.CopyList.CoInst]
+MAFWCoIn.dll
+
+[FW64.CopyList]
+deltafw.sys,deltafw64.sys,
+
+[FWBOOTLOADER64.CopyList]
+mafwboot.sys,mafwboot64.sys,
+fw1814.bcd
+
+[FW64.CopyList.PANEL]
+mafw.cpl,mafw64.cpl,
+
+[FW64.CopyList.PANEL.WOW64]
+mafwpnl.dll,,
+mafwTray.exe,,
+mafwcpl.exe,,
+
+[FW64.CopyList.ASIO]
+defwasio.dll,,
+
+[FW64.CopyList.CoInst]
+MAFWCoIn.dll,,
+
+[FW.DelReg.ASIO]
+HKCR,CLSID\%AsioID%
+HKLM,SOFTWARE\ASIO\%AsioNameStr%
+HKLM,SOFTWARE\ASIO\%FW410.AsioNameStr.Old%
+HKCR,Wow6432Node\CLSID\%AsioID%
+HKLM,SOFTWARE\Wow6432Node\ASIO\%AsioNameStr%
+HKLM,SOFTWARE\Wow6432Node\ASIO\%FW410.AsioNameStr.Old%
+
+[FW.AddReg.ASIO]
+HKLM,SOFTWARE\ASIO\%AsioNameStr%,"CLSID",0,%AsioID%
+HKCR,CLSID\%AsioID%,,0,%AsioNameStr%
+HKCR,CLSID\%AsioID%\InprocServer32,,0,%11%\defwasio.dll
+HKCR,CLSID\%AsioID%\InprocServer32,"ThreadingModel",0,"Apartment"
+
+[FW64.AddReg.ASIO]
+HKLM,SOFTWARE\Wow6432Node\ASIO\%AsioNameStr%,"CLSID",0,%AsioID%
+HKCR,Wow6432Node\CLSID\%AsioID%,,0,%AsioNameStr%
+HKCR,Wow6432Node\CLSID\%AsioID%\InprocServer32,,0,%10%\SysWOW64\defwasio.dll
+HKCR,Wow6432Node\CLSID\%AsioID%\InprocServer32,"ThreadingModel",0,"Apartment"
+
+[FW.AddReg.Names]
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Run,MAFWTaskbarApp,,"%11%\MAFWTray.exe"
+HKCR,".fws",,0,"MAudio.FWCPL.1"
+HKCR,"MAudio.FWCPL.1",,0,"M-Audio FireWire Control Panel"
+HKCR,"MAudio.FWCPL.1\DefaultIcon",,0,"%SystemRoot%\System32\mafwcpl.exe,2"
+HKCR,"MAudio.FWCPL.1\shell\open\command",,0,"mafwcpl.exe %1"
+
+[FW64.AddReg.Names]
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Run,MAFWTaskbarApp,,"%10%\SysWOW64\MAFWTray.exe"
+HKCR,".fws",,0,"MAudio.FWCPL.1"
+HKCR,"MAudio.FWCPL.1",,0,"M-Audio FireWire Control Panel"
+HKCR,"MAudio.FWCPL.1\DefaultIcon",,0,%10%\SysWOW64\mafwcpl.exe,2
+HKCR,"MAudio.FWCPL.1\shell\open\command",,0,"mafwcpl.exe %1"
+
+[FW.AddReg.CoInstallers]
+HKR,,CoInstallers32,0x00010000,"MAFWCoIn.dll,MAFWCoInstProc"
+
+[FW.AddReg.Branding]
+HKR,Branding,icon,,"deltafw.sys,114"
+HKR,Branding,bitmap,,"deltafw.sys,115"
+HKR,Branding,url,,"http://www.m-audio.com/"
+
+[FW.AddReg.SwSynth]
+HKLM,SYSTEM\CurrentControlSet\Services\swmidi,"Start",0x00010021,3
+
+[FWBOOTLOADER.NTX86.Services]
+AddService = MAFWBOOT, 0x00000002, MAFWBOOT_Service_Inst
+
+[FWBOOTLOADER.NTAMD64.Services]
+AddService = MAFWBOOT, 0x00000002, MAFWBOOT_Service_Inst
+
+[DELTAFW_Service_Inst]
+DisplayName   = %FW.SvcDesc%
+ServiceType   = 1                  ; SERVICE_KERNEL_DRIVER
+StartType     = 3                  ; SERVICE_DEMAND_START
+ErrorControl  = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary = %12%\deltafw.sys
+
+;;================= FW Bootloader ====================
+
+[FWBOOTLOADER.NTX86]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=FWBOOTLOADER.CopyList
+
+[FWBOOTLOADER.NTAMD64]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=FWBOOTLOADER64.CopyList
+
+[MAFWBOOT_Service_Inst]
+DisplayName   = %MAFWBOOT.SvcDesc%
+ServiceType   = 1                  ; SERVICE_KERNEL_DRIVER
+StartType     = 3                  ; SERVICE_DEMAND_START
+ErrorControl  = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary = %12%\mafwboot.sys
+
+;;================= FW Solo ====================
+
+[FWSOLO.NTX86]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=FW.CopyList,FW.CopyList.PANEL,FW.CopyList.ASIO,FW.CopyList.BEBOB
+DelReg=FW.DelReg.ASIO
+AddReg=FW.AddReg.ASIO,FW.AddReg.Names,FW.AddReg.Branding,FWSOLO.AddReg,FW.AddReg.SwSynth
+
+[FWSOLO.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter2%,FWSOLO.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter2%,FWSOLO.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter2%,FWSOLO.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter6%,FWSOLO.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter6%,FWSOLO.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter6%,FWSOLO.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_Topology%,FWSOLO.Interface.Topology
+
+[FWSOLO.NTX86.CoInstallers]
+CopyFiles=FW.CopyList.CoInst
+AddReg=FW.AddReg.Coinstallers
+
+[FWSOLO.NTX86.Services]
+AddService = DELTAFW, 0x00000002, DELTAFW_Service_Inst
+
+;;================= 64 bit ====================
+
+[FWSOLO.NTAMD64]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=FW64.CopyList,FW64.CopyList.PANEL,FW64.CopyList.PANEL.WOW64,FW64.CopyList.ASIO,FW.CopyList.BEBOB
+DelReg=FW.DelReg.ASIO
+AddReg=FW64.AddReg.ASIO,FW64.AddReg.Names,FW.AddReg.Branding,FWSOLO.AddReg,FW.AddReg.SwSynth
+
+[FWSOLO.NTAMD64.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter2%,FWSOLO.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter2%,FWSOLO.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter2%,FWSOLO.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter6%,FWSOLO.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter6%,FWSOLO.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter6%,FWSOLO.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_Topology%,FWSOLO.Interface.Topology
+
+[FWSOLO.NTAMD64.Services]
+AddService = DELTAFW, 0x00000002, DELTAFW_Service_Inst
+
+[FWSOLO.NTAMD64.CoInstallers]
+CopyFiles=FW64.CopyList.CoInst
+AddReg=FW64.AddReg.Coinstallers
+
+;;================= 64 bit end ====================
+
+[FWSOLO.Interface.Wave1]
+AddReg=FWSOLO.I.Wave1.AddReg
+
+[FWSOLO.I.Wave1.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FWSOLO.Wave1.szPname%
+
+[FWSOLO.Interface.Wave2]
+AddReg=FWSOLO.I.Wave2.AddReg
+
+[FWSOLO.I.Wave2.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FWSOLO.Wave2.szPname%
+
+[FWSOLO.Interface.Wave6]
+AddReg=FWSOLO.I.Wave6.AddReg
+
+[FWSOLO.I.Wave6.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FWSOLO.Wave6.szPname%
+
+[FWSOLO.Interface.Topology]
+AddReg=FWSOLO.I.Topo.AddReg
+
+[FWSOLO.I.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FWSOLO.Topology.szPname%
+
+[FWSOLO.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,deltafw.sys
+HKR,,NTMPDriver,,"deltafw.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%FWSOLO.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv, Description,,%FWSOLO.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%FWSOLO.DeviceDesc%
+
+
+;;================= Ozonic ====================
+
+[OZONIC.NTX86]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=FW.CopyList,FW.CopyList.PANEL,FW.CopyList.ASIO,FW.CopyList.BEBOB
+DelReg=FW.DelReg.ASIO
+AddReg=FW.AddReg.ASIO,FW.AddReg.Names,FW.AddReg.Branding,OZONIC.AddReg,FW.AddReg.SwSynth
+
+[OZONIC.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter1%,OZONIC.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter1%,OZONIC.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter1%,OZONIC.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter2%,OZONIC.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter2%,OZONIC.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter2%,OZONIC.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter3%,OZONIC.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter3%,OZONIC.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter3%,OZONIC.Interface.Wave3
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_MidiFilter%,OZONIC.Interface.UART1
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_MidiFilter%,OZONIC.Interface.UART1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_MidiFilter%,OZONIC.Interface.UART1
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_MidiFilter2%,OZONIC.Interface.UART2
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_MidiFilter2%,OZONIC.Interface.UART2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_MidiFilter2%,OZONIC.Interface.UART2
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_Topology%,OZONIC.Interface.Topology
+
+[OZONIC.NTX86.CoInstallers]
+CopyFiles=FW.CopyList.CoInst
+AddReg=FW.AddReg.Coinstallers
+
+[OZONIC.NTX86.Services]
+AddService = DELTAFW, 0x00000002, DELTAFW_Service_Inst
+
+;;================= 64 bit ====================
+
+[OZONIC.NTAMD64]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=FW64.CopyList,FW64.CopyList.PANEL,FW64.CopyList.PANEL.WOW64,FW64.CopyList.ASIO,FW.CopyList.BEBOB
+DelReg=FW.DelReg.ASIO
+AddReg=FW64.AddReg.ASIO,FW64.AddReg.Names,FW.AddReg.Branding,OZONIC.AddReg,FW.AddReg.SwSynth
+
+[OZONIC.NTAMD64.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter1%,OZONIC.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter1%,OZONIC.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter1%,OZONIC.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter2%,OZONIC.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter2%,OZONIC.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter2%,OZONIC.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter3%,OZONIC.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter3%,OZONIC.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter3%,OZONIC.Interface.Wave3
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_MidiFilter%,OZONIC.Interface.UART1
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_MidiFilter%,OZONIC.Interface.UART1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_MidiFilter%,OZONIC.Interface.UART1
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_MidiFilter2%,OZONIC.Interface.UART2
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_MidiFilter2%,OZONIC.Interface.UART2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_MidiFilter2%,OZONIC.Interface.UART2
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_Topology%,OZONIC.Interface.Topology
+
+[OZONIC.NTAMD64.Services]
+AddService = DELTAFW, 0x00000002, DELTAFW_Service_Inst
+
+[OZONIC.NTAMD64.CoInstallers]
+CopyFiles=FW64.CopyList.CoInst
+AddReg=FW64.AddReg.Coinstallers
+
+;;================= 64 bit end ====================
+
+[OZONIC.Interface.Wave1]
+AddReg=OZONIC.I.Wave1.AddReg
+
+[OZONIC.I.Wave1.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%OZONIC.Wave1.szPname%
+
+[OZONIC.Interface.Wave2]
+AddReg=OZONIC.I.Wave2.AddReg
+
+[OZONIC.I.Wave2.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%OZONIC.Wave2.szPname%
+
+[OZONIC.Interface.Wave3]
+AddReg=OZONIC.I.Wave3.AddReg
+
+[OZONIC.I.Wave3.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%OZONIC.Wave3.szPname%
+
+[OZONIC.Interface.UART1]
+AddReg=OZONIC.Interface.UART1.AddReg
+
+[OZONIC.Interface.UART1.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%OZONIC.UART1.szPname%
+
+[OZONIC.Interface.UART2]
+AddReg=OZONIC.Interface.UART2.AddReg
+
+[OZONIC.Interface.UART2.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%OZONIC.UART2.szPname%
+
+[OZONIC.Interface.Topology]
+AddReg=OZONIC.I.Topo.AddReg
+
+[OZONIC.I.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%OZONIC.Topology.szPname%
+
+[OZONIC.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,deltafw.sys
+HKR,,NTMPDriver,,"deltafw.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%FW410.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv, Description,,%FW410.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%FW410.DeviceDesc%
+
+;;================= FW 410 ====================
+
+[FW410.NTX86]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=FW.CopyList,FW.CopyList.PANEL,FW.CopyList.ASIO
+DelReg=FW.DelReg.ASIO
+AddReg=FW.AddReg.ASIO,FW.AddReg.Names,FW.AddReg.Branding,FW410.AddReg,FW.AddReg.SwSynth
+
+[FW410.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter1%,FW410.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter1%,FW410.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter1%,FW410.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter2%,FW410.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter2%,FW410.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter2%,FW410.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter3%,FW410.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter3%,FW410.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter3%,FW410.Interface.Wave3
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter4%,FW410.Interface.Wave4
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter4%,FW410.Interface.Wave4
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter4%,FW410.Interface.Wave4
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter5%,FW410.Interface.Wave5
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter5%,FW410.Interface.Wave5
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter5%,FW410.Interface.Wave5
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter6%,FW410.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter6%,FW410.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter6%,FW410.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_MidiFilter%,FW410.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_MidiFilter%,FW410.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_MidiFilter%,FW410.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_Topology%,FW410.Interface.Topology
+
+[FW410.NTX86.CoInstallers]
+CopyFiles=FW.CopyList.CoInst
+AddReg=FW.AddReg.Coinstallers
+
+[FW410.NTX86.Services]
+AddService = DELTAFW, 0x00000002, DELTAFW_Service_Inst
+
+;;================= 64 bit ====================
+
+[FW410.NTAMD64]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=FW64.CopyList,FW64.CopyList.PANEL,FW64.CopyList.PANEL.WOW64,FW64.CopyList.ASIO
+DelReg=FW.DelReg.ASIO
+AddReg=FW64.AddReg.ASIO,FW64.AddReg.Names,FW.AddReg.Branding,FW410.AddReg,FW.AddReg.SwSynth
+
+[FW410.NTAMD64.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter1%,FW410.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter1%,FW410.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter1%,FW410.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter2%,FW410.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter2%,FW410.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter2%,FW410.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter3%,FW410.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter3%,FW410.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter3%,FW410.Interface.Wave3
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter4%,FW410.Interface.Wave4
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter4%,FW410.Interface.Wave4
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter4%,FW410.Interface.Wave4
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter5%,FW410.Interface.Wave5
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter5%,FW410.Interface.Wave5
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter5%,FW410.Interface.Wave5
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter6%,FW410.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter6%,FW410.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter6%,FW410.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_MidiFilter%,FW410.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_MidiFilter%,FW410.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_MidiFilter%,FW410.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_Topology%,FW410.Interface.Topology
+
+[FW410.NTAMD64.Services]
+AddService = DELTAFW, 0x00000002, DELTAFW_Service_Inst
+
+[FW410.NTAMD64.CoInstallers]
+CopyFiles=FW64.CopyList.CoInst
+AddReg=FW64.AddReg.Coinstallers
+
+;;================= 64 bit end ====================
+
+[FW410.Interface.Wave1]
+AddReg=FW410.I.Wave1.AddReg
+
+[FW410.I.Wave1.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FW410.Wave1.szPname%
+
+[FW410.Interface.Wave2]
+AddReg=FW410.I.Wave2.AddReg
+
+[FW410.I.Wave2.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FW410.Wave2.szPname%
+
+[FW410.Interface.Wave3]
+AddReg=FW410.I.Wave3.AddReg
+
+[FW410.I.Wave3.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FW410.Wave3.szPname%
+
+[FW410.Interface.Wave4]
+AddReg=FW410.I.Wave4.AddReg
+
+[FW410.I.Wave4.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FW410.Wave4.szPname%
+
+[FW410.Interface.Wave5]
+AddReg=FW410.I.Wave5.AddReg
+
+[FW410.I.Wave5.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FW410.Wave5.szPname%
+
+[FW410.Interface.Wave6]
+AddReg=FW410.I.Wave6.AddReg
+
+[FW410.I.Wave6.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FW410.Wave6.szPname%
+
+[FW410.Interface.UART]
+AddReg=FW410.Interface.UART.AddReg
+
+[FW410.Interface.UART.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FW410.UART.szPname%
+
+[FW410.Interface.Topology]
+AddReg=FW410.I.Topo.AddReg
+
+[FW410.I.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FW410.Topology.szPname%
+
+[FW410.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,deltafw.sys
+HKR,,NTMPDriver,,"deltafw.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%FW410.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv, Description,,%FW410.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%FW410.DeviceDesc%
+
+
+;;================= FW Audiophile ====================
+
+[FWAP.NTX86]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=FW.CopyList,FW.CopyList.PANEL,FW.CopyList.ASIO
+DelReg=FW.DelReg
+AddReg=FW.AddReg.ASIO,FW.AddReg.Names,FW.AddReg.Branding,FWAP.AddReg,FW.AddReg.SwSynth
+
+[FWAP.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter1%,FWAP.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter1%,FWAP.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter1%,FWAP.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter2%,FWAP.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter2%,FWAP.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter2%,FWAP.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter3%,FWAP.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter3%,FWAP.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter3%,FWAP.Interface.Wave3
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter6%,FWAP.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter6%,FWAP.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter6%,FWAP.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_MidiFilter%,FWAP.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_MidiFilter%,FWAP.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_MidiFilter%,FWAP.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_Topology%,FWAP.Interface.Topology
+
+[FWAP.NTX86.Services]
+AddService = DELTAFW, 0x00000002, DELTAFW_Service_Inst
+
+[FWAP.NTX86.CoInstallers]
+CopyFiles=FW.CopyList.CoInst
+AddReg=FW.AddReg.Coinstallers
+
+;;================= 64 bit ====================
+
+[FWAP.NTAMD64]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=FW64.CopyList,FW64.CopyList.PANEL,FW64.CopyList.PANEL.WOW64,FW64.CopyList.ASIO
+DelReg=FW.DelReg
+AddReg=FW64.AddReg.ASIO,FW64.AddReg.Names,FW.AddReg.Branding,FWAP.AddReg,FW.AddReg.SwSynth
+
+[FWAP.NTAMD64.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter1%,FWAP.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter1%,FWAP.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter1%,FWAP.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter2%,FWAP.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter2%,FWAP.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter2%,FWAP.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter3%,FWAP.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter3%,FWAP.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter3%,FWAP.Interface.Wave3
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter6%,FWAP.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter6%,FWAP.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter6%,FWAP.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_MidiFilter%,FWAP.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_MidiFilter%,FWAP.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_MidiFilter%,FWAP.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_Topology%,FWAP.Interface.Topology
+
+[FWAP.NTAMD64.Services]
+AddService = DELTAFW, 0x00000002, DELTAFW_Service_Inst
+
+[FWAP.NTAMD64.CoInstallers]
+CopyFiles=FW64.CopyList.CoInst
+AddReg=FW64.AddReg.Coinstallers
+
+;;================= 64 bit end ====================
+
+[FWAP.Interface.Wave1]
+AddReg=FWAP.I.Wave1.AddReg
+
+[FWAP.I.Wave1.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FWAP.Wave1.szPname%
+
+[FWAP.Interface.Wave2]
+AddReg=FWAP.I.Wave2.AddReg
+
+[FWAP.I.Wave2.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FWAP.Wave2.szPname%
+
+[FWAP.Interface.Wave3]
+AddReg=FWAP.I.Wave3.AddReg
+
+[FWAP.I.Wave3.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FWAP.Wave3.szPname%
+
+[FWAP.Interface.Wave6]
+AddReg=FWAP.I.Wave6.AddReg
+
+[FWAP.I.Wave6.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FWAP.Wave6.szPname%
+
+[FWAP.Interface.UART]
+AddReg=FWAP.Interface.UART.AddReg
+
+[FWAP.Interface.UART.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FWAP.UART.szPname%
+
+[FWAP.Interface.Topology]
+AddReg=FWAP.I.Topo.AddReg
+
+[FWAP.I.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FWAP.Topology.szPname%
+
+[FWAP.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,deltafw.sys
+HKR,,NTMPDriver,,"deltafw.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%FWAP.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv, Description,,%FWAP.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%FWAP.DeviceDesc%
+
+;;================= FW 1814 ====================
+
+[FW1814.NTX86]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=FW.CopyList,FW.CopyList.PANEL,FW.CopyList.ASIO
+DelReg=FW.DelReg.ASIO
+AddReg=FW.AddReg.ASIO,FW.AddReg.Names,FW.AddReg.Branding,FW1814.AddReg,FW.AddReg.SwSynth
+
+[FW1814.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter1%,FW1814.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter1%,FW1814.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter1%,FW1814.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter2%,FW1814.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter2%,FW1814.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter2%,FW1814.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter3%,FW1814.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter3%,FW1814.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter3%,FW1814.Interface.Wave3
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter4%,FW1814.Interface.Wave4
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter4%,FW1814.Interface.Wave4
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter4%,FW1814.Interface.Wave4
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter5%,FW1814.Interface.Wave5
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter5%,FW1814.Interface.Wave5
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter5%,FW1814.Interface.Wave5
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter6%,FW1814.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter6%,FW1814.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter6%,FW1814.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter7%,FW1814.Interface.Wave7
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter7%,FW1814.Interface.Wave7
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter7%,FW1814.Interface.Wave7
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter8%,FW1814.Interface.Wave8
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter8%,FW1814.Interface.Wave8
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter8%,FW1814.Interface.Wave8
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter9%,FW1814.Interface.Wave9
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter9%,FW1814.Interface.Wave9
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter9%,FW1814.Interface.Wave9
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter10%,FW1814.Interface.Wave10
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter10%,FW1814.Interface.Wave10
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter10%,FW1814.Interface.Wave10
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter11%,FW1814.Interface.Wave11
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter11%,FW1814.Interface.Wave11
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter11%,FW1814.Interface.Wave11
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_MidiFilter%,FW1814.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_MidiFilter%,FW1814.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_MidiFilter%,FW1814.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_Topology%,FW1814.Interface.Topology
+
+[FW1814.NTX86.Services]
+AddService = DELTAFW, 0x00000002, DELTAFW_Service_Inst
+
+[FW1814.NTX86.CoInstallers]
+CopyFiles=FW.CopyList.CoInst
+AddReg=FW.AddReg.Coinstallers
+
+;;================= 64 bit ====================
+
+[FW1814.NTAMD64]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=FW64.CopyList,FW64.CopyList.PANEL,FW64.CopyList.PANEL.WOW64,FW64.CopyList.ASIO
+DelReg=FW.DelReg.ASIO
+AddReg=FW64.AddReg.ASIO,FW64.AddReg.Names,FW.AddReg.Branding,FW1814.AddReg,FW.AddReg.SwSynth
+
+[FW1814.NTAMD64.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter1%,FW1814.Interface.Wave1
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter1%,FW1814.Interface.Wave1
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter1%,FW1814.Interface.Wave1
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter2%,FW1814.Interface.Wave2
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter2%,FW1814.Interface.Wave2
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter2%,FW1814.Interface.Wave2
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter3%,FW1814.Interface.Wave3
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter3%,FW1814.Interface.Wave3
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter3%,FW1814.Interface.Wave3
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter4%,FW1814.Interface.Wave4
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter4%,FW1814.Interface.Wave4
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter4%,FW1814.Interface.Wave4
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter5%,FW1814.Interface.Wave5
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter5%,FW1814.Interface.Wave5
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter5%,FW1814.Interface.Wave5
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter6%,FW1814.Interface.Wave6
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter6%,FW1814.Interface.Wave6
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter6%,FW1814.Interface.Wave6
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter7%,FW1814.Interface.Wave7
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter7%,FW1814.Interface.Wave7
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter7%,FW1814.Interface.Wave7
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter8%,FW1814.Interface.Wave8
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter8%,FW1814.Interface.Wave8
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter8%,FW1814.Interface.Wave8
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter9%,FW1814.Interface.Wave9
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter9%,FW1814.Interface.Wave9
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter9%,FW1814.Interface.Wave9
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter10%,FW1814.Interface.Wave10
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter10%,FW1814.Interface.Wave10
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter10%,FW1814.Interface.Wave10
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_AudioFilter11%,FW1814.Interface.Wave11
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_AudioFilter11%,FW1814.Interface.Wave11
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_AudioFilter11%,FW1814.Interface.Wave11
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_MidiFilter%,FW1814.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSSTRING_MidiFilter%,FW1814.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSSTRING_MidiFilter%,FW1814.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSSTRING_Topology%,FW1814.Interface.Topology
+
+[FW1814.NTAMD64.Services]
+AddService = DELTAFW, 0x00000002, DELTAFW_Service_Inst
+
+[FW1814.NTAMD64.CoInstallers]
+CopyFiles=FW64.CopyList.CoInst
+AddReg=FW64.AddReg.Coinstallers
+
+;;================= 64 bit end ====================
+
+[FW1814.Interface.Wave1]
+AddReg=FW1814.I.Wave1.AddReg
+
+[FW1814.I.Wave1.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FW1814.Wave1.szPname%
+
+[FW1814.Interface.Wave2]
+AddReg=FW1814.I.Wave2.AddReg
+
+[FW1814.I.Wave2.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FW1814.Wave2.szPname%
+
+[FW1814.Interface.Wave3]
+AddReg=FW1814.I.Wave3.AddReg
+
+[FW1814.I.Wave3.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FW1814.Wave3.szPname%
+
+[FW1814.Interface.Wave4]
+AddReg=FW1814.I.Wave4.AddReg
+
+[FW1814.I.Wave4.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FW1814.Wave4.szPname%
+
+[FW1814.Interface.Wave5]
+AddReg=FW1814.I.Wave5.AddReg
+
+[FW1814.I.Wave5.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FW1814.Wave5.szPname%
+
+[FW1814.Interface.Wave6]
+AddReg=FW1814.I.Wave6.AddReg
+
+[FW1814.I.Wave6.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FW1814.Wave6.szPname%
+
+[FW1814.Interface.Wave7]
+AddReg=FW1814.I.Wave7.AddReg
+
+[FW1814.I.Wave7.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FW1814.Wave7.szPname%
+
+[FW1814.Interface.Wave8]
+AddReg=FW1814.I.Wave8.AddReg
+
+[FW1814.I.Wave8.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FW1814.Wave8.szPname%
+
+[FW1814.Interface.Wave9]
+AddReg=FW1814.I.Wave9.AddReg
+
+[FW1814.I.Wave9.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FW1814.Wave9.szPname%
+
+[FW1814.Interface.Wave10]
+AddReg=FW1814.I.Wave10.AddReg
+
+[FW1814.I.Wave10.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FW1814.Wave10.szPname%
+
+[FW1814.Interface.Wave11]
+AddReg=FW1814.I.Wave11.AddReg
+
+[FW1814.I.Wave11.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FW1814.Wave11.szPname%
+
+[FW1814.Interface.UART]
+AddReg=FW1814.Interface.UART.AddReg
+
+[FW1814.Interface.UART.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FW1814.UART.szPname%
+
+[FW1814.Interface.Topology]
+AddReg=FW1814.I.Topo.AddReg
+
+[FW1814.I.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FW1814.Topology.szPname%
+
+[FW1814.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,deltafw.sys
+HKR,,NTMPDriver,,"deltafw.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%FW1814.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv, Description,,%FW1814.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%FW1814.DeviceDesc%
+
+;;================= [Strings] ====================
+
+[Strings]
+
+;;================= Common ====================
+
+KSSTRING_MidiFilter	    ="{456DC892-44B5-4220-9C43-87697C5A097C}"
+KSSTRING_MidiFilter2	    ="{456DC89F-44B5-4220-9C43-87697C5A097C}"
+KSSTRING_AudioFilter1	="{456DC893-44B5-4220-9C43-87697C5A097C}"
+KSSTRING_AudioFilter2	="{456DC894-44B5-4220-9C43-87697C5A097C}"
+KSSTRING_AudioFilter3	="{456DC895-44B5-4220-9C43-87697C5A097C}"
+KSSTRING_AudioFilter4	="{456DC896-44B5-4220-9C43-87697C5A097C}"
+KSSTRING_AudioFilter5	="{456DC897-44B5-4220-9C43-87697C5A097C}"
+KSSTRING_AudioFilter6	="{456DC898-44B5-4220-9C43-87697C5A097C}"
+KSSTRING_AudioFilter7		="{456DC89A-44B5-4220-9C43-87697C5A097C}"
+KSSTRING_AudioFilter8		="{456DC89B-44B5-4220-9C43-87697C5A097C}"
+KSSTRING_AudioFilter9		="{456DC89C-44B5-4220-9C43-87697C5A097C}"
+KSSTRING_AudioFilter10		="{456DC89D-44B5-4220-9C43-87697C5A097C}"
+KSSTRING_AudioFilter11		="{456DC89E-44B5-4220-9C43-87697C5A097C}"
+
+KSSTRING_Topology		="{456DC899-44B5-4220-9C43-87697C5A097C}"
+
+Proxy.CLSID	    		="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO		="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER		="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE		="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+
+FW.SvcDesc			="Service for M-Audio FW Driver (WDM)"
+MAFWBOOT.SvcDesc		="Bootloader Service for M-Audio FW Driver (WDM)"
+
+AsioID                  ="{615C2C65-F8EB-11d3-B0B2-0000E8ED4AD9}"
+AsioNameStr             ="M-Audio FW ASIO"
+
+MSFT                    ="Microsoft"
+MMfg                    ="M-Audio"
+FWBOOTLOADER.DeviceDesc	="M-Audio FW Bootloader"
+
+;;================= FW Solo ====================
+
+FWSOLO.DeviceDesc    	="M-Audio FW Solo"
+
+FWSOLO.Wave1.szPname 	="M-Audio FW Solo Multi"
+FWSOLO.Wave2.szPname	="M-Audio FW Solo 1/2"
+FWSOLO.Wave6.szPname 	="M-Audio FW Solo S/PDIF"
+
+FWSOLO.Topology.szPname	="M-Audio FW Solo Mixer"
+
+;;================= Ozonic ====================
+
+OZONIC.DeviceDesc    	="M-Audio Ozonic"
+
+OZONIC.Wave1.szPname 	="M-Audio Ozonic Multi"
+OZONIC.Wave2.szPname	="M-Audio Ozonic 1/2"
+OZONIC.Wave3.szPname 	="M-Audio Ozonic 3/4"
+
+OZONIC.Topology.szPname	="M-Audio Ozonic Mixer"
+OZONIC.Uart1.szPname  	="Ozonic Keyboard MIDI"
+OZONIC.Uart2.szPname  	="Ozonic External MIDI"
+
+;;================= FW 410 ====================
+
+FW410.DeviceDesc    	="M-Audio FW 410"
+
+FW410.Wave1.szPname 	="M-Audio FW 410 Multi"
+FW410.Wave2.szPname	    ="M-Audio FW 410 1/2"
+FW410.Wave3.szPname 	="M-Audio FW 410 3/4"
+FW410.Wave4.szPname 	="M-Audio FW 410 5/6"
+FW410.Wave5.szPname 	="M-Audio FW 410 7/8"
+FW410.Wave6.szPname 	="M-Audio FW 410 S/PDIF"
+
+FW410.Topology.szPname	="M-Audio FW 410 Mixer"
+FW410.Uart.szPname  	="M-Audio FW 410 MIDI"
+FW410.AsioNameStr.Old	="M-Audio FW410 ASIO"
+
+;;================= FW Audiophile =============
+
+FWAP.DeviceDesc	    	="M-Audio FW Audiophile"
+
+FWAP.Wave1.szPname  	="M-Audio FW AP Multi"
+FWAP.Wave2.szPname  	="M-Audio FW AP 1/2"
+FWAP.Wave3.szPname  	="M-Audio FW AP 3/4"
+FWAP.Wave6.szPname  	="M-Audio FW AP S/PDIF"
+
+FWAP.Topology.szPname	="M-Audio FW AP Mixer"
+FWAP.Uart.szPname   	="M-Audio FW AP MIDI"
+
+;;================= FW 1814 ====================
+
+FW1814.DeviceDesc	="M-Audio FW 1814"
+
+FW1814.Wave1.szPname	="M-Audio FW 1814 Multi"
+FW1814.Wave2.szPname	="M-Audio FW 1814 1/2"
+FW1814.Wave3.szPname	="M-Audio FW 1814 3/4"
+FW1814.Wave4.szPname	="M-Audio FW 1814 5/6"
+FW1814.Wave5.szPname	="M-Audio FW 1814 7/8"
+FW1814.Wave6.szPname	="M-Audio FW 1814 S/PDIF"
+FW1814.Wave7.szPname	="M-Audio FW 1814 ADAT"
+FW1814.Wave8.szPname	="M-Audio FW 1814 S/PDIF"
+FW1814.Wave9.szPname	="M-Audio FW 1814 ADAT"
+FW1814.Wave10.szPname	="M-Audio FW 1814 S/PDIF"
+FW1814.Wave11.szPname	="M-Audio FW 1814 ADAT"
+
+FW1814.Topology.szPname	="M-Audio FW 1814 Mixer"
+FW1814.Uart.szPname	="M-Audio FW 1814 MIDI"

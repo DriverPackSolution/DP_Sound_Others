@@ -1,0 +1,12 @@
+[CatalogHeader]
+Name=delta
+PublicVersion=0x0000001
+EncodingType=0x00010001
+CATATTR1=0x10010001:OSAttr:2:5.1
+[CatalogFiles]
+<hash>d:\wu\aureal\a3d.dll=d:\wu\aureal\a3d.dll
+<hash>d:\wu\aureal\a3dapi.dll=d:\wu\aureal\a3dapi.dll
+<hash>d:\wu\aureal\ADM8810.sys=d:\wu\aureal\ADM8810.sys
+<hash>d:\wu\aureal\ADM8820.sys=d:\wu\aureal\ADM8820.sys
+<hash>d:\wu\aureal\ADM8830.sys=d:\wu\aureal\ADM8830.sys
+<hash>d:\wu\aureal\wdma_aur.inf=d:\wu\aureal\wdma_aur.inf

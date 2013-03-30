@@ -1,0 +1,65 @@
+; AurlGameport.inf -- Windows 2000 Setup File for XLerate Pro WDM driver 
+; Copyright (c) 2000 TerraTec Electronic GmbH.
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%AUREAL%
+LayoutFile=layout.inf
+catalogfile=AurlGameport.cat
+DriverVer=05/28/1999,5.00.2051.1
+
+[ControlFlags]
+ExcludeFromSelect = MF\PCI_VEN_12EB_GAMEPORT
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+[Manufacturer]
+%StdMfg%=Standard
+
+[Standard]
+%Aureal.DeviceDesc%=Standard_Port, MF\PCI_VEN_12EB_GAMEPORT
+; MF\PCI_VEN_12EB&DEV_0001, MF\PCI_VEN_12EB&DEV_0002, MF\PCI_VEN_12EB&DEV_0003
+
+[Standard_Port.NT]
+DriverVer = 9/23/1998, 5.0
+CopyFiles=GamePort_Device.CopyFiles.NT
+;;LogConfig=StandardJoyStick.LC0,BasicJoyStick.LC0
+
+[Standard_Port.NT.Services]
+AddService = admjoy,%SPSVCINST_ASSOCSERVICE%,GamePort_Service_Inst
+
+
+[GamePort_Device.CopyFiles.NT]
+admjoy.sys
+
+[GamePort_Service_Inst]
+DisplayName    = %gameport.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 0                  ; SERVICE_ERROR_IGNORE
+ServiceBinary  = %12%\admjoy.sys
+LoadOrderGroup = Extended Base
+
+[SourceDisksNames]
+1="XLerate Pro Software & Driver CD",""
+
+[SourceDisksFiles]
+admjoy.sys=1
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+AUREAL = "TerraTec Electronic GmbH"
+;MediaClassName = "Sound, video and game controllers"
+StdMfg = "(Standard system devices)"
+
+gameport.SvcDesc = "XLerate Pro Game Port Enum"
+
+;
+;  Device descriptions for known game ports
+;
+;PNPB02F.DeviceDesc              = "Standard Game Port"
+Aureal.DeviceDesc		 = "XLerate Pro Game Port"
+

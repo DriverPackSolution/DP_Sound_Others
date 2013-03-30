@@ -1,0 +1,8 @@
+Title: Audio: Cirrus Logic High Definition Audio Driver
+Version: A00-00        WP0000011555
+OEM Name: 
+OEM Version: 6.24.15.0
+Computers: Inspiron: 3420, 3520; Vostro Notebook: VOSTRO 2420, VOSTRO 2520
+OS: Windows 8 32-bit - ARM, Windows 8 64-bit - H, Windows 8 64-bit - Pro, Windows 8 32-bit - Pro, Windows 8 32-bit - H, Windows 8 32-bit - EM, Windows 8 64-bit - EM
+Languages: Chinese Hong Kong,Br Portuguese,Slovenian,Turkish,Arabic,Korean,Russian,Lithuanian,Czech,Khmer,Chinese Traditional,English,Dutch,Italian,Portuguese (Portugal),Basque,Japanese,Spanish,Norwegian,Serbian Latin,Pan-Euro,Finnish,Hungarian,Maltese,Slovakian,Swiss German,French,Greek,Iberian Portuguese,Croatian,Polish,Romanian,Thai,Swedish,Hebrew,Bulgarian,Estonian,Chinese Simplified,Latvian,Bahasa Indonesian,Danish,Ukrainian,German
+Created: 10/24/2012

@@ -1,0 +1,741 @@
+##############################################################################
+#
+# VTBAudio.DAT - Additional registry entries needed by VTBAudio.inf, but which
+#               blow out Microsoft's 64K INF file limit.
+#
+# Copyright (c) 1998 Voyetra Turtle Beach.
+#
+# In this file we add additional entries into the registry.
+#
+#
+##############################################################################
+
+# PhoneVolume 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{307E1008-9035-11d2-99D6-00600893863B}]
+Name,,Phone Volume
+Display,1,00,00,00,00
+
+# PhoneMute 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{307E1009-9035-11d2-99D6-00600893863B}]
+Name,,Phone Mute
+Display,1,00,00,00,00
+
+# BeepVolume 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{307E100a-9035-11d2-99D6-00600893863B}]
+Name,,Beep Volume
+Display,1,00,00,00,00
+
+# BeepMute 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{307E100b-9035-11d2-99D6-00600893863B}]
+Name,,Beep Mute
+Display,1,00,00,00,00
+
+# HPhoneVolume 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{307E100c-9035-11d2-99D6-00600893863B}]
+Name,,Headphones Volume
+Display,1,00,00,00,00
+
+# HPhoneMute 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{307E100d-9035-11d2-99D6-00600893863B}]
+Name,,Headphones Mute
+Display,1,00,00,00,00
+
+# ZVPORT 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{098F7443-75BC-11d2-AA2E-3078302C2030}]
+Name,,ZV
+Display,1,00,00,00,00
+
+# ZVVolume 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{1C4410F3-D997-11d3-943D-0040339FD9C2}]
+Name,,ZV Volume
+Display,1,00,00,00,00
+
+# ZVMute 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{26345020-D997-11d3-943D-0040339FD9C2}]
+Name,,ZV Mute
+Display,1,00,00,00,00
+
+# Master 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{3C566B60-D997-11d3-943D-0040339FD9C2}]
+Name,,Master
+Display,1,00,00,00,00
+
+# Front 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{FEFB4813-D820-11d3-943D-0040339FD9C2}]
+Name,,Front Speakers
+Display,1,00,00,00,00
+
+# FrontVolume 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{38BFD810-A288-11d3-9426-0040339FD9C2}]
+Name,,Front Volume
+Display,1,00,00,00,00
+
+# FrontMute 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{4534F060-A288-11d3-9426-0040339FD9C2}]
+Name,,Front Mute
+Display,1,00,00,00,00
+
+# Rear 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{5CC77870-D821-11d3-943D-0040339FD9C2}]
+Name,,Back Speakers
+Display,1,00,00,00,00
+
+# RearVolume 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{4D7644B0-A288-11d3-9426-0040339FD9C2}]
+Name,,Back Volume
+Display,1,00,00,00,00
+
+# RearMute 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{4D7644B1-A288-11d3-9426-0040339FD9C2}]
+Name,,Back Mute
+Display,1,00,00,00,00
+
+# SPDIF 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{307E100f-9035-11d2-99D6-00600893863B}]
+Name,,S/PDIF
+Display,1,00,00,00,00
+
+# SPDIFVolume 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{32DA4E70-D997-11d3-943D-0040339FD9C2}]
+Name,,S/PDIF Volume
+Display,1,00,00,00,00
+
+# SPDIFMute 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{32DA4E71-D997-11d3-943D-0040339FD9C2}]
+Name,,S/PDIF Mute
+Display,1,00,00,00,00
+
+# EXTRA_OUTPUT_DEVS 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{F4B896A0-EA1F-11d3-B0AB-00105A838C8E}]
+Name,,Extra Output Devices
+Display,1,00,00,00,00
+
+# EQ 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{F4B896A1-EA1F-11d3-B0AB-00105A838C8E}]
+Name,,EQ
+Display,1,00,00,00,00
+
+# SECONDARY_REC 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{F4B896A2-EA1F-11d3-B0AB-00105A838C8E}]
+Name,,Second Analog Record
+Display,1,00,00,00,00
+
+# DIGITAL_CD_REC 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{F4B896A3-EA1F-11d3-B0AB-00105A838C8E}]
+Name,,Digital CD Record
+Display,1,00,00,00,00
+
+# FX1 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{F4B896A4-EA1F-11d3-B0AB-00105A838C8E}]
+Name,,Effects Bus 1
+Display,1,00,00,00,00
+
+# FX2 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{F4B896A5-EA1F-11d3-B0AB-00105A838C8E}]
+Name,,Effects Bus 2
+Display,1,00,00,00,00
+
+# SYNTH_DC 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{F4B896A6-EA1F-11d3-B0AB-00105A838C8E}]
+Name,,Synth Daughter Card
+Display,1,00,00,00,00
+
+# FRONT_OUT 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{F4B896A7-EA1F-11d3-B0AB-00105A838C8E}]
+Name,,Front
+Display,1,00,00,00,00
+
+# REAR_OUT 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{F4B896A8-EA1F-11d3-B0AB-00105A838C8E}]
+Name,,Rear
+Display,1,00,00,00,00
+
+# 56_OUT 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{F4B896A9-EA1F-11d3-B0AB-00105A838C8E}]
+Name,,Channel 5/6 Out
+Display,1,00,00,00,00
+
+# 51_EMUL_OUT 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B40-EACA-11d3-B334-00400557BA99}]
+Name,,5.1 Emulation
+Display,1,00,00,00,00
+
+# EQ_20HZ 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{F4B896AA-EA1F-11d3-B0AB-00105A838C8E}]
+Name,,20hz
+Display,1,00,00,00,00
+
+# EQ_75HZ 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{F4B896AB-EA1F-11d3-B0AB-00105A838C8E}]
+Name,,75hz
+Display,1,00,00,00,00
+
+# EQ_135HZ 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{F4B896AC-EA1F-11d3-B0AB-00105A838C8E}]
+Name,,135hz
+Display,1,00,00,00,00
+
+# EQ_250HZ 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{F4B896AD-EA1F-11d3-B0AB-00105A838C8E}]
+Name,,250hz
+Display,1,00,00,00,00
+
+# EQ_500HZ 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{F4B896AE-EA1F-11d3-B0AB-00105A838C8E}]
+Name,,500hz
+Display,1,00,00,00,00
+
+# EQ_1000HZ 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{F4B896AF-EA1F-11d3-B0AB-00105A838C8E}]
+Name,,1Khz
+Display,1,00,00,00,00
+
+# EQ_2000HZ 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{F4B896B0-EA1F-11d3-B0AB-00105A838C8E}]
+Name,,2Khz
+Display,1,00,00,00,00
+
+# EQ_4000HZ 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{F4B896B1-EA1F-11d3-B0AB-00105A838C8E}]
+Name,,4Khz
+Display,1,00,00,00,00
+
+# EQ_8000HZ 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{F4B896B2-EA1F-11d3-B0AB-00105A838C8E}]
+Name,,8Khz
+Display,1,00,00,00,00
+
+# EQ_15000HZ 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{F4B896B3-EA1F-11d3-B0AB-00105A838C8E}]
+Name,,15Khz
+Display,1,00,00,00,00
+
+# SECONDARY_RECORD 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{F4B896B4-EA1F-11d3-B0AB-00105A838C8E}]
+Name,,Secondary Analog Record
+Display,1,00,00,00,00
+
+# DIGITAL_CD 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{F4B896B5-EA1F-11d3-B0AB-00105A838C8E}]
+Name,,Digital Cd Record
+Display,1,00,00,00,00
+
+# MASTER_FADER 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B00-EACA-11d3-B334-00400557BA99}]
+Name,,Master Fader
+Display,1,00,00,00,00
+
+# SPEAKER_CONFIG 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B02-EACA-11d3-B334-00400557BA99}]
+Name,,Speaker Config
+Display,1,00,00,00,00
+
+# VERSAJACK_CONFIG 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B03-EACA-11d3-B334-00400557BA99}]
+Name,,VersaJack Config
+Display,1,00,00,00,00
+
+# WAVE_FADER 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B04-EACA-11d3-B334-00400557BA99}]
+Name,,Wave Out Fader
+Display,1,00,00,00,00
+
+# MIDI_FADER 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B05-EACA-11d3-B334-00400557BA99}]
+Name,,Synthesis Fader
+Display,1,00,00,00,00
+
+# AUX_FADER 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B06-EACA-11d3-B334-00400557BA99}]
+Name,,Aux Fader
+Display,1,00,00,00,00
+
+# CD_FADER 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B07-EACA-11d3-B334-00400557BA99}]
+Name,,CD Fader
+Display,1,00,00,00,00
+
+# CD_DIGITAL 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B08-EACA-11d3-B334-00400557BA99}]
+Name,,Digital CD
+Display,1,00,00,00,00
+
+# CD_SPDIF_IN_RATE 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B09-EACA-11d3-B334-00400557BA99}]
+Name,,S/P Dif Input Rate
+Display,1,00,00,00,00
+
+# LINE_FADER 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B0A-EACA-11d3-B334-00400557BA99}]
+Name,,Line in Fader
+Display,1,00,00,00,00
+
+# SYNTH_DC_FADER 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B0C-EACA-11d3-B334-00400557BA99}]
+Name,,Synth2 Card Fader
+Display,1,00,00,00,00
+
+# SYNTH_DC_MUTE 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B0D-EACA-11d3-B334-00400557BA99}]
+Name,,Synth2 Card Mute
+Display,1,00,00,00,00
+
+# MIC_FADER 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B0E-EACA-11d3-B334-00400557BA99}]
+Name,,Mic Fader
+Display,1,00,00,00,00
+
+# PHONE_FADER 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B0F-EACA-11d3-B334-00400557BA99}]
+Name,,Telephone Fader
+Display,1,00,00,00,00
+
+# REC_PEAK 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B10-EACA-11d3-B334-00400557BA99}]
+Name,,Peak
+Display,1,00,00,00,00
+
+# REC_PEAK_ENABLE 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B11-EACA-11d3-B334-00400557BA99}]
+Name,,Peak Enable
+Display,1,00,00,00,00
+
+# SYNTH_DC_VOLUME 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B12-EACA-11d3-B334-00400557BA99}]
+Name,,Synth2 Card VOLUME
+Display,1,00,00,00,00
+
+# 56_VOLUME 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B17-EACA-11d3-B334-00400557BA99}]
+Name,,Channel 5/6 Volume
+Display,1,00,00,00,00
+
+# 56_MUTE 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B18-EACA-11d3-B334-00400557BA99}]
+Name,,Channel 5/6 Mute
+Display,1,00,00,00,00
+
+# 51_EMUL_VOLUME 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B19-EACA-11d3-B334-00400557BA99}]
+Name,,5.1 Emulation Volume
+Display,1,00,00,00,00
+
+# 51_EMUL_MUTE 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B1A-EACA-11d3-B334-00400557BA99}]
+Name,,5.1 Emulation Mute
+Display,1,00,00,00,00
+
+# MONO_OUT_VOLUME 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B1B-EACA-11d3-B334-00400557BA99}]
+Name,,Mono Out Volume
+Display,1,00,00,00,00
+
+# MIC_TO_MONO 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B1C-EACA-11d3-B334-00400557BA99}]
+Name,,Mic to Mono
+Display,1,00,00,00,00
+
+# DIG_CD_REC_VOLUME 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B1D-EACA-11d3-B334-00400557BA99}]
+Name,,Digital CD Record
+Display,1,00,00,00,00
+
+# DIG_CD_REC_PEAK_ENA 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B1E-EACA-11d3-B334-00400557BA99}]
+Name,,Peak Enable
+Display,1,00,00,00,00
+
+# FX1_VOLUME 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B1F-EACA-11d3-B334-00400557BA99}]
+Name,,Effects 1 return
+Display,1,00,00,00,00
+
+# FX1_MUTE 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B20-EACA-11d3-B334-00400557BA99}]
+Name,,Effects 1 Mute
+Display,1,00,00,00,00
+
+# FX1_SELECT 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B21-EACA-11d3-B334-00400557BA99}]
+Name,,Effects 1 Select
+Display,1,00,00,00,00
+
+# FX1_WAVEOUT_VOLUME 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B22-EACA-11d3-B334-00400557BA99}]
+Name,,Wave Volume
+Display,1,00,00,00,00
+
+# FX1_WAVEOUT_MUTE 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B23-EACA-11d3-B334-00400557BA99}]
+Name,,Wave Mute
+Display,1,00,00,00,00
+
+# FX1_SYNTH_VOLUME 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B24-EACA-11d3-B334-00400557BA99}]
+Name,,Synth Volume
+Display,1,00,00,00,00
+
+# FX1_SYNTH_MUTE 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B25-EACA-11d3-B334-00400557BA99}]
+Name,,Synth Mute
+Display,1,00,00,00,00
+
+# FX1_SYNTH_DC_VOLUME 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B26-EACA-11d3-B334-00400557BA99}]
+Name,,Synth 2 Volume
+Display,1,00,00,00,00
+
+# FX1_SYNTH_DC_MUTE 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B27-EACA-11d3-B334-00400557BA99}]
+Name,,Synth 2 Mute
+Display,1,00,00,00,00
+
+# FX1_DIG_CD_VOLUME 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B28-EACA-11d3-B334-00400557BA99}]
+Name,,Digital CD Volume
+Display,1,00,00,00,00
+
+# FX1_DIG_CD_MUTE 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B29-EACA-11d3-B334-00400557BA99}]
+Name,,Digital CD Mute
+Display,1,00,00,00,00
+
+# FX1_REC2_VOLUME 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B2A-EACA-11d3-B334-00400557BA99}]
+Name,,Analog 2 Volume
+Display,1,00,00,00,00
+
+# FX1_REC2_MUTE 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B2B-EACA-11d3-B334-00400557BA99}]
+Name,,Analog 2 Mute
+Display,1,00,00,00,00
+
+# FX2_VOLUME 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B2C-EACA-11d3-B334-00400557BA99}]
+Name,,Effects 2 return
+Display,1,00,00,00,00
+
+# FX2_MUTE 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B2D-EACA-11d3-B334-00400557BA99}]
+Name,,Effects 2 Mute
+Display,1,00,00,00,00
+
+# FX2_SELECT 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B2E-EACA-11d3-B334-00400557BA99}]
+Name,,Effects 2 Select
+Display,1,00,00,00,00
+
+# FX2_WAVEOUT_VOLUME 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B2F-EACA-11d3-B334-00400557BA99}]
+Name,,Waveout Volume
+Display,1,00,00,00,00
+
+# FX2_WAVEOUT_MUTE 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B30-EACA-11d3-B334-00400557BA99}]
+Name,,Waveout Mute
+Display,1,00,00,00,00
+
+# FX2_SYNTH_VOLUME 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B31-EACA-11d3-B334-00400557BA99}]
+Name,,Synth Volume
+Display,1,00,00,00,00
+
+# FX2_SYNTH_MUTE 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B32-EACA-11d3-B334-00400557BA99}]
+Name,,Synth Mute
+Display,1,00,00,00,00
+
+# FX2_SYNTH_DC_VOLUME 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B33-EACA-11d3-B334-00400557BA99}]
+Name,,Synth 2 Volume
+Display,1,00,00,00,00
+
+# FX2_SYNTH_DC_MUTE 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B34-EACA-11d3-B334-00400557BA99}]
+Name,,Synth 2 Mute
+Display,1,00,00,00,00
+
+# FX2_DIG_CD_VOLUME 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B35-EACA-11d3-B334-00400557BA99}]
+Name,,Digital CD Volume
+Display,1,00,00,00,00
+
+# FX2_DIG_CD_MUTE 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B36-EACA-11d3-B334-00400557BA99}]
+Name,,Digital CD Mute
+Display,1,00,00,00,00
+
+# FX2_REC2_VOLUME 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B37-EACA-11d3-B334-00400557BA99}]
+Name,,Analog 2 Volume
+Display,1,00,00,00,00
+
+# FX2_REC2_MUTE 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B38-EACA-11d3-B334-00400557BA99}]
+Name,,Analog 2 Mute
+Display,1,00,00,00,00
+
+# EQ_ENABLE 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B41-EACA-11d3-B334-00400557BA99}]
+Name,,EQ Enable
+Display,1,00,00,00,00
+
+# EQ_PEAK_ENABLE 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B42-EACA-11d3-B334-00400557BA99}]
+Name,,Peak Enable
+Display,1,00,00,00,00
+
+# EQ_LEVEL 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B43-EACA-11d3-B334-00400557BA99}]
+Name,,Level
+Display,1,00,00,00,00
+
+# EQ_PEAK 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B44-EACA-11d3-B334-00400557BA99}]
+Name,,Peak
+Display,1,00,00,00,00
+
+# HEADPHONE_FRONT 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B45-EACA-11d3-B334-00400557BA99}]
+Name,,Headphone Front
+Display,1,00,00,00,00
+
+# HEADPHONE_REAR 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B46-EACA-11d3-B334-00400557BA99}]
+Name,,Headphone Rear
+Display,1,00,00,00,00
+
+# HEADPHONE_VERSAJACK 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B47-EACA-11d3-B334-00400557BA99}]
+Name,,Headphone (VersaJack)
+Display,1,00,00,00,00
+
+# HEADPHONE_FRONT_PANEL 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B6A-EACA-11d3-B334-00400557BA99}]
+Name,,Headphone (Front Panel)
+Display,1,00,00,00,00
+
+# 2SPEAKER 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55EA7B48-EACA-11d3-B334-00400557BA99}]
+Name,,2 Speaker
+Display,1,00,00,00,00
+
+# 4SPEAKER 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b49-EACA-11d3-B334-00400557BA99}]
+Name,,4 Speaker
+Display,1,00,00,00,00
+
+# 6SPEAKER 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b50-EACA-11d3-B334-00400557BA99}]
+Name,,6 Speaker (5.1)
+Display,1,00,00,00,00
+
+# DIGITAL4
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{A5AA0E00-3096-11d4-9318-008048B86EFE}]
+Name,,Digital 4.1
+Display,1,00,00,00,00
+
+# VERSAJACK_LINEOUT 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b52-EACA-11d3-B334-00400557BA99}]
+Name,,Analog Out
+Display,1,00,00,00,00
+
+# VERSAJACK_SPDIFOUT 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b53-EACA-11d3-B334-00400557BA99}]
+Name,,Digital Out
+Display,1,00,00,00,00
+
+# VERSAJACK_LINEIN 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b54-EACA-11d3-B334-00400557BA99}]
+Name,,Analog In
+Display,1,00,00,00,00
+
+# DIGITAL_CD_OFF 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b56-EACA-11d3-B334-00400557BA99}]
+Name,,off/analog
+Display,1,00,00,00,00
+
+# DIGITAL_CD_ON 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b57-EACA-11d3-B334-00400557BA99}]
+Name,,on/digital
+Display,1,00,00,00,00
+
+# DIGITAL_CD_AUTO 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b58-EACA-11d3-B334-00400557BA99}]
+Name,,auto
+Display,1,00,00,00,00
+
+# SPDIF_RATE_NONE 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b60-EACA-11d3-B334-00400557BA99}]
+Name,,none
+Display,1,00,00,00,00
+
+# SPDIF_RATE_32KHZ 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b61-EACA-11d3-B334-00400557BA99}]
+Name,,32Khz
+Display,1,00,00,00,00
+
+# SPDIF_RATE_41KHZ 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b62-EACA-11d3-B334-00400557BA99}]
+Name,,44.1Khz
+Display,1,00,00,00,00
+
+# SPDIF_RATE_48KHZ 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b63-EACA-11d3-B334-00400557BA99}]
+Name,,48Khz
+Display,1,00,00,00,00
+
+# DIG_WT_SEL 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b64-EACA-11d3-B334-00400557BA99}]
+Name,,Digital Wave Table
+Display,1,00,00,00,00
+
+# DIG_WT_ON 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b65-EACA-11d3-B334-00400557BA99}]
+Name,,on/digital
+Display,1,00,00,00,00
+
+# DIG_WT_OFF 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b66-EACA-11d3-B334-00400557BA99}]
+Name,,off/analog
+Display,1,00,00,00,00
+
+# DIG_WT_AUTO 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b67-EACA-11d3-B334-00400557BA99}]
+Name,,auto
+Display,1,00,00,00,00
+
+# FX1_SEL 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b68-EACA-11d3-B334-00400557BA99}]
+Name,,Effects Bus 1
+Display,1,00,00,00,00
+
+# FX2_SEL 
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b69-EACA-11d3-B334-00400557BA99}]
+Name,,Effects Bus 2
+Display,1,00,00,00,00
+
+# FX_EFFECT_1
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b70-EACA-11d3-B334-00400557BA99}]
+Name,,Reverb
+Display,1,00,00,00,00
+
+# FX_EFFECT_2
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b71-EACA-11d3-B334-00400557BA99}]
+Name,,Small Room
+Display,1,00,00,00,00
+
+# FX_EFFECT_3
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b72-EACA-11d3-B334-00400557BA99}]
+Name,,Bathroom
+Display,1,00,00,00,00
+
+# FX_EFFECT_4
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b73-EACA-11d3-B334-00400557BA99}]
+Name,,Auditorium
+Display,1,00,00,00,00
+
+# FX_EFFECT_5
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b74-EACA-11d3-B334-00400557BA99}]
+Name,,Big Hall
+Display,1,00,00,00,00
+
+# FX_EFFECT_6
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b75-EACA-11d3-B334-00400557BA99}]
+Name,,Arena
+Display,1,00,00,00,00
+
+# FX_EFFECT_7
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b76-EACA-11d3-B334-00400557BA99}]
+Name,,Hallway
+Display,1,00,00,00,00
+
+# FX_EFFECT_8
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b77-EACA-11d3-B334-00400557BA99}]
+Name,,Sewer Pipe
+Display,1,00,00,00,00
+
+# FX_EFFECT_9
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b78-EACA-11d3-B334-00400557BA99}]
+Name,,Warble
+Display,1,00,00,00,00
+
+# FX_EFFECT_10
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b79-EACA-11d3-B334-00400557BA99}]
+Name,,Chorus (Heavy)
+Display,1,00,00,00,00
+
+# FX_EFFECT_11
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b7A-EACA-11d3-B334-00400557BA99}]
+Name,,Vibrato
+Display,1,00,00,00,00
+
+# FX_EFFECT_12
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b7B-EACA-11d3-B334-00400557BA99}]
+Name,,Chorus
+Display,1,00,00,00,00
+
+# FX_EFFECT_13
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b7C-EACA-11d3-B334-00400557BA99}]
+Name,,Flange
+Display,1,00,00,00,00
+
+# FX_EFFECT_14
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b7D-EACA-11d3-B334-00400557BA99}]
+Name,,Spatial
+Display,1,00,00,00,00
+
+# FX_EFFECT_15
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b7E-EACA-11d3-B334-00400557BA99}]
+Name,,Slap Back Echo
+Display,1,00,00,00,00
+
+# FX_EFFECT_16
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b7F-EACA-11d3-B334-00400557BA99}]
+Name,,Medium Delay
+Display,1,00,00,00,00
+
+# FX_EFFECT_17
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b80-EACA-11d3-B334-00400557BA99}]
+Name,,Long Delay
+Display,1,00,00,00,00
+
+# FX_EFFECT_18
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b81-EACA-11d3-B334-00400557BA99}]
+Name,,Repeat Delay
+Display,1,00,00,00,00
+
+# FX_EFFECT_19
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{55ea7b82-EACA-11d3-B334-00400557BA99}]
+Name,,Nervous
+Display,1,00,00,00,00
+
+# Tray menu IK_MENU_RUN_WDM
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{9471F4C9-EF05-4910-A93E-75B547F53AC5}]
+Name,,&Santa Cruz Control Panel
+Display,1,00,00,00,00
+
+# Tray menu IK_MENU_DLG_WDM
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{0FB93F3A-62CB-4642-B7F3-AF681456278E}]
+Name,,Master &Volume
+Display,1,00,00,00,00
+
+# Tray menu IK_MENU_EXIT_WDM
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{DC7550ED-B33D-47c6-983A-D47350414CB9}]
+Name,,&Close
+Display,1,00,00,00,00
+
+# Tray menu mixer IK_DLG_MUTE_WDM
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{BAA3CCB8-B1CB-4262-AB46-3187713FB410}]
+Name,,Mute
+Display,1,00,00,00,00
+
+# Tray menu mixer IK_DLG_VOLUME_WDM
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{F3988B36-B6F1-437b-A50D-79B8C4CED967}]
+Name,,Volume
+Display,1,00,00,00,00
+
+# Tray menu error IK_CPL_MISSING
+[SYSTEM\CurrentControlSet\Control\MediaCategories\{082F0B1E-585B-4e6c-ADF8-27CAB967CE1B}]
+Name,,Santa Cruz Control Panel application not installed.\r\nPlease install Santa Cruz applications.\r\nFor the latest version, please visit www.Turtle-Beach.com.
+Display,1,00,00,00,00

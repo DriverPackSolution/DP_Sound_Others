@@ -1,0 +1,123 @@
+;----------------------------------------------------------------------
+; TerraTec RC Parser
+;----------------------------------------------------------------------
+; Automatically generated resource strings
+; Source language	 English
+; Target language	 german
+; Created 	 09/10/03 17:10:26
+;----------------------------------------------------------------------
+; Notes for translators:
+; - '\n' and '\t' are control codes and must not be changed.
+; - '%s', '%d', '%i', '%x', '%c' etc. are also control codes
+;   and must not be changed.
+; - '&' is also a control code but should be omitted in all translated strings.
+;
+; - Please use one of the following filenames for your language support:
+;   English.lng, German.lng, French.lng,
+;   Spanish.lng, Italian.lng, Dutch.lng
+;   Portuguese.lng, Danish.lng, Swedish.lng,
+;   Norwegian.lng, Finnish.lng, Polish.lng
+;----------------------------------------------------------------------
+
+[Strings]
+; Application Defined Strings
+
+;IDOK
+1=OK
+
+;IDCANCEL
+2=Abbruch
+
+;----------------------------------------------------------------------
+; STRINGTABLE 8
+;----------------------------------------------------------------------
+
+;IDS_MUTE
+132=Mute
+
+;IDS_MIC
+133=Mikrofon
+
+;IDS_SPDIF
+134=S/P-DIF
+
+;IDS_LINE
+135=Line
+
+;IDS_SPKR_STEREO
+136=Stereo 
+
+;IDS_SPKR_QUAD
+137=Quadro
+
+;IDS_SPKR_SIX
+138=5.1 System
+
+;IDS_ABOUTTEXT
+139=%s Control Panel\n\n(c) 2003 TerraTec Electronic GmbH\nVersion %s\nTreiber Version: %s\n\n\n\nProgramm, Design:\nRoland Peffer
+
+;IDS_PAGE_RECORD
+140=&Aufnahme
+
+;IDS_PAGE_PLAYBACK
+141=&Wiedergabe
+
+;IDS_PAGE_SPEAKERS
+142=&Lautsprecher
+
+;IDS_PAGE_MISC
+143=&Versch.
+
+;----------------------------------------------------------------------
+; STRINGTABLE 9
+;----------------------------------------------------------------------
+
+;IDS_MASTER
+144=Master
+
+;IDS_WAVE
+145=Wave
+
+;IDS_SWSYNTH
+146=Synth.
+
+;IDS_AGC
+147=AGC
+
+;IDS_SPKRCONFIG
+148=Konfiguration
+
+;IDS_SETTINGS
+149=Einstellungen
+
+;IDS_LOAD
+150=Laden
+
+;IDR_MAINFRAME
+151=Aureon 5.1 USB
+
+;IDS_SAVE
+152=Speichern
+
+;IDS_AUTOSTART
+153=Autostart
+
+;IDS_COLORS
+154=Farben
+
+;IDS_RESET
+155=Zurücksetzen
+
+;IDS_SWITCHSENSAURA
+156=Sensaura Ein / Aus
+
+;----------------------------------------------------------------------
+; STRINGTABLE 2048
+;----------------------------------------------------------------------
+
+;ID_EXIT
+32772=Beenden
+
+;ID_SHOW
+32773=Anzeigen
+
